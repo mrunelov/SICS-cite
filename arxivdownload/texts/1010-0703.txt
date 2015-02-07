@@ -1,0 +1,570 @@
+ar
+X
+iv
+:1
+01
+0.
+07
+03
+v2
+  [
+cs
+.D
+S]
+  2
+7 A
+pr
+ 20
+11
+Implementing regularization implicitly via
+approximate eigenvector computation
+Michael W. Mahoney ∗ Lorenzo Orecchia †
+Abstract
+Regularization is a powerful technique for extracting useful information from noisy data.
+Typically, it is implemented by adding some sort of norm constraint to an objective function
+and then exactly optimizing the modified objective function. This procedure often leads to
+optimization problems that are computationally more expensive than the original problem, a
+fact that is clearly problematic if one is interested in large-scale applications. On the other
+hand, a large body of empirical work has demonstrated that heuristics, and in some cases
+approximation algorithms, developed to speed up computations sometimes have the side-
+effect of performing regularization implicitly. Thus, we consider the question: What is the
+regularized optimization objective that an approximation algorithm is exactly optimizing?
+We address this question in the context of computing approximations to the smallest non-
+trivial eigenvector of a graph Laplacian; and we consider three random-walk-based procedures:
+one based on the heat kernel of the graph, one based on computing the the PageRank vector
+associated with the graph, and one based on a truncated lazy random walk. In each case, we
+provide a precise characterization of the manner in which the approximation method can be
+viewed as implicitly computing the exact solution to a regularized problem. Interestingly, the
+regularization is not on the usual vector form of the optimization problem, but instead it is
+on a related semidefinite program.
+1 Introduction
+Regularization is a powerful technique in statistics, machine learning, and data analysis for learn-
+ing from or extracting useful information from noisy data [14, 6, 4]. It involves (explicitly or
+implicitly) making assumptions about the data in order to obtain a “smoother” or “nicer” so-
+lution to a problem of interest. The technique originated in integral equation theory, where it
+was of interest to give meaningful solutions to ill-posed problems for which a solution did not
+exist [22]. More recently, it has achieved widespread use in statistical data analysis, where it
+is of interest to achieve solutions that generalize well to unseen data [9]. For instance, much
+of the work in kernel-based and manifold-based machine learning is based on regularization in
+Reproducing kernel Hilbert spaces [19].
+Typically, regularization is implemented via a two step process: first, add some sort of norm
+constraint to an objective function of interest; and then, exactly optimize the modified objective
+function. For instance, one typically considers a loss function f(x) that specifies an empirical
+penalty depending on both the data and a parameter vector x; and a regularization function
+g(x) that encodes prior assumptions about the data and that provides capacity control on the
+vector x. Then, one must solve an optimization problem of the form:
+xˆ = argminxf(x) + λg(x). (1)
+∗Department of Mathematics, Stanford University, Stanford, CA 94305, mmahoney@cs.stanford.edu.
+†Computer Science Division, UC Berkeley, Berkeley, CA, 94720 orecchia@eecs.berkeley.edu.
+1
+A general feature of regularization implemented in this manner is that, although one obtains
+solutions that are “better” (in some statistical sense) than the solution to the original problem,
+one must often solve a modified optimization problem that is “worse” (in the sense of being
+more computationally expensive) than than the original optimization problem.1 Clearly, this
+algorithmic-statistical tradeoff is problematic if one is interested in large-scale applications.
+On the other hand, it is well-known amongst practitioners that certain heuristics that can
+be used to speed up computations can sometimes have the side-effect of performing smoothing
+or regularization implicitly. For example, “early stopping” is often used when a learning model
+such as a neural network is trained by an iterative gradient descent algorithm; and “binning”
+is often used to aggregate the data into bins, upon which computations are performed. As we
+will discuss below, we have also observed a similar phenomenon in the empirical analysis of very
+large social and information networks [12]. In these applications, the size-scale of the networks
+renders prohibitive anything but very fast nearly-linear-time algorithms, but the sparsity and
+noise properties of the networks are sufficiently complex that there is a need to understand the
+statistical properties implicit in these fast algorithms in order to draw meaningful domain-specific
+conclusions from their output.
+Motivated by these observations, we are interested in understanding in greater detail the
+manner in which algorithms that have superior algorithmic and computational properties either
+do or do not also have superior statistical properties. In particular, we would like to know:
+• To what extent can one formalize the idea that performing an approximate computation
+can implicitly lead to more regular solutions?
+Rather than addressing this question in full generality, in this paper we will address it in the
+context of computing the first nontrivial eigenvector of the graph Laplacian. (Of course, even this
+special case is of interest since a large body of work in machine learning, data analysis, computer
+vision, and scientific computation makes use of this vector.) Our main result is a characterization
+of this implicit regularization in the context of three random-walk-based procedures for computing
+an approximation to this eigenvector. In particular:
+• We consider three random-walk-based procedures—one based on the heat kernel of the
+graph, one based on computing the the PageRank vector associated with the graph, and
+one based on a truncated lazy random walk—for computing an approximation to the small-
+est nontrivial eigenvector of a graph Laplacian, and we show that these approximation
+procedures may be viewed as implicitly solving a regularized optimization problem exactly.
+Interestingly, in order to achieve this identification, we need to relax the standard spectral opti-
+mization problem to a semidefinite program. Thus, the variables that enter into the loss function
+and the regularization term are not unit vectors, as they are more typically in formulations such as
+Problem (1), but instead they are distributions over unit vectors. This was somewhat unexpected,
+and the empirical implications of this remain to be explored.
+Before proceeding, let us pause to gain an intuition of our results in a relatively simple setting.
+To do so, consider the so-called Power Iteration Method, which takes as input an n×n symmetric
+matrix A and returns as output a number λ (the eigenvalue) and a vector v (the eigenvector)
+such that Av = λv.2 The Power Iteration Method starts with an initial random vector, call it ν0,
+1Think of ridge regression or the ℓ1-regularized ℓ2-regression problem. More generally, however, even assuming
+that g(x) is convex, one obtains a linear program or convex program that must solved.
+2Our result for the truncated lazy random walk generalizes a special case of the Power Method. Formalizing
+the regularization implicit in the Power Method more generally, or in other methods such as the Lanczos method
+or the Conjugate Gradient method, is technically more intricate due to the renormalization at each step, which by
+construction we will not need.
+2
+and it iteratively computes νt+1 = Aνt/||Aνt||2. Under weak assumptions, the method converges
+to v1, the dominant eigenvector of A. The reason is clear: if we expand ν0 =
+∑n
+i=1 γivi in the
+basis provided by the eigenfunctions {vi}
+n
+i=1 of A, then νt =
+∑n
+i=1 γ
+t
+ivi → v1. If we truncate
+this method after some very small number, say 3, iterations, then the output vector is clearly a
+suboptimal approximation of the dominant eigen-direction of the particular matrix A; but due
+to the admixing of information from the other eigenvectors, it may be a better or more robust
+approximation to the best “ground truth eigen-direction” in the ensemble from which A was
+drawn. It is this intuition in the context of computing eigenvectors of the graph Laplacian that
+our main results formalize.
+2 Overview of the problem and approximation procedures
+For a connected, weighted, undirected graph G = (V,E), let A be its adjacency matrix and D
+its diagonal degree matrix, i.e., Dii =
+∑
+j:(ij)∈E wij, where wij is the weight of edge (ij). Let
+M = AD−1 be the natural random walk transition matrix associated with G, in which case
+W = (I + M)/2 is the usual lazy random walk transition matrix. (Thus, we will be post-
+multiplying by column vectors.) Finally, let L = I −D−1/2AD−1/2 be the normalized Laplacian
+of G.
+We start by considering the standard spectral optimization problem.
+SPECTRAL : min xTLx
+s.t. xTx = 1
+xTD1/21 = 0.
+In the remainder of the paper, we will assume that this last constraint always holds, effectively
+limiting ourselves to be in the subspace Rn ⊥ 1, by which we mean {x ∈ Rn : xTD1/21 = 0}.
+(Omitting explicit reference to this orthogonality constraint and assuming that we are always
+working in the subspace Rn ⊥ 1 makes the statements and the proofs easier to follow and does
+not impact the correctness of the arguments. To check this, notice that the proofs can be carried
+out in the language of linear operators without any reference to a particular matrix representation
+in Rn.)
+Next, we provide a description of three related random-walk-based matrices that arise natu-
+rally when considering a graph G.
+• Heat Kernel. The Heat Kernel of a connected, undirected graph G can be defined as:
+Ht = exp(−tL) =
+∞∑
+k=0
+(−t)k
+k!
+Lk, (2)
+where t ≥ 0 is a time parameter. Alternatively, it can be written as Ht =
+∑
+i e
+−λitPi, where
+λi is the i-th eigenvalue of L and Pi denotes the projection into the eigenspace associated
+with λi. The Heat Kernel is an operator that satisfies the heat equation
+∂Ht
+∂t = −LHt and
+thus that describes the diffusive spreading of heat on the graph.
+• PageRank. The PageRank vector pi(γ, s) associated with a connected, undirected graph
+G is defined to be the unique solution to
+pi(γ, s) = γs+ (1− γ)Mpi(γ, s),
+where γ ∈ (0, 1) is the so-called teleportation constant; s ∈ Rn is a preference vector,
+often taken to be (up to normalization) the all-ones vector; and M is the natural random
+3
+walk matrix associated with G [10].3 If we fix γ and s, then it is known that pi(γ, s) =
+γ
+∑∞
+t=0(1− γ)
+tM ts, and thus that pi(γ, s) = Rγs, where
+Rγ = γ (I − (1− γ)M)
+−1 . (3)
+This provides an expression for the PageRank vector pi(γ, s) as a γ-dependent linear trans-
+formation matrix Rγ multiplied by the preference vector s [1]. That is, Eqn. (3) simply
+states that PageRank can be presented as a linear operator Rγ acting on the seed s.
+• Truncated Lazy Random Walk. SinceM = AD−1 is the natural random walk transition
+matrix associated with a connected, undirected graph G, it follows that
+Wα = αI + (1− α)M (4)
+represents one step of the α-lazy random walk transition matrix, in which at each step
+there is a holding probability α ∈ [0, 1]. Just as M is similar to M ′ = D−1/2MD1/2, which
+permits the computation of its real eigenvalues and full suite of eigenvectors that can be
+related to those of M , Wα is similar to W
+′
+α = D
+−1/2WαD
+1/2. Thus, iterating the random
+walk Wα is similar to applying the Power Method to W
+′
+α, except that the renormalization
+at each step need not be performed since the top eigenvalue is unity.
+Each of these three matrices has been used to compute vectors that in applications are then used
+in place of the smallest nontrivial eigenvector of a graph Laplacian. This is typically achieved
+by starting with an initial random vector and then applying the Heat Kernel matrix, or the
+PageRank operator, or truncating a Lazy Random Walk.
+Finally, we recall that the solution SPECTRAL can also be characterized as the solution to a
+semidefinite program (SDP). To see this, consider the following SDP:
+SDP : min L •X
+s.t. Tr(X) = I •X = 1
+X  0,
+where • stands for the Trace, or matrix inner product, operation, i.e., A • B = Tr(ABT ) =∑
+ij AijBij for matrices A and B. (Recall that, both here and below, I is the Identity on the
+subspace perpindicular to the all-ones vector.) SDP is a relaxation of the spectral program
+SPECTRAL from an optimization over unit vectors to an optimization over distributions over
+unit vectors, represented by the density matrix X.
+To see the relationship between the solution x of SPECTRAL and the solution X of SDP, recall
+that a density matrix X is a matrix of second moments of a distribution over unit vectors. In this
+case, L•X is the expected value of xTLx, when x is drawn from a distribution defined by X. If X
+is rank-1, as is the case for the solution to SDP, then the distribution is completely concentrated
+on a vector v, and the SDP and vector solutions are the same, in the sense that X = vvT . More
+generally, as we will encounter below, the solution to an SDP may not be rank-1. In that case, a
+simple way to construct a vector x from a distribution defined by X is to start with an n-vector ξ
+with entries drawn i.i.d. from the normal distribution N(0, 1/n), and consider x = X1/2ξ. Note
+that this procedure effectively samples from a Gaussian distribution with second moment X.
+3Alternatively, one can define π′(γ, s) to be the unique solution to π = γs+(1− γ)Wπ, where W is the 1/2-lazy
+random walk matrix associated with G. These two vectors are related as π′(γ, s) = π( 2γ
+1+γ
+, s) [1].
+4
+3 Approximation procedures and regularized spectral optimiza-
+tion problems
+3.1 A simple theorem characterizing the solution to a regularized SDP
+Here, we will apply regularization technique to the SDP formulation provided by SDP, and we
+will show how natural regularization functions yield distributions over vectors which correspond
+to the diffusion-based or random-walk-based matrices. In order to regularize SDP, we want to
+modify it such that the distribution is not degenerate on the second eigenvector, but instead
+spreads the probability on a larger set of unit vectors around v. The regularized version of SDP
+we will consider will be of the form:
+(F, η) − SDP min L •X + 1/η · F (X)
+s.t. I •X = 1
+X  0,
+where η > 0 is a trade-off or regularization parameter determining the relative importance
+of the regularization term F (X), and where F is a real strictly-convex infinitely-differentiable
+rotationally-invariant function over the positive semidefinite cone. (Think of F as a strictly con-
+vex function of the eigenvalues of X.) For example, F could be the negative of the von Neumann
+entropy of X; this would penalize distributions that are too concentrated on a small measure of
+vectors. We will consider other possibilities for F below. Note that due to F , the solution X of
+(F, η) − SDP will in general not be rank-1.
+Our main results on implicit regularization via approximate computation will be based on the
+following structural theorem that provides sufficient conditions for a matrix to be a solution of
+a regularized SDP of a certain form. Note that the Lagrangian parameter λ and its relationship
+with the regularization parameter η will play a key role in relating this structural theorem to the
+three random-walk-based proceudres described previously.
+Theorem 1 Let G be a connected, weighted, undirected graph, with normalized Laplacian L.
+Then, the following conditions are sufficient for X⋆ to be an optimal solution to (F, η) − SDP.
+1. X⋆ = (∇F )−1 (η · (λ∗I − L)), for some λ∗ ∈ R,
+2. I •X⋆ = 1,
+3. X⋆  0.
+Proof: For a general function F , we can write the Lagrangian L for (F, η) − SDP as follows:
+L(X,λ,U) = L •X +
+1
+η
+· F (X) − λ · (I •X − 1)− U •X
+where λ ∈ R, U  0. The dual objective function is
+h(λ,U) = min
+X0
+L(X,λ,U).
+As F is strictly convex, differentiable and rotationally invariant, the gradient of F over the positive
+semidefinite cone is invertible and the righthand side is minimized when
+X = (∇F )−1(η · (−L+ λ∗ · I + U)),
+5
+where λ∗ is chosen such that the second condition in the statement of the theorem is satisfied.
+Hence,
+h(λ⋆, 0) = L •X⋆ +
+1
+η
+· F (X⋆)− λ⋆ · (I •X⋆ − 1) = L •X⋆ +
+1
+η
+· F (X⋆).
+By Weak Duality, this implies that X⋆ is an optimal solution to (F, η)− SDP.
+⋄
+Two clarifying remarks regarding this theorem are in order. First, the fact that such a λ∗ exists
+is an assumption of the theorem. Thus, in fact, the theorem is just a statement of the KKT
+conditions and strong duality holds for our SDP formulations. For simplicity and to keep the
+exposition self-contained, we decided to present the proof of optimality, which is extremely easy
+in the case of an SDP with only linear constraints. Second, we can plug the dual solution (λ∗, 0)
+into the dual objective and show that, under the assumptions of the theorem, we obtain a value
+equal to the primal value of X∗. This certifies that X∗ is optimal. Thus, we do not need to
+assume U = 0; we just choose to plug in this particular dual solution.
+3.2 The connection between approximate eigenvector computation and im-
+plicit statistical regularization
+In this section, we will consider the three diffusion-based or random-walked-based heuristics
+described in Section 2, and we will show that each may be viewed as solving (F, η)− SDP for an
+appropriate value of F and η.
+Generalized Entropy and the Heat Kernel. Consider first the Generalized Entropy func-
+tion:
+FH(X) = Tr(X logX)− Tr(X), (5)
+for which:
+(∇FH)(X) = logX
+(∇FH)
+−1(Y ) = expY.
+Hence, the solution to (FH, η)− SDP has the form:
+X⋆H = exp(η · (λI − L)), (6)
+for appropriately-chosen values of λ and η. Thus, we can establish the following lemma.
+Lemma 1 Let X⋆H be an optimal solution to (F, η)− SDP, when F (·) is the Generalized Entropy
+function, given by Equation (5). Then
+X⋆H =
+Hη
+Tr [Hη]
+,
+which corresponds to a “scaled” version of the Heat Kernel matrix with time parameter t = η.
+Proof: From Equation (6), it follows that X⋆H = exp(−η · L) · exp(η · λ), and thus by setting
+λ = −1/η log(Tr(exp(−η · L))), we obtain the expression for X⋆H given in the lemma. Thus,
+X⋆H  0 and Tr(X
+⋆
+H) = 1, and by Theorem 1 the lemma follows.
+⋄
+Conversely, given a graph G and time parameter t, the Heat Kernel of Equation (2) can be
+characterized as the solution to the regularized (FH, η)− SDP, with the regularization parameter
+η = t (and for the value of the Lagrangian parameter λ as specified in the proof).
+6
+Log-determinant and PageRank. Next, consider the Log-determinant function:
+FD(X) = − log det(X), (7)
+for which:
+(∇FD)(X) = −X
+−1
+(∇FD)
+−1(Y ) = −Y −1.
+Hence, the solution to (FD, η)− SDP has the form:
+X⋆D = −(η · (λI − L))
+−1, (8)
+for appropriately-chosen values of λ and η. Thus, we can establish the following lemma.
+Lemma 2 Let X⋆D be an optimal solution to (F, η) − SDP, when F (·) is the Log-determinant
+function, given by Equation (7). Then
+X⋆D =
+D−1/2RγD
+1/2
+Tr [Rγ ]
+which corresponds to a “scaled-and-streached” version of the PageRank matrix Rγ of Equation (3)
+with teleportation parameter γ depending on η.
+Proof: Recall that L = I−D−1/2AD−1/2. Since X⋆D = 1/η · (L−λI)
+−1, by standard manipulations
+it follows that
+X⋆D =
+1
+η
+(
+(1− λ)I −D−1/2AD−1/2
+)−1
+.
+Thus, X⋆D  0 if λ ≤ 0, and X
+⋆
+D ≻ 0 if λ < 0. If we set γ =
+λ
+λ−1 (which varies from 1 to 0, as λ
+varies from −∞ to 0), then it can be shown that
+X⋆D =
+−1
+ηλ
+D−1/2γ
+(
+I − (1− γ)AD−1
+)−1
+D1/2.
+By requiring that 1 = Tr[X⋆D], it follows that
+η = (1− γ)Tr
+[(
+I − (1− γ)AD−1
+)−1]
+and thus that ηλ = −Tr
+[
+γ(I − (1− γ)AD−1)−1
+]
+. Since Rγ = γ(I − (1− γ)AD
+−1)−1, the lemma
+follows.
+⋄
+Conversely, given a graph G and teleportation parameter γ, the PageRank of Equation (3) can be
+characterized as the solution to the regularized (FD, η)− SDP, with the regularization parameter
+η as specified in the proof.
+Standard p-norm and Truncated Lazy Random Walks. Finally, consider the Standard
+p-norm function, for p > 1:
+Fp(X) =
+1
+p
+||X||pp =
+1
+p
+Tr(Xp), (9)
+for which:
+(∇Fp)(X) = X
+p−1
+(∇Fp)
+−1(Y ) = Y
+1/(p−1).
+7
+Hence, the solution to (Fp, η)− SDP has the form
+X⋆p = (η · (λI − L))
+q−1, (10)
+where q > 1 is such that 1/p + 1/q = 1, for appropriately-chosen values of λ and η. Thus, we can
+establish the following lemma.
+Lemma 3 Let X⋆p be an optimal solution to (F, η)− SDP, when F (·) is the Standard p-norm
+function, for p > 1, given by Equation (9). Then
+X⋆p =
+D
+−(q−1)
+2 W q−1α D
+q−1
+2
+Tr
+[
+W q−1α
+]
+which corresponds to a “scaled-and-streached” version of q−1 steps of the Truncated Lazy Random
+Walk matrix Wα of Equation (4) with laziness parameter α depending on η.
+Proof: Recall that L = I−D−1/2AD−1/2. SinceX⋆p = η
+q−1 ·(λI−L)q−1, by standard manipulations
+it follows that
+X⋆p = η
+q−1
+(
+(λ− 1)I +D−1/2AD−1/2
+)q−1
+Thus, X⋆p  0 if λ ≥ 1, and X
+⋆
+p ≻ 0 if λ > 1. If we set α =
+λ−1
+λ (which varies from 0 to 1, as λ
+varies from 1 to ∞), then it can be shown that
+X⋆p = (ηλ)
+q−1D−(q−1)/2
+(
+αI − (1− α)AD−1
+)q−1
+D(q−1)/2.
+By requiring that 1 = Tr[X⋆p ], it follows that
+η = (1− α)
+{
+Tr
+[(
+αI + (1− α)AD−1
+)q−1]}1−p
+and thus that ηλ =
+{
+Tr
+[(
+αI + (1− α)AD−1
+)q−1]}1−p
+. Since Wα = αI + (1 − α)AD
+−1, the
+lemma follows.
+⋄
+Conversely, given a graph G, a laziness parameter α, and a number of steps q′ = q− 1, the Trun-
+cated Lazy Random Walk of Equation (4) can be characterized as the solution to the regularized
+(Fp, η)− SDP, with the regularization parameter η as specified in the proof.
+4 Discussion and Conclusion
+There is a large body of empirical and theoretical work with a broadly similar flavor to ours.
+Here, we provide just a few citations that most informed our approach.
+• In machine learning, Belkin, Niyogi, and Sindhwan describe a geometrically-motivated
+framework within which semi-supervised learning algorithms can be constructed [3]; Saul
+and Roweis (and many others, but less explicitly) observe that adding a regularization term
+to improve numerical properties also “acts to penalize large weights that exploit correla-
+tions beyond some level of precision in the data sampling process” [18]; Rosasco, De Vito,
+and Verri describe how a large class of regularization methods designed for solving ill-posed
+inverse problems gives rise to novel learning algorithms [17]; Zhang and Yu show that in
+boosting, early stopping (as opposed to waiting for full convergence) leads to regulariza-
+tion and hence better prediction [23]; Shi and Yu describe statistical aspects of binning in
+Gaussian kernel regularization [20]; and Bishop observes that training with noise can be
+equivalent to Tikhonov regularization [5].
+8
+• In numerical linear algebra, O’Leary, Stewart, and Vandergraft have described issues that
+arise in estimating the largest eigenvalue of a positive definite matrix with the power
+method [15]; and Parlett, Simon, and Stringer have described convergence issues that arise
+when estimating the largest eigenvalue with an iterative method [16].
+• In the theory of algorithms, Spielman and Teng describe how to perform local graph par-
+titioning using truncated random walks [21]; Andersen, Chung, and Lang describe an im-
+proved local graph partitioning algorithm PageRank vectors [1]; and Chung describes how to
+perform similar operations by using the heat kernel and viewing it as the so-called pagerank
+of a graph [8].
+• In internet data analysis, Andersen and Lang use these methods to try to find communities in
+large networks [2]; Leskovec, Lang, and Mahoney use these and other methods to show that
+there do not exist good large communities in large social and information networks [11, 12];
+and Lu et al. empirically evaluate implicit regularization constraints for improved online
+review quality prediction [13].
+None of this work, however, takes the approach we have adopted of asking: What is the regularized
+optimization objective that a heuristic or approximation algorithm is exactly optimizing?
+We should note that one can interpret our main results from one of two alternate perspectives.
+From the perspective of worst-case analysis, we provide a simple characterization of several related
+methods for approximating the smallest nontrivial eigenvector of a graph Laplacian as solving a
+related optimization problem. By adopting this view, it should perhaps be less surprising that
+these methods have Cheeger-like inequalities, with related algorithmic consequences, associated
+with them [21, 1, 8, 7]. From a statistical perspective, one could imagine one method or another
+being more or less appropriate as a method to compute robust approximations to the smallest
+nontrivial eigenvector of a graph Laplacian, depending on assumptions being made about the data.
+By adopting this view, it should perhaps be less surprising that these methods have performed
+well at identifying structure in sparse and noisy networks [2, 11, 12, 13].
+The particular results that motivated us to ask this question had to do with recent empirical
+work on characterizing the clustering and community structure in very large social and informa-
+tion networks [11, 12]. As a part of that line of work, Leskovec, Lang, and Mahoney (LLM) [12]
+were interested in understanding the artifactual properties induced in output clusters as a func-
+tion of different approximation algorithms for a given objective function (that formalized the
+community concept). LLM observed a severe tradeoff between the objective function value and
+the “niceness” of the clusters returned by different approximation algorithms. This phenomenon
+is analogous to the bias-variance tradeoff that is commonly-observed in statistics and machine
+learning, except that LLM did not perform any explicit regularization—instead, they observed
+this phenomenon as a function of different approximation algorithms to compute approximate
+solutions to the intractable graph partitioning problem.
+Although we have focused in this paper simply on the problem of computing an eigenvector,
+one is typically interested in computing eigenvectors in order to perform some downstream data
+analysis or machine learning task. For instance, one might be interested in characterizing the
+clustering properties of the data. Alternatively, the goal might be to perform classification or
+regression or ranking. It would, of course, be of interest to understand how the concept of
+implicit regularization via approximate computation extends to the output of algorithms for these
+problems. More generally, though, it would be of interest to understand how this concept of
+implicit regularization via approximate computation extends to intractable graph optimization
+problems (that are not obviously formulatable as vector space problems) that are more popular
+in computer science. That is: What is the (perhaps implicitly regularized) optimization problem
+9
+that an approximation algorithm for an intractable optimization problem is implicitly optimizing?
+Such graph problems arise in many applications, but the the formulation and solution of these
+graph problems tends to be quite different than that of matrix problems that are more popular
+in machine learning and statistics. Recent empirical and theoretical evidence, however, clearly
+suggests that regularization will be fruitful in this more general setting.
+References
+[1] R. Andersen, F.R.K. Chung, and K. Lang. Local graph partitioning using PageRank vectors.
+In FOCS ’06: Proceedings of the 47th Annual IEEE Symposium on Foundations of Computer
+Science, pages 475–486, 2006.
+[2] R. Andersen and K. Lang. Communities from seed sets. In WWW ’06: Proceedings of the
+15th International Conference on World Wide Web, pages 223–232, 2006.
+[3] M. Belkin, P. Niyogi, and V. Sindhwani. Manifold regularization: A geometric framework
+for learning from labeled and unlabeled examples. Journal of Machine Learning Research,
+7:2399–2434, 2006.
+[4] P. Bickel and B. Li. Regularization in statistics. TEST, 15(2):271–344, 2006.
+[5] C. M. Bishop. Training with noise is equivalent to Tikhonov regularization. Neural Compu-
+tation, 7(1):108–116, 1995.
+[6] Z. Chen and S. Haykin. On different facets of regularization theory. Neural Computation,
+14(12):2791–2846, 2002.
+[7] F.R.K Chung. Four proofs of Cheeger inequality and graph partition algorithms. In Pro-
+ceedings of ICCM, 2007.
+[8] F.R.K. Chung. The heat kernel as the pagerank of a graph. Proceedings of the National
+Academy of Sciences of the United States of America, 104(50):19735–19740, 2007.
+[9] T. Hastie, R. Tibshirani, and J. Friedman. The Elements of Statistical Learning. Springer-
+Verlag, New York, 2003.
+[10] A. N. Langville and C. D. Meyer. Deeper inside PageRank. Internet Mathematics, 1(3):335–
+380, 2004.
+[11] J. Leskovec, K.J. Lang, A. Dasgupta, and M.W. Mahoney. Statistical properties of commu-
+nity structure in large social and information networks. In WWW ’08: Proceedings of the
+17th International Conference on World Wide Web, pages 695–704, 2008.
+[12] J. Leskovec, K.J. Lang, and M.W. Mahoney. Empirical comparison of algorithms for network
+community detection. In WWW ’10: Proceedings of the 19th International Conference on
+World Wide Web, pages 631–640, 2010.
+[13] Y. Lu, P. Tsaparas, A. Ntoulas, and L. Polanyi. Exploiting social context for review quality
+prediction. In WWW ’10: Proceedings of the 19th International Conference on World Wide
+Web, pages 691–700, 2010.
+[14] A. Neumaier. Solving ill-conditioned and singular linear systems: A tutorial on regulariza-
+tion. SIAM Review, 40:636–666, 1998.
+10
+[15] D. P. O’Leary, G. W. Stewart, and J. S. Vandergraft. Estimating the largest eigenvalue of a
+positive definite matrix. Mathematics of Computation, 33(148):1289–1292, 1979.
+[16] B. N. Parlett, H. Simon, and L. M. Stringer. On estimating the largest eigenvalue with the
+Lanczos algorithm. Mathematics of Computation, 38(157):153–165, 1982.
+[17] L. Rosasco, E. De Vito, and A. Verri. Spectral methods for regularization in learning theory.
+Technical Report DISI-TR-05-18, 2005.
+[18] L.K. Saul and S.T. Roweis. Think globally, fit locally: unsupervised learning of low dimen-
+sional manifolds. Journal of Machine Learning Research, 4:119–155, 2003.
+[19] B. Scho¨lkopf and A. J. Smola. Learning with Kernels: Support Vector Machines, Regular-
+ization, Optimization, and Beyond. MIT Press, Cambridge, MA, USA, 2001.
+[20] T. Shi and B. Yu. Binning in Gaussian kernel regularization. Statistica Sinica, 16:541–567,
+2005.
+[21] D.A. Spielman and S.-H. Teng. Nearly-linear time algorithms for graph partitioning, graph
+sparsification, and solving linear systems. In STOC ’04: Proceedings of the 36th annual ACM
+Symposium on Theory of Computing, pages 81–90, 2004.
+[22] A.N. Tikhonov and V.Y. Arsenin. Solutions of Ill-Posed Problems. W.H. Winston, Wash-
+ington, D.C., 1977.
+[23] T. Zhang and B. Yu. Boosting with early stopping: Convergence and consistency. The
+Annals of Statistics, 33:1538–1579, 2005.
+11

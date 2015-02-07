@@ -1,0 +1,1824 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<algorithms version="110505">
+<algorithm name="SectLabel" version="110505">
+<variant no="0" confidence="0.000000">
+<figure confidence="0.9633081">
+ar
+X
+iv
+:0
+90
+4.
+21
+10
+v4
+[
+ph
+ys
+ics
+.so
+c-p
+h]
+1
+1 M
+ar
+20
+</figure>
+<page confidence="0.737336">
+10
+</page>
+<footnote confidence="0.7490308">
+Citation graph, weighted impact factors and performance indices
+Karol Z˙yczkowski1,2
+1“Mark Kac” Complex Systems Research Centre, Institute of Physics,
+Jagiellonian University, ul. Reymonta 4, 30-059 Krako´w, Poland and
+2Centrum Fizyki Teoretycznej, Polska Akademia Nauk, Al. Lotniko´w 32/44, 02-668 Warszawa, Poland
+</footnote>
+<bodyText confidence="0.980557666666667">
+(Dated: March 11, 2010)
+A scheme of evaluating an impact of a given scientific paper based on importance of papers
+quoting it is investigated. Introducing a weight of a given citation, dependent on the previous
+scientific achievements of the author of the citing paper, we define the weighting factor of a given
+scientist. Technically the weighting factors are defined by the components of the normalized leading
+eigenvector of the matrix describing the citation graph. The weighting factor of a given scientist,
+reflecting the scientific output of other researchers quoting his work, allows us to define weighted
+number of citation of a given paper, weighted impact factor of a journal and weighted Hirsch index
+of an individual scientist or of an entire scientific institution.
+</bodyText>
+<sectionHeader confidence="0.513228" genericHeader="method">
+I. INTRODUCTION
+</sectionHeader>
+<bodyText confidence="0.999504810344827">
+Any given scientist is a good scientist if he is considered
+to be good by a representative group of other good scien-
+tists. Such a simple way of evaluating quality of scientific
+achievements could be useful two hundred years ago, as
+the number of scientists was small and a respectable re-
+searcher was competent to evaluate the progress in a huge
+field of science.
+Nowadays such an approach is no longer realistic. As
+the number of universities, scientists, journals and sci-
+entific articles keeps growing fast, one is often forced to
+use some parametric measures to characterize the out-
+put of a given scientist. Although the peer review is still
+considered to be the most reliable and objective method
+of evaluation of candidates for any scientific position, in
+view of a large number of applicants in the preliminary
+phase one often performs screening of numerical values of
+performance indices, designed to quantify scientific out-
+put of the candidates.
+As the status of scientific citations among researchers
+is rather ambivalent [1], we do not claim that citations
+of scientific articles directly indicate their quality and
+importance. Just on contrary, we share some doubts,
+often raised in the literature [2, 3] that trying to mea-
+sure scientific achievements by any index based on the
+number of citations may generate certain perverse effects:
+researchers no longer focus on interesting and relevant re-
+search, but they try to adapt to the popular evaluation
+criteria. However, looking around we have to agree that
+various citation indices are used nowdays to evaluate sci-
+entists, journals or research institutions.
+Thus in this work we shall not discuss a controversial
+issue, what is the optimal measure of scientific achieve-
+ment. Instead we review common quantitative measures
+of scientific quality and discuss possible ways to improve
+them. The most popular indices used to evaluate the im-
+pact of a given article, the influence of a scientific journal
+for the research community, the scientific output of a sin-
+gle individual or entire institution are based only on the
+quantity of citations in the literature to the articles ana-
+lyzed. Our aim is to take into account also the quality of
+the citations, measured by the averaged achievements of
+the authors of the papers which refer to the article under
+consideration.
+Additional motivation for our research is due to the
+controversy concerning the usage of the impact factor
+(IF) [4, 5], to quantify the quality of a scientific journal.
+On one hand it was pointed out [6] that impact factor of
+a given journal can be manipulated by the editors and
+publisher. On the other hand it was often emphasized
+that the two year window for counting the citations of
+the papers analyzed is perhaps fine for biology, medicine
+and some other branches of science, it is rather not the
+case e.g. for mathematical journals. These journals score
+small values of the impact factor, since the preparation
+of a mathematical article and the entire refereeing proce-
+dure takes often more time than two years. Furthermore,
+in several branches of science great role is played by arti-
+cles which are not quickly forgotten. Thus one could also
+design and work with an impact factor, which takes into
+account only citations gathered three or five years after
+paper was published [3].
+In order to identify the papers which contribute most
+to the IF of a journal the editors often try to identify
+articles, which gained the largest number of citations in
+the first and the second year after the year they were
+published. Editors of some mathematically oriented jour-
+nals, analyzing a list of articles prepared in this way for
+their journal were concerned, if it really represents the
+most important articles published. In fact they consid-
+ered that several papers of not the top quality entered
+this list, only because they were simple enough that they
+could become understood and later quoted by other au-
+thors of recent papers of a mediocre quality.
+On the other hand, in is also believed that in several
+fields of science the impact factor could be artificially in-
+flated by a number of papers of lesser quality, the authors
+of which tend to quote several recent articles not directly
+related to their work. The aim of this practice is to please
+the editor (if the paper cited was published in the same
+journal), or to suggest the referees that the author fol-
+lows the recent literature and in this way to improve the
+chances that their work will be published.
+2To take these features into account one needs then to
+distinguish, in a statistical sense, the quality of a given ci-
+tation. In short, any citation of an established scientist,
+whose numerous papers have already attracted several
+citations, should be weighted more than a citation by a
+newcomer to the field. In this paper we suggest a pos-
+sible solution of this problem by defining the weight of
+a scientific citation and using this notion to modify and
+improve performance indices defined earlier in [5, 7, 8].
+All indices proposed are based on the weighting factor,
+associated to each scientists, which is analogous to the
+Page Rank introduced by Brin and Page [9] to character-
+ize relative importance of various web pages and used in
+the Google web search engine. The weights defined by the
+components of the leading eigenvector of a suitably de-
+fined citation matrix characterize a given citation. These
+numbers display the desired property of self-consistence:
+the weight of any citation by a given researcher is larger,
+if his papers are quoted by other scientists, whose papers
+are often quoted.
+A similar idea was recently applied for study of the
+citation graph created for publications in the Physical
+Review family of journals [10], for the graph in the field
+of biochemistry and molecular biology [11], and indepen-
+dently put forward in recent lectures of Nielsen [12], who
+considered the idea to use the Page Rank algorithm to
+order individual scientific papers according to their cita-
+tion graphs. The same algorithm was used to design the
+Eigenfactor web tool, which takes into account the cita-
+tion graph to evaluate a proposed measure of the relative
+importance of scientific journals [13]. While any node of
+the graph represents a single article in the former ap-
+proach or an entire journal in the latter scheme, in this
+work it will be associated with an individual scientist.
+</bodyText>
+<sectionHeader confidence="0.863628" genericHeader="method">
+II. CITATION MATRIX AND WEIGHTING
+FACTORS
+</sectionHeader>
+<bodyText confidence="0.95780975">
+Consider a sample of N authors of numerous scien-
+tific articles, in which they usually refer to their previous
+achievements, but also quote papers of some other scien-
+tists. Let us assume for a while that all papers consid-
+ered are written by a single author only - this simplifying
+assumption will be relaxed later in this section. Each sci-
+entist can be thus associated with a vertex of a graph,
+while any citation in any paper forms a directed link be-
+tween two vertexes – see e.g. [14]. Define a square matrix
+C of size N , such that
+a) Cij is equal to the number of times the scientist ”j”
+quoted a single paper of his colleague ”i”.
+b) Cii = 0, for i = 1, . . . , N , hence all self-citations are
+neglected.
+Observe that this citation matrix C is likely not to
+be symmetric. However, matrix C is by construction
+real and it contains non-negative entries only. Therefore
+it fulfills the assumptions of the celebrated Frobenius–
+Perron (FP) theorem (see e.g. [15, 16] ). This implies
+that
+i) there exists an eigenvalue z1 = λ with the largest
+absolute value which is real and non-negative,
+ii) the entire spectrum {zi}Ni=1 of C belongs to the disk
+of radius equal to λ,
+iii) the eigenspace associated with λ contains a real
+eigenstate ~x = {x1, . . . xN}, such that all its components
+are non-negative.
+Since we do not force citation matrix C to be stochas-
+tic, the leading eigenvalue λ needs not to be equal to
+unity. However, we will assume here that the graph an-
+alyzed is connected. Then the leading eigenvalue λ is
+non-degenerate, and there exists a unique vector ~x such
+</bodyText>
+<equation confidence="0.7744525">
+that
+Cx = λx. (1)
+</equation>
+<bodyText confidence="0.962985">
+This leading eigenvector can be normalized as
+</bodyText>
+<equation confidence="0.849268833333333">
+Wi := N
+xi∑N
+j=1 xj
+, (2)
+which implies that the mean entry is equal to unity,
+〈Wi〉i = 1.
+</equation>
+<bodyText confidence="0.993632">
+In this way for a given scientist i one can associate an
+weighting factor Wi. Such a factor depends not only on
+total number of times his papers were quoted by other
+</bodyText>
+<equation confidence="0.952283333333333">
+scientists, Ti :=
+∑N
+j=1 Cij , but also on the fact who re-
+</equation>
+<bodyText confidence="0.999294166666667">
+ferred to his work. However, such a number should not
+be treated as an optimal number used to quantify the sci-
+entific achievement of a researcher. It is more informative
+then the bare number Ti of total citations, but it shares
+similar disadvantages. For instance, as emphasized by
+Hirsch [8], the total number of citations can be inflated
+by single non representative papers, and it overweights
+highly quoted review articles versus original research pa-
+pers. On the other hand the weighting factors Wi allow
+us to define other more suitable indices and parameters.
+Before proceeding we need to adjust the definition of C
+and its eigenvector ~x, to make it directly applicable to
+the problem.
+A. Scientific papers with several authors
+Any citation to a single author paper published in
+an article written by another single author can be in-
+terpreted as a unit flow between the corresponding two
+vertexes. Thus the number
+</bodyText>
+<equation confidence="0.9994365">
+L =
+∑
+ij
+Cij (3)
+</equation>
+<bodyText confidence="0.9880425">
+represents the number of unit links in the graph, equal
+to the total number of citations (with auto citations ex-
+cluded).
+In practice, the papers are often written by several
+authors, so it is natural to split this coupling uniformly
+among all the authors involved in such a way that the
+3sum of the weights for each citation is equal to unity.
+To this end, consider the process of forming a graph by
+taking into account one article after another, and in each
+case scanning through all its references.
+Assume that a paper with M authors defined by the
+set of indices, J = {j1, . . . , jM} quotes another paper by
+K authors, described by the set I = {i1, . . . , iK}. Any
+quotation contributes to the citation matrix according to
+two rules:
+a’) if I ∩J = {∅} then Cij → Cij + 1KM for all pairs of
+indices i, j such that i ∈ I and j ∈ J . In words, an inde-
+pendent citation is taken into account and normalized in
+such a way that the number L defined by (3) grows by
+one.
+b’) if I∩J 6= {∅} then C → C; the citation matrix does
+not change since one does not want to analyze dependent
+citations,
+Observe that in the case of all papers written by single
+author the rules a’) and b’) reduce to the rules a) and b)
+discussed before.
+Let us emphasize that the assumptions a) and a’) imply
+that all quantities considered further do not depend on
+self citations and dependent citations, which are known
+to influence bibliometric indices [17–21]. Alternatively,
+one could neglect all auto citations but take into account
+the dependent citations and attribute to them the weight
+smaller than this characterizing independent citations.
+B. Truncated citation graph
+In practice it is hardly doable to take into account all
+the scientist into the consideration. Even if one could
+aim to make the graph as complete as possible, its trun-
+cation at some stage seems inevitable. In any realistic
+case the citation graph will describe a finite set of N re-
+searchers and take into account a given number of their
+papers and the cumulative list of all the references. This
+list of citations will likely include references to the pa-
+pers written by authors not belonging to the analyzed
+set of scientists. To take into account the fact that pa-
+pers written by the researcher represented by i-th vertex
+of the graph are cited by authors outside the graph we
+suggest to extend the citation matrix by an extra row
+and extra column, which jointly represents all truncated
+vertexes. The additional entries read,
+c) Ci,N+1 is equal to the total number of times, the
+papers of scientist ”i” were quoted by all authors outside
+the graph (not belonging to the analyzed set),
+</bodyText>
+<equation confidence="0.9022338">
+d) CN+1,i :=
+1
+N
+∑N
+k=1 Cki for i = 1, . . . , N . This as-
+</equation>
+<bodyText confidence="0.963403928571428">
+sumption is made to attribute a well balanced, average
+weight to all external citations. To be consistent with
+the rule b) we will also set
+e) CN+1,N+1 = 0.
+Note that the last, fictitious, vertex of the graph has no
+direct meaning, since it only represents the world outside
+the graph. The eigenvector x of the augmented matrix
+has N + 1 components, but only first N of them have
+the meaning of the weighting factors for N individuals.
+Therefore its last component xN+1 can be neglected, and
+in the normalization scheme which eventually produces
+the vector ~W of size N the same rescaling (2) can be
+used.
+III. WEIGHTED PERFORMANCE INDICES
+A. Weighted number of citations
+After constructing the complete citation matrix C or
+its approximation obtained according to the rules speci-
+fied above, we find its normalized leading vector and nor-
+malize it as in (2) to obtain the vector of the weighting
+factors Wi, i = 1, . . . , N . Spectra and leading eigenvec-
+tors of some exemplary graph matrices are discussed in
+Appendix A, while the issue of uniqueness of the vector
+corresponding to the leading eigenvalue is discussed in
+Appendix B. For any scientific article A one may find
+in an appropriate date base the number of times it was
+quoted by all other scientific papers in the literature. De-
+noting this number by c(A) we are now in position to
+define the weighted number of quotations,
+</bodyText>
+<equation confidence="0.9956495">
+w(A) :=
+c(A)∑
+j=1
+Wj , (4)
+</equation>
+<bodyText confidence="0.996728833333333">
+where Wj denotes the weighting factor of the j-th au-
+thor quoting the paper A. For consistency we are not
+going to include into this sum any auto citations. In a
+more general case of papers written by several authors
+it is natural to take the average weight of these authors.
+Therefore we write
+</bodyText>
+<equation confidence="0.99119925">
+w(A) :=
+c(A)∑
+j=1
+1
+nj
+nj∑
+µ=1
+Wjµ , (5)
+</equation>
+<bodyText confidence="0.996704142857143">
+where c(A) represents the number of independent quo-
+tations of the paper A, while nj denotes the number of
+authors of the j-th paper quoting A, and Wjµ is the
+weighting index of the µ-th co–author of this paper.
+B. Weighted impact factor of a journal
+Let Zy denotes the number of papers published by a
+certain scientific journal J in year y. To quantify the
+impact the journal exerts for the scientific community one
+often uses the so called impact factor. To compute it one
+takes all Zy−2+Zy−1 articles published one or two years
+earlier, and then sums the number of citations c(Aj), a
+given article from this set received during the year y. The
+result has then to be normalized with respect to the total
+number of articles published in journal J during the two
+</bodyText>
+<equation confidence="0.937426">
+4year time span [4, 5],
+IF2y(J) :=
+1
+Zy−2 + Zy−1
+Zy−2+Zy−1∑
+j=1
+c(Aj) . (6)
+</equation>
+<bodyText confidence="0.997271444444444">
+This commonly used index takes into account the two
+year time window, so we shall denote it by IF2.
+By construction this quantity takes into account only
+the quantity of the citations received by articles pub-
+lished in a given journal during last two years but not
+their quality. Presented approach allows us to take into
+consideration the fact, who quoted the papers analyzed.
+In full analogy to (6) we thus define the weighted impact
+factor (WIF2) of a journal J ,
+</bodyText>
+<equation confidence="0.997900833333333">
+WIF2y(J) :=
+1
+Zy−2 + Zy−1
+Zy−2+Zy−1∑
+j=1
+w(Aj) . (7)
+</equation>
+<bodyText confidence="0.999355357142857">
+The only difference is that instead of counting the bare
+numbers of citation c(Aj) of a given article Aj , we now
+sum the weighted citations w(Aj). Since these number
+reflects in a sense the quality of a citation we tend to
+believe that the weighted impact factor forms a more
+accurate quantity to evaluate the quality of a scientific
+journal than the standard IF.
+As mentioned in the introduction in some disciplines
+like mathematics and mathematical physics the process
+of preparing an article and publishing it is often longer
+than the two year time span used in the definition of
+IF2. Therefore one may propose [2] to use also similar
+quantities defined for a longer time window containing
+five years. In full analogy to the previous definitions we
+</bodyText>
+<equation confidence="0.994610705882353">
+write
+IF5y(J) :=
+1
+m
+m∑
+j=1
+c(Aj) where m =
+5∑
+i=1
+Zy−i (8)
+and
+WIF5y(J) :=
+1
+m
+m∑
+j=1
+w(Aj) . (9)
+</equation>
+<bodyText confidence="0.991678592592593">
+Here one takes into account all articles published in the
+five year time span, while c(Aj) and w(Aj) denote now
+the number of all citations and the sum of weighted cita-
+tions, a given paper Aj from this sample obtained in the
+analyzed year y. The 5–year impact factor could be spe-
+cially useful to characterize mathematical journals and
+journals devoted to these fields of science, in which the
+papers are produced in a slower pace, and the citations
+half–life is longer, since after a few years the articles do
+not become obsolete.
+C. Weighted impact factor of a paper
+Since the distribution of citations is known to be skew
+[2, 22, 23] the providing the average number of citations
+only is by far not sufficient to characterize the entire dis-
+tribution. Hence it is not possible to use the impact fac-
+tor of a journal as an estimated. number of the citation a
+typical paper published there will obtain during the next
+two years. Moreover, es explicitly emphasized by Seglen
+[22], the number of citation obtained by a given article
+is not influenced by the impact factor of the journal, in
+which it appeared.
+To make any reasonable evaluation of the impact a
+given article had on the scientific community, one can
+analyze its contribution to the impact factor of the jour-
+nal. To this end we define the impact factor of an article
+A published in year y is a sum of citations gained in the
+next two years,
+</bodyText>
+<equation confidence="0.999848">
+AIF2y(A) := cy+1(A) + cy+2(A) , (10)
+</equation>
+<bodyText confidence="0.999688">
+since only this citations contribute to the impact factor
+IF2. Here cy(A) denotes the number of times the paper
+A was quoted during year y. Note that the article impact
+factor (AIF2) can be only defined only for articles pub-
+lished more than two years ago. In view of the statistical
+properties of the citation distribution it is clear therefore
+that for any paper older then two years this very quan-
+tity has to be used to describe its impact on the field,
+instead of the IF of the journal it was published. In a
+similar manner, for papers older than five years one can
+also define the five years impact factor (AIF5).
+To take also into account the quality of each citation
+we can use of the weights wy introduced in the previ-
+ous section and define the weighted article impact factor
+</bodyText>
+<equation confidence="0.99701">
+(WAIF2)
+WAIF2y(A) := wy+1(A) + wy+2(A) , (11)
+</equation>
+<bodyText confidence="0.997016727272727">
+where wy(A) denotes the sum of the weighted citations
+the paper A defined as in (5) for citations gained during
+the year y. By construction this notion is applicable to
+articles published at least two years earlier.
+D. Weighted Hirsch index
+To quantify a scientific research output of a given re-
+searcher one often uses the h index introduced by Hirsch
+[8]. For a given scientists this index is equal to h, if h of
+all papers he has written were quoted at least h times.
+Ordering his articles according to the number of citations
+c(Ai), the article Ai has ever received one can write
+</bodyText>
+<equation confidence="0.946481">
+h := max k : c(Ak) ≥ k . (12)
+</equation>
+<bodyText confidence="0.9665655">
+Although the h index gained considerable popularity
+and it became a subject of several research papers [19,
+24–26], several of its drawbacks were emphasized [2, 3].
+As in the case of the impact factor the Hirsch index is not
+capable to differentiate between relevant and less relevant
+citations.
+5Making use of the weighted citation number w(Ai) of
+an article, we may thus introduce the weighted h index
+</bodyText>
+<equation confidence="0.999121">
+w := w(Ak) (13)
+</equation>
+<bodyText confidence="0.998890891304348">
+where k is the maximal integer such that w(Ak) ≥ k.
+This index enjoys all the virtues of the original h in-
+dex recently emphasized in [24, 25], but additionally it
+takes into account scientific achievements of the authors
+quoting the work of the evaluated individual. Since the
+weights w(Ai) determined by the citation graph take into
+account the number of authors of the paper, the weighted
+index w does not suffer a crucial drawback [3] of the orig-
+inal Hirsch index, in which a paper with a hundred co–
+authors is treated in the same way as an article written
+by a single scientist. Furthermore, the weights w are in
+general given by real numbers, so the index w may admit
+non-integer numbers. Thus this quantity provides us a
+finer differentiation of the group analyzed than the index
+h, which is integer by definition.
+A possibility to use the h-index to quantify scientific
+production of an entire institution was recently advo-
+cated in [27]. Hence one can use the weighted index w
+for this purpose. Furthermore, following Schubert [28]
+one can easily adopt his idea of successive performance
+indices and define an analogue to the index h2. To be
+concrete, the weighted successive index w2 of a scientific
+institution is equal to an integer number w, if it employs
+w scientists, such that the weighted Hirsch index w(i) for
+each of them is equal to or larger than w2.
+E. Weighted efficiency index
+Let us emphasize here that one should not directly
+compare the Hirsch indices for scientists working in dif-
+ferent research fields. This is due to the fact that the
+numbers of papers and citations vary from one scientific
+field to another [2, 29, 30], so the means values of Hirsch
+indices also do differ. On one hand one could compare the
+values of the indices rescaled against the average value
+in a given field [23]. On the other hand, one may work
+with other indicators which reflect citing patterns of each
+community.
+As an example of such a quantity one consider the
+number of ’known papers’ produced by a given re-
+searcher. Defining the known paper as an article quoted
+more times then the number of references cited in it, we
+see that this notion by construction takes into account
+the citation habits of a given field.
+To set a simple normalization scale useful for compari-
+son of citations gained by articles from various disciplines
+Plomp [7] introduced the efficiency of a given paper. It
+is defined by a ratio,
+</bodyText>
+<equation confidence="0.99969275">
+E(A) =
+c(A)
+r(A)
+, (14)
+</equation>
+<bodyText confidence="0.986963636363636">
+where c(A) denotes the number of citations gained, while
+r(A) is equal to the number of articles quoted in work A.
+In such a way various citation habits, different in differ-
+ent fields of science are automatically taken into account.
+Moreover, the role of a single citation of a review paper
+seems to be adequate, since a good review may attract
+a lot of citations, but its list of references is usually also
+long.
+In a loose analogy to the Hirsch index, we can define an
+efficiency index, (e-index), which quantifies the research
+output of a given researcher,
+</bodyText>
+<equation confidence="0.955164">
+e := max k : E(Ak) ≥ 1 . (15)
+</equation>
+<bodyText confidence="0.999143833333333">
+In other words, for a given author we count the num-
+ber of his scientific papers, which belong to the class of
+’known papers’ - they have gained more citations, than
+the number of items in the list of references in this article.
+In spirit of this work we may improve this quantity and
+define the weighted efficiency index
+</bodyText>
+<equation confidence="0.972456">
+e′ := max k : w(Ak) ≥ r(Ak) . (16)
+</equation>
+<bodyText confidence="0.997684666666667">
+Now we count the number of articles for which the
+weighted number of citations w is larger or equal to the
+total number of references r. Such an index is perhaps
+not as sophisticated as the Hirsch index, but its values
+are by construction less dependent on the working habits
+in a given scientific discipline.
+</bodyText>
+<sectionHeader confidence="0.849967" genericHeader="method">
+IV. CONCLUDING REMARKS
+</sectionHeader>
+<bodyText confidence="0.988543124183007">
+Analyzing the entire citation graph and citation ma-
+trix one can obtain a weighting factors which quantify the
+total impact of a single researcher for the scientific litera-
+ture. It will be interesting to analyze statistical distribu-
+tion of weighting factors for the citation graph represent-
+ing the entire scientific literature and certain particular
+branches of science. An empirical study of papers on high
+energy physics [31, 32] and computer science [14] reveals
+that the probability P (k) that a given article is cited k
+times, decays according to a power law, P (k) ∼ k−a. A
+power law distribution of the weighting factors attributed
+to individual scientific papers on molecular biology and
+biochemistry was recently reported by Ma et al. [11].
+Thus one could verify, whether a similar behavior will be
+observed for the distribution of weighting factors charac-
+terizing the group of scientists working in a given field.
+The weighting factors attributed to a given scientist are
+useful to introduce further bibliometric quantities. For a
+given article one defines its weighted number of citations,
+for a journal its weighted impact factor and for a given
+scientists the w index, i.e. his weighted Hirsch index.
+Analogous quantities can be introduced for groups of
+researchers or entire scientific institutions, but their nor-
+malization and interpretation has to be performed with
+a certain caution [27]. Similarly, cumulative w indices
+can be used for various scientific fields and sub-fields just
+to identify so called ’hot topics’ [33]. The usage of the
+weighted indices in all these cases could be superior with
+6respect to the standard quantities in a sense that the ap-
+proach proposed takes into account the average quality
+of the citations of scientific articles.
+However, it should be emphasized explicitly that the
+computation of weighted scientometric indices is it not
+entirely straightforward and for any practical purpose
+one needs to cope with several technical problems. For
+instance one has to deal with different authors with iden-
+tical names, with scientists who change their name during
+their career and with scientists whose name was tran-
+scribed into Latin in several different ways. In general
+one might think that such cases do not occur very often
+[34], so they should not induce statistically significant ef-
+fects for the weighted indices of all other authors, but
+these important problems definitely require further stud-
+ies. Some remarks on selection of bibliometric data and
+other practical issues are provided in Appendix B.
+We shall now pass to some more general remarks. Al-
+though we tend to agree that the existing bibliometric
+indices can be further developed and improved, we do
+not claim there exists a single number capable to quan-
+tify scientific achievement in an unambiguous way. On
+the other hand, one should not neglect the possibility of
+making a wise use of the bibliometric data and various
+impact factors. Let us quote however, an opinion of Adler
+et al. [2], ”While it is incorrect to say that the impact
+factor gives no information about individual papers in a
+journal, the information is surprisingly vague and can be
+dramatically misleading”.
+Similarly, any bibliometric data should not play the de-
+cisive role during any peer review process. For instance,
+working with applications for Advanced Grants of Eu-
+ropean Research Council (ERC) the panels of experts
+tried hard to evaluate the quality of the projects and
+the scientific achievements of the principal investigator,
+not putting too much attention to their scientometric in-
+dices. However, an a posteriori statistical analysis found
+a clear correlation [35] between the final outcome of the
+2008 grant competition in PE-2 panel and the bibliomet-
+ric benchmark suggested by ERC and used in the propos-
+als: the total number of citations of ten papers chosen
+by each applicant from his list of publications for the last
+decade.
+Let us then conclude this article with some concrete
+comments concerning the practical usage of scientometric
+data. They will be separately addressed to three groups
+of readers.
+a) Scientists. Do well your research, write good pa-
+pers and try to publish them in good scientific journals.
+Writing your articles cite these papers which should be
+quoted, according to the established habits in your field.
+Do not care too much about various impact factors and
+indices. Any good scientist will have sound numbers with
+respect to any (reasonable) measure and scientometric in-
+dicator. Do not waste your time and energy for a silly
+game to inflate artificially the values of the scientomet-
+ric indices, which might be used to characterize your re-
+search output.
+b) Reviewers. Scientists involved in all kind of eval-
+uation should make use of their knowledge of the field
+and do not treat the bibliometric data as a definite an-
+swer to any question. During the peer review process
+all scientometric indicators should be considered as aux-
+iliary data only. In a need to characterize the impact
+of a given article published more then three years ago
+one should use the number of citations gained instead of
+the impact factor of the journal it was published. Fur-
+thermore, the bibliometric indicators should always be
+normalized against the average computed for scientists
+working in the similar field of science and in the corre-
+sponding period of time.
+c) Managers of science. Scientific activity has mul-
+tiple goals, so try to avoid harsh consequences of the pro-
+jection of a multidimensional system onto a single axis.
+Do not hope therefore for a unique scientometric indica-
+tor, which could be widely used as a universal evaluation
+tool. Each bibliometric index has certain advantages and
+some drawbacks, but using several of them in parallel re-
+duces the risk of manipulating the data. Support versa-
+tile usage of scientometry, in which the researcher under
+evaluation takes active part. For instance, consider the
+benchmarks used by applicants for the ERC grants: Any
+senior researcher selects his ten best papers published in
+the last decade and provides the number each of them
+was cited. A junior scientist has to choose his best five
+papers published during the recent five years.
+To summarize, it is not fair to say that the bibliometric
+data carry no valuable information whatsoever. However,
+it is not as simple to decode from them a piece of relevant
+information, as it may look like at a first glance. Thus
+we would not to discourage from usage of scientometric
+data, provided they are used in a wise and reasonable
+way.
+Note added. After the first version of this work was
+completed a new paper by Radicchi et al. was posted
+in the web and later published [36]. The authors of this
+article put forward a similar idea to apply the PageR-
+ank algorithm to the citation graph, in which each ver-
+tex represents an individual author. Working with the
+set of data composed of the collection of the Physical
+Review journals published between 1893 and 2006 they
+concluded that the numerical values of the weighted indi-
+cator obtained in this way for several physicists correlates
+well with their scientific achievements measured by some
+of the main prizes in physics, which include Nobel prize,
+Boltzmann medal, Wolf prize, Dirac medal and Planck
+medal.
+It is a pleasure to thank P. Bia las, W. Burkot,
+G. Haran´czyk, M. Kus´ and W. S lomczyn´ski for helpful
+discussions and C. M. Bender for fruitful correspondence.
+This work was performed during the author’s spare time
+and was not supported by any funding agency.
+7Appendix A: Some exemplary graph matrices and
+their leading eigenvectors
+In this appendix we provide examples of some simple
+matrices and analyze properties of their leading eigenvec-
+tor. Although a matrix of a small size N directly repre-
+sents only a small citation graph which describes a small
+group of N scientists, it can be also applied to model a
+huge graph with a sub–graph structure: each vertex may
+represent a given field or subfield of science. Therefore
+studying even such oversimplified cases can be helpful in
+understanding the properties of the connectivity matrix
+of a citation graph and its leading eigenvector.
+Let us start with the simplest case of N = 2,
+</bodyText>
+<equation confidence="0.923025727272727">
+C2 =
+[
+0 a
+b 0
+]
+, x =
+[ √
+a√
+b
+]
+. (A1)
+</equation>
+<bodyText confidence="0.919175857142857">
+The leading eigenvalue reads λ =
+√
+ab, and in this case
+the weights xi given be the corresponding eigenvector are
+proportional to the square root of the flow between the
+vertexes. Obviously this is not longer the case for larger
+graphs,
+</bodyText>
+<equation confidence="0.842836076923077">
+C3 =
+
+ 0 a 00 0 b
+c 0 0
+
+ , x =
+
+ a
+2/3b1/3
+b2/3c1/3
+a1/3c2/3
+
+ . (A2)
+</equation>
+<bodyText confidence="0.995148666666667">
+The following numerical example shows that the weights
+given by the leading eigenvector grow slower than linearly
+with the average entry in each row,
+</bodyText>
+<figure confidence="0.766317142857143">
+C4 =
+
+
+0 1 1 1
+2 0 2 2
+3 3 0 3
+4 4 4 0
+
+ , x ≈
+
+
+0.3223
+0.5738
+0.7755
+0.9409
+
+ . (A3)
+Consider now some other numerical examples of size
+four
+C =
+
+
+0 4 0 0
+6 0 2 1
+0 0 0 0
+0 0 3 0
+
+ , x ≈
+
+
+0.6325
+0.7746
+0
+0
+
+ . (A4)
+Observe that quotations by authors, the papers of
+which were never cited do not contribute at all to the
+weighting index!
+C =
+
+
+0 6 6 6
+2 0 1 1
+0 1 0 1
+1 0 1 0
+
+ , x ≈
+
+
+0.8975
+0.4228
+0.1247
+0.2036
+
+ . (A5)
+</figure>
+<bodyText confidence="0.995408">
+Similarly, quotation by a junior scientist, the papers of
+which received a little attention of the scientific commu-
+nity, are much less important than a citation by an ac-
+complished author. This is seen by comparing the third
+and the fourth component of the eigenvector of the above
+citation matrix, in which the first two rows represent a
+renowed researcher and a less experienced author, respec-
+tively.
+It is illustrative to analyze the case of two weakly con-
+nected subgraphs, represented below by the first and the
+second pair of nodes. If the coupling between the sub-
+graphs is symmetric, C2,4 = C4,2 the leading eigenvector
+lives in both subspaces,
+</bodyText>
+<equation confidence="0.974785555555556">
+C =
+
+
+0 4 0 0
+6 0 0 1
+0 0 0 4
+0 1 6 0
+
+ , x ≈
+</equation>
+<figure confidence="0.90381125">
+
+
+0.4197
+0.5691
+0.4197
+0.5691
+
+ , (A6)
+</figure>
+<bodyText confidence="0.997385666666667">
+However, if there is more fluxes between both subgraphs
+start to differentiate, the weight of the leading vector
+moves toward the distinguished subsystem,
+</bodyText>
+<equation confidence="0.927694222222222">
+C =
+
+
+0 4 0 0
+6 0 0 1
+0 0 0 4
+0 0.5 6 0
+
+ , x ≈
+</equation>
+<figure confidence="0.9521966">
+
+
+0.4939
+0.6502
+0.3493
+0.4597
+
+ , (A7)
+C =
+
+
+0 4 0 0
+6 0 0 1
+0 0 0 4
+0 0.1 6 0
+
+ , x ≈
+
+
+0.5913
+0.7480
+0.1870
+0.2365
+
+ . (A8)
+</figure>
+<bodyText confidence="0.743995333333333">
+If two graphs are not connected, the leading eigenvalue
+is degenerated and one finds a corresponding eigenvector
+localized exclusively in the more populated subspace,
+</bodyText>
+<equation confidence="0.939332222222222">
+C =
+
+
+0 4 0 0
+6 0 0 0
+0 0 0 1
+0 0 3 0
+
+ , x ≈
+</equation>
+<figure confidence="0.955536">
+
+
+0.6325
+0.7746
+0
+0
+
+ . (A9)
+</figure>
+<bodyText confidence="0.934598714285714">
+To lift such a degeneracy one may modify the analyzed
+matrix C by forming its convex combination with the flat
+matrix S such that Sij = 1/N . In this way one assures [9]
+that the leading eigenvector of C(p) = (1− p)C+ pS can
+be obtained by iterating sufficiently long the flat vector
+with all entries equal, wi = 1/N , by the matrix C(p).
+Appendix B: Practical remarks on evaluating the
+</bodyText>
+<listItem confidence="0.457361">
+weighting vector
+1. Selection of the data
+</listItem>
+<bodyText confidence="0.998967545454545">
+The key issue by constructing the citation graph is an
+access to a reliable data base containing the scientific lit-
+erature. For instance one may rely on the data provided
+by the ISI Web of Science, although some experts claim
+that it is biased toward the scientific journals published
+in English only and it does not cover uniformly the en-
+tire literature. Alternatively one may chose to use some
+publicly open web search engines, like Google Scholar.
+In this case it is believed that Google does not cover sys-
+tematically earlier scientific literature. Furthermore it
+8is not clear how to set simple criteria, which web docu-
+ments should be taken into account. On one hand one
+might restrict the attention to the papers published by a
+scientific journal, which is first found in an earlier com-
+piled list of all sources accepted. On the other hand,
+due to popularity of various web archives and preprint
+depositories (like arxiv.org) one might also accept for-
+mally unpublished preprints posted there. In such a case
+a special care has to be taken in order to avoid double
+counting the same article, first deposited in an archive,
+and later published in a journal, often under a slightly
+changed title.
+</bodyText>
+<sectionHeader confidence="0.684131" genericHeader="method">
+2. Different fields of science
+</sectionHeader>
+<bodyText confidence="0.957530708333333">
+As illustrated with some simple matrix examples, if
+two fields of science are not coupled by any cross-
+citations, the leading vector describes only scientists
+working in the larger field. Similarly, if two fields of sci-
+ence are coupled only weakly by a few cross-citations, the
+leading eigenvector tends to be localized in the subgraph
+with more scientists, papers and citations, so the weight-
+ing factors handicap researchers working in a less popular
+subfield. The splitting of the entire graph into subgraphs
+can be defined in an objective way by applying the recent
+method of Newman [37] to find community structure in
+the citation graph. Since it is well known that the cita-
+tion patterns depend on the branch of science [29, 30],
+one should rather analyze two subgraphs separately, or
+renormalize the leading eigenvector separately for a given
+subfield. This is consistent with a rather general ’rule
+of thumb’: the bibliometric data should be normalized
+against the average computed for scientists working in
+the similar field of science in the corresponding window
+of time [23].
+3. Degeneracy in names
+It might not be easy to distinguish papers written by
+various scientist, who publish under the very same name
+[34]. In principle one may try to distinguish them by the
+scientific discipline, the affiliations and the time window
+of their publishing activity, but is its unlikely to expect
+that the success rate will tend to unity. On the other
+hand, it is reasonable to conjecture that not distinguish-
+ing between the scientists with the same name will not
+impact much the weighting indices of all other researchers
+in the graph, as the weights of the links will be taken as
+the average.
+4. Period of the scientific activity
+It would be unwise to compare weighting indices of
+two researchers in very different age or living in differ-
+ent times. The number of universities, scientists, jour-
+nals, papers and citations keeps growing fast. Hence one
+should expect that a comparison of two scientists with
+equally valuable accomplishments, whose scientific con-
+tributions are already forgotten (and their papers are not
+quoted any more), would reveal that the scientist active
+more recently is characterized by a larger weighting fac-
+tor.
+5. Uniqueness of the leading eigenvector of the
+citation matrix
+A matrix C is called reducible if it can be transformed
+by a permutation P into matrix with a zero block below
+the diagonal, C′ = PCPT =
+</bodyText>
+<equation confidence="0.65041875">
+[
+D1 Z
+0 D2
+]
+</equation>
+<bodyText confidence="0.98174092">
+, where D1 and
+D2 are square matrices. In the opposite case the matrix
+is called irreducible. The Frobenius-Perron theorem im-
+plies that for any irreducible non-negative matrix C its
+spectral gap is positive, γ := z1 − |z2 |&amp;gt; 0, so the real
+eigenvector ~x corresponding to the leading eigenvalue z1
+is unique. The size of the spectral gap governs the speed
+of the convergence of any initial vector iterated several
+times by C to the invariant state ~x = C~x.
+The initial citation matrix C analyzed in this paper
+in principle could reducible, but due to numerous cross-
+citations between various researchers and subfields this
+possibility seems to be unlikely. Furthermore, the auxil-
+iary (N + 1)-th node of the graph representing all scien-
+tists outside the ensemble under investigation introduces
+additional connectivity and hence increases (on average)
+the spectral gap.
+The size of the spectral gap for the graph matrix de-
+scribing entire scientific literature has to be determined
+in a numerical experiment. If the gap occurs to be too
+small to ensure convergence time realistic for practical
+implementations, one may always introduce a suitable
+modification of the citation matrix C. For instance, fol-
+lowing the original idea of Page Rank [9], one could mix
+C with the flat matrix S such that Sij = 1/N – see also
+</bodyText>
+<reference confidence="0.98929598019802">
+[38, 39].
+[1] D. W. Aksnes and A Rip, Researchers’ perceptions of
+citations, Research Policy 38, 895-905 (2009).
+[2] R. Adler, J. Ewing, P. Taylor, Citation Statistics, a re-
+port IMU-ICIAM-IMS, November 2008,
+[3] F. Laloe¨ and R. Mosseri, Not even right, not even wrong,
+Europhysics News, 40/5 27-29 (2009).
+[4] E. Garfield, Citation Indexing (Wiley, New York) (1979).
+[5] E. Garfield, The impact factor, Current Contents 29 20
+June 1994.
+[6] M.E. Falafas and V.G. Alexiou, The top-ten in journal
+9impact factor manipulations, Arch. Immunol. Theor Exp.
+56, 223-226 (2008).
+[7] R. Plomp, The highly cited papers of professors as an in-
+dicator of a research group’s scientific performance, Sci-
+entometrics 29, 377 (1994).
+[8] J.E. Hirsch, An index to quantify an individual’s scien-
+tific research output, PNAS 102 16569 (2005).
+[9] S. Brin and L. Page, The anatomy of a large–scale hy-
+pertextual Web search engine, Comp. Networks ISDN
+Systems 30 107 (1998).
+[10] P. Chen, H. Xie, S. Maslov and S. Redner, Find-
+ing scientific gems with Google Pare Rank algorithm,
+J.Informetrics 1, 8-15 (2007).
+[11] N. Ma, J. Guan and Y. Zhao, Bringing Page Rank to the
+citation analysis, Information Processing &amp; Management
+44, 800 (2008).
+[12] M. A. Nielsen, Lectures on the Google Technology Stack,
+December 2008, see http://michaelnielsen.org
+[13] C. Bergstrom, Eigenfactor: Measuring the value and the
+prestige of scholarly journals, C&amp;RL News, 68, 5 (2007).
+[14] Y. An, J. Janssen and E. E. Milios, Characterizing and
+mining the citation graph of the computer science litera-
+ture, Knowledge &amp; Information Systems 6, 664 (2004).
+[15] A. W. Marshall and I. Olkin, The Theory of Memoriza-
+tion and Its Applications (Academic Press, New York,
+1979)
+[16] D. S. Bernstein, Matrix Mathematics, Princeton Univer-
+sity Press, Princeton (2005).
+[17] D.W. Aksens, A marco-study of self–citations Sciento-
+metrics 56, 235 (2003).
+[18] W. Gla¨nzel, K. Debackere, B. Thijs, and A. Schubert, A
+concise review on the role of author self-citations in in-
+formation science, bibliometrics and science policy, Sci-
+entometrics 67, 263-277 (2006)
+[19] M. Schreiber, A case study of the Hirsch index for 26 non-
+prominent physicists, Ann. Physik 16, 640-652 (2007).
+[20] T. F. Frandsen, Journal self-citations - Analysing the JIF
+mechanism, J. Informetrics 1, 47-58 (2007)
+[21] J. H. Fowler and D. W. Aksnes, Does self-citation pay?
+Scientometrics 72, 427-437 (2007).
+[22] P.O. Seglen, Why the impact factor should not be used
+for evaluating research BMJ 324, 497 (1997).
+[23] F. Radicchi, S. Fortunato and C. Castellano, Universality
+in citation distribution: towards an objective measure of
+scientific impact, Proc. Natl. Acad. Sci. USA 105, 17268-
+1727 (2008).
+[24] W. Gla¨nzel, On h–index. A mathematical approach to a
+new measure of publication activity and citation impact,
+Scientometrics 67, 315 (2006).
+[25] J.E. Hirsch, Does the h index have predictive power?
+PNAS 104 19193 (2007).
+[26] G. J. Woeginger, An axiomatic characterization of the
+Hirsch index, Math. Soc. Sciences 56, 224 (2008).
+[27] J.F. Molinari and A. Molinari, A new methodology
+for rating scientific institutions,, Scientometrics 75, 163
+(2008).
+[28] A. Schubert, Successive h-indices, Scientometrics 70, 183
+(2007).
+[29] P.D. Batista, M.G. Campiteli, O.Kinouchi, and A.S.
+Martinez, Is it possible to compare researchers with dif-
+ferent scientific interest? Scientometrics 68, 179 (2006).
+[30] B. M. Althouse, J. D. West, T. C. Bergstrom, and C. T.
+Bergstrom, Differences in impact factor across fields and
+over time, J. Am. Soc. Inf. Sci. Technol. 60 27-34 (2009).
+[31] S. Redner, How popular is your paper? An empirical
+study of the citation distribution, Eur. Phys. J. B 4,
+131 (1998).
+[32] S. Lehmann, B. E. Lautrup, A. D. Jackson, Citation Net-
+works in High Energy Physics, Phys. Rev. E 68, 026113
+(2003).
+[33] M. G. Banks, An extension of the Hirsch index: Indexing
+scientific topics and compounds, Scientometrics 69, 161
+(2006).
+[34] D.W. Aksens, When different persons have an identical
+author name. How frequent are homonyms? JASIST 59,
+838-841 (2008).
+[35] K. Z˙yczkowski, How to get an ERC grant? Europhysics
+News, 40/5, 27-29 (2009).
+[36] F. Radicchi, S. Fortunato, B. Markines and A. Vespig-
+nani, Diffusion of scientific credits and the ranking of
+scientists, Phys. Rev. E 80, 056103 (2009).
+[37] M. E. J. Newman, Finding community structure in net-
+works using the eigenvectors of matrices, Phys. Rev. E
+74, 036104 (2006).
+[38] A.N. Langville and C.D. Meyer, A survey of eigenvector
+methods for web information retrieval, SIAM Review 47
+135 (2005).
+[39] K. Bryan and T. Leise, The $ 25,000,000,000 eigenvector:
+the linear algebra behind Google, SIAM Review 48 569
+(2006).
+</reference>
+</variant>
+</algorithm>
+<algorithm name="ParsHed" version="110505">
+<variant no="0" confidence="0.012354">
+<abstract confidence="0.6498585">ar X iv :0 90 4. 21 10 v4 [ ph ys ics .so c-p h]</abstract>
+<note confidence="0.468445">1 1 M ar 20 10 Citation graph, weighted impact factors and performance indices Karol Z˙yczkowski1,2 1“Mark Kac” Complex Systems Research Centre, Institute of Physics, Jagiellonian University, ul. Reymonta 4, 30-059 Krako´w, Poland and 2Centrum Fizyki Teoretycznej, Polska Akademia Nauk, Al. Lotniko´w 32/44, 02-668 Warszawa, Poland (Dated: March 11, 2010)</note>
+<abstract confidence="0.985034">A scheme of evaluating an impact of a given scientific paper based on importance of papers quoting it is investigated. Introducing a weight of a given citation, dependent on the previous scientific achievements of the author of the citing paper, we define the weighting factor of a given scientist. Technically the weighting factors are defined by the components of the normalized leading eigenvector of the matrix describing the citation graph. The weighting factor of a given scientist, reflecting the scientific output of other researchers quoting his work, allows us to define weighted number of citation of a given paper, weighted impact factor of a journal and weighted Hirsch index of an individual scientist or of an entire scientific institution.</abstract>
+</variant>
+</algorithm>
+<algorithm name="ParsCit" version="110505">
+<citationList>
+<citation valid="false">
+<marker>[38, 39]</marker>
+<rawString>.</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>D W</author>
+</authors>
+<title>Aksnes and A Rip, Researchers’ perceptions of citations,</title>
+<date>2009</date>
+<journal>Research Policy</journal>
+<volume>38</volume>
+<pages>895--905</pages>
+<contexts>
+<context position="2210" citStr="[1]" startWordPosition="356" endWordPosition="356">universities, scientists, journals and scientific articles keeps growing fast, one is often forced to use some parametric measures to characterize the output of a given scientist. Although the peer review is still considered to be the most reliable and objective method of evaluation of candidates for any scientific position, in view of a large number of applicants in the preliminary phase one often performs screening of numerical values of performance indices, designed to quantify scientific output of the candidates. As the status of scientific citations among researchers is rather ambivalent [1], we do not claim that citations of scientific articles directly indicate their quality and importance. Just on contrary, we share some doubts, often raised in the literature [2, 3] that trying to measure scientific achievements by any index based on the number of citations may generate certain perverse effects: researchers no longer focus on interesting and relevant research, but they try to adapt to the popular evaluation criteria. However, looking around we have to agree that various citation indices are used nowdays to evaluate scientists, journals or research institutions. Thus in this wo</context>
+</contexts>
+<marker>[1]</marker>
+<rawString>D. W. Aksnes and A Rip, Researchers’ perceptions of citations, Research Policy 38, 895-905 (2009).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>R Adler</author>
+<author>J Ewing</author>
+<author>P Taylor</author>
+</authors>
+<title>Citation Statistics, a report IMU-ICIAM-IMS,</title>
+<date>2008</date>
+<contexts>
+<context position="2391" citStr="[2, 3]" startWordPosition="384" endWordPosition="385">. Although the peer review is still considered to be the most reliable and objective method of evaluation of candidates for any scientific position, in view of a large number of applicants in the preliminary phase one often performs screening of numerical values of performance indices, designed to quantify scientific output of the candidates. As the status of scientific citations among researchers is rather ambivalent [1], we do not claim that citations of scientific articles directly indicate their quality and importance. Just on contrary, we share some doubts, often raised in the literature [2, 3] that trying to measure scientific achievements by any index based on the number of citations may generate certain perverse effects: researchers no longer focus on interesting and relevant research, but they try to adapt to the popular evaluation criteria. However, looking around we have to agree that various citation indices are used nowdays to evaluate scientists, journals or research institutions. Thus in this work we shall not discuss a controversial issue, what is the optimal measure of scientific achievement. Instead we review common quantitative measures of scientific quality and discus</context>
+<context position="16895" citStr="[2]" startWordPosition="2962" endWordPosition="2962">ence is that instead of counting the bare numbers of citation c(Aj) of a given article Aj , we now sum the weighted citations w(Aj). Since these number reflects in a sense the quality of a citation we tend to believe that the weighted impact factor forms a more accurate quantity to evaluate the quality of a scientific journal than the standard IF. As mentioned in the introduction in some disciplines like mathematics and mathematical physics the process of preparing an article and publishing it is often longer than the two year time span used in the definition of IF2. Therefore one may propose [2] to use also similar quantities defined for a longer time window containing five years. In full analogy to the previous definitions we write IF5y(J) := 1 m m∑ j=1 c(Aj) where m = 5∑ i=1 Zy−i (8) and WIF5y(J) := 1 m m∑ j=1 w(Aj) . (9) Here one takes into account all articles published in the five year time span, while c(Aj) and w(Aj) denote now the number of all citations and the sum of weighted citations, a given paper Aj from this sample obtained in the analyzed year y. The 5–year impact factor could be specially useful to characterize mathematical journals and journals devoted to these field</context>
+<context position="20172" citStr="[2, 3]" startWordPosition="3558" endWordPosition="3559">rticles published at least two years earlier. D. Weighted Hirsch index To quantify a scientific research output of a given researcher one often uses the h index introduced by Hirsch [8]. For a given scientists this index is equal to h, if h of all papers he has written were quoted at least h times. Ordering his articles according to the number of citations c(Ai), the article Ai has ever received one can write h := max k : c(Ak) ≥ k . (12) Although the h index gained considerable popularity and it became a subject of several research papers [19, 24–26], several of its drawbacks were emphasized [2, 3]. As in the case of the impact factor the Hirsch index is not capable to differentiate between relevant and less relevant citations. 5Making use of the weighted citation number w(Ai) of an article, we may thus introduce the weighted h index w := w(Ak) (13) where k is the maximal integer such that w(Ak) ≥ k. This index enjoys all the virtues of the original h index recently emphasized in [24, 25], but additionally it takes into account scientific achievements of the authors quoting the work of the evaluated individual. Since the weights w(Ai) determined by the citation graph take into account t</context>
+<context position="22078" citStr="[2, 29, 30]" startWordPosition="3890" endWordPosition="3892">] one can easily adopt his idea of successive performance indices and define an analogue to the index h2. To be concrete, the weighted successive index w2 of a scientific institution is equal to an integer number w, if it employs w scientists, such that the weighted Hirsch index w(i) for each of them is equal to or larger than w2. E. Weighted efficiency index Let us emphasize here that one should not directly compare the Hirsch indices for scientists working in different research fields. This is due to the fact that the numbers of papers and citations vary from one scientific field to another [2, 29, 30], so the means values of Hirsch indices also do differ. On one hand one could compare the values of the indices rescaled against the average value in a given field [23]. On the other hand, one may work with other indicators which reflect citing patterns of each community. As an example of such a quantity one consider the number of ’known papers’ produced by a given researcher. Defining the known paper as an article quoted more times then the number of references cited in it, we see that this notion by construction takes into account the citation habits of a given field. To set a simple normali</context>
+<context position="27149" citStr="[2]" startWordPosition="4755" endWordPosition="4755">mportant problems definitely require further studies. Some remarks on selection of bibliometric data and other practical issues are provided in Appendix B. We shall now pass to some more general remarks. Although we tend to agree that the existing bibliometric indices can be further developed and improved, we do not claim there exists a single number capable to quantify scientific achievement in an unambiguous way. On the other hand, one should not neglect the possibility of making a wise use of the bibliometric data and various impact factors. Let us quote however, an opinion of Adler et al. [2], ”While it is incorrect to say that the impact factor gives no information about individual papers in a journal, the information is surprisingly vague and can be dramatically misleading”. Similarly, any bibliometric data should not play the decisive role during any peer review process. For instance, working with applications for Advanced Grants of European Research Council (ERC) the panels of experts tried hard to evaluate the quality of the projects and the scientific achievements of the principal investigator, not putting too much attention to their scientometric indices. However, an a post</context>
+</contexts>
+<marker>[2]</marker>
+<rawString>R. Adler, J. Ewing, P. Taylor, Citation Statistics, a report IMU-ICIAM-IMS, November 2008,</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>F Laloe¨</author>
+<author>R Mosseri</author>
+</authors>
+<title>Not even right, not even wrong,</title>
+<date>2009</date>
+<journal>Europhysics News,</journal>
+<volume>40</volume>
+<pages>27--29</pages>
+<contexts>
+<context position="2391" citStr="[2, 3]" startWordPosition="384" endWordPosition="385">. Although the peer review is still considered to be the most reliable and objective method of evaluation of candidates for any scientific position, in view of a large number of applicants in the preliminary phase one often performs screening of numerical values of performance indices, designed to quantify scientific output of the candidates. As the status of scientific citations among researchers is rather ambivalent [1], we do not claim that citations of scientific articles directly indicate their quality and importance. Just on contrary, we share some doubts, often raised in the literature [2, 3] that trying to measure scientific achievements by any index based on the number of citations may generate certain perverse effects: researchers no longer focus on interesting and relevant research, but they try to adapt to the popular evaluation criteria. However, looking around we have to agree that various citation indices are used nowdays to evaluate scientists, journals or research institutions. Thus in this work we shall not discuss a controversial issue, what is the optimal measure of scientific achievement. Instead we review common quantitative measures of scientific quality and discus</context>
+<context position="4485" citStr="[3]" startWordPosition="734" endWordPosition="734">ns of the papers analyzed is perhaps fine for biology, medicine and some other branches of science, it is rather not the case e.g. for mathematical journals. These journals score small values of the impact factor, since the preparation of a mathematical article and the entire refereeing procedure takes often more time than two years. Furthermore, in several branches of science great role is played by articles which are not quickly forgotten. Thus one could also design and work with an impact factor, which takes into account only citations gathered three or five years after paper was published [3]. In order to identify the papers which contribute most to the IF of a journal the editors often try to identify articles, which gained the largest number of citations in the first and the second year after the year they were published. Editors of some mathematically oriented journals, analyzing a list of articles prepared in this way for their journal were concerned, if it really represents the most important articles published. In fact they considered that several papers of not the top quality entered this list, only because they were simple enough that they could become understood and later</context>
+<context position="20172" citStr="[2, 3]" startWordPosition="3558" endWordPosition="3559">rticles published at least two years earlier. D. Weighted Hirsch index To quantify a scientific research output of a given researcher one often uses the h index introduced by Hirsch [8]. For a given scientists this index is equal to h, if h of all papers he has written were quoted at least h times. Ordering his articles according to the number of citations c(Ai), the article Ai has ever received one can write h := max k : c(Ak) ≥ k . (12) Although the h index gained considerable popularity and it became a subject of several research papers [19, 24–26], several of its drawbacks were emphasized [2, 3]. As in the case of the impact factor the Hirsch index is not capable to differentiate between relevant and less relevant citations. 5Making use of the weighted citation number w(Ai) of an article, we may thus introduce the weighted h index w := w(Ak) (13) where k is the maximal integer such that w(Ak) ≥ k. This index enjoys all the virtues of the original h index recently emphasized in [24, 25], but additionally it takes into account scientific achievements of the authors quoting the work of the evaluated individual. Since the weights w(Ai) determined by the citation graph take into account t</context>
+</contexts>
+<marker>[3]</marker>
+<rawString>F. Laloe¨ and R. Mosseri, Not even right, not even wrong, Europhysics News, 40/5 27-29 (2009).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>E Garfield</author>
+</authors>
+<title>Citation Indexing (Wiley,</title>
+<date>1979</date>
+<location>New York</location>
+<contexts>
+<context position="3618" citStr="[4, 5]" startWordPosition="585" endWordPosition="586">prove them. The most popular indices used to evaluate the impact of a given article, the influence of a scientific journal for the research community, the scientific output of a single individual or entire institution are based only on the quantity of citations in the literature to the articles analyzed. Our aim is to take into account also the quality of the citations, measured by the averaged achievements of the authors of the papers which refer to the article under consideration. Additional motivation for our research is due to the controversy concerning the usage of the impact factor (IF) [4, 5], to quantify the quality of a scientific journal. On one hand it was pointed out [6] that impact factor of a given journal can be manipulated by the editors and publisher. On the other hand it was often emphasized that the two year window for counting the citations of the papers analyzed is perhaps fine for biology, medicine and some other branches of science, it is rather not the case e.g. for mathematical journals. These journals score small values of the impact factor, since the preparation of a mathematical article and the entire refereeing procedure takes often more time than two years. </context>
+<context position="15704" citStr="[4, 5]" startWordPosition="2750" endWordPosition="2751">he µ-th co–author of this paper. B. Weighted impact factor of a journal Let Zy denotes the number of papers published by a certain scientific journal J in year y. To quantify the impact the journal exerts for the scientific community one often uses the so called impact factor. To compute it one takes all Zy−2+Zy−1 articles published one or two years earlier, and then sums the number of citations c(Aj), a given article from this set received during the year y. The result has then to be normalized with respect to the total number of articles published in journal J during the two 4year time span [4, 5], IF2y(J) := 1 Zy−2 + Zy−1 Zy−2+Zy−1∑ j=1 c(Aj) . (6) This commonly used index takes into account the two year time window, so we shall denote it by IF2. By construction this quantity takes into account only the quantity of the citations received by articles published in a given journal during last two years but not their quality. Presented approach allows us to take into consideration the fact, who quoted the papers analyzed. In full analogy to (6) we thus define the weighted impact factor (WIF2) of a journal J , WIF2y(J) := 1 Zy−2 + Zy−1 Zy−2+Zy−1∑ j=1 w(Aj) . (7) The only difference is that</context>
+</contexts>
+<marker>[4]</marker>
+<rawString>E. Garfield, Citation Indexing (Wiley, New York) (1979).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>E Garfield</author>
+</authors>
+<title>The impact factor,</title>
+<date>1994</date>
+<journal>Current Contents</journal>
+<volume>29</volume>
+<contexts>
+<context position="3618" citStr="[4, 5]" startWordPosition="585" endWordPosition="586">prove them. The most popular indices used to evaluate the impact of a given article, the influence of a scientific journal for the research community, the scientific output of a single individual or entire institution are based only on the quantity of citations in the literature to the articles analyzed. Our aim is to take into account also the quality of the citations, measured by the averaged achievements of the authors of the papers which refer to the article under consideration. Additional motivation for our research is due to the controversy concerning the usage of the impact factor (IF) [4, 5], to quantify the quality of a scientific journal. On one hand it was pointed out [6] that impact factor of a given journal can be manipulated by the editors and publisher. On the other hand it was often emphasized that the two year window for counting the citations of the papers analyzed is perhaps fine for biology, medicine and some other branches of science, it is rather not the case e.g. for mathematical journals. These journals score small values of the impact factor, since the preparation of a mathematical article and the entire refereeing procedure takes often more time than two years. </context>
+<context position="6170" citStr="[5, 7, 8]" startWordPosition="1025" endWordPosition="1027">ws the recent literature and in this way to improve the chances that their work will be published. 2To take these features into account one needs then to distinguish, in a statistical sense, the quality of a given citation. In short, any citation of an established scientist, whose numerous papers have already attracted several citations, should be weighted more than a citation by a newcomer to the field. In this paper we suggest a possible solution of this problem by defining the weight of a scientific citation and using this notion to modify and improve performance indices defined earlier in [5, 7, 8]. All indices proposed are based on the weighting factor, associated to each scientists, which is analogous to the Page Rank introduced by Brin and Page [9] to characterize relative importance of various web pages and used in the Google web search engine. The weights defined by the components of the leading eigenvector of a suitably defined citation matrix characterize a given citation. These numbers display the desired property of self-consistence: the weight of any citation by a given researcher is larger, if his papers are quoted by other scientists, whose papers are often quoted. A similar</context>
+<context position="15704" citStr="[4, 5]" startWordPosition="2750" endWordPosition="2751">he µ-th co–author of this paper. B. Weighted impact factor of a journal Let Zy denotes the number of papers published by a certain scientific journal J in year y. To quantify the impact the journal exerts for the scientific community one often uses the so called impact factor. To compute it one takes all Zy−2+Zy−1 articles published one or two years earlier, and then sums the number of citations c(Aj), a given article from this set received during the year y. The result has then to be normalized with respect to the total number of articles published in journal J during the two 4year time span [4, 5], IF2y(J) := 1 Zy−2 + Zy−1 Zy−2+Zy−1∑ j=1 c(Aj) . (6) This commonly used index takes into account the two year time window, so we shall denote it by IF2. By construction this quantity takes into account only the quantity of the citations received by articles published in a given journal during last two years but not their quality. Presented approach allows us to take into consideration the fact, who quoted the papers analyzed. In full analogy to (6) we thus define the weighted impact factor (WIF2) of a journal J , WIF2y(J) := 1 Zy−2 + Zy−1 Zy−2+Zy−1∑ j=1 w(Aj) . (7) The only difference is that</context>
+</contexts>
+<marker>[5]</marker>
+<rawString>E. Garfield, The impact factor, Current Contents 29 20 June 1994.</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>M E Falafas</author>
+<author>V G Alexiou</author>
+</authors>
+<title>The top-ten in journal 9impact factor manipulations,</title>
+<date>2008</date>
+<journal>Arch. Immunol. Theor Exp.</journal>
+<volume>56</volume>
+<pages>223--226</pages>
+<contexts>
+<context position="3703" citStr="[6]" startWordPosition="602" endWordPosition="602"> influence of a scientific journal for the research community, the scientific output of a single individual or entire institution are based only on the quantity of citations in the literature to the articles analyzed. Our aim is to take into account also the quality of the citations, measured by the averaged achievements of the authors of the papers which refer to the article under consideration. Additional motivation for our research is due to the controversy concerning the usage of the impact factor (IF) [4, 5], to quantify the quality of a scientific journal. On one hand it was pointed out [6] that impact factor of a given journal can be manipulated by the editors and publisher. On the other hand it was often emphasized that the two year window for counting the citations of the papers analyzed is perhaps fine for biology, medicine and some other branches of science, it is rather not the case e.g. for mathematical journals. These journals score small values of the impact factor, since the preparation of a mathematical article and the entire refereeing procedure takes often more time than two years. Furthermore, in several branches of science great role is played by articles which ar</context>
+</contexts>
+<marker>[6]</marker>
+<rawString>M.E. Falafas and V.G. Alexiou, The top-ten in journal 9impact factor manipulations, Arch. Immunol. Theor Exp. 56, 223-226 (2008).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>R Plomp</author>
+</authors>
+<title>The highly cited papers of professors as an indicator of a research group’s scientific performance,</title>
+<date>1994</date>
+<journal>Scientometrics</journal>
+<volume>29</volume>
+<pages>377</pages>
+<contexts>
+<context position="6170" citStr="[5, 7, 8]" startWordPosition="1025" endWordPosition="1027">ws the recent literature and in this way to improve the chances that their work will be published. 2To take these features into account one needs then to distinguish, in a statistical sense, the quality of a given citation. In short, any citation of an established scientist, whose numerous papers have already attracted several citations, should be weighted more than a citation by a newcomer to the field. In this paper we suggest a possible solution of this problem by defining the weight of a scientific citation and using this notion to modify and improve performance indices defined earlier in [5, 7, 8]. All indices proposed are based on the weighting factor, associated to each scientists, which is analogous to the Page Rank introduced by Brin and Page [9] to characterize relative importance of various web pages and used in the Google web search engine. The weights defined by the components of the leading eigenvector of a suitably defined citation matrix characterize a given citation. These numbers display the desired property of self-consistence: the weight of any citation by a given researcher is larger, if his papers are quoted by other scientists, whose papers are often quoted. A similar</context>
+<context position="22779" citStr="[7]" startWordPosition="4015" endWordPosition="4015">f the indices rescaled against the average value in a given field [23]. On the other hand, one may work with other indicators which reflect citing patterns of each community. As an example of such a quantity one consider the number of ’known papers’ produced by a given researcher. Defining the known paper as an article quoted more times then the number of references cited in it, we see that this notion by construction takes into account the citation habits of a given field. To set a simple normalization scale useful for comparison of citations gained by articles from various disciplines Plomp [7] introduced the efficiency of a given paper. It is defined by a ratio, E(A) = c(A) r(A) , (14) where c(A) denotes the number of citations gained, while r(A) is equal to the number of articles quoted in work A. In such a way various citation habits, different in different fields of science are automatically taken into account. Moreover, the role of a single citation of a review paper seems to be adequate, since a good review may attract a lot of citations, but its list of references is usually also long. In a loose analogy to the Hirsch index, we can define an efficiency index, (e-index), which</context>
+</contexts>
+<marker>[7]</marker>
+<rawString>R. Plomp, The highly cited papers of professors as an indicator of a research group’s scientific performance, Scientometrics 29, 377 (1994).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>J E Hirsch</author>
+</authors>
+<title>An index to quantify an individual’s scientific research output,</title>
+<date>2005</date>
+<journal>PNAS</journal>
+<volume>102</volume>
+<contexts>
+<context position="6170" citStr="[5, 7, 8]" startWordPosition="1025" endWordPosition="1027">ws the recent literature and in this way to improve the chances that their work will be published. 2To take these features into account one needs then to distinguish, in a statistical sense, the quality of a given citation. In short, any citation of an established scientist, whose numerous papers have already attracted several citations, should be weighted more than a citation by a newcomer to the field. In this paper we suggest a possible solution of this problem by defining the weight of a scientific citation and using this notion to modify and improve performance indices defined earlier in [5, 7, 8]. All indices proposed are based on the weighting factor, associated to each scientists, which is analogous to the Page Rank introduced by Brin and Page [9] to characterize relative importance of various web pages and used in the Google web search engine. The weights defined by the components of the leading eigenvector of a suitably defined citation matrix characterize a given citation. These numbers display the desired property of self-consistence: the weight of any citation by a given researcher is larger, if his papers are quoted by other scientists, whose papers are often quoted. A similar</context>
+<context position="9836" citStr="[8]" startWordPosition="1683" endWordPosition="1683">:= N xi∑N j=1 xj , (2) which implies that the mean entry is equal to unity, 〈Wi〉i = 1. In this way for a given scientist i one can associate an weighting factor Wi. Such a factor depends not only on total number of times his papers were quoted by other scientists, Ti := ∑N j=1 Cij , but also on the fact who referred to his work. However, such a number should not be treated as an optimal number used to quantify the scientific achievement of a researcher. It is more informative then the bare number Ti of total citations, but it shares similar disadvantages. For instance, as emphasized by Hirsch [8], the total number of citations can be inflated by single non representative papers, and it overweights highly quoted review articles versus original research papers. On the other hand the weighting factors Wi allow us to define other more suitable indices and parameters. Before proceeding we need to adjust the definition of C and its eigenvector ~x, to make it directly applicable to the problem. A. Scientific papers with several authors Any citation to a single author paper published in an article written by another single author can be interpreted as a unit flow between the corresponding two</context>
+<context position="19751" citStr="[8]" startWordPosition="3480" endWordPosition="3480">the five years impact factor (AIF5). To take also into account the quality of each citation we can use of the weights wy introduced in the previous section and define the weighted article impact factor (WAIF2) WAIF2y(A) := wy+1(A) + wy+2(A) , (11) where wy(A) denotes the sum of the weighted citations the paper A defined as in (5) for citations gained during the year y. By construction this notion is applicable to articles published at least two years earlier. D. Weighted Hirsch index To quantify a scientific research output of a given researcher one often uses the h index introduced by Hirsch [8]. For a given scientists this index is equal to h, if h of all papers he has written were quoted at least h times. Ordering his articles according to the number of citations c(Ai), the article Ai has ever received one can write h := max k : c(Ak) ≥ k . (12) Although the h index gained considerable popularity and it became a subject of several research papers [19, 24–26], several of its drawbacks were emphasized [2, 3]. As in the case of the impact factor the Hirsch index is not capable to differentiate between relevant and less relevant citations. 5Making use of the weighted citation number w(</context>
+</contexts>
+<marker>[8]</marker>
+<rawString>J.E. Hirsch, An index to quantify an individual’s scientific research output, PNAS 102 16569 (2005).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>S Brin</author>
+<author>L Page</author>
+</authors>
+<title>The anatomy of a large–scale hypertextual Web search engine,</title>
+<date>1998</date>
+<journal>Comp. Networks ISDN Systems</journal>
+<volume>30</volume>
+<pages>107</pages>
+<contexts>
+<context position="6326" citStr="[9]" startWordPosition="1053" endWordPosition="1053">ish, in a statistical sense, the quality of a given citation. In short, any citation of an established scientist, whose numerous papers have already attracted several citations, should be weighted more than a citation by a newcomer to the field. In this paper we suggest a possible solution of this problem by defining the weight of a scientific citation and using this notion to modify and improve performance indices defined earlier in [5, 7, 8]. All indices proposed are based on the weighting factor, associated to each scientists, which is analogous to the Page Rank introduced by Brin and Page [9] to characterize relative importance of various web pages and used in the Google web search engine. The weights defined by the components of the leading eigenvector of a suitably defined citation matrix characterize a given citation. These numbers display the desired property of self-consistence: the weight of any citation by a given researcher is larger, if his papers are quoted by other scientists, whose papers are often quoted. A similar idea was recently applied for study of the citation graph created for publications in the Physical Review family of journals [10], for the graph in the fie</context>
+<context position="34836" citStr="[9]" startWordPosition="6199" endWordPosition="6199"> 0 0 1 0 0 0 4 0 0.5 6 0   , x ≈   0.4939 0.6502 0.3493 0.4597   , (A7) C =   0 4 0 0 6 0 0 1 0 0 0 4 0 0.1 6 0   , x ≈   0.5913 0.7480 0.1870 0.2365   . (A8) If two graphs are not connected, the leading eigenvalue is degenerated and one finds a corresponding eigenvector localized exclusively in the more populated subspace, C =   0 4 0 0 6 0 0 0 0 0 0 1 0 0 3 0   , x ≈   0.6325 0.7746 0 0   . (A9) To lift such a degeneracy one may modify the analyzed matrix C by forming its convex combination with the flat matrix S such that Sij = 1/N . In this way one assures [9] that the leading eigenvector of C(p) = (1− p)C+ pS can be obtained by iterating sufficiently long the flat vector with all entries equal, wi = 1/N , by the matrix C(p). Appendix B: Practical remarks on evaluating the weighting vector 1. Selection of the data The key issue by constructing the citation graph is an access to a reliable data base containing the scientific literature. For instance one may rely on the data provided by the ISI Web of Science, although some experts claim that it is biased toward the scientific journals published in English only and it does not cover uniformly the ent</context>
+</contexts>
+<marker>[9]</marker>
+<rawString>S. Brin and L. Page, The anatomy of a large–scale hypertextual Web search engine, Comp. Networks ISDN Systems 30 107 (1998).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>P Chen</author>
+<author>H Xie</author>
+<author>S Maslov</author>
+<author>S Redner</author>
+</authors>
+<title>Finding scientific gems with Google Pare Rank algorithm,</title>
+<date>2007</date>
+<journal>J.Informetrics</journal>
+<volume>1</volume>
+<pages>8--15</pages>
+<contexts>
+<context position="6900" citStr="[10]" startWordPosition="1146" endWordPosition="1146">ntroduced by Brin and Page [9] to characterize relative importance of various web pages and used in the Google web search engine. The weights defined by the components of the leading eigenvector of a suitably defined citation matrix characterize a given citation. These numbers display the desired property of self-consistence: the weight of any citation by a given researcher is larger, if his papers are quoted by other scientists, whose papers are often quoted. A similar idea was recently applied for study of the citation graph created for publications in the Physical Review family of journals [10], for the graph in the field of biochemistry and molecular biology [11], and independently put forward in recent lectures of Nielsen [12], who considered the idea to use the Page Rank algorithm to order individual scientific papers according to their citation graphs. The same algorithm was used to design the Eigenfactor web tool, which takes into account the citation graph to evaluate a proposed measure of the relative importance of scientific journals [13]. While any node of the graph represents a single article in the former approach or an entire journal in the latter scheme, in this work it</context>
+</contexts>
+<marker>[10]</marker>
+<rawString>P. Chen, H. Xie, S. Maslov and S. Redner, Finding scientific gems with Google Pare Rank algorithm, J.Informetrics 1, 8-15 (2007).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>N Ma</author>
+<author>J Guan</author>
+<author>Y Zhao</author>
+</authors>
+<title>Bringing Page Rank to the citation analysis,</title>
+<date>2008</date>
+<journal>Information Processing &amp; Management</journal>
+<volume>44</volume>
+<pages>800</pages>
+<contexts>
+<context position="6971" citStr="[11]" startWordPosition="1158" endWordPosition="1158">arious web pages and used in the Google web search engine. The weights defined by the components of the leading eigenvector of a suitably defined citation matrix characterize a given citation. These numbers display the desired property of self-consistence: the weight of any citation by a given researcher is larger, if his papers are quoted by other scientists, whose papers are often quoted. A similar idea was recently applied for study of the citation graph created for publications in the Physical Review family of journals [10], for the graph in the field of biochemistry and molecular biology [11], and independently put forward in recent lectures of Nielsen [12], who considered the idea to use the Page Rank algorithm to order individual scientific papers according to their citation graphs. The same algorithm was used to design the Eigenfactor web tool, which takes into account the citation graph to evaluate a proposed measure of the relative importance of scientific journals [13]. While any node of the graph represents a single article in the former approach or an entire journal in the latter scheme, in this work it will be associated with an individual scientist. II. CITATION MATRIX A</context>
+<context position="24900" citStr="[11]" startWordPosition="4391" endWordPosition="4391">er for the scientific literature. It will be interesting to analyze statistical distribution of weighting factors for the citation graph representing the entire scientific literature and certain particular branches of science. An empirical study of papers on high energy physics [31, 32] and computer science [14] reveals that the probability P (k) that a given article is cited k times, decays according to a power law, P (k) ∼ k−a. A power law distribution of the weighting factors attributed to individual scientific papers on molecular biology and biochemistry was recently reported by Ma et al. [11]. Thus one could verify, whether a similar behavior will be observed for the distribution of weighting factors characterizing the group of scientists working in a given field. The weighting factors attributed to a given scientist are useful to introduce further bibliometric quantities. For a given article one defines its weighted number of citations, for a journal its weighted impact factor and for a given scientists the w index, i.e. his weighted Hirsch index. Analogous quantities can be introduced for groups of researchers or entire scientific institutions, but their normalization and interp</context>
+</contexts>
+<marker>[11]</marker>
+<rawString>N. Ma, J. Guan and Y. Zhao, Bringing Page Rank to the citation analysis, Information Processing &amp; Management 44, 800 (2008).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>M A Nielsen</author>
+</authors>
+<date>2008</date>
+<booktitle>Lectures on the Google Technology Stack,</booktitle>
+<note>see http://michaelnielsen.org</note>
+<contexts>
+<context position="7037" citStr="[12]" startWordPosition="1169" endWordPosition="1169">ghts defined by the components of the leading eigenvector of a suitably defined citation matrix characterize a given citation. These numbers display the desired property of self-consistence: the weight of any citation by a given researcher is larger, if his papers are quoted by other scientists, whose papers are often quoted. A similar idea was recently applied for study of the citation graph created for publications in the Physical Review family of journals [10], for the graph in the field of biochemistry and molecular biology [11], and independently put forward in recent lectures of Nielsen [12], who considered the idea to use the Page Rank algorithm to order individual scientific papers according to their citation graphs. The same algorithm was used to design the Eigenfactor web tool, which takes into account the citation graph to evaluate a proposed measure of the relative importance of scientific journals [13]. While any node of the graph represents a single article in the former approach or an entire journal in the latter scheme, in this work it will be associated with an individual scientist. II. CITATION MATRIX AND WEIGHTING FACTORS Consider a sample of N authors of numerous sc</context>
+</contexts>
+<marker>[12]</marker>
+<rawString>M. A. Nielsen, Lectures on the Google Technology Stack, December 2008, see http://michaelnielsen.org</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>C Bergstrom</author>
+</authors>
+<title>Eigenfactor: Measuring the value and the prestige of scholarly journals,</title>
+<date>2007</date>
+<journal>C&amp;RL News,</journal>
+<volume>68</volume>
+<contexts>
+<context position="7361" citStr="[13]" startWordPosition="1222" endWordPosition="1222">ed. A similar idea was recently applied for study of the citation graph created for publications in the Physical Review family of journals [10], for the graph in the field of biochemistry and molecular biology [11], and independently put forward in recent lectures of Nielsen [12], who considered the idea to use the Page Rank algorithm to order individual scientific papers according to their citation graphs. The same algorithm was used to design the Eigenfactor web tool, which takes into account the citation graph to evaluate a proposed measure of the relative importance of scientific journals [13]. While any node of the graph represents a single article in the former approach or an entire journal in the latter scheme, in this work it will be associated with an individual scientist. II. CITATION MATRIX AND WEIGHTING FACTORS Consider a sample of N authors of numerous scientific articles, in which they usually refer to their previous achievements, but also quote papers of some other scientists. Let us assume for a while that all papers considered are written by a single author only - this simplifying assumption will be relaxed later in this section. Each scientist can be thus associated w</context>
+</contexts>
+<marker>[13]</marker>
+<rawString>C. Bergstrom, Eigenfactor: Measuring the value and the prestige of scholarly journals, C&amp;RL News, 68, 5 (2007).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>Y An</author>
+<author>J Janssen</author>
+<author>E E Milios</author>
+</authors>
+<title>Characterizing and mining the citation graph of the computer science literature,</title>
+<date>2004</date>
+<journal>Knowledge &amp; Information Systems</journal>
+<volume>6</volume>
+<pages>664</pages>
+<contexts>
+<context position="8076" citStr="[14]" startWordPosition="1351" endWordPosition="1351">tter scheme, in this work it will be associated with an individual scientist. II. CITATION MATRIX AND WEIGHTING FACTORS Consider a sample of N authors of numerous scientific articles, in which they usually refer to their previous achievements, but also quote papers of some other scientists. Let us assume for a while that all papers considered are written by a single author only - this simplifying assumption will be relaxed later in this section. Each scientist can be thus associated with a vertex of a graph, while any citation in any paper forms a directed link between two vertexes – see e.g. [14]. Define a square matrix C of size N , such that a) Cij is equal to the number of times the scientist ”j” quoted a single paper of his colleague ”i”. b) Cii = 0, for i = 1, . . . , N , hence all self-citations are neglected. Observe that this citation matrix C is likely not to be symmetric. However, matrix C is by construction real and it contains non-negative entries only. Therefore it fulfills the assumptions of the celebrated Frobenius– Perron (FP) theorem (see e.g. [15, 16] ). This implies that i) there exists an eigenvalue z1 = λ with the largest absolute value which is real and non-negat</context>
+<context position="24609" citStr="[14]" startWordPosition="4341" endWordPosition="4341"> the Hirsch index, but its values are by construction less dependent on the working habits in a given scientific discipline. IV. CONCLUDING REMARKS Analyzing the entire citation graph and citation matrix one can obtain a weighting factors which quantify the total impact of a single researcher for the scientific literature. It will be interesting to analyze statistical distribution of weighting factors for the citation graph representing the entire scientific literature and certain particular branches of science. An empirical study of papers on high energy physics [31, 32] and computer science [14] reveals that the probability P (k) that a given article is cited k times, decays according to a power law, P (k) ∼ k−a. A power law distribution of the weighting factors attributed to individual scientific papers on molecular biology and biochemistry was recently reported by Ma et al. [11]. Thus one could verify, whether a similar behavior will be observed for the distribution of weighting factors characterizing the group of scientists working in a given field. The weighting factors attributed to a given scientist are useful to introduce further bibliometric quantities. For a given article on</context>
+</contexts>
+<marker>[14]</marker>
+<rawString>Y. An, J. Janssen and E. E. Milios, Characterizing and mining the citation graph of the computer science literature, Knowledge &amp; Information Systems 6, 664 (2004).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>A W Marshall</author>
+<author>I Olkin</author>
+</authors>
+<title>The Theory of Memorization and Its Applications</title>
+<date>1979</date>
+<publisher>Academic Press,</publisher>
+<location>New York,</location>
+<contexts>
+<context position="8558" citStr="[15, 16]" startWordPosition="1441" endWordPosition="1442">ssociated with a vertex of a graph, while any citation in any paper forms a directed link between two vertexes – see e.g. [14]. Define a square matrix C of size N , such that a) Cij is equal to the number of times the scientist ”j” quoted a single paper of his colleague ”i”. b) Cii = 0, for i = 1, . . . , N , hence all self-citations are neglected. Observe that this citation matrix C is likely not to be symmetric. However, matrix C is by construction real and it contains non-negative entries only. Therefore it fulfills the assumptions of the celebrated Frobenius– Perron (FP) theorem (see e.g. [15, 16] ). This implies that i) there exists an eigenvalue z1 = λ with the largest absolute value which is real and non-negative, ii) the entire spectrum {zi}Ni=1 of C belongs to the disk of radius equal to λ, iii) the eigenspace associated with λ contains a real eigenstate ~x = {x1, . . . xN}, such that all its components are non-negative. Since we do not force citation matrix C to be stochastic, the leading eigenvalue λ needs not to be equal to unity. However, we will assume here that the graph analyzed is connected. Then the leading eigenvalue λ is non-degenerate, and there exists a unique vector </context>
+</contexts>
+<marker>[15]</marker>
+<rawString>A. W. Marshall and I. Olkin, The Theory of Memorization and Its Applications (Academic Press, New York, 1979)</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>D S Bernstein</author>
+</authors>
+<title>Matrix Mathematics,</title>
+<date>2005</date>
+<publisher>Princeton University Press,</publisher>
+<location>Princeton</location>
+<contexts>
+<context position="8558" citStr="[15, 16]" startWordPosition="1441" endWordPosition="1442">ssociated with a vertex of a graph, while any citation in any paper forms a directed link between two vertexes – see e.g. [14]. Define a square matrix C of size N , such that a) Cij is equal to the number of times the scientist ”j” quoted a single paper of his colleague ”i”. b) Cii = 0, for i = 1, . . . , N , hence all self-citations are neglected. Observe that this citation matrix C is likely not to be symmetric. However, matrix C is by construction real and it contains non-negative entries only. Therefore it fulfills the assumptions of the celebrated Frobenius– Perron (FP) theorem (see e.g. [15, 16] ). This implies that i) there exists an eigenvalue z1 = λ with the largest absolute value which is real and non-negative, ii) the entire spectrum {zi}Ni=1 of C belongs to the disk of radius equal to λ, iii) the eigenspace associated with λ contains a real eigenstate ~x = {x1, . . . xN}, such that all its components are non-negative. Since we do not force citation matrix C to be stochastic, the leading eigenvalue λ needs not to be equal to unity. However, we will assume here that the graph analyzed is connected. Then the leading eigenvalue λ is non-degenerate, and there exists a unique vector </context>
+</contexts>
+<marker>[16]</marker>
+<rawString>D. S. Bernstein, Matrix Mathematics, Princeton University Press, Princeton (2005).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>D W Aksens</author>
+</authors>
+<title>A marco-study of self–citations</title>
+<date>2003</date>
+<journal>Scientometrics</journal>
+<volume>56</volume>
+<pages>235</pages>
+<marker>[17]</marker>
+<rawString>D.W. Aksens, A marco-study of self–citations Scientometrics 56, 235 (2003).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>W Gla¨nzel</author>
+<author>K Debackere</author>
+<author>B Thijs</author>
+<author>A Schubert</author>
+</authors>
+<title>A concise review on the role of author self-citations in information science, bibliometrics and science policy,</title>
+<date>2006</date>
+<journal>Scientometrics</journal>
+<volume>67</volume>
+<pages>263--277</pages>
+<marker>[18]</marker>
+<rawString>W. Gla¨nzel, K. Debackere, B. Thijs, and A. Schubert, A concise review on the role of author self-citations in information science, bibliometrics and science policy, Scientometrics 67, 263-277 (2006)</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>M Schreiber</author>
+</authors>
+<title>A case study of the Hirsch index for 26 nonprominent physicists,</title>
+<date>2007</date>
+<journal>Ann. Physik</journal>
+<volume>16</volume>
+<pages>640--652</pages>
+<marker>[19]</marker>
+<rawString>M. Schreiber, A case study of the Hirsch index for 26 nonprominent physicists, Ann. Physik 16, 640-652 (2007).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>T F Frandsen</author>
+</authors>
+<date>2007</date>
+<journal>Journal self-citations - Analysing the JIF mechanism, J. Informetrics</journal>
+<volume>1</volume>
+<pages>47--58</pages>
+<marker>[20]</marker>
+<rawString>T. F. Frandsen, Journal self-citations - Analysing the JIF mechanism, J. Informetrics 1, 47-58 (2007)</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>J H Fowler</author>
+<author>D W</author>
+</authors>
+<title>Aksnes, Does self-citation pay?</title>
+<date>2007</date>
+<journal>Scientometrics</journal>
+<volume>72</volume>
+<pages>427--437</pages>
+<marker>[21]</marker>
+<rawString>J. H. Fowler and D. W. Aksnes, Does self-citation pay? Scientometrics 72, 427-437 (2007).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>P O Seglen</author>
+</authors>
+<title>Why the impact factor should not be used for evaluating research BMJ 324,</title>
+<date>1997</date>
+<pages>497</pages>
+<contexts>
+<context position="17764" citStr="[2, 22, 23]" startWordPosition="3120" endWordPosition="3122">unt all articles published in the five year time span, while c(Aj) and w(Aj) denote now the number of all citations and the sum of weighted citations, a given paper Aj from this sample obtained in the analyzed year y. The 5–year impact factor could be specially useful to characterize mathematical journals and journals devoted to these fields of science, in which the papers are produced in a slower pace, and the citations half–life is longer, since after a few years the articles do not become obsolete. C. Weighted impact factor of a paper Since the distribution of citations is known to be skew [2, 22, 23] the providing the average number of citations only is by far not sufficient to characterize the entire distribution. Hence it is not possible to use the impact factor of a journal as an estimated. number of the citation a typical paper published there will obtain during the next two years. Moreover, es explicitly emphasized by Seglen [22], the number of citation obtained by a given article is not influenced by the impact factor of the journal, in which it appeared. To make any reasonable evaluation of the impact a given article had on the scientific community, one can analyze its contribution</context>
+</contexts>
+<marker>[22]</marker>
+<rawString>P.O. Seglen, Why the impact factor should not be used for evaluating research BMJ 324, 497 (1997).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>F Radicchi</author>
+<author>S Fortunato</author>
+<author>C Castellano</author>
+</authors>
+<title>Universality in citation distribution: towards an objective measure of scientific impact,</title>
+<date>2008</date>
+<journal>Proc. Natl. Acad. Sci. USA</journal>
+<volume>105</volume>
+<pages>17268--1727</pages>
+<contexts>
+<context position="17764" citStr="[2, 22, 23]" startWordPosition="3120" endWordPosition="3122">unt all articles published in the five year time span, while c(Aj) and w(Aj) denote now the number of all citations and the sum of weighted citations, a given paper Aj from this sample obtained in the analyzed year y. The 5–year impact factor could be specially useful to characterize mathematical journals and journals devoted to these fields of science, in which the papers are produced in a slower pace, and the citations half–life is longer, since after a few years the articles do not become obsolete. C. Weighted impact factor of a paper Since the distribution of citations is known to be skew [2, 22, 23] the providing the average number of citations only is by far not sufficient to characterize the entire distribution. Hence it is not possible to use the impact factor of a journal as an estimated. number of the citation a typical paper published there will obtain during the next two years. Moreover, es explicitly emphasized by Seglen [22], the number of citation obtained by a given article is not influenced by the impact factor of the journal, in which it appeared. To make any reasonable evaluation of the impact a given article had on the scientific community, one can analyze its contribution</context>
+<context position="22246" citStr="[23]" startWordPosition="3923" endWordPosition="3923">itution is equal to an integer number w, if it employs w scientists, such that the weighted Hirsch index w(i) for each of them is equal to or larger than w2. E. Weighted efficiency index Let us emphasize here that one should not directly compare the Hirsch indices for scientists working in different research fields. This is due to the fact that the numbers of papers and citations vary from one scientific field to another [2, 29, 30], so the means values of Hirsch indices also do differ. On one hand one could compare the values of the indices rescaled against the average value in a given field [23]. On the other hand, one may work with other indicators which reflect citing patterns of each community. As an example of such a quantity one consider the number of ’known papers’ produced by a given researcher. Defining the known paper as an article quoted more times then the number of references cited in it, we see that this notion by construction takes into account the citation habits of a given field. To set a simple normalization scale useful for comparison of citations gained by articles from various disciplines Plomp [7] introduced the efficiency of a given paper. It is defined by a rat</context>
+<context position="37408" citStr="[23]" startWordPosition="6631" endWordPosition="6631">the entire graph into subgraphs can be defined in an objective way by applying the recent method of Newman [37] to find community structure in the citation graph. Since it is well known that the citation patterns depend on the branch of science [29, 30], one should rather analyze two subgraphs separately, or renormalize the leading eigenvector separately for a given subfield. This is consistent with a rather general ’rule of thumb’: the bibliometric data should be normalized against the average computed for scientists working in the similar field of science in the corresponding window of time [23]. 3. Degeneracy in names It might not be easy to distinguish papers written by various scientist, who publish under the very same name [34]. In principle one may try to distinguish them by the scientific discipline, the affiliations and the time window of their publishing activity, but is its unlikely to expect that the success rate will tend to unity. On the other hand, it is reasonable to conjecture that not distinguishing between the scientists with the same name will not impact much the weighting indices of all other researchers in the graph, as the weights of the links will be taken as th</context>
+</contexts>
+<marker>[23]</marker>
+<rawString>F. Radicchi, S. Fortunato and C. Castellano, Universality in citation distribution: towards an objective measure of scientific impact, Proc. Natl. Acad. Sci. USA 105, 17268-1727 (2008).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>W Gla¨nzel</author>
+</authors>
+<title>On h–index. A mathematical approach to a new measure of publication activity and citation impact,</title>
+<date>2006</date>
+<journal>Scientometrics</journal>
+<volume>67</volume>
+<pages>315</pages>
+<contexts>
+<context position="20570" citStr="[24, 25]" startWordPosition="3631" endWordPosition="3632">ed one can write h := max k : c(Ak) ≥ k . (12) Although the h index gained considerable popularity and it became a subject of several research papers [19, 24–26], several of its drawbacks were emphasized [2, 3]. As in the case of the impact factor the Hirsch index is not capable to differentiate between relevant and less relevant citations. 5Making use of the weighted citation number w(Ai) of an article, we may thus introduce the weighted h index w := w(Ak) (13) where k is the maximal integer such that w(Ak) ≥ k. This index enjoys all the virtues of the original h index recently emphasized in [24, 25], but additionally it takes into account scientific achievements of the authors quoting the work of the evaluated individual. Since the weights w(Ai) determined by the citation graph take into account the number of authors of the paper, the weighted index w does not suffer a crucial drawback [3] of the original Hirsch index, in which a paper with a hundred co– authors is treated in the same way as an article written by a single scientist. Furthermore, the weights w are in general given by real numbers, so the index w may admit non-integer numbers. Thus this quantity provides us a finer differe</context>
+</contexts>
+<marker>[24]</marker>
+<rawString>W. Gla¨nzel, On h–index. A mathematical approach to a new measure of publication activity and citation impact, Scientometrics 67, 315 (2006).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>J E Hirsch</author>
+</authors>
+<title>Does the h index have predictive power?</title>
+<date>2007</date>
+<journal>PNAS</journal>
+<volume>104</volume>
+<contexts>
+<context position="20570" citStr="[24, 25]" startWordPosition="3631" endWordPosition="3632">ed one can write h := max k : c(Ak) ≥ k . (12) Although the h index gained considerable popularity and it became a subject of several research papers [19, 24–26], several of its drawbacks were emphasized [2, 3]. As in the case of the impact factor the Hirsch index is not capable to differentiate between relevant and less relevant citations. 5Making use of the weighted citation number w(Ai) of an article, we may thus introduce the weighted h index w := w(Ak) (13) where k is the maximal integer such that w(Ak) ≥ k. This index enjoys all the virtues of the original h index recently emphasized in [24, 25], but additionally it takes into account scientific achievements of the authors quoting the work of the evaluated individual. Since the weights w(Ai) determined by the citation graph take into account the number of authors of the paper, the weighted index w does not suffer a crucial drawback [3] of the original Hirsch index, in which a paper with a hundred co– authors is treated in the same way as an article written by a single scientist. Furthermore, the weights w are in general given by real numbers, so the index w may admit non-integer numbers. Thus this quantity provides us a finer differe</context>
+</contexts>
+<marker>[25]</marker>
+<rawString>J.E. Hirsch, Does the h index have predictive power? PNAS 104 19193 (2007).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>G J Woeginger</author>
+</authors>
+<title>An axiomatic characterization of the Hirsch index,</title>
+<date>2008</date>
+<journal>Math. Soc. Sciences</journal>
+<volume>56</volume>
+<pages>224</pages>
+<marker>[26]</marker>
+<rawString>G. J. Woeginger, An axiomatic characterization of the Hirsch index, Math. Soc. Sciences 56, 224 (2008).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>J F Molinari</author>
+<author>A Molinari</author>
+</authors>
+<title>A new methodology for rating scientific institutions,,</title>
+<date>2008</date>
+<journal>Scientometrics</journal>
+<volume>75</volume>
+<pages>163</pages>
+<contexts>
+<context position="21373" citStr="[27]" startWordPosition="3769" endWordPosition="3769">t the number of authors of the paper, the weighted index w does not suffer a crucial drawback [3] of the original Hirsch index, in which a paper with a hundred co– authors is treated in the same way as an article written by a single scientist. Furthermore, the weights w are in general given by real numbers, so the index w may admit non-integer numbers. Thus this quantity provides us a finer differentiation of the group analyzed than the index h, which is integer by definition. A possibility to use the h-index to quantify scientific production of an entire institution was recently advocated in [27]. Hence one can use the weighted index w for this purpose. Furthermore, following Schubert [28] one can easily adopt his idea of successive performance indices and define an analogue to the index h2. To be concrete, the weighted successive index w2 of a scientific institution is equal to an integer number w, if it employs w scientists, such that the weighted Hirsch index w(i) for each of them is equal to or larger than w2. E. Weighted efficiency index Let us emphasize here that one should not directly compare the Hirsch indices for scientists working in different research fields. This is due t</context>
+<context position="25556" citStr="[27]" startWordPosition="4493" endWordPosition="4493">will be observed for the distribution of weighting factors characterizing the group of scientists working in a given field. The weighting factors attributed to a given scientist are useful to introduce further bibliometric quantities. For a given article one defines its weighted number of citations, for a journal its weighted impact factor and for a given scientists the w index, i.e. his weighted Hirsch index. Analogous quantities can be introduced for groups of researchers or entire scientific institutions, but their normalization and interpretation has to be performed with a certain caution [27]. Similarly, cumulative w indices can be used for various scientific fields and sub-fields just to identify so called ’hot topics’ [33]. The usage of the weighted indices in all these cases could be superior with 6respect to the standard quantities in a sense that the approach proposed takes into account the average quality of the citations of scientific articles. However, it should be emphasized explicitly that the computation of weighted scientometric indices is it not entirely straightforward and for any practical purpose one needs to cope with several technical problems. For instance one h</context>
+</contexts>
+<marker>[27]</marker>
+<rawString>J.F. Molinari and A. Molinari, A new methodology for rating scientific institutions,, Scientometrics 75, 163 (2008).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>A Schubert</author>
+</authors>
+<title>Successive h-indices,</title>
+<date>2007</date>
+<journal>Scientometrics</journal>
+<volume>70</volume>
+<pages>183</pages>
+<contexts>
+<context position="21468" citStr="[28]" startWordPosition="3784" endWordPosition="3784">3] of the original Hirsch index, in which a paper with a hundred co– authors is treated in the same way as an article written by a single scientist. Furthermore, the weights w are in general given by real numbers, so the index w may admit non-integer numbers. Thus this quantity provides us a finer differentiation of the group analyzed than the index h, which is integer by definition. A possibility to use the h-index to quantify scientific production of an entire institution was recently advocated in [27]. Hence one can use the weighted index w for this purpose. Furthermore, following Schubert [28] one can easily adopt his idea of successive performance indices and define an analogue to the index h2. To be concrete, the weighted successive index w2 of a scientific institution is equal to an integer number w, if it employs w scientists, such that the weighted Hirsch index w(i) for each of them is equal to or larger than w2. E. Weighted efficiency index Let us emphasize here that one should not directly compare the Hirsch indices for scientists working in different research fields. This is due to the fact that the numbers of papers and citations vary from one scientific field to another [</context>
+</contexts>
+<marker>[28]</marker>
+<rawString>A. Schubert, Successive h-indices, Scientometrics 70, 183 (2007).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>P D Batista</author>
+<author>M G Campiteli</author>
+<author>O Kinouchi</author>
+<author>A S Martinez</author>
+</authors>
+<title>Is it possible to compare researchers with different scientific interest?</title>
+<date>2006</date>
+<journal>Scientometrics</journal>
+<volume>68</volume>
+<pages>179</pages>
+<contexts>
+<context position="22078" citStr="[2, 29, 30]" startWordPosition="3890" endWordPosition="3892">] one can easily adopt his idea of successive performance indices and define an analogue to the index h2. To be concrete, the weighted successive index w2 of a scientific institution is equal to an integer number w, if it employs w scientists, such that the weighted Hirsch index w(i) for each of them is equal to or larger than w2. E. Weighted efficiency index Let us emphasize here that one should not directly compare the Hirsch indices for scientists working in different research fields. This is due to the fact that the numbers of papers and citations vary from one scientific field to another [2, 29, 30], so the means values of Hirsch indices also do differ. On one hand one could compare the values of the indices rescaled against the average value in a given field [23]. On the other hand, one may work with other indicators which reflect citing patterns of each community. As an example of such a quantity one consider the number of ’known papers’ produced by a given researcher. Defining the known paper as an article quoted more times then the number of references cited in it, we see that this notion by construction takes into account the citation habits of a given field. To set a simple normali</context>
+<context position="37057" citStr="[29, 30]" startWordPosition="6577" endWordPosition="6578">g vector describes only scientists working in the larger field. Similarly, if two fields of science are coupled only weakly by a few cross-citations, the leading eigenvector tends to be localized in the subgraph with more scientists, papers and citations, so the weighting factors handicap researchers working in a less popular subfield. The splitting of the entire graph into subgraphs can be defined in an objective way by applying the recent method of Newman [37] to find community structure in the citation graph. Since it is well known that the citation patterns depend on the branch of science [29, 30], one should rather analyze two subgraphs separately, or renormalize the leading eigenvector separately for a given subfield. This is consistent with a rather general ’rule of thumb’: the bibliometric data should be normalized against the average computed for scientists working in the similar field of science in the corresponding window of time [23]. 3. Degeneracy in names It might not be easy to distinguish papers written by various scientist, who publish under the very same name [34]. In principle one may try to distinguish them by the scientific discipline, the affiliations and the time win</context>
+</contexts>
+<marker>[29]</marker>
+<rawString>P.D. Batista, M.G. Campiteli, O.Kinouchi, and A.S. Martinez, Is it possible to compare researchers with different scientific interest? Scientometrics 68, 179 (2006).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>B M Althouse</author>
+<author>J D West</author>
+<author>T C Bergstrom</author>
+<author>C T Bergstrom</author>
+</authors>
+<title>Differences in impact factor across fields and over time,</title>
+<date>2009</date>
+<journal>J. Am. Soc. Inf. Sci. Technol.</journal>
+<volume>60</volume>
+<pages>27--34</pages>
+<contexts>
+<context position="22078" citStr="[2, 29, 30]" startWordPosition="3890" endWordPosition="3892">] one can easily adopt his idea of successive performance indices and define an analogue to the index h2. To be concrete, the weighted successive index w2 of a scientific institution is equal to an integer number w, if it employs w scientists, such that the weighted Hirsch index w(i) for each of them is equal to or larger than w2. E. Weighted efficiency index Let us emphasize here that one should not directly compare the Hirsch indices for scientists working in different research fields. This is due to the fact that the numbers of papers and citations vary from one scientific field to another [2, 29, 30], so the means values of Hirsch indices also do differ. On one hand one could compare the values of the indices rescaled against the average value in a given field [23]. On the other hand, one may work with other indicators which reflect citing patterns of each community. As an example of such a quantity one consider the number of ’known papers’ produced by a given researcher. Defining the known paper as an article quoted more times then the number of references cited in it, we see that this notion by construction takes into account the citation habits of a given field. To set a simple normali</context>
+<context position="37057" citStr="[29, 30]" startWordPosition="6577" endWordPosition="6578">g vector describes only scientists working in the larger field. Similarly, if two fields of science are coupled only weakly by a few cross-citations, the leading eigenvector tends to be localized in the subgraph with more scientists, papers and citations, so the weighting factors handicap researchers working in a less popular subfield. The splitting of the entire graph into subgraphs can be defined in an objective way by applying the recent method of Newman [37] to find community structure in the citation graph. Since it is well known that the citation patterns depend on the branch of science [29, 30], one should rather analyze two subgraphs separately, or renormalize the leading eigenvector separately for a given subfield. This is consistent with a rather general ’rule of thumb’: the bibliometric data should be normalized against the average computed for scientists working in the similar field of science in the corresponding window of time [23]. 3. Degeneracy in names It might not be easy to distinguish papers written by various scientist, who publish under the very same name [34]. In principle one may try to distinguish them by the scientific discipline, the affiliations and the time win</context>
+</contexts>
+<marker>[30]</marker>
+<rawString>B. M. Althouse, J. D. West, T. C. Bergstrom, and C. T. Bergstrom, Differences in impact factor across fields and over time, J. Am. Soc. Inf. Sci. Technol. 60 27-34 (2009).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>S Redner</author>
+</authors>
+<title>How popular is your paper? An empirical study of the citation distribution,</title>
+<date>1998</date>
+<journal>Eur. Phys. J. B</journal>
+<volume>4</volume>
+<pages>131</pages>
+<contexts>
+<context position="24583" citStr="[31, 32]" startWordPosition="4336" endWordPosition="4337">erhaps not as sophisticated as the Hirsch index, but its values are by construction less dependent on the working habits in a given scientific discipline. IV. CONCLUDING REMARKS Analyzing the entire citation graph and citation matrix one can obtain a weighting factors which quantify the total impact of a single researcher for the scientific literature. It will be interesting to analyze statistical distribution of weighting factors for the citation graph representing the entire scientific literature and certain particular branches of science. An empirical study of papers on high energy physics [31, 32] and computer science [14] reveals that the probability P (k) that a given article is cited k times, decays according to a power law, P (k) ∼ k−a. A power law distribution of the weighting factors attributed to individual scientific papers on molecular biology and biochemistry was recently reported by Ma et al. [11]. Thus one could verify, whether a similar behavior will be observed for the distribution of weighting factors characterizing the group of scientists working in a given field. The weighting factors attributed to a given scientist are useful to introduce further bibliometric quantiti</context>
+</contexts>
+<marker>[31]</marker>
+<rawString>S. Redner, How popular is your paper? An empirical study of the citation distribution, Eur. Phys. J. B 4, 131 (1998).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>S Lehmann</author>
+<author>B E Lautrup</author>
+<author>A D Jackson</author>
+</authors>
+<date>2003</date>
+<journal>Citation Networks in High Energy Physics, Phys. Rev. E</journal>
+<volume>68</volume>
+<pages>026113</pages>
+<contexts>
+<context position="24583" citStr="[31, 32]" startWordPosition="4336" endWordPosition="4337">erhaps not as sophisticated as the Hirsch index, but its values are by construction less dependent on the working habits in a given scientific discipline. IV. CONCLUDING REMARKS Analyzing the entire citation graph and citation matrix one can obtain a weighting factors which quantify the total impact of a single researcher for the scientific literature. It will be interesting to analyze statistical distribution of weighting factors for the citation graph representing the entire scientific literature and certain particular branches of science. An empirical study of papers on high energy physics [31, 32] and computer science [14] reveals that the probability P (k) that a given article is cited k times, decays according to a power law, P (k) ∼ k−a. A power law distribution of the weighting factors attributed to individual scientific papers on molecular biology and biochemistry was recently reported by Ma et al. [11]. Thus one could verify, whether a similar behavior will be observed for the distribution of weighting factors characterizing the group of scientists working in a given field. The weighting factors attributed to a given scientist are useful to introduce further bibliometric quantiti</context>
+</contexts>
+<marker>[32]</marker>
+<rawString>S. Lehmann, B. E. Lautrup, A. D. Jackson, Citation Networks in High Energy Physics, Phys. Rev. E 68, 026113 (2003).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>M G Banks</author>
+</authors>
+<title>An extension of the Hirsch index: Indexing scientific topics and compounds,</title>
+<date>2006</date>
+<journal>Scientometrics</journal>
+<volume>69</volume>
+<pages>161</pages>
+<contexts>
+<context position="25691" citStr="[33]" startWordPosition="4514" endWordPosition="4514">ng factors attributed to a given scientist are useful to introduce further bibliometric quantities. For a given article one defines its weighted number of citations, for a journal its weighted impact factor and for a given scientists the w index, i.e. his weighted Hirsch index. Analogous quantities can be introduced for groups of researchers or entire scientific institutions, but their normalization and interpretation has to be performed with a certain caution [27]. Similarly, cumulative w indices can be used for various scientific fields and sub-fields just to identify so called ’hot topics’ [33]. The usage of the weighted indices in all these cases could be superior with 6respect to the standard quantities in a sense that the approach proposed takes into account the average quality of the citations of scientific articles. However, it should be emphasized explicitly that the computation of weighted scientometric indices is it not entirely straightforward and for any practical purpose one needs to cope with several technical problems. For instance one has to deal with different authors with identical names, with scientists who change their name during their career and with scientists w</context>
+</contexts>
+<marker>[33]</marker>
+<rawString>M. G. Banks, An extension of the Hirsch index: Indexing scientific topics and compounds, Scientometrics 69, 161 (2006).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>D W Aksens</author>
+</authors>
+<title>When different persons have an identical author name. How frequent are homonyms?</title>
+<date>2008</date>
+<journal>JASIST</journal>
+<volume>59</volume>
+<pages>838--841</pages>
+<contexts>
+<context position="26426" citStr="[34]" startWordPosition="4634" endWordPosition="4634">he approach proposed takes into account the average quality of the citations of scientific articles. However, it should be emphasized explicitly that the computation of weighted scientometric indices is it not entirely straightforward and for any practical purpose one needs to cope with several technical problems. For instance one has to deal with different authors with identical names, with scientists who change their name during their career and with scientists whose name was transcribed into Latin in several different ways. In general one might think that such cases do not occur very often [34], so they should not induce statistically significant effects for the weighted indices of all other authors, but these important problems definitely require further studies. Some remarks on selection of bibliometric data and other practical issues are provided in Appendix B. We shall now pass to some more general remarks. Although we tend to agree that the existing bibliometric indices can be further developed and improved, we do not claim there exists a single number capable to quantify scientific achievement in an unambiguous way. On the other hand, one should not neglect the possibility of </context>
+<context position="37547" citStr="[34]" startWordPosition="6655" endWordPosition="6655"> in the citation graph. Since it is well known that the citation patterns depend on the branch of science [29, 30], one should rather analyze two subgraphs separately, or renormalize the leading eigenvector separately for a given subfield. This is consistent with a rather general ’rule of thumb’: the bibliometric data should be normalized against the average computed for scientists working in the similar field of science in the corresponding window of time [23]. 3. Degeneracy in names It might not be easy to distinguish papers written by various scientist, who publish under the very same name [34]. In principle one may try to distinguish them by the scientific discipline, the affiliations and the time window of their publishing activity, but is its unlikely to expect that the success rate will tend to unity. On the other hand, it is reasonable to conjecture that not distinguishing between the scientists with the same name will not impact much the weighting indices of all other researchers in the graph, as the weights of the links will be taken as the average. 4. Period of the scientific activity It would be unwise to compare weighting indices of two researchers in very different age or</context>
+</contexts>
+<marker>[34]</marker>
+<rawString>D.W. Aksens, When different persons have an identical author name. How frequent are homonyms? JASIST 59, 838-841 (2008).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>K Z˙yczkowski</author>
+</authors>
+<title>How to get an ERC grant?</title>
+<date>2009</date>
+<journal>Europhysics News,</journal>
+<volume>40</volume>
+<pages>27--29</pages>
+<contexts>
+<context position="27807" citStr="[35]" startWordPosition="4856" endWordPosition="4856"> gives no information about individual papers in a journal, the information is surprisingly vague and can be dramatically misleading”. Similarly, any bibliometric data should not play the decisive role during any peer review process. For instance, working with applications for Advanced Grants of European Research Council (ERC) the panels of experts tried hard to evaluate the quality of the projects and the scientific achievements of the principal investigator, not putting too much attention to their scientometric indices. However, an a posteriori statistical analysis found a clear correlation [35] between the final outcome of the 2008 grant competition in PE-2 panel and the bibliometric benchmark suggested by ERC and used in the proposals: the total number of citations of ten papers chosen by each applicant from his list of publications for the last decade. Let us then conclude this article with some concrete comments concerning the practical usage of scientometric data. They will be separately addressed to three groups of readers. a) Scientists. Do well your research, write good papers and try to publish them in good scientific journals. Writing your articles cite these papers which s</context>
+</contexts>
+<marker>[35]</marker>
+<rawString>K. Z˙yczkowski, How to get an ERC grant? Europhysics News, 40/5, 27-29 (2009).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>F Radicchi</author>
+<author>S Fortunato</author>
+<author>B Markines</author>
+<author>A Vespignani</author>
+</authors>
+<title>Diffusion of scientific credits and the ranking of scientists,</title>
+<date>2009</date>
+<journal>Phys. Rev. E</journal>
+<volume>80</volume>
+<pages>056103</pages>
+<contexts>
+<context position="30826" citStr="[36]" startWordPosition="5368" endWordPosition="5368"> each of them was cited. A junior scientist has to choose his best five papers published during the recent five years. To summarize, it is not fair to say that the bibliometric data carry no valuable information whatsoever. However, it is not as simple to decode from them a piece of relevant information, as it may look like at a first glance. Thus we would not to discourage from usage of scientometric data, provided they are used in a wise and reasonable way. Note added. After the first version of this work was completed a new paper by Radicchi et al. was posted in the web and later published [36]. The authors of this article put forward a similar idea to apply the PageRank algorithm to the citation graph, in which each vertex represents an individual author. Working with the set of data composed of the collection of the Physical Review journals published between 1893 and 2006 they concluded that the numerical values of the weighted indicator obtained in this way for several physicists correlates well with their scientific achievements measured by some of the main prizes in physics, which include Nobel prize, Boltzmann medal, Wolf prize, Dirac medal and Planck medal. It is a pleasure t</context>
+</contexts>
+<marker>[36]</marker>
+<rawString>F. Radicchi, S. Fortunato, B. Markines and A. Vespignani, Diffusion of scientific credits and the ranking of scientists, Phys. Rev. E 80, 056103 (2009).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>M E J Newman</author>
+</authors>
+<title>Finding community structure in networks using the eigenvectors of matrices,</title>
+<date>2006</date>
+<journal>Phys. Rev. E</journal>
+<volume>74</volume>
+<pages>036104</pages>
+<contexts>
+<context position="36915" citStr="[37]" startWordPosition="6552" endWordPosition="6552">lds of science As illustrated with some simple matrix examples, if two fields of science are not coupled by any crosscitations, the leading vector describes only scientists working in the larger field. Similarly, if two fields of science are coupled only weakly by a few cross-citations, the leading eigenvector tends to be localized in the subgraph with more scientists, papers and citations, so the weighting factors handicap researchers working in a less popular subfield. The splitting of the entire graph into subgraphs can be defined in an objective way by applying the recent method of Newman [37] to find community structure in the citation graph. Since it is well known that the citation patterns depend on the branch of science [29, 30], one should rather analyze two subgraphs separately, or renormalize the leading eigenvector separately for a given subfield. This is consistent with a rather general ’rule of thumb’: the bibliometric data should be normalized against the average computed for scientists working in the similar field of science in the corresponding window of time [23]. 3. Degeneracy in names It might not be easy to distinguish papers written by various scientist, who publi</context>
+</contexts>
+<marker>[37]</marker>
+<rawString>M. E. J. Newman, Finding community structure in networks using the eigenvectors of matrices, Phys. Rev. E 74, 036104 (2006).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>A N Langville</author>
+<author>C D Meyer</author>
+</authors>
+<title>A survey of eigenvector methods for web information retrieval,</title>
+<date>2005</date>
+<journal>SIAM Review</journal>
+<volume>47</volume>
+<marker>[38]</marker>
+<rawString>A.N. Langville and C.D. Meyer, A survey of eigenvector methods for web information retrieval, SIAM Review 47 135 (2005).</rawString>
+</citation>
+<citation valid="true">
+<authors>
+<author>K Bryan</author>
+<author>T Leise</author>
+</authors>
+<title>The $ 25,000,000,000 eigenvector: the linear algebra behind Google,</title>
+<date>2006</date>
+<journal>SIAM Review</journal>
+<volume>48</volume>
+<marker>[39]</marker>
+<rawString>K. Bryan and T. Leise, The $ 25,000,000,000 eigenvector: the linear algebra behind Google, SIAM Review 48 569 (2006).</rawString>
+</citation>
+</citationList>
+</algorithm>
+</algorithms>
