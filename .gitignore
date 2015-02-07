@@ -1,2 +1,7 @@
+# the scripts produces a lot of data in the form of .pdf, .txt and .xml
+*.pdf
+*.xml
+
+*.txt
 *.pyc
 *.out
