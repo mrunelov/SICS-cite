@@ -97,19 +97,27 @@ def download_pdf(uid):
         file.write(response.read())
         file.close()
         print("Completed")
+
     return filename
 
 
 cookies = {}
 def download_doc(uid):
     # Download pdf
-    filename = download_pdf(uid) # return .pdf name
-    filename = pdf_to_text(filename) # returns .txt name
-    filename = parscit(filename, "citeExtract", "extract_all")
-    data = extract_title_authors(filename)
-    article_urls = get_article_urls_from_title_and_authors(data)
-    for url in article_urls:
-        print url
+    try:
+        filename = download_pdf(uid) # return .pdf name
+        filename = pdf_to_text(filename) # returns .txt name
+        filename = parscit(filename, "citeExtract", "extract_citations")
+        data = extract_title_authors(filename)
+        article_urls = get_article_urls_from_title_and_authors(data)
+        for url in article_urls:
+            print url
+    except urllib2.HTTPError, e:
+        if e.code == 404:
+            print("404 - No such document page")
+        else:
+            raise # throw the rest to get more info
+
 
     #global cookies
     #url = base_url + "abs/" + str(uid)
@@ -217,7 +225,7 @@ def pdf_to_text(filename):
 
 
 def parscit(filename, script, arg):
-    cmd = "../ParsCit/bin/" + script + ".pl" 
+    cmd = "../../ParsCit/bin/" + script + ".pl" 
     output = "parscit/" + filename.replace(".txt","").replace("texts/", "") + "-" + arg + ".xml"
     if os.path.isfile(output):
         print("File " + output + " exists. Skipping.")
