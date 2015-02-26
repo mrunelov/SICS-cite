@@ -8,10 +8,10 @@ inputdir = "rawdata/"
 datadir = "data/"
 tmpdir = datadir + "tmp/"
 # Whether to include parsed citations that aren't in the data set (doesn't have a refId)
-include_unknown = True
+include_unknown = False
 # Whether to pickle adjacency lists for later writing (need to be written after nodes)
 # or store in memory
-keep_edges_in_memory = True
+keep_edges_in_memory = False
 
 
 def get_id_generator():
@@ -37,8 +37,7 @@ def parse():
 	edges = {}
 
 	write_headers()
-
-	with open(datadir + 'core.graphml','w+') as graph,\
+	with open(datadir + 'core.graphml','a') as graph,\
 		 open(datadir + 'paperid-title.txt', 'a') as pt,\
 		 open(datadir + 'paperid-authors.txt', 'a') as pa:
 		for f in os.listdir(inputdir): # loop pickled edge lists and write to graph file
@@ -127,6 +126,7 @@ def append_edges():
 	Append all adjacency lists pickled to temporary files in tmp.
 	Also writes the closing tags using get_footer().
 	"""
+	print("Appending pickled edges...")
 	with open(datadir + 'core.graphml','a') as graph:
 		num_edges = 0
 		for f in os.listdir(tmpdir): # loop pickled edge lists and write to graph file
