@@ -4,11 +4,14 @@ from pprint import pprint
 import pickle
 import os
 
-inputdir = "."
+inputdir = "rawdata/"
 datadir = "data/"
 tmpdir = datadir + "tmp/"
 # Whether to include parsed citations that aren't in the data set (doesn't have a refId)
 include_unknown = False 
+# Whether to pickle adjacency lists for later writing (need to be written after nodes)
+# or store in memory
+keep_edges_in_memory = True
 
 
 def get_id_generator():
@@ -32,12 +35,14 @@ def parse():
 	num_unknown_nodes = 0
 	# Loop all json files and write nodes and metadata. Pickle edges in tmp
 	with open(datadir + 'core.graphml','w+') as graph:
+		edges = {}
 		graph.write(gml.get_header())
 		#graph.write(gml.get_attr(name="weight", attr_type="int", attr_for="edge",id="d0")) # write attribute definitions
 		graph.write(gml.get_startgraph())
 		for f in os.listdir(inputdir): # loop pickled edge lists and write to graph file
 			if f.endswith(".json"):	
-				with open(f, 'r') as infile,\
+				print("Parsing " + f + "...")
+				with open(inputdir + f, 'r') as infile,\
 					 open(datadir + 'paperid-title.txt', 'a') as pt,\
 					 open(datadir + 'paperid-authors.txt', 'a') as pa:
 					edges = {}
@@ -66,8 +71,11 @@ def parse():
 							cites_ids.extend(unknowncites_ids)
 						# TODO: Maybe rewrite to use less files. Currently one per adj. list.
 						if cites_ids: # pickle to file to keep memory low
-							with open(tmpdir + str(id) + '.tmp', 'w+') as tmpedges:
-								pickle.dump(cites_ids, tmpedges)
+							if keep_edges_in_memory:
+								edges[id] = cites_ids
+							else:
+								with open(tmpdir + str(id) + '.tmp', 'w+') as tmpedges:
+									pickle.dump(cites_ids, tmpedges)
 
 							#tmpedges.write(str(id) + "\t" + str(localcites))
 							#edges[id] = localcites
@@ -87,8 +95,12 @@ def parse():
 									pt.write(str(unknowncites_ids[i]) + "\t" + unknowncites_titles[i].encode('utf-8') + "\n") # tab delimited
 									graph.write(gml.get_node(unknowncites_ids[i]))
 									num_unknown_nodes += 1
-
-	num_edges = append_edges() # append pickled edges
+		if keep_edges_in_memory:
+			for source,targets in edges.iteritems():
+				for target in targets:
+					graph.write(gml.get_edge(source,target))				
+	if not keep_edges_in_memory:
+		num_edges = append_edges() # append pickled edges
 	print("Created a GraphML graph with " + str(num_nodes+num_unknown_nodes) + " nodes (" + str(num_unknown_nodes) + " unknown) and " + str(num_edges) + " edges.")
 
 
