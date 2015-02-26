@@ -1,8 +1,10 @@
+#from __future__ import print_function
 import gml # local
 import json
 from pprint import pprint
 import pickle
 import os
+import sys
 
 inputdir = "rawdata/"
 datadir = "data/"
@@ -40,9 +42,15 @@ def parse():
 	with open(datadir + 'core.graphml','a') as graph,\
 		 open(datadir + 'paperid-title.txt', 'a') as pt,\
 		 open(datadir + 'paperid-authors.txt', 'a') as pa:
-		for f in os.listdir(inputdir): # loop pickled edge lists and write to graph file
+		files = [f for f in os.listdir(inputdir) if f.endswith(".json")]
+		parsed = 0
+		for f in files: # loop pickled edge lists and write to graph file
 			if f.endswith(".json"):	
-				print("Parsing " + f + "...")
+				print "Parsing file " + str(parsed+1) + " / " + str(len(files)) + "\r",
+				sys.stdout.flush()
+				parsed += 1
+				if parsed == len(files):
+					print ""
 				with open(inputdir + f, 'r') as infile:
 					edges = {}
 					for line in infile: # one entry per line
