@@ -1,3 +1,5 @@
 rawdata/*
 data/*
+data/
 *.graphml
+*.json
