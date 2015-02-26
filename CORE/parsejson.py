@@ -33,6 +33,7 @@ id_gen = get_id_generator()
 def parse():
 	num_nodes = 0
 	num_unknown_nodes = 0
+	num_edges = 0
 	# Loop all json files and write nodes and metadata. Pickle edges in tmp
 	with open(datadir + 'core.graphml','w+') as graph:
 		edges = {}
@@ -98,7 +99,9 @@ def parse():
 		if keep_edges_in_memory:
 			for source,targets in edges.iteritems():
 				for target in targets:
-					graph.write(gml.get_edge(source,target))				
+					graph.write(gml.get_edge(source,target))
+					num_edges += 1
+			graph.write(gml.get_footer())
 	if not keep_edges_in_memory:
 		num_edges = append_edges() # append pickled edges
 	print("Created a GraphML graph with " + str(num_nodes+num_unknown_nodes) + " nodes (" + str(num_unknown_nodes) + " unknown) and " + str(num_edges) + " edges.")
