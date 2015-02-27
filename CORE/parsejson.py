@@ -16,7 +16,7 @@ include_unknown = False
 keep_edges_in_memory = True
 
 
-def get_id_generator(start=0):
+def get_unknown_id_generator(start=0):
 	"""
 	ID generator that generates ID's starting at ID's larger than the ones in the CORE data set.
 	Used for creating new nodes based on e.g. citations to publications not in the set (no refID).
@@ -26,7 +26,16 @@ def get_id_generator(start=0):
 		yield num
 		num += 1
 
-unknown_id_gen = get_id_generator(80000000001)
+def get_id_generator():
+	"""
+	ID generator that generates ID's starting at 0.
+	"""
+	num = 0
+	while(True):
+		yield num
+		num += 1
+
+unknown_id_gen = get_unknown_id_generator(80000000001)
 edge_id_gen = get_id_generator()
 # print(id_gen.next())
 # print(id_gen.next())
