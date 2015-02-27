@@ -35,14 +35,15 @@ def get_startgraph():
 def get_node(id):
 	return '    <node id="' + str(id) + '" />\n'
 
-def get_edge(u,v,attrs=[]):
+def get_edge(id, u, v, attrs=[]):
 	"""
+	id: the edge ID
 	u: source node ID
 	v: target node ID
 	attrs: an even list of key,value pairs of attribute keys and values.
 		example: ["d0", 1] where "d0" is a key (id) specified via get_attr
 	"""
-	edge = '    <edge source="' + str(u) + '" target="' + str(v) + '">\n'
+	edge = '    <edge id="' + str(id) + '" source="' + str(u) + '" target="' + str(v) + '">\n'
 	# TODO: check if this works with bools (str(bool) = ?)
 	for key,value in pairwise(attrs):
 		edge += '      <data key="' + key + '">' + str(value) + '</data>\n'

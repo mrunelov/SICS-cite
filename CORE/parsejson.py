@@ -13,10 +13,10 @@ tmpdir = datadir + "tmp/"
 include_unknown = False
 # Whether to pickle adjacency lists for later writing (need to be written after nodes)
 # or store in memory
-keep_edges_in_memory = False
+keep_edges_in_memory = True
 
 
-def get_id_generator():
+def get_id_generator(start=0):
 	"""
 	ID generator that generates ID's starting at ID's larger than the ones in the CORE data set.
 	Used for creating new nodes based on e.g. citations to publications not in the set (no refID).
@@ -26,7 +26,8 @@ def get_id_generator():
 		yield num
 		num += 1
 
-id_gen = get_id_generator()
+unknown_id_gen = get_id_generator(80000000001)
+edge_id_gen = get_id_generator()
 # print(id_gen.next())
 # print(id_gen.next())
 # print(id_gen.next())
@@ -73,7 +74,7 @@ def parse():
 							unknowncites_titles = [x["bibo:shortTitle"] for x in cites if "refDocId" not in x.keys() and "bibo:shortTitle" in x.keys()]
 							unknowncites_authors = [x["authors"] for x in cites if "refDocId" not in x.keys() and "authors" in x.keys()]
 							# generate IDs for all new publications
-							unknowncites_ids = [id_gen.next() for _ in range(len(unknowncites_titles))]
+							unknowncites_ids = [unknown_id_gen.next() for _ in range(len(unknowncites_titles))]
 							cites_ids.extend(unknowncites_ids)
 						if cites_ids: # pickle to file to keep memory low
 							if keep_edges_in_memory:
@@ -124,7 +125,7 @@ def write_edges(edges):
 	with open(datadir + 'core.graphml','a') as graph:
 		for source,targets in edges.iteritems():
 				for target in targets:
-					graph.write(gml.get_edge(source,target))
+					graph.write(gml.get_edge(edge_id_gen.next(),source,target))
 					num_edges += 1
 		graph.write(gml.get_footer())
 	return num_edges
@@ -141,7 +142,7 @@ def append_edges():
 				source = int(f[:-4]) # skip '.tmp' extension
 				targets = pickle.load(open(tmpdir + f,'rb'))
 				for target in targets:
-					graph.write(gml.get_edge(source, target))
+					graph.write(gml.get_edge(edge_id_gen.next(),source,target))
 					num_edges += 1
 				os.remove(tmpdir + f) # remove temporary pickle file
 		graph.write(gml.get_footer())
