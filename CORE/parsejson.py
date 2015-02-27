@@ -62,7 +62,6 @@ def parse():
 				if parsed == len(files):
 					print ""
 				with open(inputdir + f, 'r') as infile:
-					edges = {}
 					for line in infile: # one entry per line
 						jsonobj = json.loads(line)
 						id = jsonobj["identifier"]
@@ -73,26 +72,29 @@ def parse():
 						title = jsonobj["bibo:shortTitle"]
 						authors = jsonobj["bibo:AuthorList"]
 						cites = jsonobj["bibo:cites"]
-						cites_ids = [x["refDocId"] for x in cites if "refDocId" in x.keys()]
-
+						citedBy = jsonobj["bibo:citedBy"]
+						cites_ids = [] 
 						unknowncites_ids = []
 						unknowncites_titles = []
 						unknowncites_authors = []
-						if include_unknown:
-							# extract data from cited publications that don't have refIds (aren't in the set)
-							unknowncites_titles = [x["bibo:shortTitle"] for x in cites if "refDocId" not in x.keys() and "bibo:shortTitle" in x.keys()]
-							unknowncites_authors = [x["authors"] for x in cites if "refDocId" not in x.keys() and "authors" in x.keys()]
-							# generate IDs for all new publications
-							unknowncites_ids = [unknown_id_gen.next() for _ in range(len(unknowncites_titles))]
-							cites_ids.extend(unknowncites_ids)
-						if cites_ids: # pickle to file to keep memory low
+						for c in cites:
+							if "refDocId" in c.keys():
+								cites_ids.append(c["refDocId"])
+							elif include_unknown:
+								unknowncites_ids.append(unknown_id_gen.next())
+								if "bibo:shortTitle" in c.keys():
+									unknowncites_titles.append(c["bibo:shortTitle"])
+								if "authors" in c.keys():
+									unknowncites_authors.append(c["authors"])
+						cites_ids.extend(unknowncites_ids)
+
+						if cites_ids: 
 							if keep_edges_in_memory:
 								edges[id] = cites_ids
 							else: # TODO: Maybe rewrite to use less files. Currently one per adj. list.
 								with open(tmpdir + str(id) + '.tmp', 'w+') as tmpedges:
 									pickle.dump(cites_ids, tmpedges)
 
-						citedBy = jsonobj["bibo:citedBy"]
 						if len(authors) == 0 or (len(citedBy) == 0 and len(cites) == 0): # no authors or no links. ignore.
 							continue
 							#print "No citations for " + str(id) + ". Continuing..."
