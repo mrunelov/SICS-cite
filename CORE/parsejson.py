@@ -103,16 +103,14 @@ def parse():
 									pickle.dump(cites_ids, tmpedges)
 
 
-							#print "No citations for " + str(id) + ". Continuing..."
-						else:
-							write_data(id,title,authors, graph, pt, pa)
-							nodes.add(id)
-							num_nodes += 1
-							if include_unknown:
-								for i in range(len(unknowncites_ids)):
-									nodes.add(unknowncites_ids[i])
-									write_data(unknowncites_ids[i], unknowncites_titles[i], unknowncites_authors[i], graph, pt, pa)
-									num_unknown_nodes += 1
+						write_data(id,title,authors, graph, pt, pa)
+						nodes.add(id)
+						num_nodes += 1
+						if include_unknown:
+							for i in range(len(unknowncites_ids)):
+								nodes.add(unknowncites_ids[i])
+								write_data(unknowncites_ids[i], unknowncites_titles[i], unknowncites_authors[i], graph, pt, pa)
+								num_unknown_nodes += 1
 
 	if keep_edges_in_memory: # write edges dictionary to file
 		num_edges = write_edges(edges, nodes)
