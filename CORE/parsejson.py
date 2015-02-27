@@ -5,6 +5,7 @@ from pprint import pprint
 import pickle
 import os
 import sys
+from sets import Set
 
 inputdir = "rawdata/"
 datadir = "data/"
@@ -47,6 +48,7 @@ def parse():
 	num_unknown_nodes = 0
 	num_edges = 0
 	edges = {}
+	nodes = Set()
 
 	write_headers()
 	with open(datadir + 'core.graphml','a') as graph,\
@@ -64,10 +66,10 @@ def parse():
 				with open(inputdir + f, 'r') as infile:
 					for line in infile: # one entry per line
 						jsonobj = json.loads(line)
-						id = jsonobj["identifier"]
 						# (All entries seem to have "bibo:cites")
-						if not all(key in jsonobj for key in ["dc:date", "bibo:shortTitle", "bibo:AuthorList"]):
+						if not all(key in jsonobj for key in ["doi", "dc:date", "bibo:shortTitle", "bibo:AuthorList"]):
 							continue
+						id = jsonobj["doi"]
 						date = jsonobj["dc:date"]
 						title = jsonobj["bibo:shortTitle"]
 						authors = jsonobj["bibo:AuthorList"]
@@ -78,8 +80,8 @@ def parse():
 						unknowncites_titles = []
 						unknowncites_authors = []
 						for c in cites:
-							if "refDocId" in c.keys():
-								cites_ids.append(c["refDocId"])
+							if "doi" in c.keys():
+								cites_ids.append(c["doi"])
 							elif include_unknown:
 								unknowncites_ids.append(unknown_id_gen.next())
 								if "bibo:shortTitle" in c.keys():
@@ -100,16 +102,18 @@ def parse():
 							#print "No citations for " + str(id) + ". Continuing..."
 						else:
 							write_data(id,title,authors, graph, pt, pa)
+							nodes.add(id)
 							num_nodes += 1
 							if include_unknown:
 								for i in range(len(unknowncites_ids)):
+									nodes.add(unknowncites_ids[i])
 									write_data(unknowncites_ids[i], unknowncites_titles[i], unknowncites_authors[i], graph, pt, pa)
 									num_unknown_nodes += 1
 
 	if keep_edges_in_memory: # write edges dictionary to file
-		num_edges = write_edges(edges)
+		num_edges = write_edges(edges, nodes)
 	if not keep_edges_in_memory: # write pickled edges to file
-		num_edges = append_edges()
+		num_edges = append_edges(nodes)
 
 	print("Created a GraphML graph with " + str(num_nodes+num_unknown_nodes) + " nodes (" + str(num_unknown_nodes) + " unknown) and " + str(num_edges) + " edges.")
 
@@ -131,17 +135,18 @@ def write_data(id, title, authors, graph, pt, pa):
 		if authors:
 			pa.write(str(id) + "\t" + str(authors) + "\n")
 
-def write_edges(edges):
+def write_edges(edges, valid_nodes):
 	num_edges = 0
 	with open(datadir + 'core.graphml','a') as graph:
 		for source,targets in edges.iteritems():
 				for target in targets:
-					graph.write(gml.get_edge(edge_id_gen.next(),source,target))
-					num_edges += 1
+					if target in valid_nodes:
+						graph.write(gml.get_edge(edge_id_gen.next(),source,target))
+						num_edges += 1
 		graph.write(gml.get_footer())
 	return num_edges
 
-def append_edges():
+def append_edges(valid_nodes):
 	"""
 	Append all adjacency lists pickled to temporary files in tmp.
 	Also writes the closing tags using get_footer().
@@ -153,8 +158,9 @@ def append_edges():
 				source = int(f[:-4]) # skip '.tmp' extension
 				targets = pickle.load(open(tmpdir + f,'rb'))
 				for target in targets:
-					graph.write(gml.get_edge(edge_id_gen.next(),source,target))
-					num_edges += 1
+					if target in valid_nodes:
+						graph.write(gml.get_edge(edge_id_gen.next(),source,target))
+						num_edges += 1
 				os.remove(tmpdir + f) # remove temporary pickle file
 		graph.write(gml.get_footer())
 		return num_edges
