@@ -30,7 +30,7 @@ def get_attr(name, attr_type, attr_for, id):
 	return '  <key attr.name="weight" attr.type="int" for="edge" id="d0" />\n'
 
 def get_startgraph():
-	return '  <graph edgedefault="directed">\n'
+	return '  <graph id="G" edgedefault="directed">\n'
 
 def get_node(id):
 	return '    <node id="' + str(id) + '" />\n'
