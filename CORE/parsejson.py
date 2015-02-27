@@ -69,7 +69,7 @@ def parse():
 						# (All entries seem to have "bibo:cites")
 						if not all(key in jsonobj for key in ["doi", "dc:date", "bibo:shortTitle", "bibo:AuthorList"]):
 							continue
-						id = jsonobj["doi"]
+						id = jsonobj["identifier"] # or "doi"
 						date = jsonobj["dc:date"]
 						title = jsonobj["bibo:shortTitle"]
 						authors = jsonobj["bibo:AuthorList"]
@@ -77,16 +77,16 @@ def parse():
 						citedBy = jsonobj["bibo:citedBy"]
 						if len(authors) == 0 or (len(citedBy) == 0 and len(cites) == 0): # no authors or no links. ignore.
 							continue
-						if "<" in id or "&" in id: # forbidden symbols
-							continue
+						# if "<" in id or "&" in id: # forbidden symbols
+						# 	continue
 
 						cites_ids = [] 
 						unknowncites_ids = []
 						unknowncites_titles = []
 						unknowncites_authors = []
 						for c in cites:
-							if "doi" in c.keys():
-								cites_ids.append(c["doi"])
+							if "refDocId" in c.keys():
+								cites_ids.append(c["refDocId"])
 							elif include_unknown:
 								unknowncites_ids.append(unknown_id_gen.next())
 								if "bibo:shortTitle" in c.keys():
@@ -104,7 +104,6 @@ def parse():
 
 
 						write_data(id,title,authors, graph, pt, pa)
-						nodes.add(id)
 						num_nodes += 1
 						if include_unknown:
 							for i in range(len(unknowncites_ids)):
