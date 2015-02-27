@@ -75,6 +75,11 @@ def parse():
 						authors = jsonobj["bibo:AuthorList"]
 						cites = jsonobj["bibo:cites"]
 						citedBy = jsonobj["bibo:citedBy"]
+						if len(authors) == 0 or (len(citedBy) == 0 and len(cites) == 0): # no authors or no links. ignore.
+							continue
+						if "<" in id or "&" in id: # forbidden symbols
+							continue
+
 						cites_ids = [] 
 						unknowncites_ids = []
 						unknowncites_titles = []
@@ -97,8 +102,7 @@ def parse():
 								with open(tmpdir + str(id) + '.tmp', 'w+') as tmpedges:
 									pickle.dump(cites_ids, tmpedges)
 
-						if len(authors) == 0 or (len(citedBy) == 0 and len(cites) == 0): # no authors or no links. ignore.
-							continue
+
 							#print "No citations for " + str(id) + ". Continuing..."
 						else:
 							write_data(id,title,authors, graph, pt, pa)
