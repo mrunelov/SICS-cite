@@ -6,6 +6,7 @@ import pickle
 import os
 import sys
 from sets import Set
+from collections import defaultdict
 
 inputdir = "rawdata/"
 datadir = "data/"
@@ -137,17 +138,21 @@ def write_data(id, title, authors, graph, pt, pa):
 			pa.write(str(id) + "\t" + str(authors) + "\n")
 
 def write_edges(edges, valid_nodes):
+	inDegrees = defaultdict(int)
 	num_edges = 0
 	with open(datadir + 'core.graphml','a') as graph:
 		for source,targets in edges.iteritems():
 				for target in targets:
 					if target in valid_nodes:
+						inDegrees[target] += 1
 						graph.write(gml.get_edge(edge_id_gen.next(),source,target))
 						num_edges += 1
 		graph.write(gml.get_footer())
+	print("Highest in-degree: " + str(inDegrees[max(inDegrees,key=inDegrees.get)]))
 	return num_edges
 
 def append_edges(valid_nodes):
+	inDegrees = defaultdict(int)
 	"""
 	Append all adjacency lists pickled to temporary files in tmp.
 	Also writes the closing tags using get_footer().
@@ -160,10 +165,12 @@ def append_edges(valid_nodes):
 				targets = pickle.load(open(tmpdir + f,'rb'))
 				for target in targets:
 					if target in valid_nodes:
+						inDegrees[target] += 1
 						graph.write(gml.get_edge(edge_id_gen.next(),source,target))
 						num_edges += 1
 				os.remove(tmpdir + f) # remove temporary pickle file
 		graph.write(gml.get_footer())
+		print("Highest in-degree: " + str(inDegrees[max(inDegrees,key=inDegrees.get)]))
 		return num_edges
 
 parse()
