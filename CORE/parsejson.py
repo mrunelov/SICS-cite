@@ -11,7 +11,7 @@ inputdir = "rawdata/"
 datadir = "data/"
 tmpdir = datadir + "tmp/"
 # Whether to include parsed citations that aren't in the data set (doesn't have a refId)
-include_unknown = False
+include_unknown = True
 # Whether to pickle adjacency lists for later writing (need to be written after nodes)
 # or store in memory
 keep_edges_in_memory = True
