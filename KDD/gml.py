@@ -22,19 +22,22 @@ def get_footer():
 	return "  </graph>\n" + \
 		"</graphml>"
 
-def get_attr(name, attr_type, attr_for, id):
+def get_attr(id, name, attr_type, attr_for):
 	if attr_for not in ["node", "edge"]:
 		raise ValueError("'for' must be either 'node' or 'edge'")
 	if attr_type not in valid_attr_types:
 		raise ValueError('Invalid attr_type. Must be one of ' + str(valid_attr_types))
-	return '  <key attr.name="weight" attr.type="int" for="edge" id="d0" />\n'
+	return '  <key attr.name="' + name + '" attr.type="' + attr_type + '" for="' + attr_for + '" id="' + id + '" />\n'
 
 def get_startgraph():
 	return '  <graph id="G" edgedefault="directed">\n'
 
-def get_node(id):
-	return '    <node id="' + str(id) + '" />\n'
-
+def get_node(id, attrs=[]):
+	node = '    <node id="' + str(id) + '">\n'
+	for key,value in pairwise(attrs):
+		node += '      <data key="' + key + '">' + str(value) + '</data>\n'
+	node += "    </node>\n"
+	return node
 def get_edge(id, u, v, attrs=[]):
 	"""
 	id: the edge ID
