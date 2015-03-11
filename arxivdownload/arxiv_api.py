@@ -59,13 +59,13 @@ def get_article_urls_from_title_and_authors(data):
                 xml_response = query(longest_title_word, authors)
                 url = get_article_url(original_title, xml_response)
                 if url is not None:
-                    print("FOUND MATCH with 1 word from title -------- by: " + authors[0] + " et.al.")
+                    print("FOUND MATCH with 1 word from title -------- by: " + authors[0] + " et al.")
                     urls.append(url)
-                else: # try again, authors only:
-                    xml_response = query(None, authors)
-                    url = get_article_url(original_title, xml_response)
-                    if url is not None:
-                        print("FOUND MATCH without title -------- by: " + authors[0] + " et.al.")
-                        urls.append(url)
+                # else: # try again, authors only:
+                #     xml_response = query(None, authors)
+                #     url = get_article_url(original_title, xml_response)
+                #     if url is not None:
+                #         print("FOUND MATCH without title -------- by: " + authors[0] + " et al.")
+                #         urls.append(url)
     print("Found " + str(len(urls)) + " / " + str(len(data)))
     return urls  

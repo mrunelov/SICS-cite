@@ -6,7 +6,7 @@ import urllib2
 import subprocess
 import os.path
 
-from arxiv import *
+from arxiv_api import *
 from xml_parsing import extract_title_authors
 
 base_url = "http://arxiv.org/"
