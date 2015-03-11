@@ -50,7 +50,6 @@ def save_docs(docs):
 
 class PageParser(HTMLParser):
     global cookies
-    found_first_pdf = False
     def __init__(self):
         HTMLParser.__init__(self)
         self.doc = {'references':[], 'citedby':[]}
@@ -83,16 +82,15 @@ def get_new_pdf_name():
         num += 1
 # infinitely generate pdf names
 pdf_name_generator = get_new_pdf_name()
-found_first_pdf = False
             
-def download_pdf(uid):
+def download_pdf(article_url):
+    uid = get_id_from_url(article_url)
     filename = uid.replace(".", "-") + ".pdf"
     if os.path.isfile(filename): # file exists
         print("File " + filename + " exists. Skipping.")
     else:
         print("Downloading pdf...")
-        download_url = base_url + "pdf/" + str(uid) 
-        response = urllib2.urlopen(download_url)
+        response = urllib2.urlopen(article_url)
         file = open(filename, 'w')
         file.write(response.read())
         file.close()
@@ -100,18 +98,29 @@ def download_pdf(uid):
 
     return filename
 
+def get_id_from_url(article_url):
+    return article_url.split('/')[-1]
+
+def get_pdf_url_from_id(uid):
+    return base_url + "pdf/" + uid
+
+def crawl(uid, maxdepth=1):
+    article_url = get_pdf_url_from_id(uid)
+    download_doc(article_url, 0, maxdepth)
 
 cookies = {}
-def download_doc(uid):
+def download_doc(article_url, depth, maxdepth):
     # Download pdf
     try:
-        filename = download_pdf(uid) # return .pdf name
+        filename = download_pdf(article_url) # return .pdf name
         filename = pdf_to_text(filename) # returns .txt name
         filename = parscit(filename, "citeExtract", "extract_citations")
         data = extract_title_authors(filename)
         article_urls = get_article_urls_from_title_and_authors(data)
-        for url in article_urls:
-            print url
+        depth += 1
+        if depth < maxdepth:
+            for new_url in article_urls:
+                download_doc(new_url, depth, maxdepth)
     except urllib2.HTTPError, e:
         if e.code == 404:
             print("404 - No such document page")
