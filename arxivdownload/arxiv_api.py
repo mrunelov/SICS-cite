@@ -1,5 +1,5 @@
 import urllib
-from xml_parsing import get_article_url
+from xml_parsing import find_article_match
 
 base_url = "http://export.arxiv.org/api/query?search_query="
 
@@ -19,7 +19,7 @@ def query(title, authors):
     return xml_result
 
 
-def get_article_urls_from_title_and_authors(data):
+def find_article_matchs_from_title_and_authors(data):
     """
     Takes title + authors and queries arXiv looking for matches.
 
@@ -47,23 +47,25 @@ def get_article_urls_from_title_and_authors(data):
                 authors = [author.split()[-1] for author in authors]
 
         xml_response = query(title, authors)
-        url = get_article_url(original_title,xml_response)
+        url = find_article_match(original_title,xml_response)
         if url is not None:
             print("FOUND MATCH ------------------------------------------")
             urls.append(url)
         else: 
-            if title is not None: # let similarity do its checks. query using authors
+            # Try different queries. 
+            # Querying the entire title without quotes defaults to an OR search. Too many matches.
+            if title is not None: # let similarity in find_article_match do its checks. query using authors
                 # try with longest word in title + authors
                 longest_title_word = max(title.split(),key=len) 
         #authors = ["%22" + a + "%22" for a in authors] # quote authors. Not needed
                 xml_response = query(longest_title_word, authors)
-                url = get_article_url(original_title, xml_response)
+                url = find_article_match(original_title, xml_response)
                 if url is not None:
                     print("FOUND MATCH with 1 word from title -------- by: " + authors[0] + " et al.")
                     urls.append(url)
                 # else: # try again, authors only:
                 #     xml_response = query(None, authors)
-                #     url = get_article_url(original_title, xml_response)
+                #     url = find_article_match(original_title, xml_response)
                 #     if url is not None:
                 #         print("FOUND MATCH without title -------- by: " + authors[0] + " et al.")
                 #         urls.append(url)

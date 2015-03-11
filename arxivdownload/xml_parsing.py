@@ -27,7 +27,7 @@ def extract_title_authors(filename):
     return data
 
 
-def get_article_url(title, xml, similarity_threshold=0.9):
+def find_article_match(title, xml, similarity_threshold=0.9):
     """
     Extracts arXiv article urls from arXiv atom XML responses
     """
@@ -60,14 +60,14 @@ def get_article_url(title, xml, similarity_threshold=0.9):
     elif len(entries) == 0:
         #print("No article found in XML. Returning.")
         return None
-    else: # len == 1
+    else: # len == 1, assume it's a good match.
         #print("Found an article!")
         return entries[0].find(tag_prefix + 'id').text
     return None # unreachable
     
 def similarity(seq1, seq2):
-    print("Comparing:")
-    print(seq1)
-    print(seq2)
-    print("Similarity: " + str(difflib.SequenceMatcher(a=seq1.lower(), b=seq2.lower()).ratio()))
+    # print("Comparing:")
+    # print(seq1)
+    # print(seq2)
+    # print("Similarity: " + str(difflib.SequenceMatcher(a=seq1.lower(), b=seq2.lower()).ratio()))
     return difflib.SequenceMatcher(a=seq1.lower(), b=seq2.lower()).ratio()
