@@ -5,6 +5,8 @@ import requests
 import urllib2
 import subprocess
 import os.path
+import networkx as nx
+import matplotlib.pyplot as plt
 
 from arxiv_api import *
 from xml_parsing import extract_title_authors
@@ -83,14 +85,15 @@ def get_new_pdf_name():
 # infinitely generate pdf names
 pdf_name_generator = get_new_pdf_name()
             
-def download_pdf(article_url):
-    uid = get_id_from_url(article_url)
-    filename = uid.replace(".", "-") + ".pdf"
+def download_pdf(pdf_url):
+    pdf_dir = "pdfs/"
+    uid = get_id_from_url(pdf_url)
+    filename = pdf_dir + uid.replace(".", "-") + ".pdf"
     if os.path.isfile(filename): # file exists
         print("File " + filename + " exists. Skipping.")
     else:
-        print("Downloading pdf...")
-        response = urllib2.urlopen(article_url)
+        print("Downloading pdf " + pdf_url)
+        response = urllib2.urlopen(pdf_url)
         file = open(filename, 'w')
         file.write(response.read())
         file.close()
@@ -104,22 +107,31 @@ def get_id_from_url(article_url):
 def get_pdf_url_from_id(uid):
     return base_url + "pdf/" + uid
 
-def crawl(uid, maxdepth=1):
-    article_url = get_pdf_url_from_id(uid)
+G = nx.DiGraph()
+def crawl(article_url, maxdepth=1):
+    #article_url = get_pdf_url_from_id(uid)
     download_doc(article_url, 0, maxdepth)
+    nx.draw(G,pos=nx.spring_layout(G))
+    plt.draw()
+    plt.show()
+    #for line in nx.generate_edgelist(G, data=False):
+        #print(line)
 
 cookies = {}
 def download_doc(article_url, depth, maxdepth):
+    pdf_url = article_url.replace("/abs/", "/pdf/")
+    G.add_node(article_url)
     # Download pdf
     try:
-        filename = download_pdf(article_url) # return .pdf name
+        filename = download_pdf(pdf_url) # return .pdf name
         filename = pdf_to_text(filename) # returns .txt name
         filename = parscit(filename, "citeExtract", "extract_citations")
         data = extract_title_authors(filename)
-        article_urls = get_article_urls_from_title_and_authors(data)
+        article_urls = find_article_match_from_title_and_authors(data)
         depth += 1
-        if depth < maxdepth:
-            for new_url in article_urls:
+        for new_url in article_urls:
+            G.add_edge(article_url,new_url)
+            if depth < maxdepth:
                 download_doc(new_url, depth, maxdepth)
     except urllib2.HTTPError, e:
         if e.code == 404:
@@ -223,7 +235,7 @@ def remove_uid(uid):
 
 # converts a pdf file in the current dir to text and saves it to texts/
 def pdf_to_text(filename):
-    output = "texts/" + filename.replace(".pdf", ".txt")
+    output = "texts/" + filename.replace(".pdf", ".txt").split("/",1)[1]
     if os.path.isfile(output):
         print("File " + output + " exists. Skipping.")
     else:

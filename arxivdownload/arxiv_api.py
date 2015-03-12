@@ -19,7 +19,7 @@ def query(title, authors):
     return xml_result
 
 
-def find_article_matchs_from_title_and_authors(data):
+def find_article_match_from_title_and_authors(data):
     """
     Takes title + authors and queries arXiv looking for matches.
 
@@ -56,6 +56,7 @@ def find_article_matchs_from_title_and_authors(data):
             # Querying the entire title without quotes defaults to an OR search. Too many matches.
             if title is not None: # let similarity in find_article_match do its checks. query using authors
                 # try with longest word in title + authors
+                title = title.replace("%22","")
                 longest_title_word = max(title.split(),key=len) 
         #authors = ["%22" + a + "%22" for a in authors] # quote authors. Not needed
                 xml_response = query(longest_title_word, authors)
