@@ -2,6 +2,7 @@
 *.pdf
 *.xml
 *.graphml
+rawdata/
 
 *.txt
 *.pyc
