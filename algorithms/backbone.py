@@ -14,11 +14,11 @@ def sim_read_helper(G, a, b):
  	(see sim_read_pair() and impacts())
 	"""
 	offspring = G.in_edges([a,b])
-	# TODO: look over this. should we pick u's that occur twice to get co-citing?
-	common_offspring = [u for u,v in offspring] # co-citing offspring!
+        counts = Counter(offspring)
+	common_offspring = [v for u,v in offspring if counts[v] == 2] # co-citations
 	sim_read = 0
 	for o in common_offspring:
-		sim_read += (1/G.out_degree(o))
+            sim_read += (1/G.out_degree(o))
 	return sim_read
 
 def sim_aut_helper(G, a, b):
@@ -28,10 +28,11 @@ def sim_aut_helper(G, a, b):
 	since the measure is based on their references
 	"""
 	parents = G.out_edges([a,b])
-	common_parents = [v for u,v in parents]
+        counts = Counter(parents)
+	common_parents = [v for u,v in parents if counts[v] == 2] # co-citing something
 	sim_aut = 0
 	for p in common_parents:
-		sim_aut += (1/G.in_degree(p))
+            sim_aut += (1/G.in_degree(p))
 	return sim_aut
 
 def sim_read_pair(G, a, b):
@@ -93,130 +94,133 @@ def di_triangles():
 
 
 def calculate_all_impacts(G):
-	"""
-	Calculates the impact of a parent on a child for all edges
-	Time complexity:
-	O(e^2). However, this upper bound is only reached if 
-	all edges share a common parent.
+    """
+    Calculates the impact of a parent on a child for all edges
+    Time complexity:
+    O(e^2). However, this upper bound is only reached if 
+    all edges share a common parent.
 
-	The calculated impacts will be added as edge attributes 'impact'
-	"""
-	print("Calculating all impacts...")
-	impacts = defaultdict(int)
-	i = 1
-	num_nodes = G.number_of_nodes()
-	for parent in G.nodes_iter():
-		print "Calculating impact for parent " + str(i) + " / " + str(num_nodes) + "\r",
-		i += 1
-		children = [u for u,v in G.in_edges(parent)]
-		children_impacts = get_impacts(G, parent, children)
-		for child in children:
-			if (child,parent) in impacts:
-				print("Adding to existing key!")
-			impacts[(child,parent)] += children_impacts[child]
-	nx.set_edge_attributes(G, 'impact', impacts)
-	print
-	print("Done calculating all impacts.")
-	with open('pickles/KDD-with-impacts.pickle', 'wb') as f:	
-		nx.write_gpickle(G, f)
-	return G
+    The calculated impacts will be added as edge attributes 'impact'
+    """
+    print("Calculating all impacts...")
+    impacts = defaultdict(int)
+    i = 1
+    num_nodes = G.number_of_nodes()
+    for parent in G.nodes_iter():
+        print "Calculating impact for parent " + str(i) + " / " + str(num_nodes) + "\r",
+        i += 1
+        #children = [u for u,v in G.in_edges(parent)]
+        children = nx.descendants(G,parent)
+        children_impacts = get_impacts(G, parent, children)
+        for child in children:
+            if (child,parent) in impacts:
+                print("Adding to existing key!")
+            impacts[(child,parent)] += children_impacts[child]
+    nx.set_edge_attributes(G, 'impact', impacts)
+    print
+    print("Done calculating all impacts.")
+    with open('pickles/KDD-with-impacts.pickle', 'wb') as f:	
+        nx.write_gpickle(G, f)
+    return G
 
 def get_impact_graph():
-	if os.path.isfile('pickles/KDD-with-impacts.pickle'):
-		with open('pickles/KDD-with-impacts.pickle', 'rb') as f:
-			print("Reading pickled graph with impacts...")
-			G = nx.read_gpickle(f)
-			print("Done reading graph.")
-			return G
+    if os.path.isfile('pickles/KDD-with-impacts.pickle'):
+        with open('pickles/KDD-with-impacts.pickle', 'rb') as f:
+            print("Reading pickled graph with impacts...")
+            G = nx.read_gpickle(f)
+            print("Done reading graph.")
+            return G
 
 def get_impact(edge):
-	return edge[2]['impact']
+    return edge[2]['impact']
 
 
 def build_backbone_graph(G):
-	print("Generating backbone from impact graph...")
-	backbone = []
-	for n in G.nodes_iter():
-		if G.out_degree(n) > 0: # OBS: disconnected nodes fall off here
-			top_edge = max(G.out_edges(n,data=True), key=get_impact)
-			backbone.append(top_edge)
-	print("Done generating backbone.")
-	return nx.DiGraph(backbone)
+    print("Generating backbone from impact graph...")
+    backbone = []
+    for n in G.nodes_iter():
+        if G.out_degree(n) > 0: # OBS: disconnected nodes fall off here
+            top_edge = max(G.out_edges(n,data=True), key=get_impact)
+            backbone.append(top_edge)
+    print("Done generating backbone.")
+    return nx.DiGraph(backbone)
 
 def get_backbone_node(G, n):
-	if G.in_degree(n) == 0:
-		raise ValueError("No incoming edge!")
-	out_edge = G.out_edges(n)
-	return out_edge[0][1]
+    if G.in_degree(n) == 0:
+        raise ValueError("No incoming edge!")
+    out_edge = G.out_edges(n)
+    return out_edge[0][1]
 
 def get_backbone_graph():
-	if os.path.isfile('pickles/KDD-backbone.pickle'):
-		with open('pickles/KDD-backbone.pickle', 'rb') as f:
-			print("Reading pickled backbone graph...")
-			G = nx.read_gpickle(f)
-			print("Done reading graph.")
-			return G
+    if os.path.isfile('pickles/KDD-backbone.pickle'):
+        with open('pickles/KDD-backbone.pickle', 'rb') as f:
+            print("Reading pickled backbone graph...")
+            G = nx.read_gpickle(f)
+            print("Done reading graph.")
+            return G
 
 def main():
-	G = get_gml_graph('KDD')
-	G = get_impact_graph() # when pickled, get instead
-	#G2 = build_backbone_graph(G)
-	G2 = get_backbone_graph() # when pickled, get instead
+    #G = get_gml_graph('KDD')
+    G = get_impact_graph() # when pickled, get instead
+    print next(G.edges_iter())
+    #G = calculate_all_impacts(G)
+    G2 = build_backbone_graph(G)
+    #G2 = get_backbone_graph() # when pickled, get instead
 
-	# add labels to backbone graph
-	# labels = nx.get_node_attributes(G,'label')
-	# G2_labels = {}
-	# for n in G2.nodes_iter():
-	# 	G2_labels[n] = labels[n]
-	# nx.set_node_attributes(G2,'label', G2_labels)
-	
-	# A bit manual. Pickle only when built + labeled.
-	#with open('pickles/KDD-backbone.pickle', 'wb') as f:	
-	#	nx.write_gpickle(G2, f)
-	#nx.write_graphml(G2, 'data/KDD-backbone.graphml')
-	
-	pr = nx.pagerank(G, alpha=0.5, max_iter=10)
-	# eigen_centralities = nx.eigenvector_centrality_numpy(G)
-	# indegrees = get_indegrees(G)
-	#closeness = nx.closeness_centrality(G)
-	#betweenness = nx.betweenness_centrality(G)
+    # add labels to backbone graph
+    labels = nx.get_node_attributes(G,'label')
+    G2_labels = {}
+    for n in G2.nodes_iter():
+        G2_labels[n] = labels[n]
+    nx.set_node_attributes(G2,'label', G2_labels)
+    
+    # A bit manual. Pickle only when built + labeled.
+    with open('pickles/KDD-backbone.pickle', 'wb') as f:	
+        nx.write_gpickle(G2, f)
+    nx.write_graphml(G2, '../KDD/data/KDD-backbone.graphml')
+    
+    pr = nx.pagerank(G, alpha=0.5, max_iter=10)
+    # eigen_centralities = nx.eigenvector_centrality_numpy(G)
+    # indegrees = get_indegrees(G)
+    #closeness = nx.closeness_centrality(G)
+    #betweenness = nx.betweenness_centrality(G)
 
-	top_pr = Counter(pr).most_common(10) # top 10 pageranks
-	# for n, rank in top_pr:
-	# 	rank = rank*10000.0
-	# 	print(G.node[n]['label'])
-	# 	print("\tBackbone node: " + G2.node[get_backbone_node(G2,n)]['label'])
-	# 	print("\tPR: %0.2f"%(rank))
-	# 	print("\tIn-degree: %d"%(indegrees[n]))
-	# 	#print("\tBetweenness centrality: %0.5f"%(betweenness[n]))
-	# 	#print("\tCloseness centrality: %0.5f"%(closeness[n]))
-	# 	print("\tEigenvector centrality: %0.5f"%(eigen_centralities[n]))
+    top_pr = Counter(pr).most_common(10) # top 10 pageranks
+    # for n, rank in top_pr:
+    # 	rank = rank*10000.0
+    # 	print(G.node[n]['label'])
+    # 	print("\tBackbone node: " + G2.node[get_backbone_node(G2,n)]['label'])
+    # 	print("\tPR: %0.2f"%(rank))
+    # 	print("\tIn-degree: %d"%(indegrees[n]))
+    # 	#print("\tBetweenness centrality: %0.5f"%(betweenness[n]))
+    # 	#print("\tCloseness centrality: %0.5f"%(closeness[n]))
+    # 	print("\tEigenvector centrality: %0.5f"%(eigen_centralities[n]))
 
-	print("Drawing...")
-	#nx.draw_networkx_nodes(G,pos=nx.spring_layout(G),nodelist=[0,1])
-	#nx.draw_networkx_edges(G,pos,alpha=0.5,width=6)
+    print("Drawing...")
+    #nx.draw_networkx_nodes(G,pos=nx.spring_layout(G),nodelist=[0,1])
+    #nx.draw_networkx_edges(G,pos,alpha=0.5,width=6)
 
-	#nx.draw_networkx_nodes(G,pos=nx.spring_layout(G),node_size=2000,nodelist=[4])
+    #nx.draw_networkx_nodes(G,pos=nx.spring_layout(G),node_size=2000,nodelist=[4])
 
-	plt.figure(1,figsize=(8,8))
-	# layout graphs with positions using graphviz neato
+    plt.figure(1,figsize=(8,8))
+    # layout graphs with positions using graphviz neato
 
-	#nx.draw_networkx_nodes(G,pos=nx.spring_layout(G),node_size=3000,nodelist=[0,1,2,3],node_color='b')
+    #nx.draw_networkx_nodes(G,pos=nx.spring_layout(G),node_size=3000,nodelist=[0,1,2,3],node_color='b')
 
-	todraw = [top_pr[3][0]]
-	for _ in range(2):
-		todraw.append(get_backbone_node(G2,todraw[-1]))
-	print todraw
-	SG = G.subgraph(todraw)
-	pos=nx.spring_layout(SG)
-	nx.draw(SG, pos)
-	nx.draw_networkx_labels(SG, pos)
+    todraw = [top_pr[3][0]]
+    for _ in range(2):
+        todraw.append(get_backbone_node(G2,todraw[-1]))
+    print todraw
+    SG = G.subgraph(todraw)
+    pos=nx.spring_layout(SG)
+    nx.draw(SG, pos)
+    nx.draw_networkx_labels(SG, pos)
 
-	plt.axis('off')
-	#plt.savefig("house_with_colors.png") # save as png
-	plt.show() # display
-	print("Done.")
-	
-	#print [d for n,d in G.nodes_iter(data=True)] # prints all dictionaries of label-title pairs
+    plt.axis('off')
+    #plt.savefig("house_with_colors.png") # save as png
+    plt.show() # display
+    print("Done.")
+    
+    #print [d for n,d in G.nodes_iter(data=True)] # prints all dictionaries of label-title pairs
 
 main()
