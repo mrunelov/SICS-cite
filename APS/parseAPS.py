@@ -37,15 +37,19 @@ def parse_citations():
 	write_headers(graphfile)
 	with open(graphfile,'a') as graph,\
 		 open(inputdir + 'aps-dataset-citations-2013.csv') as infile:
-		next(infile) # skip first header line
-		for node in [u,v]:
-			if node not in nodes:
-				nodes.add(node)
-				label = meta[node]["title"] if node in meta else "N/A"
-				date = meta[node]["date"] if node in meta and "date" in meta[node] else "N/A"
-				attrs = ["label", label, "date", date]
-				write_node(node, graph, attrs)
-				num_nodes += 1
+		for line in infile: # one entry per line
+			if line.startswith('#'): # ignore comments
+				continue
+			u,v = line.split()
+			edges[u].append(v) # add to adjacency list
+			for node in [u,v]:
+				if node not in nodes:
+					nodes.add(node)
+					label = meta[node]["title"] if node in meta else "N/A"
+					date = meta[node]["date"] if node in meta and "date" in meta[node] else "N/A"
+					attrs = ["label", label, "date", date]
+					write_node(node, graph, attrs)
+					num_nodes += 1
 		num_edges = write_edges(edges,graph)
 
 	print("Created a GraphML graph with " + str(num_nodes) + " nodes and " + str(num_edges) + " edges.")
