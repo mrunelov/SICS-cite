@@ -5,3 +5,5 @@
 *.txt
 *.pyc
 *.out
+*.graphml
+*.swp
