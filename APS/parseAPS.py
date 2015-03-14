@@ -31,52 +31,43 @@ def parse_citations():
 	num_edges = 0
 	edges = defaultdict(list)
 	nodes = Set()
-	#meta = parse_abstracts() # maps id's to a meta label (authors + title)
+	meta = parse_meta()
 
 	graphfile = datadir + 'APS.graphml'
 	write_headers(graphfile)
 	with open(graphfile,'a') as graph,\
 		 open(inputdir + 'aps-dataset-citations-2013.csv') as infile:
 		next(infile) # skip first header line
-		for line in infile: # one entry per line
-			u,v = line.split(',')
-			edges[u].append(v) # add to adjacency list
-			if u not in nodes:
-				nodes.add(u)
-				label = "N/A" #meta[v] if v in meta else "N/A"
-				attrs = ["label", label]
-				write_node(u, graph, attrs)
-				num_nodes += 1
-			if v not in nodes:
-				nodes.add(v)
-				label = "N/A" #meta[v] if v in meta else "N/A"
-				attrs = ["label", label]
-				write_node(v, graph, attrs)
+		for node in [u,v]:
+			if node not in nodes:
+				nodes.add(node)
+				label = meta[node]["title"] if node in meta else "N/A"
+				date = meta[node]["date"] if node in meta and "date" in meta[node] else "N/A"
+				attrs = ["label", label, "date", date]
+				write_node(node, graph, attrs)
 				num_nodes += 1
 		num_edges = write_edges(edges,graph)
 
 	print("Created a GraphML graph with " + str(num_nodes) + " nodes and " + str(num_edges) + " edges.")
 
 # OBS: Old code for KDD!
-def parse_abstracts():
-	print("Parsing abstracts...")
+def parse_meta():
+	print("Parsing metadata...")
 	meta = {}
 	for root, dirs, files in os.walk(abstractdir):
 		for file in files:
-			if file.endswith('.abs'):
-				with open(root + "/" + file, 'r') as abstract:
-					meta_entry = ""
-					for line in abstract:
-						if line.startswith("Title: "):
-							meta_entry += line[7:].replace("<","").replace(">","").replace("&","&amp;").rstrip()
-						if line.startswith("Author: "):
-							meta_entry += ", " + line[8:].replace("<","").replace(">","").replace("&","&amp;").rstrip()
-							break
-						if line.startswith("Authors: "):
-							meta_entry += ", " + line[9:].replace("<","").replace(">","").replace("&","&amp;").rstrip()
-							break
-					meta[file[:-4]] = meta_entry
-	print("Parsed " + str(len(meta)) + " abstracts.")          		
+			if file.endswith('.json'):
+				with open(root + "/" + file, 'r') as metafile:
+					data = json.load(metafile)
+					if "id" not in data or "title" not in data or :
+						continue
+					meta_entry = {}
+					meta_entry["title"] = data["title"]["value"]
+					if "date" in data:
+						meta_entry["date"] = data["date"]
+					meta[data["id"]] = meta_entry
+					
+	print("Parsed " + str(len(meta)) + " abstracts.")      		
 	return meta
 
 
