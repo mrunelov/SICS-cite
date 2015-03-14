@@ -113,7 +113,6 @@ def calculate_all_impacts(G):
     i = 1
     num_nodes = G.number_of_nodes()
     for parent in G.nodes_iter():
-        print parent
         children = G.predecessors(parent)
         #children = [u for u,v in G.in_edges(parent)]
         print "Calculating impact for parent " + str(i) + " / " + str(num_nodes) + " (with " + str(len(children)) + " children)" +  "\r",
