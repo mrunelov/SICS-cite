@@ -50,6 +50,8 @@ def parse():
 	num_edges = 0
 	edges = {}
 	nodes = Set()
+	titlemap = {}
+	authormap = {}
 
 	write_headers()
 	with open(datadir + 'core.graphml','a') as graph,\
@@ -76,24 +78,26 @@ def parse():
 						authors = jsonobj["bibo:AuthorList"]
 						cites = jsonobj["bibo:cites"]
 						citedBy = jsonobj["bibo:citedBy"]
-						if len(authors) == 0 or (len(citedBy) == 0 and len(cites) == 0): # no authors or no links. ignore.
-							continue
+
+						titlemap[id] = title
+						authormap[id] = authors
+						#if len(authors) == 0 or (len(citedBy) == 0 and len(cites) == 0): # no authors or no links. ignore.
+						#	continue
 						# if "<" in id or "&" in id: # forbidden symbols
 						# 	continue
 
 						cites_ids = [] 
 						unknowncites_ids = []
-						unknowncites_titles = []
-						unknowncites_authors = []
+						unknowncites_titles = {}
 						for c in cites:
 							if "refDocId" in c.keys():
 								cites_ids.append(c["refDocId"])
-							elif include_unknown:
-								unknowncites_ids.append(unknown_id_gen.next())
-								if "bibo:shortTitle" in c.keys():
-									unknowncites_titles.append(c["bibo:shortTitle"])
-								if "authors" in c.keys():
-									unknowncites_authors.append(c["authors"])
+							elif include_unknown and "bibo:shortTitle" in c.keys():
+								new_id = unknown_id_gen.next()
+								unknowncites_ids.append(new_id)
+								unknowncites_titles[new_id] = c["bibo:shortTitle"]
+								titlemap[new_id] = c["bibo:shortTitle"]
+
 						cites_ids.extend(unknowncites_ids)
 
 						if cites_ids: 
@@ -108,16 +112,29 @@ def parse():
 						num_nodes += 1
 						if include_unknown:
 							for i in range(len(unknowncites_ids)):
-								nodes.add(unknowncites_ids[i])
-								write_data(unknowncites_ids[i], unknowncites_titles[i], unknowncites_authors[i], graph, pt, pa)
+								u_id = unknowncites_ids[i]
+								nodes.add(u_id)
+								write_data(u_id, unknowncites_titles[u_id], None, graph, pt, pa)
 								num_unknown_nodes += 1
 
+	edges = merge_edges(edges, titlemap)
 	if keep_edges_in_memory: # write edges dictionary to file
-		num_edges = write_edges(edges, nodes)
+		num_edges = write_edges(edges)
 	if not keep_edges_in_memory: # write pickled edges to file
 		num_edges = append_edges(nodes)
 
 	print("Created a GraphML graph with " + str(num_nodes+num_unknown_nodes) + " nodes (" + str(num_unknown_nodes) + " unknown) and " + str(num_edges) + " edges.")
+
+
+def merge_edges(edges, titlemap):
+	print("Merging " + str(len(edges)) + " edges")
+	new_edges = {}
+	"""
+	merges id's with the same title
+	"""
+	for 
+
+	print("Merged into " + str(len(new_edges)) + " edges")
 
 
 def write_headers():
@@ -137,16 +154,15 @@ def write_data(id, title, authors, graph, pt, pa):
 		if authors:
 			pa.write(str(id) + "\t" + str(authors) + "\n")
 
-def write_edges(edges, valid_nodes):
+def write_edges(edges):
 	inDegrees = defaultdict(int)
 	num_edges = 0
 	with open(datadir + 'core.graphml','a') as graph:
 		for source,targets in edges.iteritems():
 				for target in targets:
-					if target in valid_nodes:
-						inDegrees[target] += 1
-						graph.write(gml.get_edge(edge_id_gen.next(),source,target))
-						num_edges += 1
+					inDegrees[target] += 1
+					graph.write(gml.get_edge(edge_id_gen.next(),source,target))
+					num_edges += 1
 		graph.write(gml.get_footer())
 	print("Highest in-degree: " + str(inDegrees[max(inDegrees,key=inDegrees.get)]))
 	return num_edges

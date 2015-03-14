@@ -1,5 +1,9 @@
+if __name__ == '__main__' and __package__ is None:
+    from os import sys, path
+    sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+
 #from __future__ import print_function
-import gml # local
+import algorithms.gml as gml
 import json
 from pprint import pprint
 import pickle

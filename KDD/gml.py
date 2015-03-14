@@ -33,7 +33,7 @@ def get_startgraph():
 	return '  <graph id="G" edgedefault="directed">\n'
 
 def get_node(id, attrs=[]):
-	node = '    <node id="' + str(id) + '">\n'
+	node = '    <node id="n' + str(id) + '">\n'
 	for key,value in pairwise(attrs):
 		node += '      <data key="' + key + '">' + str(value) + '</data>\n'
 	node += "    </node>\n"
@@ -46,7 +46,7 @@ def get_edge(id, u, v, attrs=[]):
 	attrs: an even list of key,value pairs of attribute keys and values.
 		example: ["d0", 1] where "d0" is a key (id) specified via get_attr
 	"""
-	edge = '    <edge id="' + str(id) + '" source="' + str(u) + '" target="' + str(v) + '">\n'
+	edge = '    <edge id="e' + str(id) + '" source="n' + str(u) + '" target="n' + str(v) + '">\n'
 	# TODO: check if this works with bools (str(bool) = ?)
 	for key,value in pairwise(attrs):
 		edge += '      <data key="' + key + '">' + str(value) + '</data>\n'
