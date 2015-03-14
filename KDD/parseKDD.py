@@ -33,30 +33,41 @@ def parse_citations():
 	edges = defaultdict(list)
 	nodes = Set()
 	meta = parse_abstracts() # maps id's to a meta label (authors + title)
+	dates = parse_dates() # maps id's to dates
 
 	write_headers()
 	with open(datadir + 'KDD.graphml','a') as graph,\
 		 open(inputdir + 'Cit-HepTh.txt') as infile:
 		for line in infile: # one entry per line
-			while line.startswith('#'): # ignore comments
+			if line.startswith('#'): # ignore comments
 				continue
 			u,v = line.split()
 			edges[u].append(v) # add to adjacency list
-			if u not in nodes:
-				nodes.add(u)
-				label = meta[v] if v in meta else "N/A"
-				attrs = ["label", label]
-				write_node(u, graph, attrs)
-				num_nodes += 1
-			if v not in nodes:
-				nodes.add(v)
-				label = meta[v] if v in meta else "N/A"
-				attrs = ["label", label]
-				write_node(v, graph, attrs)
-				num_nodes += 1
+			for node in [u,v]:
+				if node not in nodes:
+					nodes.add(node)
+					label = meta[node] if node in meta else "N/A"
+					date = dates[node] if node in dates else "N/A"
+					attrs = ["label", label, "date", date]
+					write_node(node, graph, attrs)
+					num_nodes += 1
 		num_edges = write_edges(edges,graph)
 
 	print("Created a GraphML graph with " + str(num_nodes) + " nodes and " + str(num_edges) + " edges.")
+
+def parse_dates():
+	dates = {}
+	print("Parsing dates...")
+	with open(inputdir + 'Cit-HepTh-dates.txt','r') as f:
+		for line in f:
+			if line.startswith('#'):
+				continue
+			node,date = line.split()
+			if node.startswith('11'):
+				node = node[2:] # remove 11 marker, means it's cross-listed, but true id comes after.
+			dates[node] = date
+	print("Done parsing dates.")
+	return dates
 
 
 def parse_abstracts():
@@ -85,6 +96,7 @@ def write_headers():
 	with open(datadir + 'KDD.graphml','w+') as graph:
 		graph.write(gml.get_header())
 		graph.write(gml.get_attr("label", "label", "string", "node"))
+		graph.write(gml.get_attr("date", "date", "string", "node"))
 		graph.write(gml.get_startgraph())
 
 # TODO: only open files once...
