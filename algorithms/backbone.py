@@ -7,90 +7,96 @@ import matplotlib.pyplot as plt
 from graphutils import get_gml_graph
 
 def sim_read_helper(G, a, b):
-	"""
- 	Calcuates the similarity between a and b from the reader's perspective
- 	by counting co-citations. Weighted by the co-citing paper's outdegree (random walk).
- 	Skips multiplying by 1/indegree in order to make the result usable by both a and b in the impact calculation 
- 	(see sim_read_pair() and impacts())
-	"""
-	offspring = G.in_edges([a,b])
-        counts = Counter(offspring)
-	common_offspring = [v for u,v in offspring if counts[v] == 2] # co-citations
-	sim_read = 0
-	for o in common_offspring:
+    """
+    Calcuates the similarity between a and b from the reader's perspective
+    by counting co-citations. Weighted by the co-citing paper's outdegree (random walk).
+    Skips multiplying by 1/indegree in order to make the result usable by both a and b in the impact calculation 
+    (see sim_read_pair() and impacts())
+    """
+    offspring = G.in_edges([a,b])
+    counts = Counter(offspring)
+    common_offspring = [u for u,v in offspring if counts[v] == 2] # co-citations
+    sim_read = 0
+    for o in common_offspring:
             sim_read += (1/G.out_degree(o))
-	return sim_read
+    return sim_read
 
 def sim_aut_helper(G, a, b):
-	"""
-	A two-step random walk from a to b
-	that simulates author's (a and b) interpretations
-	since the measure is based on their references
-	"""
-	parents = G.out_edges([a,b])
-        counts = Counter(parents)
-	common_parents = [v for u,v in parents if counts[v] == 2] # co-citing something
-	sim_aut = 0
-	for p in common_parents:
+    """
+    A two-step random walk from a to b
+    that simulates author's (a and b) interpretations
+    since the measure is based on their references
+    """
+    parents = G.out_edges([a,b])
+    counts = Counter(parents)
+    common_parents = [v for u,v in parents if counts[v] == 2] # co-citing something
+    sim_aut = 0
+    for p in common_parents:
             sim_aut += (1/G.in_degree(p))
-	return sim_aut
+    return sim_aut
 
 def sim_read_pair(G, a, b):
-	"""
-	Calculates the read similarity for a and b
-	"""
-	a_ins = G.in_degree(a)
-	b_ins = G.in_degree(b)
-	sim_read = sim_read_helper(G,a,b)
-	return [a_ins*sim_read, b_ins*sim_read]
+    """
+    Calculates the read similarity for a and b
+    """
+    a_ins = G.in_degree(a)
+    b_ins = G.in_degree(b)
+    sim_read = sim_read_helper(G,a,b)
+    return [a_ins*sim_read, b_ins*sim_read]
 
 def sim_aut_pair(G, a, b):
-	"""
-	Calculates the aut similarity for a and b
-	"""
-	a_outs = G.out_degree(a)
-	b_outs = G.out_degree(b)
-	sim_aut = sim_aut_helper(G,a,b)
-	return [a_outs*sim_aut, b_outs*sim_aut]
+    """
+    Calculates the aut similarity for a and b
+    """
+    a_outs = G.out_degree(a)
+    b_outs = G.out_degree(b)
+    sim_aut = sim_aut_helper(G,a,b)
+    return [a_outs*sim_aut, b_outs*sim_aut]
 
-
-def get_impacts(G, parent, children):
-	"""
-	The impact of a parent on its children
-	"""
-	impacts = defaultdict(int)
-	f = 0.5 # weights for similarity measures
-	 
-	for a,b in itertools.combinations(children,2):
-		sim_auts = sim_aut_pair(G,a,b)
-		sim_reads = sim_read_pair(G,a,b)
-		impacts[a] += sim_auts[0]*f + sim_reads[0]*(1-f)
-		impacts[b] += sim_auts[1]*f + sim_reads[1]*(1-f)
-	return impacts
+sim_reads_map = {} # keep in memory, no need to recalculate sim_reads since it depends on childrens' children.
+def get_impacts(G, parent, children, f=0.5):
+    """
+    The impact of a parent on its children
+    f = weights for similarity measures aut and read. w_aut = f, w_read = (1-f)
+    """
+    impacts = defaultdict(int)
+     
+    for a,b in itertools.combinations(children,2): # loop all pairs of children
+        sim_auts = sim_aut_pair(G,a,b)
+        sim_reads = []
+        if a in sim_reads and b in sim_reads:
+            sim_reads = [sim_reads_map[a], sim_reads_map[b]]
+        else:
+            sim_reads = sim_read_pair(G,a,b)
+            sim_reads_map[a] = sim_reads[0]
+            sim_reads_map[b] = sim_reads[1]
+        impacts[a] += sim_auts[0]*f + sim_reads[0]*(1-f)
+        impacts[b] += sim_auts[1]*f + sim_reads[1]*(1-f)
+    return impacts
 
 
 def get_indegrees(G): 
-	if os.path.isfile('pickles/KDD-indegrees.pickle'):
-		with open('pickles/KDD-indegrees.pickle', 'rb') as f:
-			return pickle.load(f)
-	else:
-		indegrees = G.in_degree(G.nodes_iter())
-		with open('pickles/KDD-indegrees.pickle', 'wb') as f:
-			pickle.dump(indegrees,f)
-		return indegrees
+    if os.path.isfile('pickles/KDD-indegrees.pickle'):
+        with open('pickles/KDD-indegrees.pickle', 'rb') as f:
+            return pickle.load(f)
+    else:
+        indegrees = G.in_degree(G.nodes_iter())
+        with open('pickles/KDD-indegrees.pickle', 'wb') as f:
+            pickle.dump(indegrees,f)
+        return indegrees
 
 def di_triangles():
-	"""
-	Finds triangles in a directed graph of the type:
+    """
+    Finds triangles in a directed graph of the type:
     
     A------>B
-	 \     /
-	  \   /
-	   >C<
+     \     /
+      \   /
+       >C<
 
-	i.e. where A points to B and C, and B also points to C
-	"""
-	pass
+    i.e. where A points to B and C, and B also points to C
+    """
+    pass
 
 
 def calculate_all_impacts(G):
@@ -107,19 +113,19 @@ def calculate_all_impacts(G):
     i = 1
     num_nodes = G.number_of_nodes()
     for parent in G.nodes_iter():
-        print "Calculating impact for parent " + str(i) + " / " + str(num_nodes) + "\r",
-        i += 1
+        children = G.predecessors(parent)
         #children = [u for u,v in G.in_edges(parent)]
-        children = nx.descendants(G,parent)
+        print "Calculating impact for parent " + str(i) + " / " + str(num_nodes) + " (with " + str(len(children)) + " children)" +  "\r",
+        i += 1
         children_impacts = get_impacts(G, parent, children)
         for child in children:
-            if (child,parent) in impacts:
-                print("Adding to existing key!")
+            # if (child,parent) in impacts: # TODO: multi-edge. not allowed.
+            #     print("Adding to existing key!")
             impacts[(child,parent)] += children_impacts[child]
     nx.set_edge_attributes(G, 'impact', impacts)
     print
     print("Done calculating all impacts.")
-    with open('pickles/KDD-with-impacts.pickle', 'wb') as f:	
+    with open('pickles/KDD-with-impacts.pickle', 'wb') as f:    
         nx.write_gpickle(G, f)
     return G
 
@@ -160,10 +166,9 @@ def get_backbone_graph():
             return G
 
 def main():
-    #G = get_gml_graph('KDD')
-    G = get_impact_graph() # when pickled, get instead
-    print next(G.edges_iter())
-    #G = calculate_all_impacts(G)
+    G = get_gml_graph('KDD')
+    #G = get_impact_graph() # when pickled, get instead
+    G = calculate_all_impacts(G)
     G2 = build_backbone_graph(G)
     #G2 = get_backbone_graph() # when pickled, get instead
 
@@ -175,7 +180,7 @@ def main():
     nx.set_node_attributes(G2,'label', G2_labels)
     
     # A bit manual. Pickle only when built + labeled.
-    with open('pickles/KDD-backbone.pickle', 'wb') as f:	
+    with open('pickles/KDD-backbone.pickle', 'wb') as f:    
         nx.write_gpickle(G2, f)
     nx.write_graphml(G2, '../KDD/data/KDD-backbone.graphml')
     
@@ -187,14 +192,14 @@ def main():
 
     top_pr = Counter(pr).most_common(10) # top 10 pageranks
     # for n, rank in top_pr:
-    # 	rank = rank*10000.0
-    # 	print(G.node[n]['label'])
-    # 	print("\tBackbone node: " + G2.node[get_backbone_node(G2,n)]['label'])
-    # 	print("\tPR: %0.2f"%(rank))
-    # 	print("\tIn-degree: %d"%(indegrees[n]))
-    # 	#print("\tBetweenness centrality: %0.5f"%(betweenness[n]))
-    # 	#print("\tCloseness centrality: %0.5f"%(closeness[n]))
-    # 	print("\tEigenvector centrality: %0.5f"%(eigen_centralities[n]))
+    #   rank = rank*10000.0
+    #   print(G.node[n]['label'])
+    #   print("\tBackbone node: " + G2.node[get_backbone_node(G2,n)]['label'])
+    #   print("\tPR: %0.2f"%(rank))
+    #   print("\tIn-degree: %d"%(indegrees[n]))
+    #   #print("\tBetweenness centrality: %0.5f"%(betweenness[n]))
+    #   #print("\tCloseness centrality: %0.5f"%(closeness[n]))
+    #   print("\tEigenvector centrality: %0.5f"%(eigen_centralities[n]))
 
     print("Drawing...")
     #nx.draw_networkx_nodes(G,pos=nx.spring_layout(G),nodelist=[0,1])
