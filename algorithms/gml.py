@@ -34,7 +34,11 @@ def get_startgraph():
 
 def get_node(id, attrs=[]):
 	node = '    <node id="n' + str(id) + '">\n'
-	for key,value in pairwise(attrs):
+	#if len(attrs) % 2 == 1:
+	#	raise ValueError("Attributes must come in (key,value) pairs")
+	for i in range(0,len(attrs),2):
+		key = attrs[i]
+		value = attrs[i+1]
 		node += '      <data key="' + key + '">' + str(value) + '</data>\n'
 	node += "    </node>\n"
 	return node
@@ -48,15 +52,13 @@ def get_edge(id, u, v, attrs=[]):
 	"""
 	edge = '    <edge id="e' + str(id) + '" source="n' + str(u) + '" target="n' + str(v) + '">\n'
 	# TODO: check if this works with bools (str(bool) = ?)
-	for key,value in pairwise(attrs):
+	#if len(attrs) % 2 == 1:
+	#	raise ValueError("Attributes must come in (key,value) pairs")
+	for i in range(0,len(attrs),2):
+		key = attrs[i]
+		value = attrs[i+1]
 		edge += '      <data key="' + key + '">' + str(value) + '</data>\n'
 	edge += '    </edge>\n'
 	return edge
-
-def pairwise(iterable):
-    "s -> (s0,s1), (s1,s2), (s2, s3), ..."
-    a, b = tee(iterable)
-    next(b, None)
-    return izip(a, b)
 
 test()
