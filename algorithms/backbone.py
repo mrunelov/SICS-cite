@@ -166,7 +166,11 @@ def get_backbone_graph():
             return G
 
 def main():
-    G = get_gml_graph('KDD')
+    # Options
+    dataset = 'KDD'
+    do_plot = False
+
+    G = get_gml_graph(dataset)
     #G = get_impact_graph() # when pickled, get instead
     G = calculate_all_impacts(G)
     G2 = build_backbone_graph(G)
@@ -180,9 +184,9 @@ def main():
     nx.set_node_attributes(G2,'label', G2_labels)
     
     # A bit manual. Pickle only when built + labeled.
-    with open('pickles/KDD-backbone.pickle', 'wb') as f:    
+    with open('pickles/' + dataset + '-backbone.pickle', 'wb') as f:    
         nx.write_gpickle(G2, f)
-    nx.write_graphml(G2, '../KDD/data/KDD-backbone.graphml')
+    nx.write_graphml(G2, '../' + dataset + '/data/' + dataset + '-backbone.graphml')
     
     pr = nx.pagerank(G, alpha=0.5, max_iter=10)
     # eigen_centralities = nx.eigenvector_centrality_numpy(G)
@@ -201,31 +205,26 @@ def main():
     #   #print("\tCloseness centrality: %0.5f"%(closeness[n]))
     #   print("\tEigenvector centrality: %0.5f"%(eigen_centralities[n]))
 
-    print("Drawing...")
-    #nx.draw_networkx_nodes(G,pos=nx.spring_layout(G),nodelist=[0,1])
-    #nx.draw_networkx_edges(G,pos,alpha=0.5,width=6)
+    if do_plot:
+        print("Drawing...")
+        #nx.draw_networkx_nodes(G,pos=nx.spring_layout(G),nodelist=[0,1])
+        #nx.draw_networkx_edges(G,pos,alpha=0.5,width=6)
+        #nx.draw_networkx_nodes(G,pos=nx.spring_layout(G),node_size=2000,nodelist=[4])
+        #nx.draw_networkx_nodes(G,pos=nx.spring_layout(G),node_size=3000,nodelist=[0,1,2,3],node_color='b')
+        
+        plt.figure(1,figsize=(8,8))
+        todraw = [top_pr[3][0]]
+        for _ in range(2):
+            todraw.append(get_backbone_node(G2,todraw[-1]))
+        print todraw
+        SG = G.subgraph(todraw)
+        pos=nx.spring_layout(SG)
+        nx.draw(SG, pos)
+        nx.draw_networkx_labels(SG, pos)
 
-    #nx.draw_networkx_nodes(G,pos=nx.spring_layout(G),node_size=2000,nodelist=[4])
-
-    plt.figure(1,figsize=(8,8))
-    # layout graphs with positions using graphviz neato
-
-    #nx.draw_networkx_nodes(G,pos=nx.spring_layout(G),node_size=3000,nodelist=[0,1,2,3],node_color='b')
-
-    todraw = [top_pr[3][0]]
-    for _ in range(2):
-        todraw.append(get_backbone_node(G2,todraw[-1]))
-    print todraw
-    SG = G.subgraph(todraw)
-    pos=nx.spring_layout(SG)
-    nx.draw(SG, pos)
-    nx.draw_networkx_labels(SG, pos)
-
-    plt.axis('off')
-    #plt.savefig("house_with_colors.png") # save as png
-    plt.show() # display
-    print("Done.")
-    
-    #print [d for n,d in G.nodes_iter(data=True)] # prints all dictionaries of label-title pairs
+        plt.axis('off')
+        #plt.savefig("foo.png") # save as png
+        plt.show() # display
+        print("Done.")
 
 main()

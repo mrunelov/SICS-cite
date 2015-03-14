@@ -34,14 +34,16 @@ def main():
 	# plt.hist(hist, bins=bins)
 	# plt.show()
 
-	# MemoryError på APS just nu
+	# MemoryError on APS right now
 	G = get_gml_graph('KDD') # load networkx graph
 
 	cycles = nx.simple_cycles(G)
 	# print("First cycle: ")
 	# print next(cycles)
 
+	print("Running pagerank...")
 	pr = nx.pagerank(G, alpha=1, max_iter=100)
+	print("Done running pagerank.")
 	# Ix = pr.values()
 	#top_pr = Counter(pr).most_common(100) # top 10 pageranks
 	#pr2 = nx.pagerank(G, alpha=0.5, max_iter=100)
@@ -49,6 +51,7 @@ def main():
 	Px = []
 	indegs = []
 	nodes = []
+	print("Calculating Px...")
 	for node, rank in pr.iteritems(): #top_pr:
 		indeg = G.in_degree(node)
 		if indeg > 50: # try with only less cited papers
@@ -59,7 +62,7 @@ def main():
 		Px.append(px)
 		nodes.append(node)
 		
-	print("Done calculating Ix and Px. Plotting...")
+	print("Done calculating. Plotting...")
 	
 	N = G.number_of_nodes()
 	Ix = [x*N for x in Ix]
@@ -93,10 +96,11 @@ def main():
 	# plt.hist(hist, bins=bins)
 	plt.show()
 
-memo_preds = {}	
-
 def indirect_predecessors(G,n):
 	"""
+	Note: If G is a DAG, nx.ancestors(G,source) can be used 
+	(https://networkx.github.io/documentation/latest/reference/generated/networkx.algorithms.dag.ancestors.html)
+	
 	Finds all indirect predecessors of one node.
 	TODO: A more efficient way calculates it for the entire graph at once, avoiding duplicate calculations
 	"""
@@ -111,25 +115,6 @@ def indirect_predecessors(G,n):
 				stack.append(p)
 	return list(ind_preds)
 
-# TODO: Make work with loops...
-# def indirect_predecessors(G,n,preds=Set()):
-# 	print "n = " + str(n)
-# 	print preds
-# 	if n in preds:
-# 		return Set()
-# 	direct_preds = G.predecessors(n)
-# 	for p in direct_preds:
-# 		if p not in preds:
-# 			preds.add(p)
-# 			next_preds = indirect_predecessors(G,p,preds=preds)
-# 			for np in next_preds:
-# 				if np not in preds:
-# 					preds.add(np)
-# 	memo_preds[n] = list(preds)
-# 	return preds
-
-
-
 # G = nx.DiGraph()
 # G.add_node(1)
 # G.add_node(2)
@@ -139,7 +124,5 @@ def indirect_predecessors(G,n):
 #G.add_edge(3,3)
 
 #print indirect_predecessors(G,3)
-
-# print memo_preds
 
 main()
