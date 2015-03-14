@@ -37,8 +37,8 @@ def get_node(id, attrs=[]):
 	#if len(attrs) % 2 == 1:
 	#	raise ValueError("Attributes must come in (key,value) pairs")
 	for i in range(0,len(attrs),2):
-		key = attrs[i]
-		value = attrs[i+1]
+		key = attrs[i].encode('utf-8')
+		value = attrs[i+1].encode('utf-8')
 		node += '      <data key="' + key + '">' + str(value) + '</data>\n'
 	node += "    </node>\n"
 	return node
