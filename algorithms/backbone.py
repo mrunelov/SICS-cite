@@ -181,7 +181,8 @@ def main():
     labels = nx.get_node_attributes(G,'label')
     G2_labels = {}
     for n in G2.nodes_iter():
-        G2_labels[n] = labels[n]
+        if n in labels:
+            G2_labels[n] = labels[n]
     nx.set_node_attributes(G2,'label', G2_labels)
     
     # A bit manual. Pickle only when built + labeled.
