@@ -14,6 +14,7 @@ from collections import defaultdict
 
 inputdir = "rawdata/"
 datadir = "data/"
+metadir = "rawdata/aps-dataset-metadata-2013"
 #abstractdir = "rawdata/abstracts/"
 
 def get_id_generator():
@@ -37,10 +38,11 @@ def parse_citations():
 	write_headers(graphfile)
 	with open(graphfile,'a') as graph,\
 		 open(inputdir + 'aps-dataset-citations-2013.csv') as infile:
+		next(infile) # skip header line
 		for line in infile: # one entry per line
-			if line.startswith('#'): # ignore comments
-				continue
-			u,v = line.split()
+			u,v = line.split(',')
+			u = u.strip()
+			v = v.strip()
 			edges[u].append(v) # add to adjacency list
 			for node in [u,v]:
 				if node not in nodes:
@@ -56,14 +58,19 @@ def parse_citations():
 
 # OBS: Old code for KDD!
 def parse_meta():
+	if os.path.isfile('pickles/meta.pickle'):
+		print("Loading pickled metadata.")
+		with open('pickles/meta.pickle', 'rb') as f:
+			return pickle.load(f)
+
 	print("Parsing metadata...")
 	meta = {}
-	for root, dirs, files in os.walk(abstractdir):
+	for root, dirs, files in os.walk(metadir):
 		for file in files:
 			if file.endswith('.json'):
 				with open(root + "/" + file, 'r') as metafile:
 					data = json.load(metafile)
-					if "id" not in data or "title" not in data or :
+					if "id" not in data or "title" not in data:
 						continue
 					meta_entry = {}
 					meta_entry["title"] = data["title"]["value"]
@@ -71,7 +78,9 @@ def parse_meta():
 						meta_entry["date"] = data["date"]
 					meta[data["id"]] = meta_entry
 					
-	print("Parsed " + str(len(meta)) + " abstracts.")      		
+	print("Parsed " + str(len(meta)) + " abstracts.")
+	with open('pickles/meta.pickle', 'wb') as f:
+		pickle.dump(meta,f)      		
 	return meta
 
 
@@ -79,6 +88,7 @@ def write_headers(graphfile):
 	with open(graphfile,'w+') as graph:
 		graph.write(gml.get_header())
 		graph.write(gml.get_attr("label", "label", "string", "node"))
+		graph.write(gml.get_attr("date", "date", "string", "node"))
 		graph.write(gml.get_startgraph())
 
 # TODO: only open files once...

@@ -7,3 +7,5 @@ rawdata/
 *.txt
 *.pyc
 *.out
+*.graphml
+*.swp
