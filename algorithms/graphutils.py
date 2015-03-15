@@ -22,6 +22,7 @@ def get_gml_graph(dataset):
 
 	print("Reading graphml file...")
 	G = nx.read_graphml(graphmlfile)
+	G = nx.DiGraph(G)
 	print("Done reading graph of type " + str(type(G)))
 	print("Read " + str(G.number_of_nodes()) + " nodes and " + str(G.number_of_edges()) + " edges.")
 	is_dag = nx.is_directed_acyclic_graph(G)
