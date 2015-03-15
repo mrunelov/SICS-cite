@@ -54,7 +54,7 @@ def main():
 	print("Calculating Px...")
 	for node, rank in pr.iteritems(): #top_pr:
 		indeg = G.in_degree(node)
-		if indeg > 50: # try with only less cited papers
+		if indeg < 20: # try with only less cited papers
 			continue
 		indegs.append(indeg)
 		Ix.append(rank)
@@ -74,7 +74,7 @@ def main():
 	# Currently n9407087
 	# Monopole Condensation, And Confinement In N=2 Supersymmetric Yang-Mills, N. Seiberg and E. Witten
 	# Not surprising since it gets high PageRank overall.
-	print best_17
+	#print best_17
 
 	plt.subplot(1, 2, 1)
 	#plt.xlim(12,19)
