@@ -56,7 +56,7 @@ def parse_citations():
 
 	print("Created a GraphML graph with " + str(num_nodes) + " nodes and " + str(num_edges) + " edges.")
 
-# OBS: Old code for KDD!
+
 def parse_meta():
 	if os.path.isfile('pickles/meta.pickle'):
 		print("Loading pickled metadata.")
