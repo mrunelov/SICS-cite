@@ -76,12 +76,12 @@ def get_impacts(G, parent, children, f=0.5):
 
 
 def get_indegrees(G): 
-    if os.path.isfile('pickles/KDD-indegrees.pickle'):
-        with open('pickles/KDD-indegrees.pickle', 'rb') as f:
+    if os.path.isfile('pickles/' + dataset + '-indegrees.pickle'):
+        with open('pickles/' + dataset + '-indegrees.pickle', 'rb') as f:
             return pickle.load(f)
     else:
         indegrees = G.in_degree(G.nodes_iter())
-        with open('pickles/KDD-indegrees.pickle', 'wb') as f:
+        with open('pickles/' + dataset + '-indegrees.pickle', 'wb') as f:
             pickle.dump(indegrees,f)
         return indegrees
 
@@ -125,13 +125,13 @@ def calculate_all_impacts(G):
     nx.set_edge_attributes(G, 'impact', impacts)
     print
     print("Done calculating all impacts.")
-    with open('pickles/KDD-with-impacts.pickle', 'wb') as f:    
+    with open('pickles/' + dataset + '-with-impacts.pickle', 'wb') as f:    
         nx.write_gpickle(G, f)
     return G
 
 def get_impact_graph():
-    if os.path.isfile('pickles/KDD-with-impacts.pickle'):
-        with open('pickles/KDD-with-impacts.pickle', 'rb') as f:
+    if os.path.isfile('pickles/' + dataset + '-with-impacts.pickle'):
+        with open('pickles/' + dataset + '-with-impacts.pickle', 'rb') as f:
             print("Reading pickled graph with impacts...")
             G = nx.read_gpickle(f)
             print("Done reading graph.")
@@ -158,16 +158,17 @@ def get_backbone_node(G, n):
     return out_edge[0][1]
 
 def get_backbone_graph():
-    if os.path.isfile('pickles/KDD-backbone.pickle'):
-        with open('pickles/KDD-backbone.pickle', 'rb') as f:
+    if os.path.isfile('pickles/' + dataset + '-backbone.pickle'):
+        with open('pickles/' + dataset + '-backbone.pickle', 'rb') as f:
             print("Reading pickled backbone graph...")
             G = nx.read_gpickle(f)
             print("Done reading graph.")
             return G
 
+
+dataset = 'APStest'
 def main():
     # Options
-    dataset = 'KDD'
     do_plot = False
 
     G = get_gml_graph(dataset)

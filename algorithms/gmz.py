@@ -2,6 +2,7 @@ import networkx as nx
 from graphutils import get_gml_graph
 import matplotlib.pyplot as plt
 import numpy as np
+import pickle
 import random
 from collections import Counter, defaultdict
 from sets import Set
@@ -34,13 +35,14 @@ def main():
 	# plt.hist(hist, bins=bins)
 	# plt.show()
 
+	# if os.path.isfile('pickles/KDD-indegrees.pickle'):
+ #        with open('pickles/KDD-indegrees.pickle', 'rb') as f:
+ #            return pickle.load(f)
+ #    else:
+
 	# MemoryError on APS right now
 	G = get_gml_graph('KDD') # load networkx graph
-
-	cycles = nx.simple_cycles(G)
-	# print("First cycle: ")
-	# print next(cycles)
-
+	
 	print("Running pagerank...")
 	pr = nx.pagerank(G, alpha=1, max_iter=100)
 	print("Done running pagerank.")
@@ -54,20 +56,45 @@ def main():
 	print("Calculating Px...")
 	for node, rank in pr.iteritems(): #top_pr:
 		indeg = G.in_degree(node)
-		if indeg < 20: # try with only less cited papers
-			continue
+		#if indeg < 20: # try with only less cited papers
+		#	continue
 		indegs.append(indeg)
 		Ix.append(rank)
 		px = len(indirect_predecessors(G,node))
 		Px.append(px)
 		nodes.append(node)
-		
-	print("Done calculating. Plotting...")
+
+	print("Done calculating. Pickling...")
+
+	with open('pickles/KDD-Ix.pickle', 'wb') as f1, open('pickles/KDD-Px.pickle', 'wb') as f2:
+		pickle.dump(Ix, f1)
+        pickle.dump(Px, f2)
+
+        """
+        pickle not working:
+	        Traceback (most recent call last):
+		  File "C:\Users\Martin\Desktop\KTH\Exjobb\SICS-cite\algorithms\gmz.py", line 137, in <module>
+		    main()
+		  File "C:\Users\Martin\Desktop\KTH\Exjobb\SICS-cite\algorithms\gmz.py", line 71, in main
+		    pickle.dump(Px, f2)
+		  File "C:\Python27\lib\pickle.py", line 1370, in dump
+		    Pickler(file, protocol).dump(obj)
+		  File "C:\Python27\lib\pickle.py", line 224, in dump
+		    self.save(obj)
+		  File "C:\Python27\lib\pickle.py", line 286, in save
+		    f(self, obj) # Call unbound method with explicit self
+		  File "C:\Python27\lib\pickle.py", line 597, in save_list
+		    write(MARK + LIST)
+		  ValueError: I/O operation on closed file
+        """
+
+	print("Plotting...")
 	
 	N = G.number_of_nodes()
 	Ix = [x*N for x in Ix]
 	Px = [x/10**3 for x in Px]
 
+ 
 	# Get top Ix-node for Px value of 17 after doing top_pr 100
 	# seventeens_i = [i for i,x in enumerate(node) if Px[i] == 17]
 	# best_17 = nodes[max(seventeens_i, key= lambda i: Ix[i])]
