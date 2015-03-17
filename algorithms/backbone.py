@@ -1,5 +1,6 @@
-dataset = 'APS'
-do_plot = False
+import config as conf
+dataset = conf.settings['dataset'] #'KDD'
+do_plot = conf.settings['dataset']
 
 import networkx as nx
 from collections import Counter, defaultdict
@@ -159,8 +160,8 @@ def build_backbone_graph(G):
     return nx.DiGraph(backbone)
 
 def get_backbone_node(G, n):
-    if G.in_degree(n) == 0:
-        raise ValueError("No incoming edge!")
+    if G.out_degree(n) == 0:
+        return None
     out_edge = G.out_edges(n)
     return out_edge[0][1]
 
@@ -207,7 +208,7 @@ def main():
 		rank = rank*10000.0
 		print(G.node[n]['label'])
 		backbone_node = G2.node[get_backbone_node(G2,n)]
-		if "label" in backbone_node:
+		if backbone_node is not None and "label" in backbone_node:
 			print("\tBackbone node: " + backbone_node['label'])
 		print("\tPR: %0.2f"%(rank))
 		print("\tIn-degree: %d"%(indegrees[n]))
