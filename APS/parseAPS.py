@@ -6,6 +6,7 @@ if __name__ == '__main__' and __package__ is None:
 import algorithms.gml as gml
 import json
 from pprint import pprint
+from datetime import datetime
 import pickle
 import os
 import sys
@@ -45,19 +46,19 @@ def parse_citations():
 			u = u.strip()
 			v = v.strip()
 			# TODO: add edges even if nodes fail?
-			edges[u].append(v) # add to adjacency list
-			if "date" in meta[u] and "date" in meta[v] and is_backwards_in_time(meta[u]["date"],meta[v]["date"]):
-				for node in [u,v]:
-					if node not in nodes:
-						nodes.add(node)
-						if node in meta and "date" in meta[node] and "title" in meta[node]:
+			if u in meta and v in meta:
+				if "date" in meta[u] and "date" in meta[v] and is_backwards_in_time(meta[u]["date"],meta[v]["date"]):
+					edges[u].append(v) # add to adjacency list
+					for node in [u,v]:
+						if node not in nodes and "title" in meta[node]:
+							nodes.add(node)
 							label = meta[node]["title"]
 							date = meta[node]["date"]
 							attrs = ["label", label, "date", date]
 							write_node(node, graph, attrs)
 							num_nodes += 1
-			else:
-				skipped_edges += 1
+				else:
+					skipped_edges += 1
 		num_edges = write_edges(edges,graph)
 
 	print("Created a GraphML graph with " + str(num_nodes) + " nodes and " + str(num_edges) + " edges.")
@@ -66,9 +67,9 @@ def parse_citations():
 
 dateformat = "%Y-%m-%d"
 def is_backwards_in_time(date1, date2):
-	u_date = datetime.strptime(dates[u], dateformat)
-	v_date = datetime.strptime(dates[v], dateformat)
-	if u > v:
+	u_date = datetime.strptime(date1,dateformat)
+	v_date = datetime.strptime(date2,dateformat)
+	if u_date > v_date:
 		return True # citing backwards in time
 	return False # citing forward in time
 
