@@ -1,6 +1,6 @@
 import config as conf
 dataset = conf.settings['dataset'] #'KDD'
-do_plot = conf.settings['dataset']
+do_plot = conf.settings['do_plot']
 
 import networkx as nx
 from collections import Counter, defaultdict
@@ -137,13 +137,15 @@ def calculate_all_impacts(G):
         nx.write_gpickle(G, f)
     return G
 
-def get_impact_graph():
+def get_impact_graph(G):
     if os.path.isfile('pickles/' + dataset + '-with-impacts.pickle'):
         with open('pickles/' + dataset + '-with-impacts.pickle', 'rb') as f:
             print("Reading pickled graph with impacts...")
-            G = nx.read_gpickle(f)
+            stored_G = nx.read_gpickle(f)
             print("Done reading graph.")
-            return G
+            return stored_G
+    else:
+        return calculate_all_impacts(G)
 
 def get_impact(edge):
     return edge[2]['impact']
@@ -153,37 +155,41 @@ def build_backbone_graph(G):
     print("Generating backbone from impact graph...")
     backbone = []
     for n in G.nodes_iter():
-        if G.out_degree(n) > 0: # OBS: disconnected nodes fall off here
+        outdeg = G.out_degree(n)
+        if  outdeg > 0: # OBS: isolated nodes skipped
             top_edge = max(G.out_edges(n,data=True), key=get_impact)
             backbone.append(top_edge)
+        elif outdeg == 1:
+            backbone.append(G.out_edges(n,data=True)[0])
     print("Done generating backbone.")
     return nx.DiGraph(backbone)
 
 def get_backbone_node(G, n):
-    if G.out_degree(n) == 0:
-        return None
-    out_edge = G.out_edges(n)
-    return out_edge[0][1]
+	if n in G:
+	    if G.out_degree(n) == 0:
+	        return None
+	    return G.successors(n)[0]
+	    #out_edge = G.out_edges(n)
+	    #print G.node[out_edge[0][1]]
+	    #return G.node[out_edge[0][1]] # [0]: tuple (u,v).
 
-def get_backbone_graph():
+def get_backbone_graph(G):
     if os.path.isfile('pickles/' + dataset + '-backbone.pickle'):
         with open('pickles/' + dataset + '-backbone.pickle', 'rb') as f:
             print("Reading pickled backbone graph...")
-            G = nx.read_gpickle(f)
+            stored_G = nx.read_gpickle(f)
             print("Done reading graph.")
-            return G
+            return stored_G
+    else:
+        return build_backbone_graph(G)
 
 
 def main():
-    # Options
-
     G = get_gml_graph(dataset)
-    #G = get_impact_graph() # when pickled, get instead
-    G = calculate_all_impacts(G)
-    G2 = build_backbone_graph(G)
-    #G2 = get_backbone_graph() # when pickled, get instead
+    G = get_impact_graph(G)
+    G2 = get_backbone_graph(G)
 
-    # add labels to backbone graph
+    # add labels to backbone graph. Option: get subgraph directly from G.
     labels = nx.get_node_attributes(G,'label')
     G2_labels = {}
     for n in G2.nodes_iter():
@@ -207,9 +213,10 @@ def main():
     for n, rank in top_pr:
 		rank = rank*10000.0
 		print(G.node[n]['label'])
-		backbone_node = G2.node[get_backbone_node(G2,n)]
+		backbone_node = get_backbone_node(G2,n)
 		if backbone_node is not None and "label" in backbone_node:
 			print("\tBackbone node: " + backbone_node['label'])
+		print("\tDate: " + G.node[n]['date'])
 		print("\tPR: %0.2f"%(rank))
 		print("\tIn-degree: %d"%(indegrees[n]))
     # for n, rank in top_pr:
@@ -221,7 +228,6 @@ def main():
     #   #print("\tBetweenness centrality: %0.5f"%(betweenness[n]))
     #   #print("\tCloseness centrality: %0.5f"%(closeness[n]))
     #   print("\tEigenvector centrality: %0.5f"%(eigen_centralities[n]))
-
 
     if do_plot:
         print("Drawing...")
