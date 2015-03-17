@@ -43,15 +43,17 @@ def parse_citations():
 			u,v = line.split(',')
 			u = u.strip()
 			v = v.strip()
+			# TODO: add edges even if nodes fail?
 			edges[u].append(v) # add to adjacency list
 			for node in [u,v]:
 				if node not in nodes:
 					nodes.add(node)
-					label = meta[node]["title"] if node in meta else "N/A"
-					date = meta[node]["date"] if node in meta and "date" in meta[node] else "N/A"
-					attrs = ["label", label, "date", date]
-					write_node(node, graph, attrs)
-					num_nodes += 1
+					if node in meta and "date" in meta[node] and "title" in meta[node]:
+						label = meta[node]["title"]
+						date = meta[node]["date"]
+						attrs = ["label", label, "date", date]
+						write_node(node, graph, attrs)
+						num_nodes += 1
 		num_edges = write_edges(edges,graph)
 
 	print("Created a GraphML graph with " + str(num_nodes) + " nodes and " + str(num_edges) + " edges.")
