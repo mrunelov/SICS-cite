@@ -1,3 +1,7 @@
+import config as conf
+dataset = conf.settings['dataset']
+do_plot = conf.settings['do_plot']
+
 import networkx as nx
 from graphutils import get_gml_graph
 import matplotlib.pyplot as plt
@@ -24,24 +28,7 @@ http://pydoc.net/Python/networkx/1.0/networkx.algorithms.pagerank/
 
 
 def main():
-	x = random.sample([random.random() for _ in range(1000)], 100)
-	# print x
-	# plt.bar(100, x)
-	# plt.show()
-
-	#bins=[0,1.0]
-	# bins=10
-	# hist,bin_edges=np.histogram(x,bins=bins)
-	# plt.hist(hist, bins=bins)
-	# plt.show()
-
-	# if os.path.isfile('pickles/KDD-indegrees.pickle'):
- #        with open('pickles/KDD-indegrees.pickle', 'rb') as f:
- #            return pickle.load(f)
- #    else:
-
-	# MemoryError on APS right now
-	G = get_gml_graph('KDD') # load networkx graph
+	G = get_gml_graph(dataset) # load networkx graph
 	
 	print("Running pagerank...")
 	pr = nx.pagerank(G, alpha=1, max_iter=100)
@@ -56,72 +43,55 @@ def main():
 	print("Calculating Px...")
 	for node, rank in pr.iteritems(): #top_pr:
 		indeg = G.in_degree(node)
-		if indeg < 40: # try with only less cited papers
-			continue
+		# if indeg < 40: # try with only less cited papers
+		# 	continue
 		indegs.append(indeg)
 		Ix.append(rank)
-		px = len(indirect_predecessors(G,node))
+		px = progeny_size(G,node) #len(nx.ancestors(G,node)) #len(indirect_predecessors(G,node))
 		Px.append(px)
 		nodes.append(node)
 
 	print("Done calculating. Pickling...")
 
-	# with open('pickles/KDD-Ix.pickle', 'wb') as f1, open('pickles/KDD-Px.pickle', 'wb') as f2:
-	# 	pickle.dump(Ix, f1)
- #        pickle.dump(Px, f2)
+	with open('pickles/KDD-Ix.pickle', 'wb') as f1:
+		pickle.dump(Ix, f1)
+	with open('pickles/KDD-Px.pickle', 'wb') as f2:
+		pickle.dump(Px, f2)
 
-        """
-        pickle not working:
-	        Traceback (most recent call last):
-		  File "C:\Users\Martin\Desktop\KTH\Exjobb\SICS-cite\algorithms\gmz.py", line 137, in <module>
-		    main()
-		  File "C:\Users\Martin\Desktop\KTH\Exjobb\SICS-cite\algorithms\gmz.py", line 71, in main
-		    pickle.dump(Px, f2)
-		  File "C:\Python27\lib\pickle.py", line 1370, in dump
-		    Pickler(file, protocol).dump(obj)
-		  File "C:\Python27\lib\pickle.py", line 224, in dump
-		    self.save(obj)
-		  File "C:\Python27\lib\pickle.py", line 286, in save
-		    f(self, obj) # Call unbound method with explicit self
-		  File "C:\Python27\lib\pickle.py", line 597, in save_list
-		    write(MARK + LIST)
-		  ValueError: I/O operation on closed file
-        """
+	if do_plot:
+		print("Plotting...")
+		
+		N = G.number_of_nodes()
+		Ix = [x*N for x in Ix]
+		Px = [x for x in Px]
 
-	print("Plotting...")
-	
-	N = G.number_of_nodes()
-	Ix = [x*N for x in Ix]
-	Px = [x/10**3 for x in Px]
+	 	# Get top Ix-node for Px value of 17 after doing top_pr 100
+		# seventeens_i = [i for i,x in enumerate(node) if Px[i] == 17]
+		# best_17 = nodes[max(seventeens_i, key= lambda i: Ix[i])]
+		# Currently n9407087
+		# Monopole Condensation, And Confinement In N=2 Supersymmetric Yang-Mills, N. Seiberg and E. Witten
+		# Not surprising since it gets high PageRank overall.
+		#print best_17
 
- 
-	# Get top Ix-node for Px value of 17 after doing top_pr 100
-	# seventeens_i = [i for i,x in enumerate(node) if Px[i] == 17]
-	# best_17 = nodes[max(seventeens_i, key= lambda i: Ix[i])]
-	# Currently n9407087
-	# Monopole Condensation, And Confinement In N=2 Supersymmetric Yang-Mills, N. Seiberg and E. Witten
-	# Not surprising since it gets high PageRank overall.
-	#print best_17
-
-	plt.subplot(1, 2, 1)
-	#plt.xlim(12,19)
-	plt.title('Px and Ix')
-	plt.xlabel('Px')
-	plt.ylabel('Ix')
-	plt.plot(Px,Ix,'ro')
-	
-	plt.subplot(1, 2, 2)
-	plt.title('Indegree and Ix')
-	plt.xlabel('Indegree')
-	plt.ylabel('Ix')
-	plt.plot(indegs,Ix,'bo')
+		plt.subplot(1, 2, 1)
+		#plt.xlim(12,19)
+		plt.title('Px and Ix')
+		plt.xlabel('Px')
+		plt.ylabel('Ix')
+		plt.plot(Px,Ix,'ro')
+		
+		plt.subplot(1, 2, 2)
+		plt.title('Indegree and Ix')
+		plt.xlabel('Indegree')
+		plt.ylabel('Ix')
+		plt.plot(indegs,Ix,'bo')
 
 
-	#plt.plot(pr2.values(),Px,'bo')
-	# bins=100
-	# hist,bin_edges=np.histogram(I_P.values(),bins=bins)
-	# plt.hist(hist, bins=bins)
-	plt.show()
+		#plt.plot(pr2.values(),Px,'bo')
+		# bins=100
+		# hist,bin_edges=np.histogram(I_P.values(),bins=bins)
+		# plt.hist(hist, bins=bins)
+		plt.show()
 
 def indirect_predecessors(G,n):
 	"""
@@ -148,6 +118,81 @@ def indirect_predecessors(G,n):
 			# 	print("Currently at node "),
 			# 	print curr
 	return list(ind_preds)
+
+def single_source_shortest_path_length(G,source):
+	"""Compute the shortest path lengths from source to all reachable nodes.
+
+	Parameters
+	----------
+	G : NetworkX graph
+
+	source : node
+	   Starting node for path
+
+	cutoff : integer, optional
+		Depth to stop the search. Only paths of length <= cutoff are returned.
+
+	Returns
+	-------
+	lengths : dictionary
+		Dictionary of shortest path lengths keyed by target.
+
+	Examples
+	--------
+	>>> G=nx.path_graph(5)
+	>>> length=nx.single_source_shortest_path_length(G,0)
+	>>> length[4]
+	4
+	>>> print(length)
+	{0: 0, 1: 1, 2: 2, 3: 3, 4: 4}
+
+	See Also
+	--------
+	shortest_path_length
+	"""
+	seen={}                  # level (number of hops) when seen in BFS
+	level=0                  # the current level
+	memoized=0
+	nextlevel={source:1}  # dict of nodes to check at next level
+	while nextlevel:
+		thislevel=nextlevel  # advance to next level
+		nextlevel={}         # and start a new list (fringe)
+		if len(thislevel) == 1 and thislevel.keys()[0] in progenies:
+			memoized = progenies[thislevel.keys()[0]]
+			return seen,memoized + 1 # count the node we're at
+		for v in thislevel:
+			if v not in seen:
+				seen[v]=level # set the level of vertex v
+				nextlevel.update(G[v]) # add neighbors of v
+		level=level+1
+	return seen,memoized  # return all path lengths as dictionary
+
+progenies = {}
+def progeny_size(G, source):
+	"""Return all nodes having a path to `source` in G.
+
+	Parameters
+	----------
+	G : NetworkX DiGraph
+	source : node in G
+
+	Returns
+	-------
+	ancestors : set()
+	   The ancestors of source in G
+	"""
+	if not G.has_node(source):
+		raise nx.NetworkXError("The node %s is not in the graph." % source)
+
+	anc = []
+	with nx.utils.reversed(G):
+		paths,memo = single_source_shortest_path_length(G, source)
+		px = memo + len(set(paths.keys())) - 1 # don't count source
+	progenies[source] = px
+	return px
+
+#    anc = set(nx.shortest_path_length(G, target=source).keys()) - set([source])
+#    return anc
 
 # G = nx.DiGraph()
 # G.add_node(1)
