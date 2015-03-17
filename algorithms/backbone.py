@@ -1,6 +1,6 @@
 import config as conf
 dataset = conf.settings['dataset'] #'KDD'
-do_plot = conf.settings['dataset']
+do_plot = conf.settings['do_plot']
 
 import networkx as nx
 from collections import Counter, defaultdict
