@@ -113,7 +113,7 @@ def calculate_all_impacts(G):
     The calculated impacts will be added as edge attributes 'impact'
     """
     print("Calculating all impacts...")
-    impacts = defaultdict(int)
+    impacts = {}
     i = 1
     num_nodes = G.number_of_nodes()
     for parent in G.nodes_iter():
@@ -121,11 +121,14 @@ def calculate_all_impacts(G):
         #children = [u for u,v in G.in_edges(parent)]
         print "Calculating impact for parent " + str(i) + " / " + str(num_nodes) + " (with " + str(len(children)) + " children)" +  "\r",
         i += 1
+        if len(children) == 1:
+            impacts[(children[0],parent)] = 1.0
+            continue
         children_impacts = get_impacts(G, parent, children)
         for child in children:
             # if (child,parent) in impacts: # TODO: multi-edge. not allowed.
             #     print("Adding to existing key!")
-            impacts[(child,parent)] += children_impacts[child]
+            impacts[(child,parent)] = children_impacts[child]
     nx.set_edge_attributes(G, 'impact', impacts)
     print
     print("Done calculating all impacts.")
@@ -193,12 +196,13 @@ def main():
     #nx.write_graphml(G2, '../' + dataset + '/data/' + dataset + '-backbone.graphml')
     
     pr = nx.pagerank(G, alpha=0.5, max_iter=100)
+    top_pr = Counter(pr).most_common(10) # top 10 pageranks
+
     # eigen_centralities = nx.eigenvector_centrality_numpy(G)
     indegrees = get_indegrees(G)
     #closeness = nx.closeness_centrality(G)
     #betweenness = nx.betweenness_centrality(G)
 
-    top_pr = Counter(pr).most_common(10) # top 10 pageranks
     for n, rank in top_pr:
 		rank = rank*10000.0
 		print(G.node[n]['label'])
@@ -207,9 +211,16 @@ def main():
 			print("\tBackbone node: " + backbone_node['label'])
 		print("\tPR: %0.2f"%(rank))
 		print("\tIn-degree: %d"%(indegrees[n]))
+    # for n, rank in top_pr:
+    #   rank = rank*10000.0
+    #   print(G.node[n]['label'])
+    #   print("\tBackbone node: " + G2.node[get_backbone_node(G2,n)]['label'])
+    #   print("\tPR: %0.2f"%(rank))
+    #   print("\tIn-degree: %d"%(indegrees[n]))
     #   #print("\tBetweenness centrality: %0.5f"%(betweenness[n]))
     #   #print("\tCloseness centrality: %0.5f"%(closeness[n]))
     #   print("\tEigenvector centrality: %0.5f"%(eigen_centralities[n]))
+
 
     if do_plot:
         print("Drawing...")

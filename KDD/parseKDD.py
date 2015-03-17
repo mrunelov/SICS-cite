@@ -27,7 +27,6 @@ def get_id_generator():
 		num += 1
 
 edge_id_gen = get_id_generator()
-dateformat = "%Y-%m-%d"
 
 def parse_citations():
 	num_nodes = 0
@@ -45,31 +44,32 @@ def parse_citations():
 			if line.startswith('#'): # ignore comments
 				continue
 			u,v = line.split()
-			edges[u].append(v) # add to adjacency list
-			for node in [u,v]:
-				if node not in nodes:
-					if is_backwards_in_time(u,v,dates):
+			if is_backwards_in_time(u,v,dates):
+				edges[u].append(v) # add to adjacency list
+				for node in [u,v]:
+					if node not in nodes:
 						nodes.add(node)
 						label = meta[node] if node in meta else "N/A"
 						date = dates[node] if node in dates else "N/A"
 						attrs = ["label", label, "date", date]
 						write_node(node, graph, attrs)
 						num_nodes += 1
-					else:
-						skipped_forward_edges += 1
+				else:
+					skipped_forward_edges += 1
 		num_edges = write_edges(edges,graph)
 
 	print("Created a GraphML graph with " + str(num_nodes) + " nodes and " + str(num_edges) + " edges.")
 	print("Skipped forward-going edges: " + str(skipped_forward_edges))
 
+dateformat = "%Y-%m-%d"
 def is_backwards_in_time(u,v, dates):
 	if u in dates and v in dates and dates[u] is not "N/A" and dates[v] is not "N/A":
 		u_date = datetime.strptime(dates[u], dateformat)
 		v_date = datetime.strptime(dates[v], dateformat)
-		if u > v:
+		if u_date > v_date:
 			return True # citing backwards in time
 		return False # citing forward in time
-	return True # not enough data available, skipping
+	return False # not enough data available
 
 def parse_dates():
 	dates = {}
