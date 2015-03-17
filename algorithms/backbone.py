@@ -1,9 +1,13 @@
+dataset = 'APS'
+do_plot = False
+
 import networkx as nx
 from collections import Counter, defaultdict
 import itertools
 import pickle
 import os.path
-import matplotlib.pyplot as plt
+if do_plot:
+	import matplotlib.pyplot as plt
 from graphutils import get_gml_graph
 
 def sim_read_helper(G, a, b):
@@ -166,10 +170,8 @@ def get_backbone_graph():
             return G
 
 
-dataset = 'APStest'
 def main():
     # Options
-    do_plot = False
 
     G = get_gml_graph(dataset)
     #G = get_impact_graph() # when pickled, get instead
@@ -186,23 +188,25 @@ def main():
     nx.set_node_attributes(G2,'label', G2_labels)
     
     # A bit manual. Pickle only when built + labeled.
-    with open('pickles/' + dataset + '-backbone.pickle', 'wb') as f:    
-        nx.write_gpickle(G2, f)
-    nx.write_graphml(G2, '../' + dataset + '/data/' + dataset + '-backbone.graphml')
+    #with open('pickles/' + dataset + '-backbone.pickle', 'wb') as f:    
+    #    nx.write_gpickle(G2, f)
+    #nx.write_graphml(G2, '../' + dataset + '/data/' + dataset + '-backbone.graphml')
     
-    pr = nx.pagerank(G, alpha=0.5, max_iter=10)
+    pr = nx.pagerank(G, alpha=0.5, max_iter=100)
     # eigen_centralities = nx.eigenvector_centrality_numpy(G)
-    # indegrees = get_indegrees(G)
+    indegrees = get_indegrees(G)
     #closeness = nx.closeness_centrality(G)
     #betweenness = nx.betweenness_centrality(G)
 
     top_pr = Counter(pr).most_common(10) # top 10 pageranks
-    # for n, rank in top_pr:
-    #   rank = rank*10000.0
-    #   print(G.node[n]['label'])
-    #   print("\tBackbone node: " + G2.node[get_backbone_node(G2,n)]['label'])
-    #   print("\tPR: %0.2f"%(rank))
-    #   print("\tIn-degree: %d"%(indegrees[n]))
+    for n, rank in top_pr:
+		rank = rank*10000.0
+		print(G.node[n]['label'])
+		backbone_node = G2.node[get_backbone_node(G2,n)]
+		if "label" in backbone_node:
+			print("\tBackbone node: " + backbone_node['label'])
+		print("\tPR: %0.2f"%(rank))
+		print("\tIn-degree: %d"%(indegrees[n]))
     #   #print("\tBetweenness centrality: %0.5f"%(betweenness[n]))
     #   #print("\tCloseness centrality: %0.5f"%(closeness[n]))
     #   print("\tEigenvector centrality: %0.5f"%(eigen_centralities[n]))
