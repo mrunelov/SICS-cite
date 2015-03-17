@@ -46,16 +46,25 @@ def sim_read_pair(G, a, b):
 	"""
 	a_ins = G.in_degree(a)
 	b_ins = G.in_degree(b)
+	if a_ins == 0 and b_ins == 0:
+		return [0,0]
 	sim_read = sim_read_helper(G,a,b)
-	return [(1.0/a_ins)*sim_read, (1.0/b_ins)*sim_read]
+	sim_read_a = (1.0/a_ins)*sim_read if a_ins else 0
+	sim_read_b = (1.0/b_ins)*sim_read if b_ins else 0
+	return [sim_read_a, sim_read_b]
 
 def sim_aut_pair(G, a, b):
 	"""
 	Calculates the aut similarity for a and b
 	"""
+
 	a_outs = G.out_degree(a)
 	b_outs = G.out_degree(b)
+	if a_outs == 0 and b_outs == 0:
+		return [0,0]
 	sim_aut = sim_aut_helper(G,a,b)
+	sim_aut_a = (1.0/a_outs)*sim_aut if a_outs else 0
+	sim_aut_b = (1.0/b_outs)*sim_aut if b_outs else 0
 	return [(1.0/a_outs)*sim_aut, (1.0/b_outs)*sim_aut]
 
 # Keep in memory, no need to recalculate sim_reads since it depends on childrens' children.
@@ -162,8 +171,21 @@ def build_backbone_graph(G):
 			backbone.append(top_edge)
 		elif outdeg == 1:
 			backbone.append(G.out_edges(n,data=True)[0])
+	G2 = nx.DiGraph(backbone)
 	print("Done generating backbone.")
-	return nx.DiGraph(backbone)
+	# add labels to backbone graph. Option: get subgraph directly from G.
+	labels = nx.get_node_attributes(G,'label')
+	G2_labels = {}
+	for n in G2.nodes_iter():
+		if n in labels:
+			G2_labels[n] = labels[n]
+	nx.set_node_attributes(G2,'label', G2_labels)
+	
+	with open('pickles/' + dataset + '-backbone.pickle', 'wb') as f:    
+		nx.write_gpickle(G2, f)
+	nx.write_graphml(G2, '../' + dataset + '/data/' + dataset + '-backbone.graphml')
+
+	return G2
 
 def get_backbone_node(G, n):
 	if n in G:
@@ -189,19 +211,6 @@ def main():
 	G = get_gml_graph(dataset)
 	G = get_impact_graph(G)
 	G2 = get_backbone_graph(G)
-
-	# add labels to backbone graph. Option: get subgraph directly from G.
-	labels = nx.get_node_attributes(G,'label')
-	G2_labels = {}
-	for n in G2.nodes_iter():
-		if n in labels:
-			G2_labels[n] = labels[n]
-	nx.set_node_attributes(G2,'label', G2_labels)
-	
-	# A bit manual. Pickle only when built + labeled.
-	#with open('pickles/' + dataset + '-backbone.pickle', 'wb') as f:    
-	#    nx.write_gpickle(G2, f)
-	#nx.write_graphml(G2, '../' + dataset + '/data/' + dataset + '-backbone.graphml')
 	
 	pr = nx.pagerank(G, alpha=0.5, max_iter=100)
 	top_pr = Counter(pr).most_common(10) # top 10 pageranks
