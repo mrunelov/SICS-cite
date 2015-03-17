@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pickle
 import random
-from collections import Counter, defaultdict
+from collections import Counter, defaultdict, deque
 from sets import Set
 
 """
@@ -56,8 +56,8 @@ def main():
 	print("Calculating Px...")
 	for node, rank in pr.iteritems(): #top_pr:
 		indeg = G.in_degree(node)
-		#if indeg < 20: # try with only less cited papers
-		#	continue
+		if indeg < 40: # try with only less cited papers
+			continue
 		indegs.append(indeg)
 		Ix.append(rank)
 		px = len(indirect_predecessors(G,node))
@@ -66,9 +66,9 @@ def main():
 
 	print("Done calculating. Pickling...")
 
-	with open('pickles/KDD-Ix.pickle', 'wb') as f1, open('pickles/KDD-Px.pickle', 'wb') as f2:
-		pickle.dump(Ix, f1)
-        pickle.dump(Px, f2)
+	# with open('pickles/KDD-Ix.pickle', 'wb') as f1, open('pickles/KDD-Px.pickle', 'wb') as f2:
+	# 	pickle.dump(Ix, f1)
+ #        pickle.dump(Px, f2)
 
         """
         pickle not working:
@@ -131,15 +131,22 @@ def indirect_predecessors(G,n):
 	Finds all indirect predecessors of one node.
 	TODO: A more efficient way calculates it for the entire graph at once, avoiding duplicate calculations
 	"""
-	stack = [n]
+	queue = deque([n])
 	ind_preds = Set()
-	while stack:
-		curr = stack.pop()
+	depth = 0
+	while queue:
+		curr = queue.popleft()
 		preds = G.predecessors(curr)
 		for p in preds:
 			if p not in ind_preds:
 				ind_preds.add(p)
-				stack.append(p)
+				queue.append(p)
+			# else:
+			# 	print("Reached node "),
+			# 	print p,
+			# 	print(" twice.")
+			# 	print("Currently at node "),
+			# 	print curr
 	return list(ind_preds)
 
 # G = nx.DiGraph()
