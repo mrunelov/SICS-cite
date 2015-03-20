@@ -189,9 +189,9 @@ def build_backbone_graph(G):
 
 def get_backbone_node(G, n):
 	if n in G:
-		if G.out_degree(n) == 0:
-			return None
-		return G.successors(n)[0]
+		if G.out_degree(n) > 0:
+			return G.successors(n)[0]
+	return None
 		#out_edge = G.out_edges(n)
 		#print G.node[out_edge[0][1]]
 		#return G.node[out_edge[0][1]] # [0]: tuple (u,v).
@@ -224,7 +224,7 @@ def main():
 		rank = rank*10000.0
 		print(G.node[n]['label'])
 		backbone_node = get_backbone_node(G2,n)
-		if backbone_node is not None:
+		if backbone_node is not None and 'label' in G2.node[backbone_node] :
 			print("\tBackbone node: " + G2.node[backbone_node]['label'])
 		print("\tDate: " + G.node[n]['date'])
 		print("\tPR: %0.2f"%(rank))
