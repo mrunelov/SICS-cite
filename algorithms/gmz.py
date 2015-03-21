@@ -70,14 +70,6 @@ def main():
 		Ix = [x*N for x in Ix]
 		Px = [x for x in Px]
 
-		# Get top Ix-node for Px value of 17 after doing top_pr 100
-		# seventeens_i = [i for i,x in enumerate(node) if Px[i] == 17]
-		# best_17 = nodes[max(seventeens_i, key= lambda i: Ix[i])]
-		# Currently n9407087
-		# Monopole Condensation, And Confinement In N=2 Supersymmetric Yang-Mills, N. Seiberg and E. Witten
-		# Not surprising since it gets high PageRank overall.
-		#print best_17
-
 		plt.subplot(1, 2, 1)
 		#plt.xlim(12,19)
 		plt.title('Px and Ix')
