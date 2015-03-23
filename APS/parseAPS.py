@@ -28,6 +28,17 @@ def get_id_generator():
 		num += 1
 edge_id_gen = get_id_generator()
 
+def write_meta_CSV():
+	meta = parse_meta()
+	with open('APS-citations-with-date.csv,'a') as csv,\
+		 open(inputdir + 'aps-dataset-citations-2013.csv') as infile:
+		csv.write('"citing_doi","cited_doi","citation_date"') # write headers
+		next(infile) # skip headers in infile
+		for line in infile:
+			u,v = line.split(',')
+			if 'date' in meta[u]:
+				csv.write(line + "," + meta[u]['date'])
+
 def parse_citations():
 	num_nodes = 0
 	num_edges = 0
@@ -63,6 +74,8 @@ def parse_citations():
 
 	print("Created a GraphML graph with " + str(num_nodes) + " nodes and " + str(num_edges) + " edges.")
 	print("Skipped " + str(skipped_edges) + " edges due to incorrect dates")
+
+def write_CSV_file(edges):
 
 
 dateformat = "%Y-%m-%d"
@@ -121,4 +134,5 @@ def write_edges(edges, graph):
 	graph.write(gml.get_footer())
 	return num_edges
 
-parse_citations()
+#parse_citations()
+write_meta_CSV()
