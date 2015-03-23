@@ -207,18 +207,63 @@ def get_backbone_graph(G):
 		return build_backbone_graph(G)
 
 
+def normalize_impacts(G):
+	for n in G:
+		outs = G.out_edges([n],data=True)
+		if len(outs) == 0:
+			continue
+		impacts = [get_impact(e) for e in outs]
+		impact_sum = sum(impacts)
+		if impact_sum == 0:
+			#impacts = [1.0/len(outs)]*len(outs)
+			pass
+		else:
+			#avg_impact = impact_sum/len(outs)
+			#print("Avg impact: " + str(avg_impact))
+			for i,e in enumerate(outs):
+				G.add_edge(e[0],e[1], impact=impacts[i]/impact_sum)
+			#G.edge[e]['impact'] = e['impact']/impact_sum 
+
+
+
 def main():
 	G = get_gml_graph(dataset)
 	G = get_impact_graph(G)
+	#normalize_impacts(G)
 	G2 = get_backbone_graph(G)
 	
-	pr = nx.pagerank(G, alpha=0.5, max_iter=100)
+	pr = nx.pagerank(G, alpha=0.5, max_iter=10)
+	#pr_w = nx.pagerank(G, alpha=0.5, max_iter=100,weight='impact')
+	pr_b = nx.pagerank(G2, alpha=0.5, max_iter=10)
 	top_pr = Counter(pr).most_common(10) # top 10 pageranks
 
 	# eigen_centralities = nx.eigenvector_centrality_numpy(G)
 	indegrees = get_indegrees(G)
 	#closeness = nx.closeness_centrality(G)
 	#betweenness = nx.betweenness_centrality(G)
+
+	indegs = []
+	prs = []
+	#prs_w = []
+	for n in G:
+		prs.append(pr[n])
+		#prs_w.append(pr_w[n])
+		indegs.append(indegrees[n])
+
+	# indegs2 = []
+	# prs_b = []
+	# for n in G2:
+	# 	indegs2 = indegrees[n]
+	# 	print pr_b[n]
+	# 	prs_b = pr_b[n]
+
+
+	#TODO: find top progeny sizes, compare with e.g. indegree
+	# Px = {}
+	# for node in G2:	
+	# 	px = progeny_size(G2,node) #len(nx.ancestors(G,node)) #len(indirect_predecessors(G,node))
+	# 	Px[node] = px
+
 
 	for n, rank in top_pr:
 		rank = rank*10000.0
@@ -245,19 +290,42 @@ def main():
 		#nx.draw_networkx_edges(G,pos,alpha=0.5,width=6)
 		#nx.draw_networkx_nodes(G,pos=nx.spring_layout(G),node_size=2000,nodelist=[4])
 		#nx.draw_networkx_nodes(G,pos=nx.spring_layout(G),node_size=3000,nodelist=[0,1,2,3],node_color='b')
-		
-		plt.figure(1,figsize=(8,8))
-		todraw = [top_pr[3][0]]
-		for _ in range(2):
-			todraw.append(get_backbone_node(G2,todraw[-1]))
-		print todraw
-		SG = G.subgraph(todraw)
-		pos=nx.spring_layout(SG)
-		nx.draw(SG, pos)
-		nx.draw_networkx_labels(SG, pos)
 
-		plt.axis('off')
-		#plt.savefig("foo.png") # save as png
+
+		plt.subplot(1, 2, 1)
+		#plt.xlim(12,19)
+		#plt.title('')
+		plt.xlabel('Indegree')
+		plt.ylabel('Pagerank')
+		plt.plot(indegs,prs,'ro')
+		
+		# plt.subplot(1, 2, 2)
+		# #plt.title('')
+		# plt.xlabel('Indegree')
+		# plt.ylabel('Pagerank with weights')
+		# plt.plot(indegs,prs_w,'ro')
+
+		plt.subplot(1, 2, 2)
+		#plt.title('')
+		plt.xlabel('Indegree')
+		plt.ylabel('Pagerank for backbone')
+		plt.plot(indegs2,prs_b,'ro')		
+		
+
+
+		# Plot backbone from 1 node
+		# plt.figure(1,figsize=(8,8))
+		# todraw = [top_pr[3][0]]
+		# for _ in range(2):
+		# 	todraw.append(get_backbone_node(G2,todraw[-1]))
+		# print todraw
+		# SG = G.subgraph(todraw)
+		# pos=nx.spring_layout(SG)
+		# nx.draw(SG, pos)
+		# nx.draw_networkx_labels(SG, pos)
+
+		# plt.axis('off')
+		# #plt.savefig("foo.png") # save as png
 		plt.show() # display
 		print("Done.")
 
