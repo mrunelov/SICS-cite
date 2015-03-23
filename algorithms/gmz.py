@@ -32,37 +32,38 @@ http://pydoc.net/Python/networkx/1.0/networkx.algorithms.pagerank/
 def main():
 	G = get_gml_graph('APS-backbone') # load networkx graph
 	
-	print("Running pagerank...")
-	pr = nx.pagerank(G, alpha=1, max_iter=100)
-	print("Done running pagerank.")
+	#print("Running pagerank...")
+	#pr = nx.pagerank(G, alpha=1, max_iter=100)
+	#print("Done running pagerank.")
 	# Ix = pr.values()
 	#top_pr = Counter(pr).most_common(100) # top 10 pageranks
 	#pr2 = nx.pagerank(G, alpha=0.5, max_iter=100)
-	Ix = []
+	#Ix = []
 	Px = []
-	indegs = []
+	#indegs = []
 	nodes = []
 	N = G.number_of_nodes()
 	print("Calculating Px...")
 	i = 1
-	for node, rank in pr.iteritems(): #top_pr:
+	#for node, rank in pr.iteritems(): #top_pr:
+	for node in G:
 		print str(i) + " / " + str(N) + '\r'
 		i += 1
-		indeg = G.in_degree(node)
+		#indeg = G.in_degree(node)
 		# if indeg < 40: # try with only less cited papers
 		#	continue
-		indegs.append(indeg)
-		Ix.append(rank)
-		px = progeny_size(G,node) #len(nx.ancestors(G,node)) #len(indirect_predecessors(G,node))
+		#indegs.append(indeg)
+		#Ix.append(rank)
+		px = len(nx.ancestors(G,node)) # progeny_size(G,node) #len(indirect_predecessors(G,node))
 		Px.append(px)
 		nodes.append(node)
 
 	print("Done calculating. Pickling...")
 
-	with open('pickles/KDD-Ix.pickle', 'wb') as f1:
-		pickle.dump(Ix, f1)
-	with open('pickles/KDD-Px.pickle', 'wb') as f2:
-		pickle.dump(Px, f2)
+	#with open('pickles/KDD-Ix.pickle', 'wb') as f1:
+	#	pickle.dump(Ix, f1)
+	with open('pickles/' + dataset + '-Px.pickle', 'wb') as f2:
+		pickle.dump(zip(Px,nodes), f2)
 
 	if do_plot:
 		print("Plotting...")
