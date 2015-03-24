@@ -9,3 +9,4 @@ rawdata/
 *.out
 *.graphml
 *.swp
+*.pickle

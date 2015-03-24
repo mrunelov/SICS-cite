@@ -39,16 +39,22 @@ def write_meta_CSV():
 			in_edges[v].append(u)
 
 	meta = parse_meta()
+	num_cited_added = 0
 	with open('APS-citations-with-date.csv','w+') as csv:
 		csv.write('"citing_doi","cited_doi","citation_date"\n') # write headers
 		for v, us in in_edges.iteritems():
-			if len(us) <= 1:
+			if len(us) <= 1000:
 				continue
 			else:
+				num_cited_added += 1
 				for u in us:
 					if u in meta and 'date' in meta[u]:
-						line = u + "," + v + "," + meta[u]['date'] + "\n"
+						date_list = meta[u]['date'].split("-")
+						date = date_list[2] + "/" + date_list[1] + "/" + date_list[0] # dd/MM/yyyy
+						line = u + "," + meta[v]['title'] + "," + date + "\n"
 						csv.write(line)
+				if num_cited_added > 20:
+					return
 
 def parse_citations():
 	num_nodes = 0
