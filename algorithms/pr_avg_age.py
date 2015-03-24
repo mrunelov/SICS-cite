@@ -15,9 +15,9 @@ from datetime import datetime
 dateformat = "%Y-%m-%d"
 epoch = datetime(1890,1,1) # some year older than the oldest publication
 def pr_avg_age(G):
-	pr = nx.pagerank(G, alpha=0.5, max_iter=20)
+	#pr = nx.pagerank(G, alpha=0.5, max_iter=12)
 	h,a = hits(G) # float division by zero
-	top_pr = Counter(pr).most_common(10) # top 100 pageranks
+	top_pr = Counter(a).most_common(10) # top 100 pageranks
 	avg_age = 0
 	for n, rank in top_pr:
 		date = datetime.strptime(G.node[n]['date'],dateformat)
@@ -35,25 +35,36 @@ def secs_since_epoch(datestr):
 def main():
 	G = get_gml_graph(dataset) # load networkx graph
 
-	years = range(1992,2004,1)
+    # KDD: (also change from years to times in plotting parameter)
+	# years = range(1992,2004,1)
+	# times = []
+	# for y in years:
+	# 	for m in range(1,13):
+	# 		date = datetime(y,m,1)
+	# 		secs = (date - epoch).total_seconds()
+	# 		times.append(secs)
+	# print times
+
+    # APS:
+	years = range(1990,2015,1)
 	times = []
 	for y in years:
-		for m in range(1,13):
-			date = datetime(y,m,1)
-			secs = (date - epoch).total_seconds()
-			times.append(secs)
-	print times
+		date = datetime(y,12,31)
+		secs = (date - epoch).total_seconds()
+		times.append(secs)
 
 	pr_ages = []
-	prev_avg = 1e12
-	for t in times:
-		Gy = G.subgraph([node for node, attrs in G.nodes_iter(data=True) if secs_since_epoch(attrs['date']) <= t])
-		print("Num nodes: " + str(Gy.number_of_nodes()))
-		if Gy.number_of_nodes() > 10:
-			avg = pr_avg_age(Gy)
-			if avg < prev_avg:
-				print "Avg age dropped!"
-			prev_avg = avg
+	prev_avg = 1e15
+	cutoff = secs_since_epoch("1980-01-01")
+	G = G.subgraph([node for node, attrs in G.nodes_iter(data=True) if secs_since_epoch(attrs['date']) >= cutoff])
+	for t in times[::-1]:
+		G = G.subgraph([node for node, attrs in G.nodes_iter(data=True) if secs_since_epoch(attrs['date']) <= t])
+		print("Num nodes: " + str(G.number_of_nodes()))
+		if G.number_of_nodes() > 10:
+			avg = pr_avg_age(G)
+			# if avg < prev_avg:
+			# 	print "Avg age dropped!"
+			# prev_avg = avg
 			pr_ages.append(avg)
 		else:
 			pr_ages.append(0)
@@ -63,7 +74,7 @@ def main():
 	#plt.title('')
 	plt.xlabel('Year')
 	plt.ylabel('Average age of top ranked nodes')
-	plt.plot(times,pr_ages,'ro')
+	plt.plot(years,pr_ages[::-1],'-o')
 
 
 	#plt.plot(pr2.values(),Px,'bo')

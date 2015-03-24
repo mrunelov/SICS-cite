@@ -28,10 +28,14 @@ def get_id_generator():
 
 edge_id_gen = get_id_generator()
 
+skipped_forward_edges = 0
+skipped_NA_nodes = 0
+
 def parse_citations():
+	global skipped_NA_nodes,skipped_forward_edges
 	num_nodes = 0
 	num_edges = 0
-	skipped_forward_edges = 0
+	
 	edges = defaultdict(list)
 	nodes = Set()
 	meta = parse_abstracts() # maps id's to a meta label (authors + title)
@@ -60,16 +64,23 @@ def parse_citations():
 
 	print("Created a GraphML graph with " + str(num_nodes) + " nodes and " + str(num_edges) + " edges.")
 	print("Skipped forward-going edges: " + str(skipped_forward_edges))
+	print("Skipped N/A nodes (no date): " + str(skipped_NA_nodes))
 
 dateformat = "%Y-%m-%d"
 def is_backwards_in_time(u,v, dates):
+	global skipped_NA_nodes,skipped_forward_edges
 	if u in dates and v in dates and dates[u] is not "N/A" and dates[v] is not "N/A":
 		u_date = datetime.strptime(dates[u], dateformat)
 		v_date = datetime.strptime(dates[v], dateformat)
 		if u_date > v_date:
 			return True # citing backwards in time
-		return False # citing forward in time
-	return False # not enough data available
+		skipped_forward_edges += 1
+		return True # citing forward in time. Skip for KDD since the data seems to be wrong.
+	if u not in dates or dates[u] is "N/A":
+		skipped_NA_nodes += 1
+	if v not in dates or dates[v] is "N/A":
+		skipped_NA_nodes += 1
+	return True # not enough data available. Keep these for KDD.
 
 def parse_dates():
 	dates = {}

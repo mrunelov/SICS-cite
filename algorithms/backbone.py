@@ -2,6 +2,7 @@ import config as conf
 dataset = conf.settings['dataset'] 
 do_plot = conf.settings['do_plot']
 
+import numpy as np
 import networkx as nx
 from collections import Counter, defaultdict
 import itertools
@@ -90,7 +91,7 @@ def get_impacts(G, parent, children, f=0.5):
 	return impacts
 
 
-def get_indegrees(G):
+def get_indegrees(G=None):
 	if os.path.isfile('pickles/' + dataset + '-indegrees.pickle'):
 		with open('pickles/' + dataset + '-indegrees.pickle', 'rb') as f:
 			return pickle.load(f)
@@ -99,6 +100,14 @@ def get_indegrees(G):
 		with open('pickles/' + dataset + '-indegrees.pickle', 'wb') as f:
 			pickle.dump(indegrees,f)
 		return indegrees
+
+
+def get_Px(dataset=dataset):
+	if os.path.isfile('pickles/' + dataset + '-Px.pickle'):
+		with open('pickles/' + dataset + '-Px.pickle', 'rb') as f:
+			return pickle.load(f)
+	else:
+		raise ValueError("No Px file for dataset " + dataset)
 
 def di_triangles():
 	"""
@@ -196,7 +205,7 @@ def get_backbone_node(G, n):
 		#print G.node[out_edge[0][1]]
 		#return G.node[out_edge[0][1]] # [0]: tuple (u,v).
 
-def get_backbone_graph(G):
+def get_backbone_graph(G=None):
 	if os.path.isfile('pickles/' + dataset + '-backbone.pickle'):
 		with open('pickles/' + dataset + '-backbone.pickle', 'rb') as f:
 			print("Reading pickled backbone graph...")
@@ -227,35 +236,76 @@ def normalize_impacts(G):
 
 
 def main():
-	G = get_gml_graph(dataset)
-	G = get_impact_graph(G)
+	#G = get_gml_graph(dataset)
+	#G = get_impact_graph(G)
 	#normalize_impacts(G)
-	G2 = get_backbone_graph(G)
+	G2 = get_backbone_graph()
 	
-	pr = nx.pagerank(G, alpha=0.5, max_iter=10)
+	#pr = nx.pagerank(G, alpha=0.5, max_iter=10)
+	#top_pr = Counter(pr).most_common(10) # top 10 pageranks
 	#pr_w = nx.pagerank(G, alpha=0.5, max_iter=100,weight='impact')
-	pr_b = nx.pagerank(G2, alpha=0.5, max_iter=10)
-	top_pr = Counter(pr).most_common(10) # top 10 pageranks
+	#pr_b = nx.pagerank(G2, alpha=0.5, max_iter=10)
+	#stop_pr_b = Counter(pr_b).most_common(10) # top 10 pageranks
 
 	# eigen_centralities = nx.eigenvector_centrality_numpy(G)
-	indegrees = get_indegrees(G)
+	indegrees = get_indegrees()
+	#top_indegrees = Counter(indegrees).most_common(1000) # top 10 pageranks
 	#closeness = nx.closeness_centrality(G)
 	#betweenness = nx.betweenness_centrality(G)
 
-	indegs = []
-	prs = []
-	#prs_w = []
-	for n in G:
-		prs.append(pr[n])
-		#prs_w.append(pr_w[n])
-		indegs.append(indegrees[n])
+	# indegs = []
+	# prs = []
+	# #prs_w = []
+	# for n in G:
+	# 	prs.append(pr[n])
+	# 	#prs_w.append(pr_w[n])
+	# 	indegs.append(indegrees[n])
 
-	# indegs2 = []
-	# prs_b = []
-	# for n in G2:
-	# 	indegs2 = indegrees[n]
-	# 	print pr_b[n]
-	# 	prs_b = pr_b[n]
+	pickled_Px = get_Px('APS-backbone')
+	Px_map = {}
+	for px, node in pickled_Px:
+		#if px > 1000:
+			#print px,indegrees[node]
+		Px_map[node] = px
+
+	Px = []
+	indegs = []
+	#prs_b = [x[1] for x in top_pr_b] #[]
+	#nodes = [x[0] for x in top_pr_b] #[]
+	#print("Calculating progeny for backbone...")
+	#for n in G2:
+	num_skipped = 0
+	print("Indegrees size: " + str(len(indegrees)))
+	for n,px in Px_map.iteritems():
+		#px = Px_map[node] #(len(nx.ancestors(G2,n)))
+		if n not in G2:
+			num_skipped += 1
+			continue
+		# if indegrees[n] < 500:
+		# 	continue
+		# if px <= 10:
+		# 	continue
+		Px.append(px)
+		indegs.append(indegrees[n])
+		
+		# prs_b.append(pr_b[n])
+		# nodes.append(n)
+	print("Done. Num skipped: " + str(num_skipped))
+	#Px = [px/10**3 for px in Px ]
+ 
+	# scores = sorted(zip(Px,prs_b,nodes))
+	# buckets = defaultdict(list)
+	# for x in scores:
+	# 	buckets[x[0]].append(x)
+	# for b in buckets.keys():
+	# 	top_node = max(buckets[b], key = lambda x:x[1])[2]
+	# 	print "Top node for bucket " + str(b) + ": ",
+	# 	print("(indeg = " + str(G.in_degree(top_node)) + ", date = " + G.node[top_node]['date'] + ")"),
+	# 	print G2.node[top_node]['label']
+	
+	# for n in nodes:
+	# 	if 0 < Px[n] < 200:
+
 
 
 	#TODO: find top progeny sizes, compare with e.g. indegree
@@ -265,24 +315,19 @@ def main():
 	# 	Px[node] = px
 
 
-	for n, rank in top_pr:
-		rank = rank*10000.0
-		print(G.node[n]['label'])
-		backbone_node = get_backbone_node(G2,n)
-		if backbone_node is not None and 'label' in G2.node[backbone_node] :
-			print("\tBackbone node: " + G2.node[backbone_node]['label'])
-		print("\tDate: " + G.node[n]['date'])
-		print("\tPR: %0.2f"%(rank))
-		print("\tIn-degree: %d"%(indegrees[n]))
 	# for n, rank in top_pr:
-	#   rank = rank*10000.0
-	#   print(G.node[n]['label'])
-	#   print("\tBackbone node: " + G2.node[get_backbone_node(G2,n)]['label'])
-	#   print("\tPR: %0.2f"%(rank))
-	#   print("\tIn-degree: %d"%(indegrees[n]))
+	# 	rank = rank*10000.0
+	# 	print(G.node[n]['label'])
+	# 	backbone_node = get_backbone_node(G2,n)
+	# 	if backbone_node is not None and 'label' in G2.node[backbone_node] :
+	# 		print("\tBackbone node: " + G2.node[backbone_node]['label'])
+	# 	print("\tDate: " + G.node[n]['date'])
+	# 	print("\tPR: %0.2f"%(rank))
+	# 	print("\tIn-degree: %d"%(indegrees[n]))
 	#   #print("\tBetweenness centrality: %0.5f"%(betweenness[n]))
 	#   #print("\tCloseness centrality: %0.5f"%(closeness[n]))
-	#   print("\tEigenvector centrality: %0.5f"%(eigen_centralities[n]))
+	#   #print("\tEigenvector centrality: %0.5f"%(eigen_centralities[n]))
+	
 
 	if do_plot:
 		print("Drawing...")
@@ -291,13 +336,15 @@ def main():
 		#nx.draw_networkx_nodes(G,pos=nx.spring_layout(G),node_size=2000,nodelist=[4])
 		#nx.draw_networkx_nodes(G,pos=nx.spring_layout(G),node_size=3000,nodelist=[0,1,2,3],node_color='b')
 
+		plt.figure().set_facecolor('white')
 
-		plt.subplot(1, 2, 1)
-		#plt.xlim(12,19)
-		#plt.title('')
-		plt.xlabel('Indegree')
-		plt.ylabel('Pagerank')
-		plt.plot(indegs,prs,'ro')
+		# plt.subplot(2, 1, 1)
+		# plt.subplots_adjust(hspace=0.5)
+		# #plt.xlim(12,19)
+		# #plt.title('')
+		# plt.xlabel('Indegree')
+		# plt.ylabel('Pagerank')
+		# plt.plot(indegs,prs,'ro')
 		
 		# plt.subplot(1, 2, 2)
 		# #plt.title('')
@@ -305,13 +352,15 @@ def main():
 		# plt.ylabel('Pagerank with weights')
 		# plt.plot(indegs,prs_w,'ro')
 
-		plt.subplot(1, 2, 2)
+		#plt.subplot(2, 1, 2)
 		#plt.title('')
 		plt.xlabel('Indegree')
-		plt.ylabel('Pagerank for backbone')
-		plt.plot(indegs2,prs_b,'ro')		
+		plt.ylabel('Backbone progeny size')
+		#plt.plot(indegs,Px,'go')
 		
-
+		ax = plt.subplot()
+		ax.plot(indegs, Px,'go', alpha=0.3)
+		#ax.plot(ax.get_xlim(), ax.get_ylim(), ls="--",alpha=0.5,c='0.3')
 
 		# Plot backbone from 1 node
 		# plt.figure(1,figsize=(8,8))
