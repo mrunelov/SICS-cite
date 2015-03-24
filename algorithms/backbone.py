@@ -2,14 +2,13 @@ import config as conf
 dataset = conf.settings['dataset'] 
 do_plot = conf.settings['do_plot']
 
+import plotter
 import numpy as np
 import networkx as nx
 from collections import Counter, defaultdict
 import itertools
 import pickle
 import os.path
-if do_plot:
-	import matplotlib.pyplot as plt
 from graphutils import get_gml_graph
 
 def sim_read_helper(G, a, b):
@@ -236,10 +235,10 @@ def normalize_impacts(G):
 
 
 def main():
-	#G = get_gml_graph(dataset)
-	#G = get_impact_graph(G)
+	G = get_gml_graph(dataset)
+	G = get_impact_graph(G)
 	#normalize_impacts(G)
-	G2 = get_backbone_graph()
+	G2 = get_backbone_graph(G)
 	
 	#pr = nx.pagerank(G, alpha=0.5, max_iter=10)
 	#top_pr = Counter(pr).most_common(10) # top 10 pageranks
@@ -330,52 +329,5 @@ def main():
 	
 
 	if do_plot:
-		print("Drawing...")
-		#nx.draw_networkx_nodes(G,pos=nx.spring_layout(G),nodelist=[0,1])
-		#nx.draw_networkx_edges(G,pos,alpha=0.5,width=6)
-		#nx.draw_networkx_nodes(G,pos=nx.spring_layout(G),node_size=2000,nodelist=[4])
-		#nx.draw_networkx_nodes(G,pos=nx.spring_layout(G),node_size=3000,nodelist=[0,1,2,3],node_color='b')
-
-		plt.figure().set_facecolor('white')
-
-		# plt.subplot(2, 1, 1)
-		# plt.subplots_adjust(hspace=0.5)
-		# #plt.xlim(12,19)
-		# #plt.title('')
-		# plt.xlabel('Indegree')
-		# plt.ylabel('Pagerank')
-		# plt.plot(indegs,prs,'ro')
-		
-		# plt.subplot(1, 2, 2)
-		# #plt.title('')
-		# plt.xlabel('Indegree')
-		# plt.ylabel('Pagerank with weights')
-		# plt.plot(indegs,prs_w,'ro')
-
-		#plt.subplot(2, 1, 2)
-		#plt.title('')
-		plt.xlabel('Indegree')
-		plt.ylabel('Backbone progeny size')
-		#plt.plot(indegs,Px,'go')
-		
-		ax = plt.subplot()
-		ax.plot(indegs, Px,'go', alpha=0.3)
-		#ax.plot(ax.get_xlim(), ax.get_ylim(), ls="--",alpha=0.5,c='0.3')
-
-		# Plot backbone from 1 node
-		# plt.figure(1,figsize=(8,8))
-		# todraw = [top_pr[3][0]]
-		# for _ in range(2):
-		# 	todraw.append(get_backbone_node(G2,todraw[-1]))
-		# print todraw
-		# SG = G.subgraph(todraw)
-		# pos=nx.spring_layout(SG)
-		# nx.draw(SG, pos)
-		# nx.draw_networkx_labels(SG, pos)
-
-		# plt.axis('off')
-		# #plt.savefig("foo.png") # save as png
-		plt.show() # display
-		print("Done.")
-
+		plotxy(indegs,Px)
 main()
