@@ -1,5 +1,8 @@
 import pybursts
 
+def betweenness_over_time():
+	pass
+
 def burst(offsets, s=2, gamma=0.1):
 	"""
 	http://www.cs.cornell.edu/home/kleinber/bhs.pdf
@@ -10,10 +13,10 @@ def burst(offsets, s=2, gamma=0.1):
 	Details:
 	The model is a hidden Markov process in which, after each event, 
 	the state of the system proba-blistically determines how much time will pass until the next event occurs.  
-	While the system isin state i, the gaps between events are assumed to be drawn from an exponential distribution 
+	While the system is in state i, the gaps between events are assumed to be drawn from an exponential distribution 
 	with expected value proportional to s ** -i.  The value of s may be modified; 
-	higher values increase the strictness of the algorithm’s criterion for how dramatic an increase of activity has to be
-	to beconsidered a ‘burst’. 
+	higher values increase the strictness of the algorithm's criterion for how dramatic an increase of activity has to be
+	to be considered a 'burst'.
 
 	The cost of a state change is proportional to the increase in state number; 
 	this proportion can be modified by setting the parameter gamma. Higher values mean roughly that bursts must be sustained

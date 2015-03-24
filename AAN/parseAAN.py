@@ -35,7 +35,6 @@ def parse_citations():
 	num_nodes = 0
 	num_edges = 0
 	
-	nodes = Set()
 	meta = {}
 	for i in range(2008, 2014):
 			print "Parsing year " + str(i)
@@ -44,34 +43,48 @@ def parse_citations():
 			meta.update(year_meta)
 
 	write_headers()
+
+	added_nodes = Set()
 	with open(datadir + 'AAN.graphml','a') as graph:
 		for i in range(2008, 2014):
 			print "Parsing year " + str(i)
 			base_dir = inputdir + str(i) + "/"
-	 		(_,edges) = build_graph(base_dir) # parse one AAN graph (one year)
-	 		for u,vs in edges.iteritems():
-	 			if u not in meta:
-	 				skipped_NA_nodes += 1
+	 		nodes,edges = build_graph(base_dir) # parse one AAN graph (one year)
+	 		for node in nodes:
+	 			if node in added_nodes:
 	 				continue
-	 			if u not in nodes:
-					nodes.add(u)
-					num_nodes += 1
-					label = meta[u]['title']
-					date = meta[u]['date']
+	 			added_nodes.add(node)
+	 			if node in meta and 'date' in meta[node]:
+	 				label = meta[node]['title']
+					date = meta[node]['date']
 					attrs = ["label", label, "date", date]
-					write_node(u,graph,attrs)
-	 			for v in vs:
-	 				if v in meta: # both u and v have metadata. test date and possibly insert
-		 				dates = {u: meta[u]['date'], v: meta[v]['date']}
-		 				if is_backwards_in_time(u,v,dates):
-	 						if v not in nodes:
-								nodes.add(v)
-								label = meta[v]['title']
-								date = meta[v]['date']
-								attrs = ["label", label, "date", date]
-								write_node(v,graph,attrs)
+					write_node(node,graph,attrs)
+
+	 		# for u,vs in edges.iteritems():
+	 		# 	if u not in meta:
+	 		# 		skipped_NA_nodes += 1
+	 		# 		continue
+	 		# 	if u not in nodes:
+				# 	nodes.add(u)
+				# 	num_nodes += 1
+				# 	label = meta[u]['title']
+				# 	date = meta[u]['date']
+				# 	attrs = ["label", label, "date", date]
+				# 	write_node(u,graph,attrs)
+	 		# 	for v in vs:
+	 		# 		if v in meta: # both u and v have metadata. test date and possibly insert
+		 	# 			dates = {u: meta[u]['date'], v: meta[v]['date']}
+		 	# 			if is_backwards_in_time(u,v,dates):
+	 		# 				if v not in nodes:
+	 		# 					if v == "W02-2013":
+	 		# 						print "ADDING THAT NODE, with date."
+				# 				nodes.add(v)
+				# 				label = meta[v]['title']
+				# 				date = meta[v]['date']
+				# 				attrs = ["label", label, "date", date]
+				# 				write_node(v,graph,attrs)
 		num_edges = write_edges(edges,graph)
-	print("Created a GraphML graph with " + str(num_nodes) + " nodes and " + str(num_edges) + " edges.")
+	print("Created a GraphML graph with " + str(len(nodes)) + " nodes and " + str(num_edges) + " edges.")
 	print("Skipped forward-going edges: " + str(skipped_forward_edges))
 	print("Skipped N/A nodes (no date): " + str(skipped_NA_nodes))
 
@@ -172,7 +185,7 @@ def build_graph(year="2013", write_to_files=False):
     edges = edge_list(base_dir) # edges as strings
     print("Read " + str(len(edges)) + " edges")
 
-    paperids = Set() # this way, only nodes with an in out out edge are added
+    paperids = Set() # this way, only nodes with an edge are added
     parsed_edges = defaultdict(list)
     for edge in edges:
         data = edge.split(edge_sep)
