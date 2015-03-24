@@ -1,6 +1,6 @@
 if __name__ == '__main__' and __package__ is None:
-    from os import sys, path
-    sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+	from os import sys, path
+	sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
 
 #from __future__ import print_function
 import algorithms.gml as gml
@@ -29,15 +29,32 @@ def get_id_generator():
 edge_id_gen = get_id_generator()
 
 def write_meta_CSV():
-	meta = parse_meta()
-	with open('APS-citations-with-date.csv,'a') as csv,\
-		 open(inputdir + 'aps-dataset-citations-2013.csv') as infile:
-		csv.write('"citing_doi","cited_doi","citation_date"') # write headers
+	in_edges = defaultdict(list)
+	with open(inputdir + 'aps-dataset-citations-2013.csv') as infile:
 		next(infile) # skip headers in infile
 		for line in infile:
 			u,v = line.split(',')
-			if 'date' in meta[u]:
-				csv.write(line + "," + meta[u]['date'])
+			u = u.strip()
+			v = v.strip()
+			in_edges[v].append(u)
+
+	meta = parse_meta()
+	num_cited_added = 0
+	with open('APS-citations-with-date.csv','w+') as csv:
+		csv.write('"citing_doi","cited_doi","citation_date"\n') # write headers
+		for v, us in in_edges.iteritems():
+			if len(us) <= 1000:
+				continue
+			else:
+				num_cited_added += 1
+				for u in us:
+					if u in meta and 'date' in meta[u]:
+						date_list = meta[u]['date'].split("-")
+						date = date_list[2] + "/" + date_list[1] + "/" + date_list[0] # dd/MM/yyyy
+						line = u + "," + meta[v]['title'] + "," + date + "\n"
+						csv.write(line)
+				if num_cited_added > 20:
+					return
 
 def parse_citations():
 	num_nodes = 0
@@ -75,8 +92,6 @@ def parse_citations():
 	print("Created a GraphML graph with " + str(num_nodes) + " nodes and " + str(num_edges) + " edges.")
 	print("Skipped " + str(skipped_edges) + " edges due to incorrect dates")
 
-def write_CSV_file(edges):
-
 
 dateformat = "%Y-%m-%d"
 def is_backwards_in_time(date1, date2):
@@ -110,7 +125,7 @@ def parse_meta():
 					
 	print("Parsed " + str(len(meta)) + " abstracts.")
 	with open('pickles/meta.pickle', 'wb') as f:
-		pickle.dump(meta,f)      		
+		pickle.dump(meta,f)				
 	return meta
 
 
