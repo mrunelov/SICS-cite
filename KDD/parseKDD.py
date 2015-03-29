@@ -11,6 +11,7 @@ import os
 import sys
 from sets import Set
 from collections import defaultdict
+from datetime import datetime 
 
 inputdir = "rawdata/"
 datadir = "data/"
@@ -27,36 +28,73 @@ def get_id_generator():
 
 edge_id_gen = get_id_generator()
 
+skipped_forward_edges = 0
+skipped_NA_nodes = 0
+
 def parse_citations():
+	global skipped_NA_nodes,skipped_forward_edges
 	num_nodes = 0
 	num_edges = 0
+	
 	edges = defaultdict(list)
 	nodes = Set()
 	meta = parse_abstracts() # maps id's to a meta label (authors + title)
+	dates = parse_dates() # maps id's to dates
 
 	write_headers()
 	with open(datadir + 'KDD.graphml','a') as graph,\
 		 open(inputdir + 'Cit-HepTh.txt') as infile:
 		for line in infile: # one entry per line
-			while line.startswith('#'): # ignore comments
+			if line.startswith('#'): # ignore comments
 				continue
 			u,v = line.split()
-			edges[u].append(v) # add to adjacency list
-			if u not in nodes:
-				nodes.add(u)
-				label = meta[v] if v in meta else "N/A"
-				attrs = ["label", label]
-				write_node(u, graph, attrs)
-				num_nodes += 1
-			if v not in nodes:
-				nodes.add(v)
-				label = meta[v] if v in meta else "N/A"
-				attrs = ["label", label]
-				write_node(v, graph, attrs)
-				num_nodes += 1
+			if is_backwards_in_time(u,v,dates):
+				edges[u].append(v) # add to adjacency list
+				for node in [u,v]:
+					if node not in nodes:
+						nodes.add(node)
+						label = meta[node] if node in meta else "N/A"
+						date = dates[node] if node in dates else "N/A"
+						attrs = ["label", label, "date", date]
+						write_node(node, graph, attrs)
+						num_nodes += 1
+				else:
+					skipped_forward_edges += 1
 		num_edges = write_edges(edges,graph)
 
 	print("Created a GraphML graph with " + str(num_nodes) + " nodes and " + str(num_edges) + " edges.")
+	print("Skipped forward-going edges: " + str(skipped_forward_edges))
+	print("Skipped N/A nodes (no date): " + str(skipped_NA_nodes))
+
+dateformat = "%Y-%m-%d"
+def is_backwards_in_time(u,v, dates):
+	global skipped_NA_nodes,skipped_forward_edges
+	if u in dates and v in dates and dates[u] is not "N/A" and dates[v] is not "N/A":
+		u_date = datetime.strptime(dates[u], dateformat)
+		v_date = datetime.strptime(dates[v], dateformat)
+		if u_date > v_date:
+			return True # citing backwards in time
+		skipped_forward_edges += 1
+		return True # citing forward in time. Skip for KDD since the data seems to be wrong.
+	if u not in dates or dates[u] is "N/A":
+		skipped_NA_nodes += 1
+	if v not in dates or dates[v] is "N/A":
+		skipped_NA_nodes += 1
+	return True # not enough data available. Keep these for KDD.
+
+def parse_dates():
+	dates = {}
+	print("Parsing dates...")
+	with open(inputdir + 'Cit-HepTh-dates.txt','r') as f:
+		for line in f:
+			if line.startswith('#'):
+				continue
+			node,date = line.split()
+			if node.startswith('11'):
+				node = node[2:] # remove 11 marker, means it's cross-listed, but true id comes after.
+			dates[node] = date
+	print("Done parsing dates.")
+	return dates
 
 
 def parse_abstracts():
@@ -85,6 +123,7 @@ def write_headers():
 	with open(datadir + 'KDD.graphml','w+') as graph:
 		graph.write(gml.get_header())
 		graph.write(gml.get_attr("label", "label", "string", "node"))
+		graph.write(gml.get_attr("date", "date", "string", "node"))
 		graph.write(gml.get_startgraph())
 
 # TODO: only open files once...

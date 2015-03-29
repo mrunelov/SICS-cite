@@ -22,10 +22,11 @@ def get_gml_graph(dataset):
 
 	print("Reading graphml file...")
 	G = nx.read_graphml(graphmlfile)
+	G = nx.DiGraph(G)
 	print("Done reading graph of type " + str(type(G)))
 	print("Read " + str(G.number_of_nodes()) + " nodes and " + str(G.number_of_edges()) + " edges.")
 	is_dag = nx.is_directed_acyclic_graph(G)
-	#print("Is DAG: " + str(is_dag))
+	print("Is DAG: " + str(is_dag))
 	if not is_dag: # try to make DAG or closer to DAG by pruning nodes and edges
 		selfloop_edges = G.selfloop_edges()
 		biconnected_edges = []
