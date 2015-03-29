@@ -76,15 +76,6 @@ class PageParser(HTMLParser):
                     if a[0] == 'id':
                         self.doc[self.section].append(a[1])
 
-
-def get_new_pdf_name():
-    num = 0
-    while(True):
-        yield str(num) + ".pdf"
-        num += 1
-# infinitely generate pdf names
-pdf_name_generator = get_new_pdf_name()
-            
 def download_pdf(pdf_url):
     pdf_dir = "pdfs/"
     uid = get_id_from_url(pdf_url)
@@ -114,6 +105,7 @@ def crawl(article_url, maxdepth=1):
     nx.draw(G,pos=nx.spring_layout(G))
     plt.draw()
     plt.show()
+    nx.write_graphml(G, "graphs/arxiv.graphml")
     #for line in nx.generate_edgelist(G, data=False):
         #print(line)
 
