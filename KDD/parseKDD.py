@@ -42,7 +42,7 @@ def parse_citations():
 	dates = parse_dates() # maps id's to dates
 
 	write_headers()
-	with open(datadir + 'KDD.graphml','a') as graph,\
+	with open(datadir + 'KDD.graphml','w+') as graph,\
 		 open(inputdir + 'Cit-HepTh.txt') as infile:
 		for line in infile: # one entry per line
 			if line.startswith('#'): # ignore comments
