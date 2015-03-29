@@ -2,7 +2,8 @@ import config as conf
 dataset = conf.settings['dataset'] 
 do_plot = conf.settings['do_plot']
 
-from plotter import *
+if do_plot:
+	from plotter import *
 import numpy as np
 import networkx as nx
 from collections import Counter, defaultdict
@@ -235,6 +236,7 @@ def normalize_impacts(G):
 
 
 def main():
+	#G = None
 	G = get_gml_graph(dataset)
 	G = get_impact_graph(G)
 	#normalize_impacts(G)
@@ -247,7 +249,7 @@ def main():
 	#stop_pr_b = Counter(pr_b).most_common(10) # top 10 pageranks
 
 	# eigen_centralities = nx.eigenvector_centrality_numpy(G)
-	indegrees = get_indegrees()
+	indegrees = get_indegrees(G)
 	#top_indegrees = Counter(indegrees).most_common(1000) # top 10 pageranks
 	#closeness = nx.closeness_centrality(G)
 	#betweenness = nx.betweenness_centrality(G)
