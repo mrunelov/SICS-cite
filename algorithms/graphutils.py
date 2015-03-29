@@ -1,8 +1,9 @@
 import pickle
 import os.path
 import networkx as nx
+import itertools
 
-def get_gml_graph(dataset):
+def get_gml_graph(dataset,co_citation=False):
 	"""
 	Loads a graphml file into a networkx graph object.
 	The graph object is pickled after the first time is read,
@@ -16,7 +17,12 @@ def get_gml_graph(dataset):
 			print("Done reading graph.")
 			return G
 
-	graphmlfile = '../' + dataset + '/data/' + dataset + '.graphml'
+	# build filename
+	graphmlfile = '../' + dataset + '/data/' + dataset
+	if co_citation:
+		 graphmlfile += 'co-citation'
+	graphmlfile += '.graphml'
+
 	if not os.path.isfile(graphmlfile):
 		raise ValueError('No dataset files were found. Looked for:\n' + picklefile + '\n' + graphmlfile + '\n')
 
@@ -28,14 +34,15 @@ def get_gml_graph(dataset):
 	is_dag = nx.is_directed_acyclic_graph(G)
 	print("Is DAG: " + str(is_dag))
 	if not is_dag: # try to make DAG or closer to DAG by pruning nodes and edges
+		print "Removing biconnected nodes, self-loops and isolates..."
 		selfloop_edges = G.selfloop_edges()
 		biconnected_edges = []
 		for u,v in G.edges_iter(): # find bi-edges where two papers cite each other
 			if G.has_edge(v,u):
 				biconnected_edges.extend([(u,v),(v,u)])
-		G.remove_edges_from(nx.isolates(G)) # delete isolates
-		G.remove_edges_from(selfloop_edges) # delete self-loops
 		G.remove_edges_from(biconnected_edges) # delete biconnecting edges
+		G.remove_edges_from(selfloop_edges) # delete self-loops
+		G.remove_edges_from(nx.isolates(G)) # delete isolates
 		print("Is DAG now?..."),
 		is_dag = nx.is_directed_acyclic_graph(G)
 		print(str(is_dag))
@@ -43,3 +50,32 @@ def get_gml_graph(dataset):
 	with open('pickles/' + dataset + '.pickle', 'wb') as f:	
 		nx.write_gpickle(G, f)
 	return G
+
+
+def build_time_slices(G,s):
+	"""
+	Create time slices of a graph G of size s.
+	"""
+	pass
+
+
+def build_co_citation_graph(G,dataset):
+	print "Building co-citation graph for " + dataset
+	cc = nx.Graph()
+	i = 1
+	num_nodes = G.number_of_nodes()
+	for n in G:
+		refs = G.successors(n)
+		print "Looping node " + str(i) + " / " + str(num_nodes) + " (with " + str(len(refs)) + " refs)" +  "\r",
+		i += 1
+		for u,v in itertools.combinations(refs,2): # loop all co-citations
+			if cc.has_edge(u,v):
+				G.edge[u][v]['weight'] += 1
+			else:
+				G.add_edge(u,v,weight=1)
+	print "Done. Writing Graphml file..."
+	nx.write_graphml(cc, '../' + dataset + '/data/' + dataset + '-co-citation.graphml')
+	print "Done. Wrote a graph with " + str(cc.number_of_nodes()) + " nodes and " + str(cc.number_of_edges()) + " edges."
+
+G = get_gml_graph('AAN')
+build_co_citation_graph(G,'AAN')
