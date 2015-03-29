@@ -1,6 +1,8 @@
 import graph_tool.all as gt
 from find_fellows import *
 
+num_top = 50
+
 g = gt.load_graph("AAN-preprocessed.xml")
 
 in_degs = g.degree_property_map("in")
@@ -11,7 +13,8 @@ titles = g.vertex_properties["title"]
 authors = g.vertex_properties["authors"]
 
 top_authors = []
-for i in range(32):
+fellow_articles = 0
+for i in range(num_top):
     node = top_in_degs[i]
     citations = in_degs.a[node]
     print "##############################"
@@ -22,5 +25,11 @@ for i in range(32):
     print "Authors: " + authors[g.vertex(node)]
     auths = authors[g.vertex(node)]
     auths = auths.split(";")
+    found_fellow = False
     for a in auths:
-        is_fellow(a,reverse=True)
+        if is_fellow(a,reverse=True):
+            found_fellow = True
+    if found_fellow:
+        fellow_articles += 1
+
+print "Fellow articles: " + str(fellow_articles) + " / " + str(num_top)
