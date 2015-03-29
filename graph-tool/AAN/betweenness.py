@@ -4,12 +4,17 @@ import pickle
 import numpy as np
 from find_fellows import *
 
-num_top = 50
+"""
+Calculates betweenness centrality for a co-citation network and prints info and plots the top results
+"""
+
+num_top = 100
 
 g = gt.load_graph("co-citation.graphml")
 g.set_directed(False)
 titles = g.vertex_properties["title"]
 authors = g.vertex_properties["authors"]
+in_degs = g.degree_property_map("in")
 print "Loaded a graph with " + str(g.num_vertices()) + " nodes"
 #g = gt.GraphView(g, vfilt=gt.label_largest_component(g))
 
@@ -73,7 +78,7 @@ pos = gt.fruchterman_reingold_layout(bg,n_iter=10)
 print "Done calculating layout. Plotting."
 
 gt.graph_draw(bg, pos=pos, #vertex_fill_color=vpa,
-        #vertex_size=gt.prop_to_size(vpa, mi=5, ma=15),
+        vertex_size=gt.prop_to_size(in_degs, mi=7, ma=25),
         #edge_pen_width=gt.prop_to_size(ep, mi=0.5, ma=5),
         vcmap=matplotlib.cm.gist_heat,
         output="co-citation_betweenness.pdf") #vorder=vpa, 

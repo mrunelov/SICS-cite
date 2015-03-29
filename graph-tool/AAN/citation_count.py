@@ -1,7 +1,7 @@
 import graph_tool.all as gt
 from find_fellows import *
 
-num_top = 50
+num_top = 100
 
 g = gt.load_graph("AAN-preprocessed.xml")
 

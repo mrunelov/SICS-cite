@@ -1,7 +1,10 @@
 import difflib
 
 def parse_names(fullname, has_firstname=True, reverse=False):
-    names = fullname.split(" ")
+    if fullname.count(",") == 1:
+        names = fullname.split(",")
+    else:
+        names = fullname.split(" ")
     names[-1] = names[-1].strip() # remove newline
     if reverse: # first name is last, put it first
         r_i = len(names) - 1
