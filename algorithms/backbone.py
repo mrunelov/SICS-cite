@@ -2,7 +2,7 @@ import config as conf
 dataset = conf.settings['dataset'] 
 do_plot = conf.settings['do_plot']
 
-import plotter
+from plotter import *
 import numpy as np
 import networkx as nx
 from collections import Counter, defaultdict
@@ -260,12 +260,12 @@ def main():
 	# 	#prs_w.append(pr_w[n])
 	# 	indegs.append(indegrees[n])
 
-	pickled_Px = get_Px('APS-backbone')
-	Px_map = {}
-	for px, node in pickled_Px:
-		#if px > 1000:
-			#print px,indegrees[node]
-		Px_map[node] = px
+	# pickled_Px = get_Px('APS-backbone')
+	# Px_map = {}
+	# for px, node in pickled_Px:
+	# 	#if px > 1000:
+	# 		#print px,indegrees[node]
+	# 	Px_map[node] = px
 
 	Px = []
 	indegs = []
@@ -275,11 +275,12 @@ def main():
 	#for n in G2:
 	num_skipped = 0
 	print("Indegrees size: " + str(len(indegrees)))
-	for n,px in Px_map.iteritems():
-		#px = Px_map[node] #(len(nx.ancestors(G2,n)))
-		if n not in G2:
-			num_skipped += 1
-			continue
+	#for n,px in Px_map.iteritems():
+	for n in G2.nodes_iter():
+		px = len(nx.ancestors(G2,n)) # Px_map[node]
+		# if n not in G2:
+		# 	num_skipped += 1
+		# 	continue
 		# if indegrees[n] < 500:
 		# 	continue
 		# if px <= 10:
