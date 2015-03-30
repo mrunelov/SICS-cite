@@ -1,8 +1,5 @@
 import pybursts
 
-def betweenness_over_time():
-	pass
-
 def burst(offsets, s=2, gamma=0.1):
 	"""
 	http://www.cs.cornell.edu/home/kleinber/bhs.pdf
