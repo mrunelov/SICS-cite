@@ -96,18 +96,23 @@ def get_indegrees(G=None):
 		with open('pickles/' + dataset + '-indegrees.pickle', 'rb') as f:
 			return pickle.load(f)
 	else:
-		indegrees = G.in_degree(G.nodes_iter())
-		with open('pickles/' + dataset + '-indegrees.pickle', 'wb') as f:
-			pickle.dump(indegrees,f)
-		return indegrees
+		return calculate_indegrees(G)
+
+def calculate_indegrees(G):
+	if G is None:
+		raise ValueError("No graph provided for calculate_indegrees")
+	indegrees = G.in_degree(G.nodes_iter())
+	with open('pickles/' + dataset + '-indegrees.pickle', 'wb') as f:
+		pickle.dump(indegrees,f)
+	return indegrees
 
 
-def get_Px(dataset=dataset):
-	if os.path.isfile('pickles/' + dataset + '-Px.pickle'):
-		with open('pickles/' + dataset + '-Px.pickle', 'rb') as f:
-			return pickle.load(f)
+def get_Px(G=None):
+	if os.path.isfile('pickles/' + dataset + '-backbone-Px.pickle'): # OBS: hardcoded backbone Px, since that's all we're interested in
+		with open('pickles/' + dataset + '-backbone-Px.pickle', 'rb') as f:
+			return zip(*pickle.load(f)) # return (Px, nodes) unzipped
 	else:
-		raise ValueError("No Px file for dataset " + dataset)
+		return calculate_Px(G)
 
 def di_triangles():
 	"""
@@ -234,13 +239,39 @@ def normalize_impacts(G):
 			#G.edge[e]['impact'] = e['impact']/impact_sum 
 
 
+def calculate_Px(G):
+	"""
+	Calculates and pickles Px (progeny sizes) for a graph.
+	Returns the node order that was pickled
+	"""
+	if G is None:
+		raise ValueError("No graph provided for calculate_Px")
+	Px = []
+	nodes = []
+	print("Calculating Px...")
+	for n in G.nodes_iter():
+		px = len(nx.ancestors(G,n))
+		Px.append(px)
+		nodes.append(n)
+
+	print("Done calculating Px.")
+	Px_with_nodes = zip(Px,nodes)
+	with open('pickles/' + dataset + '-backbone-Px.pickle', 'wb') as f:
+		pickle.dump(Px_with_nodes,f)
+	return Px,nodes
+
+def get_subset_list(map, keys):
+	subset = []
+	for k in keys:
+		subset.append(map[k])
+	return subset
 
 def main():
 	#G = None
-	G = get_gml_graph(dataset)
-	G = get_impact_graph(G)
+	G = None #get_gml_graph(dataset)
+	# G = get_impact_graph(G)
 	#normalize_impacts(G)
-	G2 = get_backbone_graph(G)
+	G2 = None #get_backbone_graph() 
 	
 	#pr = nx.pagerank(G, alpha=0.5, max_iter=10)
 	#top_pr = Counter(pr).most_common(10) # top 10 pageranks
@@ -249,10 +280,13 @@ def main():
 	#stop_pr_b = Counter(pr_b).most_common(10) # top 10 pageranks
 
 	# eigen_centralities = nx.eigenvector_centrality_numpy(G)
-	indegrees = get_indegrees(G)
+	
 	#top_indegrees = Counter(indegrees).most_common(1000) # top 10 pageranks
 	#closeness = nx.closeness_centrality(G)
 	#betweenness = nx.betweenness_centrality(G)
+	Px,nodes = get_Px(G2)
+	indegrees = get_indegrees(G)
+	backbone_indegs = get_subset_list(indegrees,nodes)
 
 	# indegs = []
 	# prs = []
@@ -261,39 +295,6 @@ def main():
 	# 	prs.append(pr[n])
 	# 	#prs_w.append(pr_w[n])
 	# 	indegs.append(indegrees[n])
-
-	# pickled_Px = get_Px('APS-backbone')
-	# Px_map = {}
-	# for px, node in pickled_Px:
-	# 	#if px > 1000:
-	# 		#print px,indegrees[node]
-	# 	Px_map[node] = px
-
-	Px = []
-	indegs = []
-	#prs_b = [x[1] for x in top_pr_b] #[]
-	#nodes = [x[0] for x in top_pr_b] #[]
-	#print("Calculating progeny for backbone...")
-	#for n in G2:
-	num_skipped = 0
-	print("Indegrees size: " + str(len(indegrees)))
-	#for n,px in Px_map.iteritems():
-	for n in G2.nodes_iter():
-		px = len(nx.ancestors(G2,n)) # Px_map[node]
-		# if n not in G2:
-		# 	num_skipped += 1
-		# 	continue
-		# if indegrees[n] < 500:
-		# 	continue
-		# if px <= 10:
-		# 	continue
-		Px.append(px)
-		indegs.append(indegrees[n])
-		
-		# prs_b.append(pr_b[n])
-		# nodes.append(n)
-	print("Done. Num skipped: " + str(num_skipped))
-	#Px = [px/10**3 for px in Px ]
  
 	# scores = sorted(zip(Px,prs_b,nodes))
 	# buckets = defaultdict(list)
@@ -304,11 +305,6 @@ def main():
 	# 	print "Top node for bucket " + str(b) + ": ",
 	# 	print("(indeg = " + str(G.in_degree(top_node)) + ", date = " + G.node[top_node]['date'] + ")"),
 	# 	print G2.node[top_node]['label']
-	
-	# for n in nodes:
-	# 	if 0 < Px[n] < 200:
-
-
 
 	#TODO: find top progeny sizes, compare with e.g. indegree
 	# Px = {}
@@ -332,5 +328,5 @@ def main():
 	
 
 	if do_plot:
-		plotxy(indegs,Px)
+		plotxy(backbone_indegs,Px)
 main()
