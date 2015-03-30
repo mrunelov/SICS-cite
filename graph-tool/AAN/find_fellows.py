@@ -145,8 +145,8 @@ def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, pr
                 output="co-citation_betweenness.pdf") #vorder=vpa, 
 
 
-num_top = 1000
-with open("vpa.pickle","rb") as f:
+num_top = 2000
+with open("vpa-between.pickle","rb") as f:
     vpa = np.asarray(pickle.load(f))
     tp = find_fellows_in_top_scores(vpa,"betweenness",num_top,printstuff=False)
 

@@ -21,6 +21,7 @@ print "Loaded a graph with " + str(g.num_vertices()) + " nodes"
 #g = gt.GraphView(g, vfilt=gt.label_largest_component(g))
 
 #vp, ep = gt.betweenness(g)
+#vp, ep = gt.closeness(g)
 
 # TODO: find out if we can pickle betweenness scores with correct indexes
 # and then just load that array of floats
@@ -28,12 +29,18 @@ print "Loaded a graph with " + str(g.num_vertices()) + " nodes"
 #for b in vp.a:
     #betweens.append(b)
 
-with open("vpa.pickle","rb") as f:
-    vpa = np.asarray(pickle.load(f))
-top_vp = vpa.argsort()[::-1]#[:num_top]
+#with open("vpa-between.pickle","rb") as f:
+    #vpa = np.asarray(pickle.load(f))
 
-#with open("vpa.pickle","wb") as f:
+#closeness = []
+#for c in vp.a:
+    #closeness.append(c)
+#with open("vpa-closeness.pickle","wb") as f:
     #pickle.dump(betweens,f)
+    #pickle.dump(closeness,f)
+#print "vpa pickled!"
+
+top_vp = vpa.argsort()[::-1]#[:num_top]
 
 #with open("top_vp.pickle","wb") as f:
     #pickle.dump(top_vp,f)
