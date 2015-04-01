@@ -20,8 +20,10 @@ def plotxy(x,y):
 
 	#plt.title('')
 	plt.xlabel('Indegree')
-	plt.ylabel('Backbone progeny size')		
+	plt.ylabel('Backbone progeny size')
 	ax = plt.subplot()
+	ax.set_xscale('log')
+	ax.set_yscale('log')
 	ax.plot(x, y, 'go', alpha=0.3)
 	#ax.plot(ax.get_xlim(), ax.get_ylim(), ls="--",alpha=0.5,c='0.3')
 

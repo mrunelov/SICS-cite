@@ -29,7 +29,6 @@ def normalize_offsets(offsets):
 	min_value = min(offsets)
 	return [x - min_value for x in offsets]
 
-
 offsets = [4, 17, 23, 27, 33, 35, 37, 76, 77, 82, 84, 88, 90, 92]
 offsets = normalize_offsets(offsets)
 print offsets

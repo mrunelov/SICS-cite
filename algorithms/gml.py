@@ -38,9 +38,16 @@ def get_node(id, attrs=[]):
 	#	raise ValueError("Attributes must come in (key,value) pairs")
 	for i in range(0,len(attrs),2):
 		# OBS: encoding should be done before instead...
-		key = attrs[i].encode('utf-8')
-		value = attrs[i+1].encode('utf-8')
-		node += '      <data key="' + key + '">' + str(value) + '</data>\n'
+		key = attrs[i]
+		value = attrs[i+1]
+		if key == "authors" or key == "title":
+			try:
+				key = key.encode('utf-8') #.decode('utf-8')
+				#value = value.decode('utf-8')
+				value = value.encode('utf-8') #.decode('utf-8')
+			except UnicodeEncodeError as e:
+				print value
+		node += '      <data key="' + key + '">' + value + '</data>\n'
 	node += "    </node>\n"
 	return node
 def get_edge(id, u, v, attrs=[]):

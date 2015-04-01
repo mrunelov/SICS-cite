@@ -77,5 +77,5 @@ def build_co_citation_graph(G,dataset):
 	nx.write_graphml(cc, '../' + dataset + '/data/' + dataset + '-co-citation.graphml')
 	print "Done. Wrote a graph with " + str(cc.number_of_nodes()) + " nodes and " + str(cc.number_of_edges()) + " edges."
 
-G = get_gml_graph('AAN')
-build_co_citation_graph(G,'AAN')
+# G = get_gml_graph('AAN')
+# build_co_citation_graph(G,'AAN')

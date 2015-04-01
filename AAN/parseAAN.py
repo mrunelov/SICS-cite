@@ -16,6 +16,7 @@ from datetime import datetime
 
 inputdir = "rawdata/release/"
 datadir = "data/"
+dateformat = "%Y"
 
 def get_id_generator():
 	"""
@@ -90,7 +91,6 @@ def parse_citations():
 	print("Skipped forward-going edges: " + str(skipped_forward_edges))
 	print("Skipped N/A nodes (no date): " + str(skipped_NA_nodes))
 
-dateformat = "%Y"
 def is_backwards_in_time(u,v, dates):
 	global skipped_NA_nodes,skipped_forward_edges
 	if u in dates and v in dates and dates[u] is not "N/A" and dates[v] is not "N/A":
@@ -274,4 +274,32 @@ def authorid_author_map(base_dir):
 			authorid_to_name[data[0]] = data[1].rstrip()
 	return authorid_to_name
 
-parse_citations()
+def write_meta_CSV():
+	in_edges = defaultdict(list)
+	with open(inputdir + 'aps-dataset-citations-2013.csv') as infile:
+		next(infile) # skip headers in infile
+		for line in infile:
+			u,v = line.split(',')
+			u = u.strip()
+			v = v.strip()
+			in_edges[v].append(u)
+
+	meta = parse_meta()
+	num_cited_added = 0
+	with open('AAN-citations-with-date.csv','w+') as csv:
+		csv.write('"citing_doi","cited_doi","citation_date"\n') # write headers
+		for v, us in in_edges.iteritems():
+			# if len(us) <= 1000:
+			# 	continue
+			# else:
+			num_cited_added += 1
+			for u in us:
+				if u in meta and 'date' in meta[u]:
+					date_list = meta[u]['date'].split("-")
+					date = date_list[2] + "/" + date_list[1] + "/" + date_list[0] # dd/MM/yyyy
+					line = u + "," + meta[v]['title'] + "," + date + "\n"
+					csv.write(line)
+			if num_cited_added > 20:
+				return
+
+# parse_citations()

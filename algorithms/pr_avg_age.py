@@ -12,12 +12,13 @@ from collections import Counter, defaultdict, deque
 from sets import Set
 from datetime import datetime
 
-dateformat = "%Y-%m-%d"
+#dateformat = "%Y-%m-%d"
+dateformat = "%Y"
 epoch = datetime(1890,1,1) # some year older than the oldest publication
 def pr_avg_age(G):
-	#pr = nx.pagerank(G, alpha=0.5, max_iter=12)
-	h,a = hits(G) # float division by zero
-	top_pr = Counter(a).most_common(10) # top 100 pageranks
+	pr = nx.pagerank(G, alpha=0.5, max_iter=20)
+	#h,a = hits(G) # float division by zero
+	top_pr = Counter(pr).most_common(10) # top 100 pageranks
 	avg_age = 0
 	for n, rank in top_pr:
 		date = datetime.strptime(G.node[n]['date'],dateformat)
@@ -34,6 +35,9 @@ def secs_since_epoch(datestr):
 
 def main():
 	G = get_gml_graph(dataset) # load networkx graph
+	for n,attrs in G.nodes_iter(data=True):
+		if 'date' not in attrs:
+			print n
 
     # KDD: (also change from years to times in plotting parameter)
 	# years = range(1992,2004,1)
@@ -55,7 +59,7 @@ def main():
 
 	pr_ages = []
 	prev_avg = 1e15
-	cutoff = secs_since_epoch("1980-01-01")
+	cutoff = secs_since_epoch("1920") # for AAN.   #("1980-01-01")
 	G = G.subgraph([node for node, attrs in G.nodes_iter(data=True) if secs_since_epoch(attrs['date']) >= cutoff])
 	for t in times[::-1]:
 		G = G.subgraph([node for node, attrs in G.nodes_iter(data=True) if secs_since_epoch(attrs['date']) <= t])

@@ -43,18 +43,43 @@ def write_meta_CSV():
 	with open('APS-citations-with-date.csv','w+') as csv:
 		csv.write('"citing_doi","cited_doi","citation_date"\n') # write headers
 		for v, us in in_edges.iteritems():
-			if len(us) <= 1000:
-				continue
+			# if len(us) <= 1000:
+			# 	continue
+			# else:
+			num_cited_added += 1
+			for u in us:
+				if u in meta and 'date' in meta[u]:
+					date_list = meta[u]['date'].split("-")
+					date = date_list[2] + "/" + date_list[1] + "/" + date_list[0] # dd/MM/yyyy
+					line = u + "," + meta[v]['title'] + "," + date + "\n"
+					csv.write(line)
+			if num_cited_added > 20:
+				return
+
+def preprocess_CSV():
+	num_rows = 5934522
+	half = 5934522/2
+	prev_target = ""
+	with open('data/APS-citations-with-date.csv','r') as csv, \
+	    open('data/APS-citations-with-date-part1.csv','w+') as csv1, \
+	    open('data/APS-citations-with-date-part2.csv','w+') as csv2:
+		i = 0
+		for line in csv:
+			if i < half:
+				csv1.write(line)
+				if i == half -1:
+					prev_target = line.split(",")[1]
+			elif i == half: # special case, don't split time series over multiple files!
+				target = line.split(",")[1]
+				while target == prev_target:
+					csv1.write(line)
+					line = csv.next()
+					target = line.split(",")[1]
+				csv2.write(line) # write first non-matching to second file
 			else:
-				num_cited_added += 1
-				for u in us:
-					if u in meta and 'date' in meta[u]:
-						date_list = meta[u]['date'].split("-")
-						date = date_list[2] + "/" + date_list[1] + "/" + date_list[0] # dd/MM/yyyy
-						line = u + "," + meta[v]['title'] + "," + date + "\n"
-						csv.write(line)
-				if num_cited_added > 20:
-					return
+				csv2.write(line)
+			i += 1
+
 
 def parse_citations():
 	num_nodes = 0
@@ -150,4 +175,5 @@ def write_edges(edges, graph):
 	return num_edges
 
 #parse_citations()
-write_meta_CSV()
+#write_meta_CSV()
+preprocess_CSV()
