@@ -1,7 +1,9 @@
+import graph_tool.all as gt
 import pybursts
+import sys
 
-def betweenness_over_time():
-	pass
+#sys.path.append("/home/mrunelov/KTH/exjobb/SICS-cite/algorithms/")
+#from graphutils import get_gml_graph
 
 def burst(offsets, s=2, gamma=0.1):
 	"""
@@ -25,13 +27,31 @@ def burst(offsets, s=2, gamma=0.1):
 	"""
 	print pybursts.kleinberg(offsets, s=s, gamma=gamma)
 
-def normalize_offsets(offsets):
-	min_value = min(offsets)
-	return [x - min_value for x in offsets]
 
+def normalize_offsets(offsets):
+    min_value = min(offsets)
+    return [x - min_value for x in offsets]
+
+
+def get_offsets():
+    g = gt.load_graph("AAN-preprocessed.xml")
+    dates = g.vertex_properties["date"]
+    i = 0
+    for v in g.vertices():
+        offsets = []
+        for e in v.in_edges():
+            offsets.append(int(dates[e.source()])) 
+        print sorted(offsets)
+        i += 1
+        if i > 5:
+            break
+
+
+print "burst example:"
+>>>>>>> 7c069df650a4d293695c4c38a310aa959bf766b7:graph-tool/AAN/burst.py
 offsets = [4, 17, 23, 27, 33, 35, 37, 76, 77, 82, 84, 88, 90, 92]
 offsets = normalize_offsets(offsets)
 print offsets
 burst(offsets)
-
-
+print "##################################"
+get_offsets()
