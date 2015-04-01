@@ -30,7 +30,7 @@ def create_csv_all_AAN():
 			csv.write(line)
 
 
-def load_progeny_sizes():
+def load_progeny_sizes(normalize_values=False):
 	G = get_gml_graph("AAN")
 	Px_map = {}
 	Px,nodes = get_Px()
@@ -40,13 +40,14 @@ def load_progeny_sizes():
 		else:
 			title = G.node[nodes[i]]["title"].strip().replace(",","")
 			Px_map[title] = int(Px[i])
-	M = max(Px_map.values())
-    	for k in Px_map.keys():
+	if normalize_values:
+		M = max(Px_map.values())
+		for k in Px_map.keys():
 			Px_map[k] /= float(M)
 	return Px_map
 
 
-def load_burst_map():
+def load_burst_map(normalize_values=False):
 	# Word,Level,Weight,Length,Start,End (word is title.strip().replace(",",""))
 	burst_map = {}
 	with open(burstfile, "r") as f:
@@ -54,14 +55,15 @@ def load_burst_map():
 		for line in f:
 			data = line.strip().split(",")
 			burst_map[data[0]] = float(data[2])
-	M = max(burst_map.values())
-        for k in burst_map.keys():
+	if normalize_values:
+		M = max(burst_map.values())
+		for k in burst_map.keys():
 			burst_map[k] /= M
 	return burst_map
 
 
 
-def load_csv_as_map(filename, normalize_values=True):
+def load_csv_as_map(filename, normalize_values=False):
 	"""
 	Loads a csv file with two values into a dictionary
 	"""
