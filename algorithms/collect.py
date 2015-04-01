@@ -33,7 +33,7 @@ def load_burst_map():
 
 
 
-def load_csv_as_map(filename):
+def load_csv_as_map(filename, normalize_values=False):
 	"""
 	Loads a csv file with two values into a dictionary
 	"""
@@ -42,6 +42,11 @@ def load_csv_as_map(filename):
 		for line in f:
 			key,value = line.strip().split(",")
 			csv_map[key] = value
+        if normalize_values:
+            M = max(csv_map.values())
+            for k in csv_map.keys():
+                csv_map[k] /= M
+
 	print "Loaded " + str(len(csv_map.keys())) + " lines"
 	return csv_map
 
