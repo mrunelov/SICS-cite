@@ -1,3 +1,6 @@
+from backbone import get_Px
+from graphutils import get_gml_graph
+
 AAN_dir = '../AAN/'
 burstfile = AAN_dir + 'data/Burst-detection-analysis-AAN.csv'
 metrics_dir = '../graph-tool/AAN/'
@@ -8,17 +11,39 @@ def create_csv_all_AAN():
 	i = load_csv_as_map(metrics_dir + "indegs.csv")
 	h = load_csv_as_map(metrics_dir + "hits.csv")
 	bursts = load_burst_map()
+	progeny_sizes = load_progeny_sizes()
 
 	with open("all_AAN.csv", "w+") as csv:
-		csv.write("title,indegree,betweenness,hits,burst_weight\n")
+		csv.write("title,indegree,betweenness,hits,burst_weight,progeny_size\n")
 		for k in b.keys():
 			line = k + "," + str(i[k]) + "," + str(b[k]) + "," + str(h[k]) + ","
 			if k in bursts:
-				line += bursts[k]
+				line += str(bursts[k])
+			else:
+				line += "0"
+			line += ","
+			if k in progeny_sizes:
+				line += str(progeny_sizes[k])
 			else:
 				line += "0"
 			line += "\n"
 			csv.write(line)
+
+
+def load_progeny_sizes():
+	G = get_gml_graph("AAN")
+	Px_map = {}
+	Px,nodes = get_Px()
+	for i in range(len(nodes)):
+		if "title" not in G.node[nodes[i]]:
+			print "Skipping node..."
+		else:
+			title = G.node[nodes[i]]["title"].strip().replace(",","")
+			Px_map[title] = int(Px[i])
+	M = max(Px_map.values())
+    	for k in Px_map.keys():
+			Px_map[k] /= float(M)
+	return Px_map
 
 
 def load_burst_map():
@@ -28,12 +53,15 @@ def load_burst_map():
 		next(f) # skip header
 		for line in f:
 			data = line.strip().split(",")
-			burst_map[data[0]] = data[2]
+			burst_map[data[0]] = float(data[2])
+	M = max(burst_map.values())
+        for k in burst_map.keys():
+			burst_map[k] /= M
 	return burst_map
 
 
 
-def load_csv_as_map(filename, normalize_values=False):
+def load_csv_as_map(filename, normalize_values=True):
 	"""
 	Loads a csv file with two values into a dictionary
 	"""
@@ -41,7 +69,7 @@ def load_csv_as_map(filename, normalize_values=False):
 	with open(filename, "r") as f:
 		for line in f:
 			key,value = line.strip().split(",")
-			csv_map[key] = value
+			csv_map[key] = float(value)
         if normalize_values:
             M = max(csv_map.values())
             for k in csv_map.keys():
