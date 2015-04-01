@@ -17,9 +17,15 @@ authors = g.vertex_properties["authors"]
 #in_degs = g.degree_property_map("in")
 #top_in_degs = in_degs.a.argsort()[::-1]
 eig, auths, hubs = gt.hits(g)
-top_auths = auths.a.argsort()[::-1][:num_top]
+top_auths = auths.a.argsort()[::-1]#[:num_top]
 top_nodes = [g.vertex(v) for v in top_auths]
 bg = gt.GraphView(g, vfilt=lambda v: v in top_auths)
+
+with open("hits.csv", "w+") as csv:
+    for x in top_auths:
+        v = g.vertex(x)
+        line = titles[v].strip().replace(",","") + "," + str(auths[v]) + "\n"
+        csv.write(line)
 
 i = 0
 fellow_articles = 0
@@ -33,6 +39,7 @@ for i in range(num_top):
     print "Authority score: " + str(auths[v])
     author_str = authors[v]
     author_list = author_str.split(";")
+    # TODO: old code. see betweenness.py for how it's done now
     found_fellow = False
     for a in author_list:
         if is_fellow(a,reverse=True):

@@ -29,8 +29,8 @@ print "Loaded a graph with " + str(g.num_vertices()) + " nodes"
 #for b in vp.a:
     #betweens.append(b)
 
-#with open("vpa-between.pickle","rb") as f:
-    #vpa = np.asarray(pickle.load(f))
+with open("vpa-between.pickle","rb") as f:
+    vpa = np.asarray(pickle.load(f))
 
 #closeness = []
 #for c in vp.a:
@@ -41,6 +41,12 @@ print "Loaded a graph with " + str(g.num_vertices()) + " nodes"
 #print "vpa pickled!"
 
 top_vp = vpa.argsort()[::-1]#[:num_top]
+
+with open("betwenness.csv","w+") as csv:
+    for i,v_i in enumerate(top_vp):
+        v = g.vertex(v_i)
+        line = titles[v].strip().replace(",","") + "," + str(vpa[v]) + "\n"
+        csv.write(line)
 
 #with open("top_vp.pickle","wb") as f:
     #pickle.dump(top_vp,f)
@@ -81,8 +87,8 @@ for i,v_i in enumerate(top_vp):
         break
     print "###################################################"
     i += 1
-    #if i > 10:
-        #break
+
+
 print "Fellow articles: " + str(fellow_articles) + " / " + str(num_top)
 print "Fellows remaining: " + str(fellows)
 

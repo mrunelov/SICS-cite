@@ -145,17 +145,17 @@ def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, pr
                 output="co-citation_betweenness.pdf") #vorder=vpa, 
 
 
-num_top = 2000
-with open("vpa-between.pickle","rb") as f:
-    vpa = np.asarray(pickle.load(f))
-    tp = find_fellows_in_top_scores(vpa,"betweenness",num_top,printstuff=False)
+#num_top = 2000
+#with open("vpa-between.pickle","rb") as f:
+    #vpa = np.asarray(pickle.load(f))
+    #tp = find_fellows_in_top_scores(vpa,"betweenness",num_top,printstuff=False)
 
-g = gt.load_graph("AAN-preprocessed.xml")
-in_degs = g.degree_property_map("in")
-tp = find_fellows_in_top_scores(in_degs.a,"indegree",num_top,printstuff=False)
+#g = gt.load_graph("AAN-preprocessed.xml")
+#in_degs = g.degree_property_map("in")
+#tp = find_fellows_in_top_scores(in_degs.a,"indegree",num_top,printstuff=False)
 
-eig, auths, hubs = gt.hits(g)
-tp = find_fellows_in_top_scores(auths.a,"HITS",num_top,printstuff=False)
+#eig, auths, hubs = gt.hits(g)
+#tp = find_fellows_in_top_scores(auths.a,"HITS",num_top,printstuff=False)
 
 
 

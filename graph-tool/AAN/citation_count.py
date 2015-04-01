@@ -10,7 +10,16 @@ in_degs = g.degree_property_map("in")
 top_in_degs = in_degs.a.argsort()[::-1]
 
 titles = g.vertex_properties["title"]
+
 authors = g.vertex_properties["authors"]
+
+# write title-->author to file:
+with open("indegs.csv", "w+") as csv:
+    csv.write("title,indegree\n")
+    for x in top_in_degs:
+        line = titles[g.vertex(x)].strip().replace(",","") + "," + str(in_degs.a[x]) + "\n"
+        csv.write(line)
+    
 
 top_authors = []
 fellow_articles = 0
@@ -25,6 +34,8 @@ for i in range(num_top):
     print "Authors: " + authors[g.vertex(node)]
     auths = authors[g.vertex(node)]
     auths = auths.split(";")
+    # TODO: old code. the new one is "find_fellow" and returns an index. 
+    # see betweenness.py for usage hints
     found_fellow = False
     for a in auths:
         if is_fellow(a,reverse=True):
