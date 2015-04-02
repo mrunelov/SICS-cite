@@ -1,4 +1,4 @@
-from backbone import get_Px
+from backbone import get_Px, get_impact_graph
 from graphutils import get_gml_graph
 
 AAN_dir = '../AAN/'
@@ -12,6 +12,7 @@ def create_csv_all_AAN():
 	h = load_csv_as_map(metrics_dir + "hits.csv")
 	bursts = load_burst_map()
 	progeny_sizes = load_progeny_sizes()
+	# impacts = load_impacts()
 
 	with open("all_AAN.csv", "w+") as csv:
 		csv.write("title,indegree,betweenness,hits,burst_weight,progeny_size\n")
@@ -26,6 +27,11 @@ def create_csv_all_AAN():
 				line += str(progeny_sizes[k])
 			else:
 				line += "0"
+			# line += ","
+			# if k in impacts:
+			# 	line += str(impacts[k])
+			# else:
+			# 	line += "0"
 			line += "\n"
 			csv.write(line)
 
@@ -45,6 +51,29 @@ def load_progeny_sizes(normalize_values=False):
 		for k in Px_map.keys():
 			Px_map[k] /= float(M)
 	return Px_map
+
+
+# Not very useful since impact sums to 1, but can be used in other ways later maybe
+# def load_impacts(normalize_values=False):
+# 	G = get_impact_graph()
+# 	impact_map = {}
+# 	num_skipped = 0
+# 	for n in G.nodes_iter(data=True):
+# 		if "label" not in n[1]: # called label in this graph. it should be fixed..
+# 			print n
+# 			num_skipped += 1
+# 			# print "Skipping node..."
+# 		else:
+# 			pred = G.predecessors(n[0])
+# 			cumulative_impact = sum([G[x][n[0]]["impact"] for x in pred])
+# 			title = n[1]["label"].strip().replace(",","")
+# 			impact_map[title] = cumulative_impact
+# 	if normalize_values:
+# 		M = max(impact_map.values())
+# 		for k in impact_map.keys():
+# 			impact_map[k] /= float(M)
+# 	print "Done loading impacts. Skipped " + str(num_skipped) + " nodes."
+# 	return impact_map
 
 
 def load_burst_map(normalize_values=False):

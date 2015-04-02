@@ -161,7 +161,7 @@ def calculate_all_impacts(G):
 		nx.write_gpickle(G, f)
 	return G
 
-def get_impact_graph(G):
+def get_impact_graph(G=None):
 	if os.path.isfile('pickles/' + dataset + '-with-impacts.pickle'):
 		with open('pickles/' + dataset + '-with-impacts.pickle', 'rb') as f:
 			print("Reading pickled graph with impacts...")
