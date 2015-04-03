@@ -3,6 +3,7 @@
 *.xml
 *.graphml
 rawdata/
+*.csv
 
 *.txt
 *.pyc
