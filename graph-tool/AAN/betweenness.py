@@ -20,7 +20,7 @@ in_degs = g.degree_property_map("in")
 print "Loaded a graph with " + str(g.num_vertices()) + " nodes"
 #g = gt.GraphView(g, vfilt=gt.label_largest_component(g))
 
-#vp, ep = gt.betweenness(g)
+vp, ep = gt.betweenness(g)
 #vp = gt.closeness(g)
 
 # TODO: find out if we can pickle betweenness scores with correct indexes
