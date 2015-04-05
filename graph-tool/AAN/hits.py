@@ -22,7 +22,7 @@ top_nodes = [g.vertex(v) for v in top_auths]
 bg = gt.GraphView(g, vfilt=lambda v: v in top_auths)
 
 with open("hits.csv", "w+") as csv:
-    csv.write("title,gt_index,hits_auth")
+    csv.write("title,gt_index,hits_auth\n")
     #for x in top_auths:
     i = 0
     for n in g.vertices():
