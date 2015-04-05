@@ -8,7 +8,9 @@ import numpy as np
 from sets import Set
 from logit import logit
 
-num_top = 20
+# There are 1667 / 18158 fellow-articles in total
+num_top = 1667
+
 
 def parse_names(fullname, has_firstname=True, reverse=False):
     if fullname.count(",") == 1:
@@ -81,21 +83,6 @@ def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, pr
     authors = g.vertex_properties["authors"]
     #print "Loaded a graph with " + str(g.num_vertices()) + " nodes"
 
-    # TODO: find out if we can pickle betweenness scores with correct indexes
-    # and then just load that array of floats
-    #betweens = []
-    #for b in vp.a:
-        #betweens.append(b)
-
-    #with open("vpa.pickle","wb") as f:
-        #pickle.dump(betweens,f)
-
-    #with open("top_vp.pickle","wb") as f:
-        #pickle.dump(top_vp,f)
-
-    #with open("top_vp.pickle","rb") as f:
-        #top_vp = pickle.load(f)
-
     top_v = scores.argsort()[::-1][:num_top]
 
     i = 0
@@ -121,8 +108,8 @@ def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, pr
                 fellow_articles += 1
                 if fellow_index in fellows:
                     fellows.remove(fellow_index)
-        if len(fellows) == 1: # found all fellows except Tou Ng
-            break
+        #if len(fellows) == 1: # found all fellows except Tou Ng
+            #break
         i += 1
         #if i > 10:
             #break
@@ -147,79 +134,85 @@ def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, pr
                 vcmap=matplotlib.cm.gist_heat,
                 output="co-citation_betweenness.pdf") #vorder=vpa, 
 
+def main():
+    # build score array with logit coefficients
+    lp = logit()
+    with open("vpa-between.pickle","rb") as f:
+        vpa = np.asarray(pickle.load(f))
+        vpa *= lp["betweenness"]
+        
+    g = gt.load_graph("AAN-preprocessed.xml")
+    in_degs = g.degree_property_map("in")
+    vpa += in_degs.a*lp["indegree"]
 
-# build score array with logit coefficients
-lp = logit()
-with open("vpa-between.pickle","rb") as f:
-    vpa = np.asarray(pickle.load(f))
-    vpa *= lp["betweenness"]
+    #eig, auths, hubs = gt.hits(g)
+    #vpa += auths.a*lp["hits"]
+
+
+    # Generate Px and burst pickles with correct graph-tool ordering
+    # (need to match csv titles to graph-tool titles)
+    # Unfortunately this is O(n^2) since there's not O(1) attribute lookup in graph-tool
+    #titles = g.vertex_properties["title"]
+    ##Px = g.new_vertex_property("int")
+    #bursts = g.new_vertex_property("double")
+    #i = 1
+    #with open("all_AAN_with_fellows.csv", "r") as csv:
+        #for line in csv:
+            #print "Checking line " + str(i) + "\r",
+            #values = line.split(",")
+            #title = values[0]
+            ##px = values[5]
+            #burst = values[4]
+            #for v in g.vertices():
+                #if title == titles[v]:
+                    ##Px[v] = px
+                    #bursts[v] = burst
+            #i += 1
+
+    #Px_list = []
+    #burst_list = []
+    #for px in Px.a:
+        #Px_list.append(px)
+    #with open("Px_list.pickle","wb") as f:
+        #pickle.dump(Px_list,f)
+    #print "wrote Px_list to pickle!"
+
+    #for b in bursts.a:
+        #burst_list.append(b)
+    #with open("burst_list.pickle","wb") as f:
+        #pickle.dump(burst_list,f)
+    #print "wrote burst_list to pickle!"
+
+
+    with open("Px_list.pickle","rb") as f:
+        pxa = np.asarray(pickle.load(f))
+    vpa += pxa*lp["progeny_size"]
+
+    with open("burst_list.pickle","rb") as f:
+        ba = np.asarray(pickle.load(f))
+    vpa += ba*lp["burst_weight"]
+
+    tp = find_fellows_in_top_scores(vpa,"All with logit coefficients",num_top,printstuff=False)
+
+    tp = find_fellows_in_top_scores(pxa, "progeny size", num_top, printstuff=False)
+
+    with open("vpa-between.pickle","rb") as f:
+        vpa = np.asarray(pickle.load(f))
+        tp = find_fellows_in_top_scores(vpa,"betweenness",num_top,printstuff=False)
     
-g = gt.load_graph("AAN-preprocessed.xml")
-in_degs = g.degree_property_map("in")
-vpa += in_degs.a*lp["indegree"]
-
-eig, auths, hubs = gt.hits(g)
-vpa += auths.a*lp["hits"]
+    with open("vpa-closeness.pickle","rb") as f:
+        vpa = np.asarray(pickle.load(f))
+        tp = find_fellows_in_top_scores(vpa,"closeness",num_top,printstuff=False)
 
 
-# Generate Px and burst pickles with correct graph-tool ordering
-# (need to match csv titles to graph-tool titles)
-# Unfortunately this is O(n^2) since there's not O(1) attribute lookup in graph-tool
-#titles = g.vertex_properties["title"]
-##Px = g.new_vertex_property("int")
-#bursts = g.new_vertex_property("double")
-#i = 1
-#with open("all_AAN_with_fellows.csv", "r") as csv:
-    #for line in csv:
-        #print "Checking line " + str(i) + "\r",
-        #values = line.split(",")
-        #title = values[0]
-        ##px = values[5]
-        #burst = values[4]
-        #for v in g.vertices():
-            #if title == titles[v]:
-                ##Px[v] = px
-                #bursts[v] = burst
-        #i += 1
+    g = gt.load_graph("AAN-preprocessed.xml")
+    in_degs = g.degree_property_map("in")
+    tp = find_fellows_in_top_scores(in_degs.a,"indegree",num_top,printstuff=False)
 
-#Px_list = []
-#burst_list = []
-#for px in Px.a:
-    #Px_list.append(px)
-#with open("Px_list.pickle","wb") as f:
-    #pickle.dump(Px_list,f)
-#print "wrote Px_list to pickle!"
+    eig, auths, hubs = gt.hits(g)
+    tp = find_fellows_in_top_scores(auths.a,"HITS",num_top,printstuff=False)
 
-#for b in bursts.a:
-    #burst_list.append(b)
-#with open("burst_list.pickle","wb") as f:
-    #pickle.dump(burst_list,f)
-#print "wrote burst_list to pickle!"
-
-
-with open("Px_list.pickle","rb") as f:
-    pxa = np.asarray(pickle.load(f))
-vpa += pxa*lp["progeny_size"]
-
-with open("burst_list.pickle","rb") as f:
-    ba = np.asarray(pickle.load(f))
-vpa += ba*lp["burst_weight"]
-
-
-tp = find_fellows_in_top_scores(vpa,"All with logit coefficients",num_top,printstuff=False)
-
-with open("vpa-between.pickle","rb") as f:
-    vpa = np.asarray(pickle.load(f))
-    tp = find_fellows_in_top_scores(vpa,"betweenness",num_top,printstuff=False)
-
-g = gt.load_graph("AAN-preprocessed.xml")
-in_degs = g.degree_property_map("in")
-tp = find_fellows_in_top_scores(in_degs.a,"indegree",num_top,printstuff=False)
-
-eig, auths, hubs = gt.hits(g)
-tp = find_fellows_in_top_scores(auths.a,"HITS",num_top,printstuff=False)
-
-
+main()
 
 #candidates = ["Kaplan", "Mercer", "Moore", "Tou Ng", "Palmer"]
 #for c in candidates:
