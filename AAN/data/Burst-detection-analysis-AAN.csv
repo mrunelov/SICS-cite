@@ -1,0 +1,1878 @@
+Word,Level,Weight,Length,Start,End
+Discriminative Training And Maximum Entropy Models For Statistical Machine Translation,1,22.362692640501887,4,2005,2008
+Efficient Graph-Based Semi-Supervised Learning of Structured Tagging Models,1,4.264031802269959,3,2011,
+Practical Experiments With Regular Approximation Of Context-Free Languages,1,5.617921802494623,5,2001,2005
+Operating Statistics For The Transformational Question Answering System,1,5.540403469102257,15,1981,1995
+(Meta-) Evaluation of Machine Translation,1,6.839495993887395,2,2008,2009
+The Parallel Grammar Project,1,4.120654597292285,4,2007,2010
+MUC-5 Evaluation Metrics,1,6.131813887973298,8,1993,2000
+A Generative Constituent-Context Model For Improved Grammar Induction,1,6.94495965931041,6,2004,2009
+A Perspective On Word Sense Disambiguation Methods And Their Evaluation,1,6.882632149829245,8,1997,2004
+A Simple Rule-Based Part Of Speech Tagger,1,48.875157560431184,11,1993,2003
+Resolving Ellipsis In Clarification,1,5.498102807754805,5,2001,2005
+Japanese Named Entity Extraction Evaluation - Analysis Of Results -,1,4.340395445381384,3,2001,2003
+Tuning Support Vector Machines For Biomedical Named Entity Recognition,1,6.798919581403576,3,2003,2005
+Multi-Level Structured Models for Document-Level Sentiment Classification,1,4.264031802269963,3,2011,
+Discovery Procedures For Sublanguage Selectional Patterns: Initial Experiments,1,15.601240122039854,8,1987,1994
+Shallow Semantic Parsing Using Support Vector Machines,1,10.341000906992306,4,2005,2008
+Discriminative Word Alignment With Conditional Random Fields,1,5.559409105005406,4,2007,2010
+Some Pragmatic Issues In The Planning Of Definite And Indefinite Noun Phrases,1,4.0086893521260025,13,1986,1998
+If The Parser Fails,1,4.114504018769315,6,1980,1985
+A Maximum Entropy Approach to Chinese Word Segmentation,1,5.272904130131053,5,2006,2010
+Redundancy In Collaborative Dialogue,1,7.058051891188079,9,1993,2001
+Improving Statistical Natural Language Translation with Categories and Rules,1,4.290024910845865,6,1999,2004
+A Regression Model of Adjective-Noun Compositionality in Distributional Semantics,1,8.173964170924107,3,2011,
+Fast Consensus Decoding over Translation Forests,1,4.546950151529666,2,2010,2011
+Automatic Processing Of Large Corpora For The Resolution Of Anaphora References,1,6.003696180665945,12,1990,2001
+Thumbs Up? Sentiment Classification Using Machine Learning Techniques,1,9.843697157220806,2,2010,2011
+Conditional Structure Versus Conditional Estimation In NLP Models,1,7.166539802658214,6,2003,2008
+Focusing In Dialog,1,5.084579308583615,16,1978,1993
+Semantic Coherence Scoring Using An Ontology,1,4.323594549853175,2,2003,2004
+Mixed-Initiative Development Of Language Processing Systems,1,7.804255770076411,8,1999,2006
+Measuring Distributional Similarity in Context,1,6.383377016879763,2,2012,
+Approximating Context-Free Grammars With A Finite-State Calculus,1,4.022696494387332,6,1998,2003
+A Probability Model To Improve Word Alignment,1,12.6431895247189,5,2003,2007
+Efficient Third-Order Dependency Parsers,1,15.321607920721426,3,2011,
+A Simple Reconstruction Of GPSG,1,9.136228275824587,6,1987,1992
+Two Statistical Parsing Models Applied To The Chinese Treebank,1,6.64736711711881,5,2001,2005
+A Decoder For Syntax-Based Statistical MT,1,6.860082449370239,3,2003,2005
+Noun Classification From Predicate-Argument Structures,1,21.133237797959342,9,1991,1999
+One Sense Per Discourse,1,11.765276472566784,11,1994,2004
+Problem Solving Applied To Language Generation,1,4.12084445036185,6,1980,1985
+Methods For The Qualitative Evaluation Of Lexical Association Measures,1,5.681212088311542,5,2002,2006
+Improved Alignment Models For Statistical Machine Translation,1,22.747586307130877,6,2000,2005
+Using Syntax to Improve Word Alignment Precision for Syntax-Based Machine Translation,1,5.4302397580365085,5,2009,
+Improving Name Tagging By Reference Resolution And Relation Detection,1,4.3177040909056,4,2005,2008
+Machine Learning For Coreference Resolution: From Local Classification To Global Ranking,1,5.355328879903647,3,2006,2008
+Optimizing Chinese Word Segmentation for Machine Translation Performance,1,6.06293212297714,5,2009,
+A Mention-Synchronous Coreference Resolution Algorithm Based On The Bell Tree,1,6.200462963894617,5,2005,2009
+Evaluation Of A Practical Interlingua For Task-Oriented Dialogue,1,3.8554367202582305,2,2001,2002
+SemEval-2013 Task 7: The Joint Student Response Analysis and 8th Recognizing Textual Entailment Challenge,1,4.928162209799619,1,2013,
+Application-driven Statistical Paraphrase Generation,1,7.1752714288792205,4,2010,
+SemEval-2010 Task 17: All-words Word Sense Disambiguation on a Specific Domain,1,5.701930233687445,1,2010,2010
+Improved Statistical Machine Translation Using Monolingually-Derived Paraphrases,1,4.139072798522578,4,2010,
+Why Doesn't EM Find Good HMM POS-Taggers?,1,8.114086606323236,4,2008,2011
+Poor Estimates Of Context Are Worse Than None,1,9.051975448336838,7,1991,1997
+Multiple Aspect Summarization Using Integer Linear Programming,1,4.928162209799619,1,2013,
+Parsing Idioms In Lexicalized TAGs,1,7.840913005514254,10,1989,1998
+From Discourse Structures To Text Summaries,1,13.645318393683624,7,1998,2004
+Reasoning On A Highlighted User Model To Respond To Misconceptions,1,4.048491825680476,11,1988,1998
+Frustratingly Easy Domain Adaptation,1,8.464396064266086,6,2008,
+Detecting Speculations and their Scopes in Scientific Text,1,5.143866734245528,4,2010,
+Deducing Linguistic Structure From The Statistics Of Large Corpora,1,11.616610368728178,10,1991,2000
+Part-Of-Speech Induction From Scratch,1,5.791360671507969,8,1993,2000
+Unification-Based Semantic Interpretation In The BBN Spoken Language System,1,4.59754406540929,4,1990,1993
+But Dictionaries Are Data Too,1,4.067425379984813,11,1994,2004
+Prosodic Inheritance And Morphological Generalisations,1,5.58836994609437,6,1992,1997
+Automatic Identification Of Non-Compositional Phrases,1,6.330850145086723,5,2003,2007
+Flexible Parsing,1,15.316075460060427,15,1981,1995
+Machine Translation Based On Logically Isomorphic Montague Grammars,1,5.937152210022131,9,1983,1991
+Joint Models for Chinese POS Tagging and Dependency Parsing,1,5.307215445427925,2,2012,
+Aligning A Parallel English-Chinese Corpus Statistically With Lexical Criteria,1,11.012627722636172,12,1994,2005
+Linguistic Regularities in Continuous Space Word Representations,1,4.380526686543082,1,2013,
+Linguistic Analysis Of Natural Language Communication With Computers,1,12.768920566096572,9,1981,1989
+A Uniform Architecture For Parsing And Generation,1,26.133289515207167,8,1989,1996
+Relating Probabilistic Grammars And Automata,1,3.8917711938960715,5,2000,2004
+Automatic Extraction Of Subcategorization Frames For Czech,1,5.719457021856173,7,2000,2006
+Incorporating Non-Local Information Into Information Extraction Systems By Gibbs Sampling,1,12.559677535224647,3,2011,
+GAMBL Genetic Algorithm Optimization Of Memory-Based WSD,1,6.1296532749908,4,2005,2008
+Machine Translation System Combination using ITG-based Alignments,1,3.845707408879532,2,2009,2010
+Learning Semantic Classes For Word Sense Disambiguation,1,4.75313569480158,2,2006,2007
+A Computational Model Of Language Performance: Data Oriented Parsing,1,7.8358451791385715,9,1993,2001
+Joint Parsing and Named Entity Recognition,1,8.402042774212205,2,2010,2011
+Abstract Generation Based On Rhetorical Structure Extraction,1,7.6283572133271225,7,1996,2002
+Concise Integer Linear Programming Formulations for Dependency Parsing,1,10.716726649521856,4,2010,
+The Senseval-3 English Lexical Sample Task,1,10.129443422222977,3,2005,2007
+Pattern Abstraction And Term Similarity For Word Sense Disambiguation: IRST At Senseval-3,1,5.0413495020036265,3,2005,2007
+Global Learning of Typed Entailment Rules,1,7.7105775331972835,2,2012,
+Distributional Measures Of Concept-Distance: A Task-Oriented Evaluation,1,4.198628203203356,4,2007,2010
+What's In A Translation Rule?,1,4.933349333229932,3,2011,
+Sentence Fusion via Dependency Graph Compression,1,4.2913733281731705,3,2009,2011
+Assigning Time-Stamps To Event-Clauses,1,4.313683889878725,3,2006,2008
+The CMU Air Travel Information Service: Understanding Spontaneous Speech,1,6.967661104540273,5,1990,1994
+An Algorithm For Finding Noun Phrase Correspondences In Bilingual Corpora,1,15.362567748503748,12,1993,2004
+Utilizing Statistical Dialogue Act Processing In VERBMOBIL,1,6.687274223358569,9,1995,2003
+Learning Sentential Paraphrases from Bilingual Parallel Corpora for Text-to-Text Generation,1,4.4225559690237795,2,2012,
+Generating Contextually Appropriate Intonation,1,4.116031214603927,7,1994,2000
+Adaptive Chinese Word Segmentation,1,4.3248639360904715,5,2005,2009
+Resolving Bridging References In Unrestricted Text,1,4.365458095531776,10,1998,2007
+Bayesian Word Sense Induction,1,8.5988710896751,4,2010,
+Multi-Document Summarization Of Evaluative Text,1,3.9847601829116486,4,2008,2011
+Learning Features That Predict Cue Usage,1,5.745700718019949,8,1998,2005
+An Experimental Parser For Systemic Grammars,1,5.937068482773579,4,1989,1992
+A Boosting Algorithm For Classification Of Semi-Structured Text,1,7.762475825585996,5,2005,2009
+Tracking Point Of View In Narrative,1,4.277512760701441,6,1999,2004
+An Efficient Easily Adaptable System For Interpreting Natural Language Queries,1,4.6263669851096525,7,1982,1988
+Task-oriented Evaluation of Syntactic Parsers and Their Representations,1,3.8665694844040095,3,2009,2011
+Discriminative Reranking For Natural Language Parsing,1,7.056342942023189,3,2006,2008
+Tagging For Learning: Collecting Thematic Relations From Corpus,1,9.672126341231476,4,1991,1994
+Constituent Boundary Parsing For Example-Based Machine Translation,1,5.994928814401517,8,1996,2003
+Using Bilingual Knowledge and Ensemble Techniques for Unsupervised Chinese Sentiment Analysis,1,3.9787412877825705,3,2009,2011
+Unsupervised Part-of-Speech Tagging with Bilingual Graph-Based Projections,1,13.8632511241094,3,2011,
+Clustering Verbs Semantically According To Their Alternation Behaviour,1,9.205238339324271,6,2001,2006
+Findings of the 2011 Workshop on Statistical Machine Translation,1,20.988704720610823,2,2012,
+Speech Acts And Rationality,1,8.436283259601346,11,1986,1996
+An Experiment On Learning Appropriate Selectional Restrictions From A Parsed Corpus,1,4.817825467319723,6,1995,2000
+Dependency Grammar Induction via Bitext Projection Constraints,1,4.626145080979541,4,2010,
+D-Theory: Talking About Talking About Trees,1,12.588626869009452,19,1983,2001
+Hidden-Variable Models For Discriminative Reranking,1,6.291232845971986,4,2006,2009
+Phrasal Cohesion And Statistical Machine Translation,1,10.610552631402465,5,2003,2007
+TESLA: Translation Evaluation of Sentences with Linear-Programming-Based Analysis,1,4.124467724219755,3,2011,
+A Practical Part-Of-Speech Tagger,1,37.28358935479582,10,1992,2001
+A Composite Kernel To Extract Relations Between Entities With Both Flat And Structured Features,1,6.711283289245504,4,2007,2010
+Perplexity Minimization for Translation Model Domain Adaptation in Statistical Machine Translation,1,4.2349258722192396,1,2013,
+Machine Translation by Triangulation: Making Effective Use of Multi-Parallel Corpora,1,4.04075321004764,2,2008,2009
+Automatic Grammar Induction And Parsing Free Text: A Transformation-Based Approach,1,14.049445466107205,8,1994,2001
+Less Is More: Using A Single Knowledge Representation In Dialogue Systems,1,4.702279685809695,3,2003,2005
+HMM-Based Word Alignment In Statistical Translation,1,5.883915338837387,3,2003,2005
+Head Automata And Bilingual Tiling: Translation With Minimal Representations (Invited Talk),1,6.271301600399747,4,1997,2000
+Annotating The Propositions In The Penn Chinese Treebank,1,4.117047610710042,2,2004,2005
+Fluency Adequacy or HTER? Exploring Different Human Judgments with a Tunable MT Metric,1,8.56109533706141,4,2010,
+Summarization with a Joint Model for Sentence Extraction and Compression,1,4.626145080979548,4,2010,
+University Of Massachusetts: MUC-4 Test Results And Analysis,1,5.1428563341719125,11,1993,2003
+A Simple Hybrid Aligner for Generating Lexical Correspondences in Parallel Texts,1,4.94822253939669,5,2001,2005
+Better K-Best Parsing,1,11.66696103826084,5,2006,2010
+Subgrammars Rule Classes And Control In The Rosetta Translation System,1,4.688313120954254,4,1988,1991
+Hierarchical Directed Acyclic Graph Kernel: Methods For Structured Natural Language Data,1,5.626874107021925,5,2003,2007
+Syntax-to-Morphology Mapping in Factored Phrase-Based Statistical Machine Translation from English to Turkish,1,3.908642064932806,3,2011,
+Inside-Outside Reestimation From Partially Bracketed Corpora,1,19.229550901301753,9,1993,2001
+Tuning as Ranking,1,18.774910225246913,2,2012,
+Automatically Constructing a Corpus of Sentential Paraphrases,1,4.2315839944911575,4,2010,
+A Comparison Of Rule-Invocation Strategies In Context-Free Chart Parsing,1,5.012285933360895,7,1988,1994
+Structure Sharing In Lexicalized Tree-Adjoining Grammars,1,5.653083089685836,7,1992,1998
+Verb Semantics And Lexical Selection,1,5.132888027941801,2,2012,
+Management And Evaluation Of Interactive Dialog In The Air Travel Domain,1,3.9406958618987287,4,1990,1993
+Discriminating Gender on Twitter,1,4.864879527799767,2,2012,
+Aligning Needles in a Haystack: Paraphrase Acquisition Across the Web,1,3.976269946287642,4,2010,
+Analysis Of Japanese Compound Nouns Using Collocational Information,1,3.9849131465581236,10,1995,2004
+A Distributional Analysis Of A Lexicalized Statistical Parsing Model,1,4.049617256003188,4,2005,2008
+Joint Learning Improves Semantic Role Labeling,1,14.553295248180088,5,2005,2009
+A Tale of Two Parsers: Investigating and Combining Graph-based and Transition-based Dependency Parsing,1,11.533303911796004,3,2011,
+Information Fusion In The Context Of Multi-Document Summarization,1,8.772112546396528,7,1999,2005
+Evaluating The Accuracy Of An Unlexicalized Statistical Parser On The PARC DepBank,1,4.866034031316443,4,2007,2010
+Identifying Sarcasm in Twitter: A Closer Look,1,3.980244768572628,2,2012,
+Learning Semantic Correspondences with Less Supervision,1,6.5746922884123125,4,2010,
+Extending The BLEU MT Evaluation Method With Frequency Weightings,1,4.236530698587006,3,2005,2007
+Generative Models For Statistical Parsing With Combinatory Categorial Grammar,1,10.468969045028741,5,2003,2007
+Parsing As Natural Deduction,1,7.190973282136856,13,1990,2002
+University Of Sheffield: Description Of The LaSIE System As Used For MUC-6,1,8.211884751215552,6,1996,2001
+New Results With The Lincoln Tied-Mixture HMM CSR System,1,4.046074762375504,2,1991,1992
+Dependency-Based Construction of Semantic Space Models,1,11.83657383727342,4,2010,
+Computer Generation Of Multiparagraph English Text,1,7.662274675842949,12,1981,1992
+Distributed Word Clustering for Large Scale Class-Based Language Modeling in Machine Translation,1,4.2990771113573505,3,2011,
+Upper Modeling: Organizing Knowledge For Natural Language Processing,1,6.8318754522245095,13,1990,2002
+Using Mostly Native Data to Correct Errors in Learners’ Writing,1,5.703250002518828,3,2011,
+Automatic Committed Belief Tagging,1,4.115268449431285,2,2012,
+METEOR-NEXT and the METEOR Paraphrase Tables: Improved Evaluation Support for Five Target Languages,1,4.974840603079926,3,2011,
+A Sentimental Education: Sentiment Analysis Using Subjectivity Summarization Based On Minimum Cuts,1,8.997332354417459,7,2005,2011
+An End-To-End Discriminative Approach To Machine Translation,1,5.693244429326631,7,2007,
+Investigating Cue Selection And Placement In Tutorial Discourse,1,7.434530965555168,8,1996,2003
+Automatic Retrieval and Clustering of Similar Words,1,20.416125230219258,8,2002,2009
+The (Non)Utility Of Predicate-Argument Frequencies For Pronoun Interpretation,1,4.656847641953933,4,2004,2007
+Topic Identification for Fine-Grained Opinion Analysis,1,4.02726612259613,2,2009,2010
+On Reasoning With Ambiguities,1,4.094552218334172,5,1996,2000
+Getting the Structure Right for Word Alignment: LEAF,1,7.130770890801468,2,2009,2010
+Target-dependent Twitter Sentiment Classification,1,7.519080435298682,2,2012,
+VerbOcean: Mining The Web For Fine-Grained Semantic Verb Relations,1,7.089882146649849,5,2005,2009
+Generating High-Coverage Semantic Orientation Lexicons From Overtly Marked Words and a Thesaurus,1,4.299077111357344,3,2011,
+XTAG System - A Wide Coverage Grammar For English,1,4.740058642250135,8,1995,2002
+Event Extraction as Dependency Parsing,1,3.908642064932811,3,2011,
+Stochastic Lexicalized Tree-Adjoining Grammars,1,16.324174377114204,12,1992,2003
+The Whiteboard Architecture: A Way To Integrate Heterogeneous Components Of NLP Systems,1,4.36399923800254,5,1994,1998
+Co-Training for Cross-Lingual Sentiment Classification,1,8.004576425850496,2,2010,2011
+Arabic Preprocessing Schemes For Statistical Machine Translation,1,6.41629371334457,2,2008,2009
+Disambiguation Of Proper Names In Text,1,11.816613624385191,6,1998,2003
+Combining Knowledge Sources To Reorder N-Best Speech Hypothesis Lists,1,4.294272232186022,5,1994,1998
+Describing Complex Charts In Natural Language: A Caption Generation System,1,7.059002270025051,6,1999,2004
+Introduction To The Special Issue On Computational Linguistics Using Large Corpora,1,11.965697133102326,11,1993,2003
+The Web As A Baseline: Evaluating The Performance Of Unsupervised Web-Based Models For A Range Of NLP Tasks,1,8.295139638169674,3,2005,2007
+Phrase Clustering for Discriminative Learning,1,5.600367064927447,4,2010,
+A Fully Statistical Approach To Natural Language Interfaces,1,4.7364512043624245,10,1997,2006
+An Unsupervised Aspect-Sentiment Model for Online Reviews,1,4.299077111357358,3,2011,
+Learning Extraction Patterns For Subjective Expressions,1,5.956364950377902,2,2005,2006
+Robust Machine Translation Evaluation with Entailment Features,1,6.615634104639572,4,2010,
+Dependency-based Syntactic–Semantic Analysis with PropBank and NomBank,1,6.117251879256824,5,2009,
+Collective Cross-Document Relation Extraction Without Labelled Data,1,5.126607797787594,3,2011,
+Parsing And Derivational Equivalence,1,6.265523914220236,14,1989,2002
+Head Corner Parsing For Discontinuous Constituency,1,3.96732515017852,8,1991,1998
+Unsupervised Part-Of-Speech Tagging Employing Efficient Graph Clustering,1,5.945352788317573,5,2007,2011
+Machine Translation Using Probabilistic Synchronous Dependency Insertion Grammars,1,10.182696692452222,3,2006,2008
+The Distributional Inclusion Hypotheses And Lexical Entailment,1,6.1766474162971186,4,2006,2009
+Better Arabic Parsing: Baselines Evaluations and Analysis,1,4.61943131484467,3,2011,
+Learning Context-Dependent Mappings from Sentences to Logical Form,1,4.626145080979549,4,2010,
+Machine Translation with a Stochastic Grammatical Channel,1,5.145403957138412,9,1999,2007
+Conciseness Through Aggregation In Text Generation,1,4.3062919922903795,9,1997,2005
+Online EM for Unsupervised Models,1,4.139072798522579,4,2010,
+Noun Phrase Recognition By System Combination,1,5.4604315243425345,6,2000,2005
+Named Entity Extraction Based On A Maximum Entropy Model And Transformation Rules,1,4.019672689708482,4,2001,2004
+Improving Machine Translation Performance By Exploiting Non-Parallel Corpora,1,8.405131828806532,4,2010,
+A Statistical Approach To Anaphora Resolution,1,17.2313033207763,7,1999,2005
+A Morphological Recognizer With Syntactic And Phonological Rules,1,6.909141324807243,12,1987,1998
+NPtool A Detector Of English Noun Phrases,1,6.9514328661709515,7,1994,2000
+Text Segmentation Based On Similarity Between Words,1,11.428578808945403,10,1994,2003
+Maximum Entropy Models For FrameNet Classification,1,7.288652127667608,3,2004,2006
+A New Dataset and Method for Automatically Grading ESOL Texts,1,10.616210644004102,2,2012,
+Two Languages Are More Informative Than One,1,20.491070479911436,9,1991,1999
+Extracting Product Features And Opinions From Reviews,1,9.53049267921498,5,2006,2010
+Syntax-Driven Learning of Sub-Sentential Translation Equivalents and Translation Rules from Parsed Parallel Corpora,1,4.135053449505751,3,2009,2011
+Constraint Projection: An Efficient Treatment Of Disjunctive Feature Descriptions,1,3.9647263412661804,9,1992,2000
+Degrees Of Stativity: The Lexical Representation Of Verb Aspect,1,5.3722008329214725,5,1997,2001
+Reducing Grounded Learning Tasks To Grammatical Inference,1,5.307215445427916,2,2012,
+Semantic Interpretation Using KL-One,1,4.332787492689362,9,1986,1994
+Mining WordNet For A Fuzzy Sentiment: Sentiment Tag Extraction From WordNet Glosses,1,5.310832274686968,5,2007,2011
+Hierarchical Clustering Of Words,1,3.952429204037034,11,1996,2006
+Detecting Patterns In A Lexical Data Base,1,10.860177428568424,14,1985,1998
+Rule Writing Or Annotation: Cost-Efficient Resource Usage For Base Noun Phrase Chunking,1,5.5563247880502615,10,2000,2009
+*SEM 2013 shared task: Semantic Textual Similarity,1,9.857578978008679,1,2013,
+Automatic Acquisition of Hierarchical Transduction Models for Machine Translation,1,4.490448539490832,9,1999,2007
+HHMM-Based Chinese Lexical Analyzer ICTCLAS,1,4.559350811198379,3,2004,2006
+BYBLOS Speech Recognition Benchmark Results,1,4.652463157839859,3,1991,1993
+Semantic Role Labeling Via Integer Linear Programming Inference,1,7.291771621680281,2,2005,2006
+Acquiring Disambiguation Rules From Text,1,12.173138074210456,10,1990,1999
+Exploiting Parallel Texts For Word Sense Disambiguation: An Empirical Study,1,4.872064434835015,3,2005,2007
+The Importance Of Supertagging For Wide-Coverage CCG Parsing,1,7.272546018375649,2,2006,2007
+Semantic-Head-Driven Generation,1,24.49870260763328,12,1990,2001
+A Fully-Lexicalized Probabilistic Model For Japanese Syntactic And Case Structure Analysis,1,4.413207504675922,3,2007,2009
+Two Languages are Better than One (for Syntactic Parsing),1,9.421797948539865,5,2009,
+Modeling Negotiation Subdialogues,1,6.6160745167766395,7,1993,1999
+Automatic Discovery of Part-Whole Relations,1,4.963590586512296,3,2008,2010
+Sample Selection For Statistical Grammar Induction,1,6.237491907714835,4,2001,2004
+Feature Structures And Nonmonotonicity,1,4.612684167787217,8,1992,1999
+Predictive Combinators: A Method For Efficient Processing Of Combinatory Categorical Grammars,1,8.26954476529084,10,1988,1997
+Non-Projective Dependency Parsing in Expected Linear Time,1,5.113243169076346,4,2010,
+Methods For Using Textual Entailment In Open-Domain Question Answering,1,4.866034031316438,4,2007,2010
+Encoding And Acquiring Meanings For Figurative Phrases,1,4.5865879838385455,6,1987,1992
+Using Contextual Speller Techniques and Language Modeling for ESL Error Correction,1,7.622573369379387,3,2009,2011
+Statistical Parsing With An Automatically-Extracted Tree Adjoining Grammar,1,13.0699924854649,3,2001,2003
+SemEval-2007 Task 09: Multilevel Semantic Annotation of Catalan and Spanish,1,4.538189402432534,3,2007,2009
+An Earley-Type Parsing Algorithm For Tree Adjoining Grammars,1,7.79875372253177,12,1988,1999
+Utilizing Domain-Specific Information For Processing Compact Text,1,4.7213200502433335,7,1983,1989
+New Ranking Algorithms For Parsing And Tagging: Kernels Over Discrete Structures And The Voted Perceptron,1,13.246676588995882,5,2003,2007
+Inducing History Representations For Broad Coverage Statistical Parsing,1,8.534015131386276,4,2004,2007
+Using An Annotated Corpus As A Stochastic Grammar,1,4.692663369174722,6,1995,2000
+Incorporating GENETAG-style annotation to GENIA corpus,1,5.438948924310667,2,2010,2011
+Annotation Strategies For Probabilistic Parsing In German,1,3.8908297617825216,4,2005,2008
+Example-Based Machine Translation In The Pangloss System,1,7.117671948535568,7,1997,2003
+Improving Summaries By Revising Them,1,7.927970862894823,6,2000,2005
+Efficient Probabilistic Top-Down And Left-Corner Parsing,1,4.018978970307266,5,2000,2004
+Extracting Complex Biological Events with Rich Graph-Based Feature Sets,1,10.77410332548696,2,2010,2011
+Survey Article: Inter-Coder Agreement for Computational Linguistics,1,10.32653169603267,5,2009,
+Automatically Evaluating Text Coherence Using Discourse Relations,1,3.9802447685726374,2,2012,
+Cross-Language Parser Adaptation between Related Languages,1,3.9261553442667623,3,2011,
+Bootstrapping Deep Lexical Resources: Resources For Courses,1,4.668373609988528,3,2006,2008
+The ATIS Spoken Language Systems Pilot Corpus,1,16.75768414216811,10,1990,1999
+Latent Semantic Analysis For Text Segmentation,1,4.543895946079962,6,2002,2007
+Examining The Consensus Between Human Summaries: Initial Experiments With Factoid Analysis,1,6.326848302678794,3,2004,2006
+Models Of Translational Equivalence Among Words,1,13.624830169512721,7,2001,2007
+Some Applications Of Tree-Based Modelling To Speech And Language,1,5.1542252674399665,13,1991,2003
+Morphology With Two-Level Rules And Negative Rule Features,1,4.932798374862051,12,1989,2000
+Some Computational Complexity Results For Synchronous Context-Free Grammars,1,3.8909311633921866,4,2006,2009
+Description Of The UMass System As Used For MUC-6,1,6.205622807892254,8,1997,2004
+Using Predicate-Argument Structures For Information Extraction,1,14.161299793010999,2,2004,2005
+Document Structure,1,4.515474619991568,5,2004,2008
+GPSM: A Generalized Probabilistic Semantic Model For Ambiguity Resolution,1,5.895550898110232,8,1992,1999
+Identifying Topics By Position,1,4.986146874303958,8,1997,2004
+The Pragmatics Of Referring And The Modality Of Communication,1,6.882508877766963,13,1985,1997
+A Joint Model of Text and Aspect Ratings for Sentiment Summarization,1,7.085548007069142,3,2009,2011
+Design Of A Knowledge-Based Report Generator,1,5.32932398216445,15,1984,1998
+Unsupervised Word Sense Disambiguation Rivaling Supervised Methods,1,43.62411303537069,11,1996,2006
+Multi-Level Translation Aids In A Distributed System,1,4.534373240656456,10,1983,1992
+Semantically Significant Patterns In Dictionary Definitions,1,10.94055947387644,12,1987,1998
+Learning Accurate Compact And Interpretable Tree Annotation,1,20.405920135160105,4,2010,
+The TIPSTER SUMMAC Text Summarization Evaluation,1,7.333945545543353,6,1999,2004
+A Noisy-Channel Approach To Question Answering,1,4.313304018081395,2,2004,2005
+Distant supervision for relation extraction without labeled data,1,16.495895973791235,3,2011,
+Automatic Evaluation of Translation Quality for Distant Language Pairs,1,4.619431314844669,3,2011,
+An Automatic Method Of Finding Topic Boundaries,1,6.915747596896871,9,1995,2003
+Transformation Based Learning In The Fast Lane,1,17.327701507310447,6,2001,2006
+Joint Decoding with Multiple Translation Models,1,4.365458095531781,4,2010,
+Mapping WordNets Using Structural Information,1,3.8957057594559337,9,2001,2009
+Analysis Of Conjunctions In A Rule-Based Parser,1,4.3976995901758436,9,1986,1994
+Statistical Models For Topic Segmentation,1,4.332805984953628,7,2000,2006
+Deciphering Foreign Language by Combining Language Models and Context Vectors,1,4.928162209799619,1,2013,
+Capitalizing Machine Translation,1,4.349257417913963,3,2007,2009
+Supertagging: An Approach To Almost Parsing,1,11.170445362829543,8,2000,2007
+Crowdsourcing Translation: Professional Quality from Non-Professionals,1,4.974840603079922,3,2011,
+A Decision Tree Of Bigrams Is An Accurate Predictor Of Word Sense,1,9.052534529283045,3,2002,2004
+Re-Evaluation The Role Of Bleu In Machine Translation Research,1,13.272936130188164,4,2006,2009
+The Practical Value Of N-Grams Is In Generation,1,8.830848285328674,7,2000,2006
+Estimators For Stochastic Unification-Based Grammars,1,21.1093860581515,8,2000,2007
+Minimum Bayes-Risk Decoding For Statistical Machine Translation,1,9.232851948914034,2,2009,2010
+The Intonational Structuring Of Discourse,1,8.674865766318609,12,1986,1997
+A Rule-Based Approach To Ill-Formed Input,1,4.130948462251897,4,1981,1984
+Large Scale Decipherment for Out-of-Domain Machine Translation,1,4.928162209799619,1,2013,
+Literal and Metaphorical Sense Identification through Concrete and Abstract Context,1,4.422555969023778,2,2012,
+The Lincoln Continuous Tied-Mixture HMM Speech Recognizer*,1,3.999001954040703,3,1990,1992
+Indirect Responses To Loaded Questions,1,4.827205724664386,4,1980,1983
+Inheritance In Natural Language Processing,1,4.209990015416319,7,1993,1999
+Use Of Support Vector Learning For Chunk Identification,1,10.787778423290426,6,2001,2006
+Inducing Compact but Accurate Tree-Substitution Grammars,1,3.9328096520699343,4,2010,
+An All-Subtrees Approach To Unsupervised Parsing,1,5.02863566707775,5,2007,2011
+Lexical Disambiguation Using Simulated Annealing,1,9.58404306566397,7,1993,1999
+Detecting A Continuum Of Compositionality In Phrasal Verbs,1,5.848450340580856,4,2004,2007
+Experience With An Easily Computed Metric For Ranking Alternative Parses,1,6.952463964117789,12,1982,1993
+Exploring Adaptor Grammars for Native Language Identification,1,5.475813221431289,1,2013,
+Sentiment Classification On Customer Feedback Data: Noisy Data Large Feature Vectors And The Role Of Linguistic Analysis,1,3.8665694844040095,3,2009,2011
+Web-Scale Distributional Similarity and Entity Set Expansion,1,11.239249872951023,4,2010,
+Translation By Quasi Logical Form Transfer,1,6.620324461056048,7,1992,1998
+The Collection And Preliminary Analysis Of A Spontaneous Speech Database,1,5.218060336516636,4,1990,1993
+Inducing German Semantic Verb Classes From Purely Syntactic Subcategorisation Information,1,7.560783883455023,6,2002,2007
+Dependency Tree Kernels For Relation Extraction,1,16.730883857199007,5,2005,2009
+A Rich Environment For Experimentation With Unification Grammars,1,7.8344165332054345,9,1989,1997
+Lexical Operations In A Unification-Based Framework,1,5.525692560731074,7,1991,1997
+Automatic Adaptation of Annotation Standards: Chinese Word Segmentation and POS Tagging – A Case Study,1,4.139072798522573,4,2010,
+The Semantics Of Grammar Formalisms Seen As Computer Languages,1,11.21175078991553,8,1984,1991
+A Polynomial-Time Algorithm For Statistical Machine Translation,1,6.542507252459946,5,2003,2007
+A Maximum-Entropy Partial Parser For Unrestricted Text,1,4.98326124842624,6,1999,2004
+A Monolingual Tree-based Translation Model for Sentence Simplification,1,6.7520336937746,3,2011,
+How Verb Subcategorization Frequencies are Affected by Corpus Choice,1,3.898214750878611,9,1998,2006
+Meteor M-BLEU and M-TER: Evaluation Metrics for High-Correlation with Human Rankings of Machine Translation Output,1,4.828329420083659,3,2009,2011
+Characterizing Structural Descriptions Produced By Various Grammatical Formalisms,1,5.910609490478122,8,1988,1995
+Role of Verbs in Document Analysis,1,10.242873628967097,6,1999,2004
+Is It Really That Difficult To Parse German?,1,3.9713766032299196,3,2007,2009
+Towards Automatic Extraction Of Monolingual And Bilingual Terminology,1,5.941851886953237,5,1996,2000
+The Descent Of Hierarchy And Selection In Relational Semantics,1,4.486135753783584,6,2004,2009
+EM Can Find Pretty Good HMM POS-Taggers (When Given a Good Start),1,4.473228093474073,2,2009,2010
+Semantic Class Learning from the Web with Hyponym Pattern Linkage Graphs,1,8.88516768491479,5,2009,
+Building An MT Dictionary From Parallel Texts Based On Linguistic And Statistical Information,1,5.656112931092491,7,1995,2001
+An Approach to Text Corpus Construction which Cuts Annotation Costs and Maintains Reusability of Annotated Data,1,7.68167640018712,3,2008,2010
+Stochastic Language Generation For Spoken Dialogue Systems,1,4.4944910154602375,5,2001,2005
+Ambiguity Resolution In A Reductionistic Parser,1,12.197133989375851,6,1993,1998
+A Statistical Constraint Dependency Grammar (CDG) Parser,1,4.638928927888699,3,2005,2007
+Overview of BioNLP’09 Shared Task on Event Extraction,1,17.785849400870916,2,2010,2011
+Base Noun Phrase Translation Using Web Data And The EM Algorithm,1,7.941760819070378,5,2003,2007
+Automatic Image Annotation Using Auxiliary Text Information,1,4.427230859319781,1,2010,2010
+One Sense Per Collocation,1,19.0150713035275,12,1993,2004
+Efficient Feature-based Conditional Random Field Parsing,1,5.3178876105533925,3,2009,2011
+A Syntactic Analysis Method Of Long Japanese Sentences Based On The Detection Of Conjunctive Structures,1,10.790446124762859,11,1999,2009
+Probabilistic Models For Disambiguation Of An HPSG-Based Chart Generator,1,5.363728262560724,5,2006,2010
+Developing An Evaluation Methodology For Spoken Language Systems,1,5.606290507201086,7,1990,1996
+Findings of the 2010 Joint Workshop on Statistical Machine Translation and Metrics for Machine Translation,1,16.708834003511296,3,2011,
+TAUM-Aviation: Its Technical Features And Some Experimental Results,1,4.3976995901758436,9,1986,1994
+Coreference Resolution with Reconcile,1,3.9086420649328057,3,2011,
+Syntactic Graphs: A Representation For The Union Of All Ambiguous Parse Trees,1,4.10902764347326,9,1990,1998
+MIMIC: An Adaptive Mixed Initiative Spoken Dialogue System For Information Queries,1,3.961744622864015,5,2000,2004
+K-Vec: A New Approach For Aligning Parallel Texts,1,11.451955009654764,9,1995,2003
+Global Learning of Focused Entailment Graphs,1,4.007816254141392,3,2011,
+Parsing Strategies With 'Lexicalized' Grammars: Application To Tree Adjoining Grammars,1,27.425074282777963,12,1988,1999
+Pearl: A Probabilistic Chart Parser,1,11.20318288227508,9,1992,2000
+Combining Trigram-Based And Feature-Based Methods For Context-Sensitive Spelling Correction,1,6.6907524376273715,7,1996,2002
+A Framework For Lexical Selection In Natural Language Generation,1,7.525585718037789,9,1990,1998
+Improved Word-Level System Combination for Machine Translation,1,9.04220625123817,4,2008,2011
+Identifying Anaphoric And Non-Anaphoric Noun Phrases To Improve Coreference Resolution,1,4.078951764600964,7,2003,2009
+Turbo Parsers: Dependency Parsing by Approximate Variational Inference,1,5.690071318461459,2,2012,
+Non-Classical Lexical Semantic Relations,1,5.59675571393364,4,2005,2008
+Syntax-Based Alignment: Supervised Or Unsupervised?,1,4.493503390779746,3,2005,2007
+MindNet: Acquiring and Structuring Semantic Information from Text,1,5.256768158090752,8,1999,2006
+On Learning More Appropriate Selectional Restrictions,1,5.308385050039836,7,1997,2003
+Guided Learning for Bidirectional Sequence Classification,1,4.579428573283183,6,2008,
+Entity Disambiguation for Knowledge Base Population,1,4.81772387770995,3,2011,
+Design Challenges and Misconceptions in Named Entity Recognition,1,7.5865257796420025,4,2010,
+Internal And External Evidence In The Identification And Semantic Categorization Of Proper Names,1,4.462122688453678,3,1996,1998
+Exploring Various Knowledge In Relation Extraction,1,5.3045310617707315,6,2006,2011
+A DP-Based Search Using Monotone Alignments In Statistical Translation,1,4.535687279777048,10,1998,2007
+A Speech-First Model For Repair Detection And Correction,1,6.4130840773154185,10,1993,2002
+Scientific Paper Summarization Using Citation Summary Networks,1,4.705930402821362,4,2010,
+Word-Sense Disambiguation Using Statistical Methods,1,25.03165980017088,8,1991,1998
+An Algorithm For Pronominal Anaphora Resolution,1,27.395516526701893,11,1995,2005
+Learning Word Vectors for Sentiment Analysis,1,6.280000406254668,1,2013,
+Acquisition Of Selectional Patterns,1,10.141010090371054,7,1992,1998
+The viability of web-derived polarity lexicons,1,6.396575520970099,3,2011,
+Extraction Of Lexical Translations From Non-Aligned Corpora,1,7.35572939407406,10,1997,2006
+Extracting Social Networks from Literary Fiction,1,6.058698264865,3,2011,
+Beyond Class A: A Proposal For Automatic Evaluation Of Discourse,1,6.89713431079482,10,1990,1999
+Learning To Paraphrase: An Unsupervised Approach Using Multiple-Sequence Alignment,1,4.895676392005671,5,2004,2008
+Identifying Text Polarity Using Random Walks,1,5.330259667391198,3,2011,
+The ACL Anthology Reference Corpus: A Reference Dataset for Bibliographic Research in Computational Linguistics,1,4.934413112896896,3,2011,
+Unsupervised Coreference Resolution in a Nonparametric Bayesian Model,1,6.3471071330764275,6,2008,
+Topological Dependency Trees: A Constraint-Based Account Of Linear Precedence,1,7.126182041618182,6,2001,2006
+Semi-Supervised Training For Statistical Word Alignment,1,8.516416364737074,4,2007,2010
+An Efficient Augmented-Context-Free Parsing Algorithm,1,12.788549261943933,10,1988,1997
+Exploiting Wikipedia as External Knowledge for Named Entity Recognition,1,4.04075321004764,2,2008,2009
+Shake-And-Bake Translation,1,4.426213768057777,11,1992,2002
+Feature Vector Quality And Distributional Similarity,1,5.063915205689602,4,2005,2008
+Estimating Linear Models for Compositional Distributional Semantics,1,6.134413262610677,1,2013,
+TEAM: A Transportable Natural-Language Interface System,1,9.004996772474092,9,1984,1992
+Using The Web As A Bilingual Dictionary,1,4.769093845713936,8,2002,2009
+Efficient Bottom-Up Parsing,1,5.880898725238305,3,1992,1994
+Translating English Into Logical Form,1,5.5029374571374206,4,1982,1985
+Unification-based Multimodal Parsing,1,4.080188901854359,8,2000,2007
+Parsing the Penn Chinese Treebank with Semantic Knowledge,1,5.925654233742057,2,2009,2010
+1993 Benchmark Tests For The ARPA Spoken Language Program,1,4.008411982972312,8,1994,2001
+BART: A modular toolkit for coreference resolution,1,4.449923952205418,2,2010,2011
+Now Let's Talk About Now: Identifying Cue Phrases Intonationally,1,7.98386386566185,12,1988,1999
+Cross-lingual Word Clusters for Direct Transfer of Linguistic Structure,1,7.961490517389632,2,2012,
+Exploiting Syntactic and Shallow Semantic Kernels for Question Answer Classification,1,7.930751764870905,2,2008,2009
+Lexical Transfer Based On Bilingual Signs: Towards Interaction During Transfer,1,4.46399081790769,5,1992,1996
+Improving Accuracy In Word Class Tagging Through The Combination Of Machine Learning Systems,1,7.433724968840031,5,2002,2006
+Unsupervised Multilingual Grammar Induction,1,5.229002888064546,4,2010,
+Fast Decoding And Optimal Decoding For Machine Translation,1,13.51290455782728,5,2001,2005
+Tagging Accurately - Don't Guess If You Know,1,5.392560710384258,10,1995,2004
+Reinforcement Learning for Mapping Instructions to Actions,1,5.600367064927448,4,2010,
+Syntactic And Semantic Parsability,1,3.896297644946581,9,1984,1992
+Coreference Semantics from Web Features,1,4.380526686543082,1,2013,
+Treebank Grammar Techniques for Non-Projective Dependency Parsing,1,3.950686851160862,2,2010,2011
+Comparative Experiments On Disambiguating Word Senses: An Illustration Of The Role Of Bias In Machine Learning,1,14.837305914212484,8,1997,2004
+Recovering Implicit Information,1,10.365534108708335,6,1986,1991
+A Comparison Of Algorithms For Maximum Entropy Parameter Estimation,1,18.808270822961607,5,2003,2007
+Statistical Machine Translation With Word- And Sentence-Aligned Parallel Corpora,1,4.972317038933861,6,2005,2010
+In Question Answering Two Heads Are Better Than One,1,4.137971687284278,2,2004,2005
+Translation By Structural Correspondences,1,15.887823479175157,8,1989,1996
+Unsupervised Induction of Tree Substitution Grammars for Dependency Parsing,1,6.0411271259150725,3,2011,
+11001 New Features for Statistical Machine Translation,1,13.39786098843882,4,2010,
+Annealing Structural Bias In Multilingual Weighted Grammar Induction,1,6.294946076082715,3,2008,2010
+PCFG Models Of Linguistic Tree Representations,1,12.203804747704872,10,1999,2008
+Deterministic Part-Of-Speech Tagging With Finite-State Transducers,1,10.0336349070095,7,1995,2001
+Beyond NomBank: A Study of Implicit Arguments for Nominal Predicates,1,4.264031802269962,3,2011,
+A TAG-Based Noisy-Channel Model Of Speech Repairs,1,5.521502989137792,4,2006,2009
+A Lazy Way To Chart-Parse With Categorial Grammars,1,10.286174696263785,9,1988,1996
+Fast and Robust Joint Models for Biomedical Event Extraction,1,4.422555969023778,2,2012,
+An Unsupervised Model for Text Message Normalization,1,3.943668089703908,3,2011,
+Statistical Dependency Parsing For Turkish,1,4.152446604796948,3,2006,2008
+Multi-Engine Machine Translation With Voted Language Model,1,3.8908297617825234,4,2005,2008
+Joint Inference for Knowledge Extraction from Biomedical Literature,1,5.283067918544722,1,2011,2011
+Bilingual Parsing With Factored Estimation: Using English To Parse Korean,1,4.503414240855111,3,2005,2007
+Automatic Extraction Of Subcategorization From Corpora,1,20.62998840900275,8,1998,2005
+Compilation Of HPSG To TAG,1,5.994928814401519,8,1996,2003
+An Integrated Architecture For Shallow And Deep Processing,1,4.908429094215353,3,2002,2004
+Automatic Detection And Correction Of Repairs In Human-Computer Dialog,1,3.9647263412661777,9,1992,2000
+Deep Read: A Reading Comprehension System,1,11.616265430178975,6,2000,2005
+CogNIAC: High Precision Coreference With Limited Knowledge And Linguistic Resources,1,7.671383112580723,5,1998,2002
+A Novel Discourse Parser Based on Support Vector Machine Classification,1,3.8955463337407887,4,2010,
+Pilot Implementation Of A Bilingual Knowledge Bank,1,7.4318780154653075,13,1991,2003
+Dependency Unification Grammar,1,7.4516047718104375,13,1988,2000
+TakeLab: Systems for Measuring Semantic Text Similarity,1,12.048833703061394,1,2013,
+The Japanese Government Project For Machine Translation,1,7.324888259870593,13,1986,1998
+GATE - A General Architecture For Text Engineering,1,4.750408235525493,7,1997,2003
+Anaphora Resolution: A Multi-Strategy Approach,1,9.889899723539555,13,1990,2002
+Automatic Acquisition Of The Lexical Semantics Of Verbs From Sentence Frames,1,5.362284928423477,12,1990,2001
+Effective Adaptation Of Hidden Markov Model-Based Named Entity Recognizer For Biomedical Domain,1,3.875712236900996,4,2004,2007
+Calibrating Features For Semantic Role Labeling,1,22.397083671118374,5,2005,2009
+Integrated Annotation For Biomedical Information Extraction,1,9.329051767538328,4,2005,2008
+Joint Processing and Discriminative Training for Letter-to-Phoneme Conversion,1,3.845707408879531,2,2009,2010
+An Algorithm For Generating Referential Descriptions With Flexible Interfaces,1,5.699436502960102,10,1997,2006
+Forest-to-String Statistical Translation Rules,1,6.7940540253702295,3,2008,2010
+An Efficient Compiler For Weighted Rewrite Rules,1,4.989060520303855,9,1996,2004
+EUROTRA: A Multilingual System Under Development,1,5.917939549261857,12,1986,1997
+What Can Syntax-Based MT Learn from Phrase-Based MT?,1,5.102423467500409,3,2008,2010
+Error-Driven Pruning of Treebank Grammars for Base Noun Phrase Identification,1,11.4963622204402,4,1998,2001
+Edinburgh's Submission to all Tracks of the WMT 2009 Shared Task with Reordering and Speed Improvements to Moses,1,4.251183238090466,2,2010,2011
+Toward Statistical Machine Translation without Parallel Corpora,1,4.380526686543082,1,2013,
+Multi-Criteria-Based Active Learning For Named Entity Recognition,1,7.075703465857755,4,2006,2009
+Named Entity Extraction Using AdaBoost,1,9.856911476729886,6,2002,2007
+Resolving Translation Ambiguity Using Non-Parallel Bilingual Corpora,1,3.961744622864012,5,2000,2004
+Dialogue Act Tagging with Transformation-Based Learning,1,6.451586834299533,4,1999,2002
+A New String-to-Dependency Machine Translation Algorithm with a Target Dependency Language Model,1,13.259833553088278,3,2009,2011
+Constraints On Non-Projective Dependency Parsing,1,4.005802351682935,4,2006,2009
+CCGbank: A Corpus of CCG Derivations and Dependency Structures Extracted from the Penn Treebank,1,11.870807625260625,5,2009,
+Probabilistic Parsing For German Using Sister-Head Dependencies,1,8.458537263760793,5,2004,2008
+Machine-Readable Dictionaries Lexical Data Bases And The Lexical System,1,4.389447857853572,10,1985,1994
+Foma: a Finite-State Compiler and Library,1,4.492712710696884,2,2012,
+Multi-Tape Two-Level Morphology: A Case Study In Semitic Non-Linear Morphology,1,7.077816792920074,8,1995,2002
+UKP: Computing Semantic Textual Similarity by Combining Multiple Content Similarity Measures,1,15.88412614281642,1,2013,
+Current Issues In Computational Lexical Semantics,1,3.959246634991489,3,1991,1993
+From Submit To Submitted Via Submission: On Lexical Rules In Large-Scale Lexicon Acquisition,1,5.689295693222753,4,1996,1999
+A Maximum Entropy/Minimum Divergence Translation Model,1,4.053985774037869,3,2002,2004
+A Smorgasbord Of Features For Statistical Machine Translation,1,11.170465421046005,3,2005,2007
+Solving The Problem Of Cascading Errors: Approximate Bayesian Inference For Linguistic Annotation Pipelines,1,4.723079883882729,5,2007,2011
+Probabilistic CFG With Latent Annotations,1,6.690801903138923,3,2007,2009
+Corpus Variation And Parser Performance,1,8.968746987283929,6,2003,2008
+Interpretation As Abduction,1,17.23667038004523,8,1988,1995
+Learning Optimal Dialogue Strategies: A Case Study of a Spoken Dialogue Agent for Email,1,7.405389514675773,3,1999,2001
+Lexical Normalisation of Short Text Messages: Makn Sens a #twitter,1,7.107501644755508,3,2011,
+Apportioning Development Effort In A Probabilistic LR Parsing System Through Evaluation,1,4.7504082355254935,7,1997,2003
+A Statistical Profile Of The Named Entity Task,1,5.939736410964718,7,1998,2004
+Deterministic Parsing Of Syntactic Non-Fluencies,1,16.23656457759774,20,1983,2002
+Design Of LMT: A PROLOG-Based Machine Translation System,1,5.974253586360324,8,1990,1997
+What’s great and what’s not: learning to classify the scope of negation for improved sentiment analysis,1,5.627698992460411,3,2011,
+Multi-Paragraph Segmentation Of Expository Text,1,16.429041881562625,13,1995,2007
+SemEval-2007 Task 10: English Lexical Substitution Task,1,6.323740905837993,2,2009,2010
+RAFT/RAPR And Centering: A Comparison And Discussion Of Problems Related To Processing Complex Sentences,1,8.579890578533458,6,1995,2000
+Extracting The Names Of Genes And Gene Products With A Hidden Markov Model,1,9.175622635769203,6,2000,2005
+Reading between the Lines: Learning to Map High-Level Instructions to Commands,1,3.90864206493281,3,2011,
+Entity-Based Cross-Document Core f erencing Using the Vector Space Model,1,7.863030338457708,7,2004,2010
+Introduction To The CoNLL-2005 Shared Task: Semantic Role Labeling,1,16.401386507742906,4,2006,2009
+Sentiment Analysis Using Support Vector Machines With Diverse Information Sources,1,4.549461510333755,5,2005,2009
+Logic Form Transformation Of WordNet And Its Applicability To Question Answering,1,5.806086181068586,4,2003,2006
+The Impact Of Parse Quality On Syntactically-Informed Statistical Machine Translation,1,3.9088532824016218,3,2007,2009
+Towards Cross-Lingual Textual Entailment,1,7.4596570906699835,2,2012,
+Using Universal Linguistic Knowledge to Guide Grammar Induction,1,8.75140444524421,3,2011,
+Distributional Clustering Of English Words,1,35.344169571947425,11,1994,2004
+Clause Restructuring For Statistical Machine Translation,1,9.263096161731433,6,2006,2011
+Emotions From Text: Machine Learning For Text-Based Emotion Prediction,1,4.657177094839561,4,2010,
+Automatic Tagging Of Arabic Text: From Raw Text To Base Phrase Chunks,1,8.528398583182,4,2005,2008
+Convolution Kernels on Constituent Dependency and Sequential Structures for Relation Extraction,1,4.348201625337456,2,2010,2011
+Weakly Supervised Training of Semantic Parsers,1,4.928162209799619,1,2013,
+A Syntactic Approach To Discourse Semantics,1,8.893484733515946,10,1986,1995
+Summarizing Scientific Articles: Experiments With Relevance And Rhetorical Status,1,6.227839045785455,5,2004,2008
+Surface Grammatical Analysis For The Extraction Of Terminological Noun Phrases,1,12.664684114883922,10,1993,2002
+Modeling the Translation of Predicate-Argument Structure for SMT,1,4.380526686543082,1,2013,
+Comparing Automatic And Human Evaluation Of NLG Systems,1,5.033773091516011,4,2006,2009
+SemEval-2010 Task 3: Cross-Lingual Word Sense Disambiguation,1,5.690071318461459,2,2012,
+Multi-Site Data Collection For A Spoken Language Corpus,1,13.841584725399972,8,1992,1999
+Semi-Supervised Recursive Autoencoders for Predicting Sentiment Distributions,1,8.403912962106897,2,2012,
+Anaphor Resolution In Unrestricted Texts With Partial Parsing,1,3.875760185220198,6,1999,2004
+Relaxation Techniques For Parsing Grammatically Ill-Formed Input In Natural Language Understanding Systems,1,19.30145626207291,12,1981,1992
+Finding Predominant Word Senses In Untagged Text,1,14.66456766104766,5,2005,2009
+Deep Dependencies From Context-Free Statistical Parsers: Correcting The Surface Dependency Approximation,1,5.007510430893705,3,2005,2007
+Towards History-Based Grammars: Using Richer Models For Probabilistic Parsing,1,15.266833910648728,13,1992,2004
+Latent Variable Models of Selectional Preference,1,8.529471238789633,3,2011,
+Applying Co-Training Methods To Statistical Parsing,1,4.537500418380219,3,2002,2004
+Vector-based Models of Semantic Composition,1,14.995628471105551,1,2013,
+A Bag Of Useful Techniques For Efficient And Robust Parsing,1,5.498027651218315,7,2000,2006
+A Parsing Algorithm For Unification Grammar,1,4.080725800773235,14,1989,2002
+Inducing Multilingual Text Analysis Tools Via Robust Projection Across Aligned Corpora,1,10.839353606416584,4,2002,2005
+Statistical Machine Reordering,1,5.42195856086843,3,2007,2009
+Repairing Reference Identification Failures By Relaxation,1,4.3503388071833236,10,1986,1995
+Syntactic Analysis Of Natural Language Using Linguistic Rules And Corpus-Based Patterns,1,4.460582290931193,8,1994,2001
+The CoNLL 2007 Shared Task on Dependency Parsing,1,8.737735135165227,2,2008,2009
+The CoNLL 2007 Shared Task on Dependency Parsing,1,8.144994440698289,3,2011,
+A Stochastic Approach To Parsing,1,5.8334625952603725,6,1988,1993
+Knowledge-Free Induction Of Inflectional Morphologies,1,4.778111935657004,6,2002,2007
+Effective Self-Training For Parsing,1,15.55195397237433,4,2007,2010
+Cache-based Document-level Statistical Machine Translation,1,4.422555969023781,2,2012,
+A Structured Vector Space Model for Word Meaning in Context,1,9.212704357189796,5,2009,
+Enforcing Transitivity in Coreference Resolution,1,4.491871101775246,3,2009,2011
+Computational Aspects Of Discourse In The Context Of MUC-3,1,5.416475210702568,7,1992,1998
+A Best-First Alignment Algorithm For Automatic Extraction Of Transfer Mappings From Bilingual Corpora,1,6.837689108854644,5,2001,2005
+Joint Unsupervised Coreference Resolution with Markov Logic,1,7.02168453021179,5,2009,
+A Syntax-Based Part-Of-Speech Analyser,1,9.464094153265817,7,1996,2002
+COGEX: A Logic Prover For Question Answering,1,11.95257768887165,4,2004,2007
+Combining Outputs from Multiple Machine Translation Systems,1,7.379166562714311,3,2007,2009
+Unsupervised Learning Of Derivational Morphology From Inflectional Lexicons,1,4.896736575697662,5,2000,2004
+LexPageRank: Prestige In Multi-Document Text Summarization,1,4.748460030906776,4,2007,2010
+Wide-Coverage Semantic Representations From A CCG Parser,1,5.779409703663516,2,2006,2007
+Paraphrasing For Automatic Evaluation,1,5.510801849759959,5,2007,2011
+Part-of-Speech Tagging for Twitter: Annotation Features and Experiments,1,11.466717142835815,1,2013,
+Multi-Prototype Vector-Space Models of Word Meaning,1,7.459657090669962,2,2012,
+Identification And Classification Of Proper Nouns In Chinese Texts,1,4.327738330488362,7,1997,2003
+Efficient Parsing For Bilexical Context-Free Grammars And Head Automaton Grammars,1,4.844236223009393,7,2000,2006
+Sampling Alignment Structure under a Bayesian Translation Model,1,7.13027416801282,5,2009,
+Slot Grammars,1,4.835382024347219,21,1982,2002
+Learning to Grade Short Answer Questions using Semantic Similarity Measures and Dependency Graph Alignments,1,4.864879527799766,2,2012,
+The Unknown Word Problem: A Morphological Analysis Of Japanese Using Maximum Entropy Aided By A Dictionary,1,5.0645127782464625,5,2002,2006
+Pseudo-Projective Dependency Parsing,1,14.752822925713682,4,2006,2009
+Automated Text Summarization In SUMMARIST,1,5.152006017422933,8,1998,2005
+The Importance of Syntactic Parsing and Inference in Semantic Role Labeling,1,7.935478783591914,3,2009,2011
+Discriminative Training Methods For Hidden Markov Models: Theory And Experiments With Perceptron Algorithms,1,4.627276751932918,3,2005,2007
+Constructing Lexical Transducers,1,7.6422187441579785,8,1995,2002
+The Computational Complexity Of Avoiding Conversational Implicatures,1,5.475299872161201,16,1991,2006
+A Tree Sequence Alignment-based Tree-to-Tree Translation Model,1,8.785456948289209,3,2009,2011
+Semantic Classes And Syntactic Ambiguity,1,10.993881999146717,8,1993,2000
+Divide and Conquer: Crowdsourcing the Creation of Cross-Lingual Textual Entailment Corpora,1,9.731254477428305,2,2012,
+Exploiting Auxiliary Distributions In Stochastic Unification-Based Grammars,1,4.228066199317309,8,2000,2007
+Multi-Source Transfer of Delexicalized Dependency Parsers,1,8.153002430332496,2,2012,
+Word Clustering and Disambiguation Based on Co-occurrence Data,1,4.4095878982296295,5,2002,2006
+A Semantic Concordance,1,8.670055850035228,14,1994,2007
+Online Large-Margin Training for Statistical Machine Translation,1,8.688200236031165,3,2011,
+Entity-Oriented Parsing,1,3.912998982247189,7,1986,1992
+Enriching Morphologically Poor Languages for Statistical Machine Translation,1,4.043608541461489,5,2009,
+Incremental Dialogue Processing in a Micro-Domain,1,5.744425998882031,3,2011,
+The Interface Between Phrasal And Functional Constraints,1,9.678052379574552,12,1994,2005
+Investigating A Generic Paraphrase-Based Approach For Relation Extraction,1,4.499463070738923,4,2007,2010
+Semantic Compositionality through Recursive Matrix-Vector Spaces,1,15.88412614281642,1,2013,
+Greedy Decoding For Statistical Machine Translation In Almost Linear Time,1,4.0123906609951,4,2004,2007
+A Logical Version Of Functional Grammar,1,4.552956973953668,4,1991,1994
+Structural Disambiguation With Constraint Propagation,1,6.0329902816842935,17,1990,2006
+Finding Structural Correspondences From Bilingual Parsed Corpus For Corpus-Based Translation,1,5.89129111050173,4,2001,2004
+Analyzing The Structure Of Argumentative Discourse,1,8.804241460001647,12,1988,1999
+An Improved Extraction Pattern Representation Model For Automatic IE Pattern Acquisition,1,7.235378923941493,4,2004,2007
+Early Results For Named Entity Recognition With Conditional Random Fields Feature Induction And Web-Enhanced Lexicons,1,10.77814603624811,3,2004,2006
+Probabilistic Top-Down Parsing And Language Modeling,1,6.5696602456403905,4,2002,2005
+Providing A Unified Account Of Definite Noun Phrases In Discourse,1,33.80435591128751,16,1984,1999
+SemEval-2013 Task 2: Sentiment Analysis in Twitter,1,6.023479722124719,1,2013,
+Building a Large Annotated Corpus of Learner English: The NUS Corpus of Learner English,1,9.857578978008679,1,2013,
+Speech Repairs Intonational Phrases And Discourse Markers: Modeling Speakers' Utterances In Spoken Dialogue,1,4.554248594277522,7,2000,2006
+TextTiling: Segmenting Text Into Multi-Paragraph Subtopic Passages,1,14.187447054924736,9,1998,2006
+Automatic Discovery Of Non-Compositional Compounds In Parallel Data,1,5.998994493575151,7,2000,2006
+A Joint Sequence Translation Model with Integrated Reordering,1,4.2349258722192396,1,2013,
+A Discriminative Model For Tree-To-Tree Translation,1,4.547617801424916,2,2007,2008
+Feature-Rich Part-Of-Speech Tagging With A Cyclic Dependency Network,1,14.649817435065465,2,2012,
+Implementation And Conversational Environment Of ARIANE 78.4 An Integrated System For Automated Translation And Human Revision,1,6.7346806581550265,6,1983,1988
+Arabic Tokenization Part-Of-Speech Tagging And Morphological Disambiguation In One Fell Swoop,1,5.656046532781902,3,2006,2008
+Compositional Matrix-Space Models for Sentiment Analysis,1,4.422555969023778,2,2012,
+Adaptive Sentence Boundary Disambiguation,1,5.178024348149026,8,1997,2004
+Zero Pronoun Resolution In A Machine Translation System By Using Japanese To English Verbal Semantic Attributes,1,4.447065282084056,4,1994,1997
+Translating Names And Technical Terms In Arabic Text,1,6.405121796118266,9,2000,2008
+Two-Level Morphology With Composition,1,13.165327614595455,9,1993,2001
+Exploring The Statistical Derivation Of Transformational Rule Sequences For Part-Of-Speech Tagging,1,4.927826000013241,9,1994,2002
+Meta-Rules As A Basis For Processing Ill-Formed Input,1,17.864265107510114,14,1983,1996
+OntoNotes: The 90% Solution,1,9.378941158872863,3,2011,
+An IR Approach for Translating New Words from Nonparallel Comparable Texts,1,7.732160311025089,3,2002,2004
+The CoNLL-2009 Shared Task: Syntactic and Semantic Dependencies in Multiple Languages,1,10.952330618951036,5,2009,
+Anchoring A Lexicalized Tree-Adjoining Grammar For Discourse,1,7.179992148808507,7,1999,2005
+Morphonology In The Lexicon,1,4.626358657903924,8,1993,2000
+Temporal Ontology In Natural Language,1,6.543637146870843,5,1988,1992
+Relating Complexity To Practical Performance In Parsing With Wide-Coverage Unification Grammars,1,4.445871382560009,7,1996,2002
+Practical Very Large Scale CRFs,1,7.462979374328386,3,2011,
+Planning Text For Advisory Dialogues: Capturing Intentional And Rhetorical Information,1,19.327838756374042,8,1994,2001
+The Mathematics Of Statistical Machine Translation: Parameter Estimation,1,42.2699411076514,6,2001,2006
+Domain Adaptation with Active Learning for Word Sense Disambiguation,1,5.768888805667724,4,2008,2011
+A Memory-Based Approach to Learning Shallow Natural Language Patterns,1,13.018452382406819,4,1999,2002
+Computational Complexity And Lexical-Functional Grammar,1,5.478755464258144,4,1983,1986
+Using Register-Diversified Corpora For General Language Studies,1,6.962832180087852,8,1994,2001
+A Classifier-Based Approach to Preposition and Determiner Error Correction in L2 English,1,5.637696492536403,4,2010,
+Optimal Constituent Alignment With Edge Covers For Semantic Projection,1,3.89818977825022,2,2008,2009
+Cats Rule and Dogs Drool!: Classifying Stance in Online Debate,1,4.422555969023781,2,2012,
+A Task Independent Oral Dialogue Model,1,4.531179999746486,9,1992,2000
+An Architecture For Opportunistic Text Generation,1,4.112473862649663,5,1998,2002
+Automatic Detection Of Poor Speech Recognition At The Dialogue Level,1,4.024423846559166,7,2000,2006
+A Learning Approach To Shallow Parsing,1,9.956230011206541,4,2000,2003
+Unsupervised Models for Coreference Resolution,1,3.8665694844040064,3,2009,2011
+Lexical Cohesion Computed By Thesaural Relations As An Indicator Of The Structure Of Text,1,19.955567920733756,15,1992,2006
+Fine-Grained Proper Noun Ontologies For Question Answering,1,5.502917417505525,7,2003,2009
+A Discourse Copying Algorithm For Ellipsis And Anaphora Resolution,1,4.26768700244357,12,1993,2004
+Towards A Dictionary Support Environment For Realtime Parsing,1,5.164145813820977,7,1987,1993
+Class-Based N-Gram Models Of Natural Language,1,30.332399756652443,10,1993,2002
+Stochastic Finite-State Models For Spoken Language Machine Translation,1,4.625574972989984,8,2000,2007
+Using Restriction To Extend Parsing Algorithms For Complex-Feature-Based Formalisms,1,26.92559122000697,17,1985,2001
+Confidence Estimation For Information Extraction,1,4.332803880944937,5,2006,2010
+A New Quantitative Quality Measure For Machine Translation Systems,1,5.18780662374775,5,2001,2005
+Improved Statistical Alignment Models,1,30.504327202844053,7,2001,2007
+Using Bilingual Parallel Corpora for Cross-Lingual Textual Entailment,1,7.710577533197298,2,2012,
+Tagging And Morphological Disambiguation Of Turkish Text,1,4.53528057284117,5,1996,2000
+Evaluating Automated And Manual Acquisition Of Anaphora Resolution Strategies,1,11.881782737701267,9,1996,2004
+The Automated Acquisition Of Topic Signatures For Text Summarization,1,4.959429984373672,5,2004,2008
+The Proposition Bank: An Annotated Corpus Of Semantic Roles,1,22.057991823003608,5,2005,2009
+Identifying Relations for Open Information Extraction,1,14.599125566076314,2,2012,
+An Annotation Scheme For Free Word Order Languages,1,10.092617439207947,10,1997,2006
+Evaluating Message Understanding Systems: An Analysis Of The Third Message Understanding Conference (MUC-3),1,5.791360671507968,8,1993,2000
+Decision Lists For Lexical Ambiguity Resolution: Application To Accent Restoration In Spanish And French,1,26.790515888558033,10,1995,2004
+The HealthDoc Sentence Planner,1,7.5913897693130075,6,1997,2002
+UNT: A Supervised Synergistic Approach to Semantic Text Similarity,1,3.8329066509751435,1,2013,
+Dependency Treelet Translation: Syntactically Informed Phrasal SMT,1,19.476820044860393,4,2006,2009
+Soft Syntactic Constraints for Hierarchical Phrased-Based Translation,1,8.941948805318898,3,2009,2011
+Estimation of Conditional Probabilities With Decision Trees and an Application to Fine-Grained POS Tagging,1,4.663436728844443,4,2010,
+Direct Word Sense Matching For Lexical Substitution,1,5.295464679238231,3,2007,2009
+Alignment-Based Discriminative String Similarity,1,4.824770460788074,3,2008,2010
+Resolving Quasi Logical Forms,1,7.9912512164680365,10,1991,2000
+ABL: Alignment-Based Learning,1,4.575215150038648,7,2001,2007
+Long-Distance Dependency Resolution In Automatically Acquired Wide-Coverage PCFG-Based LFG Approximations,1,8.114585733641057,5,2005,2009
+The Statistical Significance Of The MUC-4 Results,1,5.927068307565861,7,1992,1998
+N-Gram Posterior Probabilities For Statistical Machine Translation,1,5.768580669459727,4,2007,2010
+Unsupervised Semantic Role Labeling,1,6.560804875031442,3,2007,2009
+Tagging Inlective Languages: Prediction of Morphological Categories for a Rich Structured Tagset,1,7.7756947106828385,10,1999,2008
+Multi-instance Multi-label Learning for Relation Extraction,1,3.8329066509751435,1,2013,
+Unsupervised Multilingual Learning for Morphological Segmentation,1,5.104258130499845,5,2009,
+Dependency Tree-based Sentiment Classification using CRFs with Hidden Variables,1,5.347811517627563,3,2011,
+Better Hypothesis Testing for Statistical Machine Translation: Controlling for Optimizer Instability,1,13.463065696269297,2,2012,
+Knowledge Representation For Commonsense Reasoning With Text,1,6.638770514971457,3,1990,1992
+A Robust System For Natural Spoken Dialogue,1,7.584127727706903,8,1997,2004
+Inferring Temporal Ordering Of Events In News,1,5.477177558964049,3,2004,2006
+Estimating Upper And Lower Bounds On The Performance Of Word-Sense Disambiguation Programs,1,17.54209940846479,9,1993,2001
+MBT: A Memory-Based Part Of Speech Tagger-Generator,1,16.55945668057807,7,1997,2003
+Generation Of Extended Bilingual Statistical Reports,1,5.775160042809556,7,1994,2000
+The Ups and Downs of Preposition Error Detection in ESL Writing,1,7.174047769851465,4,2010,
+The SemEval-2007 WePS Evaluation: Establishing a benchmark for the Web People Search Task,1,11.749307140311064,4,2007,2010
+Head-Driven Statistical Models For Natural Language Parsing,1,9.949107062929972,4,2007,2010
+What To Do When Lexicalization Fails: Parsing German With Suffix Analysis And Smoothing,1,5.70671862212437,3,2006,2008
+Solving Thematic Divergences In Machine Translation,1,4.758863833956581,8,1991,1998
+Learning Dependency Translation Models As Collections Of Finite-State Head Transducers,1,16.700305099000847,7,2001,2007
+Efficient Minimum Error Rate Training and Minimum Bayes-Risk Decoding for Translation Hypergraphs and Lattices,1,8.767301598874841,4,2010,
+Generating Natural Language Summaries From Multiple On-Line Sources,1,16.04319958302704,8,1999,2006
+Using Descriptions Of Trees In A Tree Adjoining Grammar,1,8.106837006455896,10,1992,2001
+Generalizing Biomedical Event Extraction,1,5.330259667391193,3,2011,
+New Figures Of Merit For Best-First Probabilistic Chart Parsing,1,4.6409796727900225,9,1998,2006
+Parser Adaptation and Projection with Quasi-Synchronous Grammar Features,1,5.531421737427081,2,2010,2011
+Tagging French - Comparing A Statistical And A Constraint-Based Method,1,9.300020797898652,6,1996,2001
+Meaningful Clustering Of Senses Helps Boost Word Sense Disambiguation Performance,1,4.855096197477318,3,2007,2009
+Japanese Dependency Analysis Using Cascaded Chunking,1,12.202217087288819,6,2003,2008
+Char Align: A Program For Aligning Parallel Texts At The Character Level,1,18.29912351104976,11,1993,2003
+Some Computational Properties Of Tree Adjoining Grammers,1,10.97423016009914,14,1986,1999
+BabelNet: Building a Very Large Multilingual Semantic Network,1,5.330259667391193,3,2011,
+Insights Into The Dialogue Processing Of VERBMOBIL,1,4.852219753448225,5,1997,2001
+Learning Better Monolingual Models with Unannotated Bilingual Text,1,3.9086420649328066,3,2011,
+Finite-State Parsing And Disambiguation,1,8.471715000659795,12,1992,2003
+The Tradeoffs Between Open and Traditional Relation Extraction,1,6.5185079575012175,4,2010,
+Detection of Grammatical Errors Involving Prepositions,1,6.8501830563009545,6,2008,
+Learning First-Order Horn Clauses from Web Text,1,5.056287751874649,2,2012,
+A Logical Semantics For Feature Structures,1,27.668443186720797,8,1987,1994
+The Effect Of Establishing Coherence In Ellipsis And Anaphora Resolution,1,4.008411982972312,8,1994,2001
+Vector-Based Natural Language Call Routing,1,4.796558434224153,8,2000,2007
+Dual Decomposition with Many Overlapping Components,1,3.9802447685726388,2,2012,
+Robust Sentiment Detection on Twitter from Biased and Noisy Data,1,10.88453135833214,1,2013,
+Statistical Models for Unsupervised Prepositional Phrase Attachment,1,8.556114432508275,9,1998,2006
+Contrastive Estimation: Training Log-Linear Models On Unlabeled Data,1,6.334228091107519,5,2007,2011
+A Centering Approach To Pronouns,1,32.784707350297836,17,1988,2004
+On the unification of syntactic annotations under the Stanford dependency scheme: A case study on BioInfer and GENIA,1,4.186879584543353,3,2008,2010
+An Improper Treatment Of Quantification In Ordinary English,1,5.123647019586941,12,1985,1996
+On Coreferring: Coreference In MUC And Related Annotation Schemes,1,6.407586416598513,5,2001,2005
+Loosely Tree-Based Alignment For Machine Translation,1,13.992109072837911,5,2004,2008
+Unsupervised Personal Name Disambiguation,1,7.4707970738319345,4,2007,2010
+Comparing MUCK-II And MUC-3: Assessing The Difficulty Of Different Tasks,1,3.987768670233531,3,1991,1993
+Inducing A Semantically Annotated Lexicon Via EM-Based Clustering,1,4.049927790895069,4,2000,2003
+Semantic Role Labelling With Tree Conditional Random Fields,1,4.436425044958417,3,2008,2010
+Inheritance And Constraint-Based Grammar Formalisms,1,5.664135459658018,9,1992,2000
+The Candide System For Machine Translation,1,6.547291966822929,12,1996,2007
+A Simple Approach To Building Ensembles Of Naive Bayesian Classifiers For Word Sense Disambiguation,1,12.199625877450398,5,2000,2004
+Machine Transliteration,1,7.564714555718217,10,2000,2009
+Memory-Based Shallow Parsing,1,6.231581198619912,4,1999,2002
+Grammar Specialization Through Entropy Thresholds,1,4.124599037252569,6,1995,2000
+An Environment For Acquiring Semantic Information,1,6.116465464783361,10,1987,1996
+University Of Massachusetts: Description Of The CIRCUS System As Used For MUC-3,1,3.908488079866272,3,1992,1994
+Dialogue Act Modeling For Automatic Tagging And Recognition Of Conversational Speech,1,4.744068726325486,4,2001,2004
+ProFIT: Prolog With Features Inheritance And Templates,1,5.914876369140069,7,1996,2002
+Bootstrapping Statistical Parsers From Small Datasets,1,4.423007241820564,7,2003,2009
+The Penn Discourse TreeBank 2.0.,1,13.564543634390642,2,2012,
+A Syntax-Based Statistical Translation Model,1,21.90921476937707,6,2002,2007
+Robust Pronoun Resolution with Limited Knowledge,1,15.529210931046702,7,1999,2005
+TAG's As A Grammatical Formalism For Generation,1,5.910038901743587,15,1986,2000
+Exploiting Diversity In Natural Language Processing: Combining Parsers,1,6.529092415979228,7,2000,2006
+Using The Web To Obtain Frequencies For Unseen Bigrams,1,12.637932677235986,4,2004,2007
+Decision Tree Models Applied To The Labeling Of Text With Parts-Of-Speech,1,4.296970032049851,4,1995,1998
+Probabilistic Tree-Edit Models with Structured Latent Variables for Textual Entailment and Question Answering,1,3.980244768572628,2,2012,
+SemEval-2010 Task 1: Coreference Resolution in Multiple Languages,1,6.396731664369693,4,2010,
+Machine Transliteration Of Names In Arabic Texts,1,6.987368767449997,6,2004,2009
+Technical Correspondance - On The Need For Parsing Ill-Formed Input,1,4.534373240656455,10,1983,1992
+Jointly Modeling Aspects and Opinions with a MaxEnt-LDA Hybrid,1,3.980244768572628,2,2012,
+An Interactive Japanese Parser For Machine Translation,1,5.516033541641727,11,1990,2000
+Proper Name Translation in Cross-Language Information Retrieval,1,3.8598490444337834,7,1998,2004
+Structure Sharing With Binary Trees,1,5.392707252339115,11,1986,1996
+Experiments With Open-Domain Textual Question Answering,1,10.986932485779395,4,2001,2004
+Structured Lexical Similarity via Convolution Kernels on Dependency Trees,1,4.422555969023781,2,2012,
+Word Re-Ordering And DP-Based Search In Statistical Machine Translation,1,9.322874315891108,4,2001,2004
+A Status Report On The LRC Machine,1,3.886550245240888,10,1983,1992
+Discourse Deixis: Reference To Discourse Segments,1,5.755302075745701,14,1989,2002
+Algorithms That Learn To Extract Information - BBN: Description Of The SIFT System As Used For MUC-7,1,6.736501710649873,8,1998,2005
+Discourse Segmentation Of Multi-Party Conversation,1,8.458954327329545,3,2006,2008
+Experiments in Domain Adaptation for Statistical Machine Translation,1,4.982632816694922,4,2008,2011
+Probabilistic Reasoning For Entity And Relation Recognition,1,9.100229661328932,3,2004,2006
+Using a Dependency Parser to Improve SMT for Subject-Object-Verb Languages,1,7.8201966702146395,4,2010,
+Intelligent Selection of Language Model Training Data,1,10.662719046325705,3,2011,
+Transportable Natural-Language Interfaces To Databases,1,4.1341579719110895,3,1982,1984
+A Systematic Comparison of Phrase-Based Hierarchical and Syntax-Augmented Statistical MT,1,5.586797327773212,5,2009,
+Minimized Models for Unsupervised Part-of-Speech Tagging,1,8.513631219912128,4,2010,
+Two Decades of Unsupervised POS Induction: How Far Have We Come?,1,5.330259667391197,3,2011,
+Joint Parsing and Alignment with Weakly Synchronized Grammars,1,4.2990771113573505,3,2011,
+Latent Structure Perceptron with Feature Induction for Unrestricted Coreference Resolution,1,3.8329066509751435,1,2013,
+The Transfer Phase Of Mu Machine Translation System,1,5.6543461412136296,9,1986,1994
+Generalizing Dependency Features for Opinion Mining,1,4.149447191972964,2,2010,2011
+Understanding Natural Language Instructions: The Case Of Purpose Clauses,1,4.631898794183768,7,1992,1998
+Inducing Probabilistic CCG Grammars from Logical Form with Higher-Order Unification,1,7.902084440170006,2,2012,
+Finite-state Approximation of Constraint-based Grammars using Left-corner Grammar Transforms,1,4.3258745040871815,4,2000,2003
+Example-Based Machine Translation Using DP-Matching Between Work Sequences,1,6.045039723719986,3,2002,2004
+Thumbs Up Or Thumbs Down? Semantic Orientation Applied To Unsupervised Classification Of Reviews,1,9.310447470628132,3,2005,2007
+A Pattern Matching Method For Finding Noun And Proper Noun Translations From Noisy Parallel Corpora,1,7.217790549362175,9,1995,2003
+Unsupervised Semantic Role Induction via Split-Merge Clustering,1,4.6139493835411205,2,2012,
+D-Tree Grammars,1,10.567353585744454,7,1996,2002
+A Rapid Match Algorithm For Continuous Speech Recognition,1,5.14068795968725,5,1990,1994
+Using Language And Translation Models To Select The Best Among Outputs From Multiple MT Systems,1,3.9100936132389803,7,2002,2008
+Going Beyond AER: An Extensive Analysis Of Word Alignments And Their Impact On MT,1,5.07523532979719,4,2007,2010
+Constraint Grammar As A Framework For Parsing Running Text,1,12.859626624197409,11,1991,2001
+NLTK: The Natural Language Toolkit,1,5.395706254153436,3,2011,
+The Stanford Typed Dependencies Representation,1,10.754254552671494,4,2010,
+Evaluation Metrics For Generation,1,5.839237621770444,10,2000,2009
+Some Chart-Based Techniques For Parsing Ill-Formed Input,1,7.029598081268006,11,1990,2000
+Training Tree Transducers,1,6.761627664364718,5,2006,2010
+Target Word Detection And Semantic Role Chunking Using Support Vector Machines,1,5.821047583010282,2,2004,2005
+Making DATR Work For Speech: Lexicon Compilation In SUNDIAL,1,4.463990817907687,5,1992,1996
+The Disambiguation Of Nominalizations,1,5.36133983711211,8,2002,2009
+Domain Kernels For Word Sense Disambiguation,1,5.521502989137792,4,2006,2009
+Memory-Based Learning: Using Similarity For Smoothing,1,5.986361266659396,6,1997,2002
+A Computational Mechanism For Pronominal Reference,1,5.470251580882069,13,1990,2002
+Alignment By Agreement,1,7.857944276963957,4,2010,
+Biomedical Named Entity Recognition Using Conditional Random Fields And Rich Feature Sets,1,5.700434037256647,3,2006,2008
+Discriminative Instance Weighting for Domain Adaptation in Statistical Machine Translation,1,8.344524153323906,2,2012,
+Probabilistic Inference for Machine Translation,1,5.413877519432738,2,2009,2010
+Revisiting Readability: A Unified Framework for Predicting Text Quality,1,4.517902719747229,5,2009,
+A Novel Use Of Statistical Parsing To Extract Information From Text,1,12.094588438264392,7,2001,2007
+Stanfordâs Multi-Pass Sieve Coreference Resolution System at the CoNLL-2011 Shared Task,1,16.812289028231337,2,2012,
+Centering: A Framework For Modeling The Local Coherence Of Discourse,1,38.9070985434882,9,1996,2004
+Parsing The Wall Street Journal Using A Lexical-Functional Grammar And Discriminative Estimation Techniques,1,19.859987661658227,6,2002,2007
+A Metalearning Approach to Processing the Scope of Negation,1,6.785996154951548,4,2010,
+A Terminological Simplification Transformation For Natural Language Question-Answering Systems,1,4.446510535533595,8,1986,1993
+Statistical Decision-Tree Models For Parsing,1,32.02389286000092,8,1996,2003
+Experimental Support for a Categorical Compositional Distributional Model of Meaning,1,11.250322916002592,2,2012,
+What Is The Minimal Set Of Fragments That Achieves Maximal Parse Accuracy?,1,4.457976463046936,3,2001,2003
+Assessing Agreement On Classification Tasks: The Kappa Statistic,1,33.390594046337085,9,1997,2005
+Contextual Word Similarity And Estimation From Sparse Data,1,13.324715835014217,9,1994,2002
+Learning Non-Isomorphic Tree Mappings For Machine Translation,1,9.908740059750281,3,2007,2009
+Combining Multiple Knowledge Sources For Discourse Segmentation,1,7.692732276231763,7,1997,2003
+Semantic Role Labeling Using Different Syntactic Views,1,7.777530626350969,3,2006,2008
+Another Stride Towards Knowledge-Based Machine Translation,1,3.9129989822471893,7,1986,1992
+Improving Verb Clustering with Automatically Acquired Selectional Preferences,1,3.9089046964475136,1,2013,
+Detecting Semantic Equivalence and Information Disparity in Cross-lingual Documents,1,4.86487952779977,2,2012,
+The Web As A Parallel Corpus,1,6.523065600452465,4,2004,2007
+The Interpretation Of Tense In Discourse,1,7.1311279314538885,5,1988,1992
+Confidence Measure for Word Alignment,1,3.9554323298765572,2,2010,2011
+Evaluating Unsupervised Part-of-Speech Tagging for Grammar Induction,1,4.4035294350066945,3,2009,2011
+Algorithm Selection and Model Adaptation for ESL Correction Tasks,1,5.307215445427924,2,2012,
+Word Sense Disambiguation With Very Large Neural Networks Extracted From Machine Readable Dictionaries,1,12.166182160800384,11,1991,2001
+Parse Fitting And Prose Fixing: Getting A Hold On Ill-Formedness,1,15.218128233159007,11,1986,1996
+Frequency Estimates For Statistical Word Similarity Measures,1,4.634358047140869,5,2004,2008
+The First International Chinese Word Segmentation Bakeoff,1,8.095144608453964,6,2003,2008
+Grammatical Category Disambiguation By Statistical Optimization,1,25.888599193989233,11,1989,1999
+Chinese And Japanese Word Segmentation Using Word-Level And Character-Level Information,1,4.354164741671776,5,2005,2009
+Phrase Structure Trees Bear More Fruit Than You Would Have Thought,1,4.721320050243335,7,1983,1989
+Exploring Content Models for Multi-Document Summarization,1,9.010957131677566,4,2010,
+A Study On Convolution Kernels For Shallow Statistic Parsing,1,11.781789212212315,4,2005,2008
+Judging Grammaticality with Tree Substitution Grammar Derivations,1,3.9802447685726285,2,2012,
+SemEval-2010 Task 10: Linking Events and Their Participants in Discourse,1,5.113243169076351,4,2010,
+Statistical Parsing of Morphologically Rich Languages (SPMRL) What How and Whither,1,5.586714526691151,1,2013,
+Hitting the Right Paraphrases in Good Time,1,6.058698264864991,3,2011,
+Maximum Expected BLEU Training of Phrase and Lexicon Translation Models,1,4.782566976043238,1,2013,
+Deciphering Foreign Language,1,5.498638479851657,2,2012,
+Salience-Based Content Characterisation Of Text Documents,1,4.816741718500148,6,1998,2003
+Streaming First Story Detection with application to Twitter,1,4.281554723516408,3,2011,
+Improving Translation Quality by Discarding Most of the Phrasetable,1,4.3515173666830105,5,2009,
+Paraphrasing With Bilingual Parallel Corpora,1,11.450789247608808,4,2010,
+The Acquisition Of Lexical Semantic Knowledge From Large Corpora,1,3.903667630089908,4,1992,1995
+A Simple Statistical Class Grammar For Measuring Speech Recognition Performance,1,4.049343707398756,3,1989,1991
+WordNet::Similarity - Measuring The Relatedness Of Concepts,1,5.443681858962441,2,2012,
+Nominalizations In PUNDIT,1,4.147381668275061,12,1988,1999
+Automatically Evaluating Answers To Definition Questions,1,5.277342068762895,4,2005,2008
+Recovering Latent Information In Treebanks,1,5.13239556637354,7,2003,2009
+A Machine Learning Approach To The Automatic Evaluation Of Machine Translation,1,4.450418363854412,2,2007,2008
+Improved Inference for Unlexicalized Parsing,1,21.70871905832065,5,2009,
+Improving Tree-to-Tree Translation with Packed Forests,1,5.531421737427095,2,2010,2011
+TrustRank: Inducing Trust in Automatic Translations via Ranking,1,6.574839480487071,2,2012,
+Improved Discriminative Bilingual Word Alignment,1,4.682740805892596,4,2007,2010
+Automatic Text Summarization Based on the Global Document Annotation,1,4.056999207603696,5,1999,2003
+Grammatical Error Correction with Alternating Structure Optimization,1,4.171623374309577,2,2012,
+Word Sense Disambiguation using Optimised Combinations of Knowledge Sources,1,5.054383453489299,8,1999,2006
+A Stacked Sub-Word Model for Joint Chinese Word Segmentation and Part-of-Speech Tagging,1,6.383377016879762,2,2012,
+Multiple Aspect Ranking Using the Good Grief Algorithm,1,4.738993840541758,4,2008,2011
+Resolving PP Attachment Ambiguities With Memory-Based Learning,1,5.74570071801995,8,1998,2005
+The Berkeley FrameNet Project,1,27.35825144348142,6,2003,2008
+Unsupervised Event Coreference Resolution with Rich Linguistic Features,1,3.9086420649328044,3,2011,
+The NOMAD System: Expectation-Based Detection And Correction Of Errors During Understanding Of Syntactically And Semantically Ill-Formed Text,1,6.0013878459903935,11,1986,1996
+The BICORD System Combining Lexical Information From Bilingual Corpora And Machine Readable Dictionaries,1,6.245378236800551,6,1991,1996
+Experiments Using Stochastic Search For Text Planning,1,6.086360822595415,5,2000,2004
+Intonational Features Of Local And Global Discourse Structure,1,4.02652541174499,7,1993,1999
+Using Encyclopedic Knowledge For Named Entity Disambiguation,1,5.35601759933551,7,2007,
+MATCH: An Architecture For Multimodal Dialogue Systems,1,7.072193865306374,5,2003,2007
+Bleu: A Method For Automatic Evaluation Of Machine Translation,1,7.566718917132619,3,2011,
+Constraint-Based Categorial Grammar,1,4.377520984244917,5,1995,1999
+Subgroup Detection in Ideological Discussions,1,4.2349258722192396,1,2013,
+Word-Sense Disambiguation Using Decomposable Models,1,16.761750010668905,7,1995,2001
+Unsupervised Learning Of Disambiguation Rules For Part Of Speech Tagging,1,7.7090788281387095,10,1996,2005
+Using Parse Features for Preposition Selection and Error Detection,1,6.058698264864992,3,2011,
+Antecedent Recovery: Experiments With A Trace Tagger,1,4.842374698742942,4,2004,2007
+Automatic Evaluation Of Machine Translation Quality Using Longest Common Subsequence And Skip-Bigram Statistics,1,3.993121646441365,4,2005,2008
+A Fast Accurate Non-Projective Semantically-Enriched Parser,1,5.307215445427928,2,2012,
+Opinion Word Expansion and Target Extraction through Double Propagation,1,3.980244768572628,2,2012,
+An Improved Heuristic For Ellipsis Processing,1,6.66657245524789,8,1983,1990
+Overview Of Results Of The MUC-6 Evaluation,1,5.747987945408321,7,1997,2003
+A Principle-Based Hierarchical Representation Of LTAGs,1,6.134580531946046,11,1996,2006
+Bidirectional Grammars And The Design Of Natural Language Generation Systems,1,6.8332259932816175,8,1988,1995
+Preliminary ATIS Development At MIT,1,4.070383826275682,2,1990,1991
+Online Large-Margin Training of Syntactic and Structural Translation Features,1,11.126317363045919,5,2009,
+GEMINI: A Natural Language System For Spoken-Language Understanding,1,11.054227954619623,11,1994,2004
+Hierarchical Phrase-Based Translation with Suffix Arrays,1,4.606239885270744,2,2008,2009
+Learning Dependency-Based Compositional Semantics,1,12.961281151490912,2,2012,
+Treating Coordination In Logic Grammars,1,7.2034749313206605,12,1985,1996
+The CoNLL-2013 Shared Task on Grammatical Error Correction,1,4.380526686543082,1,2013,
+Lexicon-Based Methods for Sentiment Analysis,1,15.041733514918931,2,2012,
+Introduction To The Special Issue On The Web As Corpus,1,10.285480851882587,5,2004,2008
+Automatic Evaluation And Uniform Filter Cascades For Inducing N-Best Translation Lexicons,1,9.663185493193208,9,1996,2004
+Nouns are Vectors Adjectives are Matrices: Representing Adjective-Noun Constructions in Semantic Space,1,16.708834003511274,3,2011,
+Minimum Error Rate Training In Statistical Machine Translation,1,20.358451481069956,3,2007,2009
+Auxiliaries And Clitics In French UCG Grammar,1,3.9471148812171095,5,1988,1992
+Learning Entailment Rules for Unary Templates,1,4.517902719747225,5,2009,
+Efficient Incremental Decoding for Tree-to-String Translation,1,3.908642064932811,3,2011,
+Structure-Sharing In Lexical Representation,1,9.5166675486889,9,1985,1993
+Domain-Specific Sense Distributions And Predominant Sense Acquisition,1,6.161095983629427,4,2007,2010
+Computation Of The Probability Of Initial Substring Generation By Stochastic Context-Free Grammars,1,6.269516571800341,8,1994,2001
+Nymble: A High-Performance Learning Name-Finder,1,33.30434315447549,9,1998,2006
+Anaphora For Everyone: Pronominal Anaphora Resolution Without A Parser,1,14.655995382836958,9,1997,2005
+Instance Weighting for Domain Adaptation in NLP,1,5.369467831296831,5,2009,
+Probabilistic Models Of Short And Long Distance Word Dependencies In Running Text,1,6.418833513039975,10,1989,1998
+Immediate-Head Parsing For Language Models,1,14.240981144909908,5,2002,2006
+Using Decision Trees to Construct a Practical Parser,1,6.6446303725535145,6,1999,2004
+A Self-Learning Universal Concept Spotter,1,3.9595458058382347,7,1998,2004
+Generating Confusion Sets for Context-Sensitive Error Correction,1,5.330259667391195,3,2011,
+TRIPS and TRIOS System for TempEval-2: Extracting Temporal Information from Text,1,3.9802447685726388,2,2012,
+A Fast And Portable Realizer For Text Generation Systems,1,9.336026078495134,5,1998,2002
+Evaluating Discourse Processing Algorithms,1,13.631367179885347,12,1990,2001
+The Design For The Wall Street Journal-Based CSR Corpus,1,6.046045903920366,11,1992,2002
+Phonological Derivation In Optimality Theory,1,4.772636746236715,7,1996,2002
+An Estimate Of An Upper Bound For The Entropy Of English,1,4.169361953992352,7,1993,1999
+Automating The Acquisition Of Bilingual Terminology,1,5.783112318211575,8,1993,2000
+A Topic Model for Word Sense Disambiguation,1,4.1763455595282934,4,2010,
+Hierarchical Bayesian Domain Adaptation,1,4.626145080979548,4,2010,
+An Alternative Conception Of Tree-Adjoining Derivation,1,9.044824275057142,10,1993,2002
+Improved Acoustic Modeling For Continuous Speech Recognition,1,3.999001954040704,3,1990,1992
+Lexicalized Context-Free Grammars,1,5.153818628511574,8,1994,2001
+Assigning Function Tags To Parsed Text,1,11.29701742644143,5,2002,2006
+Phrasetable Smoothing For Statistical Machine Translation,1,5.06102872053418,1,2007,2007
+A Decision Tree Method For Finding And Classifying Names In Japanese Texts,1,6.7365017106498755,8,1998,2005
+Fragment Processing In The DELPHI System,1,3.9442619837422717,3,1992,1994
+A Statistical Semantic Parser That Integrates Syntax And Semantics,1,3.8354523200155106,7,2005,2011
+A Survey Of Machine Translation: Its History Current Status And Future Prospects,1,7.092458631944497,7,1986,1992
+Quasi-Destructive Graph Unification,1,7.57286913130898,10,1992,2001
+Learning Question Classifiers,1,4.0681557537131,6,2003,2008
+The Reliability Of A Dialogue Structure Coding Scheme,1,12.222987529320944,8,1997,2004
+Sentence Disambiguation By A Shift-Reduce Parsing Technique,1,9.489950652164955,14,1983,1996
+Discriminative Training Of A Neural Network Statistical Parser,1,6.742039381323769,3,2006,2008
+Generation that Exploits Corpus-Based Statistical Knowledge,1,17.439918083459247,7,1999,2005
+Dependency Parsing by Belief Propagation,1,7.522896284617272,3,2011,
+Semantic Role Labeling Of NomBank: A Maximum Entropy Approach,1,5.1927588595825664,4,2007,2010
+Efficient Deep Processing Of Japanese,1,4.309672993792627,6,2002,2007
+Statistical Parsing Of Messages,1,10.035154642433229,14,1990,2003
+PRINCIPAR - An Efficient Broad-Coverage Principle-Based Parser,1,6.397077796522898,13,1995,2007
+An Algorithm For Generation In Unification Categorial Grammar,1,14.249367097406406,8,1989,1996
+Expressing Generalizations In Unification-Based Grammar Formalisms,1,5.998759711140254,3,1990,1992
+Global Thresholding And Multiple-Pass Parsing,1,6.372193646615109,11,1998,2008
+Termight: Identifying And Translating Technical Terminology,1,13.34422548233606,7,1995,2001
+Semi-Supervised Polarity Lexicon Induction,1,4.139072798522572,4,2010,
+Noun Phrase Coreference As Clustering,1,8.127365985917452,9,1999,2007
+Using Subcategorization To Resolve Verb Class Ambiguity,1,8.36326506778918,5,2000,2004
+Machine Learning Of Temporal Relations,1,5.316257056611834,2,2007,2008
+Special Issue Introduction: Semantic Role Labeling: An Introduction to the Special Issue,1,4.559855363967522,3,2009,2011
+An Integrated Framework For Text Planning And Pronominalisation,1,6.037558807025659,6,2001,2006
+Decoding Complexity In Word-Replacement Translation Models,1,5.832623581532157,6,2001,2006
+Structured Perceptron with Inexact Search,1,4.380526686543082,1,2013,
+Scaling To Very Very Large Corpora For Natural Language Disambiguation,1,10.558142539289044,5,2002,2006
+Evaluation Of Spoken Language Systems: The ATIS Domain,1,7.320054766205013,6,1991,1996
+Weakly-Supervised Acquisition of Open-Domain Classes and Class Attributes from Web Documents and Query Logs,1,6.255915506979664,2,2009,2010
+Which Side Are You On? Identifying Perspectives At The Document And Sentence Levels,1,3.945929358094716,2,2010,2011
+Defaults In Unification Grammar,1,5.736118105078555,12,1991,2002
+Twitter Polarity Classification with Label Propagation over Lexical Links and the Follower Graph,1,3.8329066509751435,1,2013,
+The Phrasal Lexicon,1,11.859183045658293,14,1980,1993
+A Generative Model for Parsing Natural Language to Meaning Representations,1,4.707088802479289,3,2011,
+Factors In Anaphora Resolution: They Are Not The Only Things That Matter - A Case Study Based On Two Different Approaches,1,4.620803533436058,5,1998,2002
+Identifying Word Correspondences In Parallel Texts,1,19.860532129798507,14,1993,2006
+A Tree Trellis Based Fast Search For Finding The N-Best Sentence Hypotheses In Continuous Speech Recognition,1,3.9043275425609223,4,1990,1993
+The BioScope corpus: annotation for negation uncertainty and their scope in biomedical texts,1,6.864991465662449,5,2009,
+Modeling The User's Plans And Goals,1,6.793350912449881,12,1988,1999
+Domain Adaptation With Structural Correspondence Learning,1,12.47656549056386,3,2009,2011
+Two Principles Of Parse Preference,1,8.84565148206961,7,1992,1998
+Extracting Relations With Integrated Information Using Kernel Methods,1,6.041027184168666,2,2006,2007
+Part-Of-Speech Tagging With Neural Networks,1,9.608592335574079,7,1995,2001
+SemEval-2010 Task 14: Word Sense Induction Disambiguation,1,6.414156305092963,3,2011,
+Learning Bilingual Lexicons from Monolingual Corpora,1,7.647415548573333,5,2009,
+A CCG Approach To Free Word Order Languages,1,3.8976052229558804,4,1993,1996
+Towards Effective Tutorial Feedback for Explanation Questions: A Dataset and Baselines,1,4.2349258722192396,1,2013,
+Metaphor Identification Using Verb and Noun Clustering,1,6.5711617125567425,1,2013,
+High Precision Extraction Of Grammatical Relations,1,4.815096588580813,6,2002,2007
+Improvements In Automatic Thesaurus Extraction,1,7.451191776530417,6,2004,2009
+Categorial Semantics And Scoping,1,4.521427882591425,12,1992,2003
+Exploiting Web-Derived Selectional Preference to Improve Statistical Dependency Parsing,1,5.7495637224525495,2,2012,
+Statistically-Enhanced New Word Identification In A Rule-Based Chinese System,1,3.8813392024412363,4,2002,2005
+Enhancing Chinese Word Segmentation Using Unlabeled Data,1,4.422555969023781,2,2012,
+Multi-Site Data Collection And Evaluation In Spoken Language Understanding,1,5.089674227095375,4,1994,1997
+Multitext Grammars And Synchronous Parsers,1,6.8248791931352315,4,2004,2007
+Recognizing Stances in Online Debates,1,7.533415091757961,3,2011,
+Prototype-Driven Learning For Sequence Models,1,9.332696485881954,7,2007,
+Lexico-Semantic Pattern Matching As A Companion To Parsing In Text Understanding,1,6.4368411188734544,5,1991,1995
+A Common Framework For Syntactic Annotation,1,4.4043564498644,3,2001,2003
+Unsupervised Learning of Narrative Event Chains,1,4.865556280521549,5,2009,
+Characterizing and Recognizing Spoken Corrections in Human-Computer Dialogue,1,4.820684010943027,8,1999,2006
+An Empirical Study Of Information Synthesis Task,1,5.391154616900043,2,2005,2006
+Improved Source-Channel Models For Chinese Word Segmentation,1,8.306101271143651,5,2003,2007
+Probabilistic Text Structuring: Experiments With Sentence Ordering,1,5.881173455245486,6,2004,2009
+Unsupervised Mining of Lexical Variants from Noisy Text,1,4.2349258722192396,1,2013,
+Factored Translation Models,1,9.156409456213613,3,2008,2010
+Three New Probabilistic Models For Dependency Parsing: An Exploration,1,5.604467625774962,3,2006,2008
+Features And Values,1,16.583567647655713,9,1984,1992
+Compositional Matrix-Space Models of Language,1,3.9261553442667543,3,2011,
+On Dual Decomposition and Linear Programming Relaxations for Natural Language Processing,1,10.68041561497882,3,2011,
+From N-Grams To Collocations: An Evaluation Of Xtract,1,4.565939542896846,3,1992,1994
+Translating Collocations For Bilingual Lexicons: A Statistical Approach,1,20.8113223858165,10,1996,2005
+Evaluating Translational Correspondence Using Annotation Projection,1,7.3495966558562555,4,2003,2006
+The Second International Chinese Word Segmentation Bakeoff,1,6.390701179985832,3,2006,2008
+Answering Definition Questions With Multiple Knowledge Sources,1,6.503483921809526,4,2005,2008
+Finding Hedges by Chasing Weasels: Hedge Detection Using Wikipedia Tags and Shallow Linguistic Features,1,4.450570945401882,4,2010,
+Human-Machine Problem Solving Using Spoken Language Systems (SLS): Factors Affecting Performance And User Satisfaction,1,5.410622991135656,9,1992,2000
+Concept-to-text Generation via Discriminative Reranking,1,4.380526686543082,1,2013,
+Parsing Word Associations And Typical Predicate-Argument Relations,1,8.525004697361704,8,1989,1996
+Chinese Part-Of-Speech Tagging: One-At-A-Time Or All-At-Once? Word-Based Or Character-Based?,1,5.59224903387334,4,2005,2008
+Chinese Segmentation And New Word Detection Using Conditional Random Fields,1,8.687785262979045,4,2005,2008
+The LRC Machine Translation System,1,5.346268131897036,5,1986,1990
+The CoNLL-2010 Shared Task: Learning to Detect Hedges and their Scope in Natural Language Text,1,9.596051125679518,3,2011,
+Randomised Language Modelling for Statistical Machine Translation,1,4.628243187730025,5,2009,
+Paraphrase Identification as Probabilistic Quasi-Synchronous Recognition,1,4.924909512942431,4,2010,
+Experiments with a Higher-Order Projective Dependency Parser,1,5.9706774321876015,6,2008,
+Lattice Minimum Bayes-Risk Decoding for Statistical Machine Translation,1,8.316027746770683,3,2009,2011
+Forest-Based Translation,1,9.769042902429678,3,2009,2011
+Using Syntax to Disambiguate Explicit Discourse Connectives in Text,1,3.943668089703905,3,2011,
+CoNLL-2012 Shared Task: Modeling Multilingual Unrestricted Coreference in OntoNotes,1,10.173726378054212,2,2012,
+Collection Of Spontaneous Speech For The ATIS Domain And Comparative Analyses Of Data Collected At MIT And TI,1,4.0460747623755084,2,1991,1992
+A Property-Sharing Constraint In Centering,1,13.61632857542338,13,1987,1999
+Automatic Verb Classification Based On Statistical Distributions Of Argument Structure,1,13.98877984120129,5,2002,2006
+Tense As Discourse Anaphor,1,10.395035509309432,17,1988,2004
+An Efficient Two-Pass Approach to Synchronous-CFG Driven Statistical MT,1,5.978136603112748,2,2008,2009
+Discriminative Corpus Weight Estimation for Machine Translation,1,4.382605714182006,4,2010,
+Log-Linear Models For Word Alignment,1,8.2536553301486,6,2005,2010
+Towards The Automatic Identification Of Adjectival Scales: Clustering Adjectives According To Meaning,1,9.128509982145607,12,1994,2005
+Exploiting Diverse Knowledge Sources Via Maximum Entropy In Named Entity Recognition,1,11.097793363938985,8,1998,2005
+Using Classifier Features for Studying the Effect of Native Language on the Choice of Written Second Language Words,1,7.229857209908132,1,2013,
+Semantic Roles for SMT: A Hybrid Two-Pass Model,1,6.093838949857211,3,2011,
+Robust Bilingual Word Alignment For Machine Aided Translation,1,18.905737074581655,10,1994,2003
+The Role Of Lexico-Semantic Feedback In Open-Domain Textual Question-Answering,1,7.616608092544783,5,2002,2006
+Classifier Combination for Improved Lexical Disambiguation,1,16.065398417011686,7,1999,2005
+Treebank Annotation Schemes and Parser Evaluation for German,1,4.575215150038641,3,2008,2010
+Semantic-Based Transfer,1,5.748406797768795,3,1998,2000
+Using Semantic Preferences To Identify Verbal Participation In Role Switching Alternations,1,9.426085934968922,5,2000,2004
+Synchronous Binarization For Machine Translation,1,8.915136080499984,5,2006,2010
+Structured Relation Discovery using Generative Models,1,7.0766827152980545,2,2012,
+TDL - A Type Description Language For Constraint-Based Grammars,1,4.069072209189562,9,1995,2003
+Improving Data Driven Wordclass Tagging by System Combination,1,17.718519322746463,5,1999,2003
+An Efficient A* Search Algorithm For Statistical Machine Translation,1,5.719509224895397,5,2002,2006
+Anaphora Resolution In Slot Grammar,1,9.028228198962136,7,1992,1998
+A High-Performance Semi-Supervised Learning Method For Text Chunking,1,5.291074269011349,5,2006,2010
+Stochastic Inversion Transduction Grammars And Bilingual Parsing Of Parallel Corpora,1,12.445642499658575,6,2003,2008
+Word Sense Disambiguation Improves Statistical Machine Translation,1,8.211103471196402,3,2008,2010
+Text Segmentation Using Exponential Models,1,4.105760120517043,6,1998,2003
+Improving nonparameteric Bayesian inference: experiments on unsupervised word segmentation with adaptor grammars,1,6.818289727454687,4,2010,
+A Phrase-Based Joint Probability Model For Statistical Machine Translation,1,14.388609334057396,5,2003,2007
+Identifying Sources Of Opinions With Conditional Random Fields And Extraction Patterns,1,5.272904130131054,5,2006,2010
+Arabic Finite-State Morphological Analysis And Generation,1,8.024935520057802,8,1998,2005
+Bootstrapping,1,8.120041020359633,2,2003,2004
+Counter-Training In Discovery Of Semantic Patterns,1,5.413308774812156,6,2004,2009
+Open Language Learning for Information Extraction,1,4.928162209799619,1,2013,
+Two Constraints On Speech Act Ambiguity,1,5.141069174589874,11,1989,1999
+Centroid-Based Summarization Of Multiple Documents: Sentence Extraction Utility-Based Evaluation And User Studies,1,10.813917420714077,4,2001,2004
+The Role Of The Hierarchy Of Activation In The Process Of Natural Language Understanding,1,5.5776612864102955,10,1985,1994
+Disambiguating Highly Ambiguous Words,1,5.266687369302593,6,2000,2005
+Word Translation Disambiguation Using Bilingual Bootstrapping,1,3.9945908442719507,4,2003,2006
+Conceptual And Linguistic Decisions In Generation,1,4.686148024679605,10,1985,1994
+Chinese Syntactic Reordering for Statistical Machine Translation,1,13.429217376924784,4,2008,2011
+Automatic Pattern Acquisition For Japanese Information Extraction,1,4.687876723835469,4,2003,2006
+Towards A Workbench For Acquisition Of Domain Knowledge From Natural Language,1,3.9780666984240054,6,1997,2002
+Articles: Recognizing Contextual Polarity: An Exploration of Features for Phrase-Level Sentiment Analysis,1,6.818289727454706,4,2010,
+Syntax Augmented Machine Translation Via Chart Parsing,1,13.23738613949331,3,2009,2011
+Online Large-Margin Training Of Dependency Parsers,1,14.660120276444394,4,2006,2009
+SRI: Description Of The JV-FASTUS System Used For MUC-5,1,5.292190324221152,7,1994,2000
+Combining Clues For Word Alignment,1,5.611422566886311,3,2004,2006
+A comparison of Bayesian estimators for unsupervised Hidden Markov Model POS taggers,1,6.026024844251309,2,2010,2011
+Chunking With Support Vector Machines,1,23.312858291489782,6,2002,2007
+Prepositional Phrase Attachment Through A Backed-Off Model,1,24.077376199882554,12,1995,2006
+Using Semantic Roles to Improve Question Answering,1,5.136468665674647,4,2008,2011
+Normal Form Theorem Proving For The Lambek Calculus,1,4.622442786740239,13,1990,2002
+Exact Decoding of Phrase-Based Translation Models through Lagrangian Relaxation,1,4.864879527799767,2,2012,
+Chart-Based Transfer Rule Application In Machine Translation,1,4.019672689708483,4,2001,2004
+Unification-Based Multimodal Integration,1,5.822427907363483,5,1998,2002
+Discovering Sociolinguistic Associations with Structured Sparsity,1,5.498638479851657,2,2012,
+A Corpus-Based Investigation Of Definite Description Use,1,9.151479044985004,7,1999,2005
+A Symmetrical Approach To Parsing And Generation,1,9.65594958930756,5,1991,1995
+Unsupervised Learning of Narrative Schemas and their Participants,1,5.843938691429289,4,2010,
+A Scalable Decoder for Parsing-Based Machine Translation with Equivalent Language Model State Maintenance,1,4.720571821014431,2,2009,2010
+Machine Translation Divergences: A Formal Description And Proposed Solution,1,9.373092043452043,11,1995,2005
+Improving Machine Learning Approaches To Coreference Resolution,1,10.699524004420818,4,2004,2007
+Findings of the 2012 Workshop on Statistical Machine Translation,1,24.507967543064098,1,2013,
+An Unsupervised Method For Word Sense Tagging Using Parallel Corpora,1,10.493515601259277,4,2003,2006
+Recognizing Named Entities in Tweets,1,5.498638479851657,2,2012,
+Preventing False Inferences,1,5.154175256593297,13,1986,1998
+Chart Generation,1,5.237643868025851,12,1996,2007
+Online Learning of Relaxed CCG Grammars for Parsing to Logical Form,1,5.217039322569333,5,2009,
+Phrase Dependency Parsing for Opinion Mining,1,4.672027407045756,3,2011,
+Generation As A Solution To Its Own Problem,1,4.118130175454063,7,1998,2004
+Automatic Acquisition Of Domain Knowledge For Information Extraction,1,5.130503096124883,7,2001,2007
+Data-Defined Kernels For Parse Reranking Derived From Probabilistic Models,1,4.003268041716318,2,2006,2007
+Lexical Generalization in CCG Grammar Induction for Semantic Parsing,1,4.864879527799767,2,2012,
+ROUGE: A Package For Automatic Evaluation Of Summaries,1,8.727475415746174,2,2008,2009
+Learning with Compositional Semantics as Structural Inference for Subsentential Sentiment Analysis,1,7.015272802971466,2,2010,2011
+Names And Similarities On The Web: Fact Extraction In The Fast Lane,1,3.989405376982985,4,2007,2010
+Evaluating Parsing Strategies Using Standardized Parse Files,1,3.8379535696793328,9,1992,2000
+Contextual Preferences,1,5.03489178885374,4,2008,2011
+Examining The Role Of Linguistic Knowledge Sources In The Automatic Identification And Classification Of Reviews,1,5.409494709165243,3,2009,2011
+A Word-To-Word Model Of Translational Equivalence,1,5.342904812335005,6,2001,2006
+Open Information Extraction Using Wikipedia,1,6.7520336937746075,3,2011,
+METEOR: An Automatic Metric for MT Evaluation with High Levels of Correlation with Human Judgments,1,9.1034702289827,4,2008,2011
+The Third International Chinese Language Processing Bakeoff: Word Segmentation And Named Entity Recognition,1,5.151526188127178,1,2008,2008
+Unsupervised Ontology Induction from Text,1,3.9086420649328066,3,2011,
+Parsing Some Constrained Grammar Formalisms,1,6.942545109366934,7,1993,1999
+A Flexible Corpus-Driven Model of Regular and Inverse Selectional Preferences,1,5.307215445427923,2,2012,
+Selectional Preference And Sense Disambiguation,1,11.299347188555725,8,1998,2005
+Using Multiple Knowledge Sources For Word Sense Discrimination,1,14.522134683668403,12,1993,2004
+Distortion Models For Statistical Machine Translation,1,5.630064264960893,2,2007,2008
+Parsing As Deduction,1,22.704134770570654,12,1984,1995
+SemEval-2007 Task 04: Classification of Semantic Relations between Nominals,1,10.454097771726532,4,2007,2010
+A Projection Extension Algorithm For Statistical Machine Translation,1,6.52811495295865,5,2004,2008
+A Taxonomy For English Nouns And Verbs,1,8.400041210928578,16,1983,1998
+Revisiting Context-based Projection Methods for Term-Translation Spotting in Comparable Corpora,1,5.68568850819395,3,2011,
+TINA: A Natural Language System For Spoken Language Applications,1,12.216147870651149,10,1992,2001
+Semantic Role Labeling Via FrameNet VerbNet And PropBank,1,4.015381902823133,4,2007,2010
+A Model Of Plan Inference That Distinguishes Between The Beliefs Of Actors And Observers,1,12.09254021439375,12,1987,1998
+Building A Shallow Arabic Morphological Analyser In One Day,1,3.9908086293894147,6,2003,2008
+Textual Economy Through Close Coupling Of Syntax And Semantics,1,4.4495955750010125,5,1999,2003
+Extracting Opinion Targets in a Single and Cross-Domain Setting with Conditional Random Fields,1,3.980244768572628,2,2012,
+Simple Semi-supervised Dependency Parsing,1,13.049418798482172,5,2009,
+Template-Based Information Extraction without the Templates,1,9.037889315376091,2,2012,
+Active Learning For Statistical Natural Language Parsing,1,4.409094733812925,8,2003,2010
+A Global Joint Model for Semantic Role Labeling,1,6.652265936309426,4,2010,
+A Statistical Model For Multilingual Entity Detection And Tracking,1,8.794997205187613,4,2005,2008
+CATiB: The Columbia Arabic Treebank,1,4.139072798522573,4,2010,
+An Algorithm For Functional Uncertainty,1,7.544115720838574,13,1988,2000
+Anaphora And Discourse Structure,1,6.647143009806788,5,2004,2008
+University Of Sheffield: Description Of The LaSIE-II System As Used For MUC-7,1,8.427413386378863,6,2000,2005
+OpenFst: An Open-Source Weighted Finite-State Transducer Library and its Applications to Speech and Language,1,5.185958956084937,2,2012,
+Generating Connectives,1,6.765704657207081,7,1992,1998
+Generation As Structure Driven Derivation,1,13.369181566441679,6,1989,1994
+Unification Categorial Grammar: A Concise Extendable Grammar For Natural Language Processing,1,6.539950150997978,4,1989,1992
+A Latent Variable Model for Geographic Lexical Variation,1,7.107501644755516,3,2011,
+Combinatory Categorial Grammars: Generative Power And Relationship To Linear Context-Free Rewriting Systems,1,4.533130246912515,5,1989,1993
+A Multi-Pass Sieve for Coreference Resolution,1,8.884988086921181,3,2011,
+A Grain of Salt for the WMT Manual Evaluation,1,4.422555969023781,2,2012,
+Robust Applied Morphological Generation,1,5.181852993524239,6,2000,2005
+Coreference Resolution in a Modular Entity-Centered Model,1,8.209221679314359,3,2011,
+HMM Word And Phrase Alignment For Statistical Machine Translation,1,5.166891853673853,4,2007,2010
+The CoNLL 2008 Shared Task on Joint Parsing of Syntactic and Semantic Dependencies,1,19.010610083170825,5,2009,
+Learning Semantic Constraints For The Automatic Discovery Of Part-Whole Relations,1,5.118498379279235,3,2004,2006
+Word Sense Discrimination By Clustering Contexts In Vector And Similarity Spaces,1,5.085260445550659,3,2005,2007
+Active Learning And The Total Cost Of Annotation,1,5.60923215461915,2,2006,2007
+When Specialists and Generalists Work Together: Overcoming Domain Dependence in Sentiment Tagging,1,5.3713913994866775,4,2008,2011
+Word Sense Disambiguation Using Conceptual Density,1,10.22794737091107,6,1997,2002
+Training Phrase Translation Models with Leaving-One-Out,1,6.0411271259150725,3,2011,
+Does Baum-Welch Re-Estimation Help Taggers?,1,9.118691863513828,10,1995,2004
+What is the Jeopardy Model? A Quasi-Synchronous Grammar for QA,1,4.173987375704637,5,2009,
+Strategie Selection For An ATN Syntactic Parser,1,4.041082191794541,8,1982,1989
+Catching Metaphors,1,4.310974830398489,1,2013,
+Structured Ramp Loss Minimization for Machine Translation,1,6.827709051454324,1,2013,
+Exploiting Parse Structures for Native Language Identification,1,8.403912962106908,2,2012,
+Joshua 4.0: Packing PRO and Paraphrases,1,3.9802447685726388,2,2012,
+Concept Discovery From Text,1,5.047046374526558,3,2008,2010
+Discourse Pragmatics And Ellipsis Resolution In Task-Oriented Natural Language Interfaces,1,5.306593257805053,8,1983,1990
+Expressing Rhetorical Relations In Instructional Text: A Case Study Of The Purpose Relation,1,7.9174860947902905,5,1996,2000
+Minimum Bayes Risk Combination of Translation Hypotheses from Alternative Morphological Decompositions,1,4.896867732800828,1,2010,2010
+A Machine Learning Approach To Pronoun Resolution In Spoken Dialogue,1,4.627635902983034,5,2003,2007
+The MIT Summit Speech Recognition System: A Progress Report,1,10.118164863640668,7,1989,1995
+Recognizing Text Genres With Simple Metrics Using Discriminant Analysis,1,7.016362182472031,7,1997,2003
+Studying the History of Ideas Using Topic Models,1,4.550006605419672,3,2011,
+Robust Temporal Processing Of News,1,8.70515054297942,8,2001,2008
+Helping Our Own: Text Massaging for Computational Linguistics as a New Shared Task,1,9.197119834601326,2,2012,
+Large Language Models in Machine Translation,1,11.360261467923982,6,2008,
+Efficient Parsing Of Highly Ambiguous Context-Free Grammars With Bit Vectors,1,4.647115552060942,5,2005,2009
+Robust Textual Inference Via Graph Matching,1,4.615836940947379,5,2006,2010
+Memory-Based Dependency Parsing,1,5.852530088639061,3,2006,2008
+Corpus-Based Statistical Sense Resolution,1,12.659141596499355,11,1993,2003
+Smoothing Of Automatically Generated Selectional Constraints,1,4.8114855067430415,7,1993,1999
+Beyond Skeleton Parsing: Producing A Comprehensive Large-Scale General-English Treebank With Full Grammatical Analysis,1,5.628283413571717,4,1996,1999
+Word Association Norms Mutual Information And Lexicography,1,30.29753111836658,10,1991,2000
+Processing English With A Generalized Phrase Structure Grammar,1,6.163432727877103,5,1982,1986
+Efficient Unsupervised Discovery Of Word Categories Using Symmetric Patterns And High Frequency Words,1,7.547806485049552,4,2007,2010
+Learning Parse And Translation Decisions From Examples With Rich Context,1,5.939736410964716,7,1998,2004
+A Gibbs Sampler for Phrasal Synchronous Grammar Induction,1,8.280009900784673,4,2010,
+Statistical Sense Disambiguation With Relatively Small Corpora Using Dictionary Definitions,1,9.135820596360361,5,1996,2000
+Distinguishing Word Senses In Untagged Text,1,6.481906266827032,10,1998,2007
+Functional Centering,1,7.767584128341802,8,1997,2004
+Strategies For Adding Control Information To Declarative Grammars,1,4.297638667982274,7,1991,1997
+Hierarchical Phrase-Based Translation,1,41.99121743284672,5,2009,
+Can I Finish? Learning When to Respond to Incremental Interpretation Results in Interactive Dialogue,1,4.2411272333333745,3,2011,
+Language Identification for Creating Language-Specific Twitter Collections,1,3.8329066509751435,1,2013,
+A Hybrid Japanese Parser With Hand-Crafted Grammar And Statistics,1,3.848508665870182,5,2001,2005
+Overview of BioNLP Shared Task 2011,1,8.884988086921176,3,2011,
+Confidence Estimation For Machine Translation,1,4.081848881479036,4,2010,
+Formalism-Independent Parser Evaluation with CCG and DepBank,1,6.508453651842618,2,2007,2008
+Subject-Dependent Co-Occurrence And Word Sense Disambiguation,1,8.429635957674487,8,1992,1999
+Substring-Based Transliteration,1,4.186879584543357,3,2008,2010
+Corpus-Based Induction Of Syntactic Structure: Models Of Dependency And Constituency,1,7.152950890348775,5,2009,
+Question Answering Using Constraint Satisfaction: QA-By-Dossier-With-Contraints,1,4.091103897561068,3,2005,2007
+Improving Statistical Language Model Performance With Automatically Generated Word Hierarchies,1,4.327738330488359,7,1997,2003
+A Unification Method For Disjunctive Feature Descriptions,1,18.965058286098685,7,1988,1994
+Word-Sense Disambiguation Using Statistical Models Of Roget's Categories Trained On Large Corpora,1,43.235435764014326,8,1993,2000
+METEOR: An Automatic Metric For MT Evaluation With Improved Correlation With Human Judgments,1,17.692870287656582,5,2007,2011
+SenseLearner: Minimally Supervised Word Sense Disambiguation For All Words In Open Text,1,6.1370882117172565,3,2005,2007
+A Probabilistic Approach to Syntax-based Reordering for Statistical Machine Translation,1,4.908215751978325,3,2008,2010
+Coupling Semi-Supervised Learning of Categories and Relations,1,4.280348729985704,4,2010,
+Type-Based MCMC,1,4.124467724219758,3,2011,
+The Replace Operator,1,6.362637440985777,5,1996,2000
+Trainable Methods For Surface Natural Language Generation,1,7.289321094719252,6,2000,2005
+Classification of Semantic Relationships between Nominals Using Pattern Clusters,1,5.595411017633665,2,2009,2010
+Using The Web To Overcome Data Sparseness,1,7.6166080925447766,5,2002,2006
+Generating A Grammar For Statistical Training,1,7.367904365143033,7,1991,1997
+Information Retrieval Using Robust Natural Language Processing,1,5.443911963580804,6,1992,1997
+Using Focus To Generate Complex And Simple Sentences,1,7.459251906991234,10,1985,1994
+MITRE: Description Of The Alembic System Used For MUC-6,1,10.948438870349921,10,1996,2005
+Unsupervised Large-Vocabulary Word Sense Disambiguation With Graph-Based Algorithms For Sequence Data Labeling,1,3.9653734432038026,3,2006,2008
+Compiling And Using Finite-State Syntactic Rules,1,7.0215323987849425,11,1993,2003
+Applying System Combination To Base Noun Phrase Identification,1,4.777798479626613,3,2001,2003
+Detecting Subject Boundaries Within Text: A Language Independent Statistical Approach,1,4.204928028361483,5,1998,2002
+Performance Of SRI'S DECIPHER (TM) Speech Recognition System On DARPA'S CSR Task,1,4.60170460271464,3,1992,1994
+A Dictionary And Morphological Analyser For English,1,7.415390960096195,4,1987,1990
+Discourse Processing Of Dialogues With Multiple Threads,1,5.323194814019825,4,1996,1999
+DIALOGIC: A Core Natural-Language Processing System,1,4.823253214224307,3,1982,1984
+Can Subcategorisation Probabilities Help A Statistical Parser,1,5.7582811358812265,4,1999,2002
+A Uniform Method Of Grammar Extraction And Its Applications,1,4.186879584543356,7,2001,2007
+Japanese Discourse And The Process Of Centering,1,12.672719399261009,10,1995,2004
+Syntagmatic And Paradigmatic Representations Of Term Variation,1,4.835529617185452,6,1999,2004
+Automatically Labeling Semantic Classes,1,6.41629371334457,2,2008,2009
+NYU: Description Of The MENE Named Entity System As Used In MUC-7,1,5.966333699464897,6,1998,2003
+Experiments In Constructing A Corpus Of Discourse Trees,1,6.844239845176544,7,1999,2005
+Forest-Based Statistical Sentence Generation,1,9.591504376627377,9,2000,2008
+A Pragmatics-Based Approach To Ellipsis Resolution,1,8.046884833173301,10,1990,1999
+SemEval-2007 Task-17: English Lexical Sample SRL and All Words,1,5.352005900293975,3,2008,2010
+Development And Evaluation Of A Broad-Coverage Probabilistic Grammar Of English-Language Computer Manuals,1,4.881532299310358,5,1993,1997
+D-PATR: A Development Environment For Unification-Based Grammars,1,15.651344320598021,13,1987,1999
+Efficient High-Performance Algorithms For N-Best Search,1,4.552956973953668,4,1991,1994
+Pivot Approach for Extracting Paraphrase Patterns from Bilingual Corpora,1,5.695433239993966,5,2009,
+Ungrammaticality And Extra-Grammaticality In Natural Language Understanding Systems,1,7.586042568853996,4,1980,1983
+Word Sense Disambiguation Using A Second Language Monolingual Corpus,1,21.28001488303951,10,1995,2004
+Parsing The LOB Corpus,1,19.315310558054005,8,1990,1997
+Max-Margin Parsing,1,13.59641849753067,4,2005,2008
+Automatic Evaluation Of Summaries Using N-Gram Co-Occurrence Statistics,1,19.56278977878447,3,2004,2006
+Cut And Paste Based Text Summarization,1,4.233415965765228,2,2002,2003
+Using Grammatical Relations To Compare Parsers,1,4.549947759402557,6,2003,2008
+Modeling Local Coherence: An Entity-Based Approach,1,4.322380602515273,4,2010,
+A Linear Observed Time Statistical Parser Based On Maximum Entropy Models,1,22.14479036231045,9,1998,2006
+Stylometric Analysis of Scientific Articles,1,4.380526686543082,1,2013,
+TTP: A Fast And Robust Parser For Natural Language,1,5.588369946094368,6,1992,1997
+Tagging English Text With A Probabilistic Model,1,13.704377959366372,9,1995,2003
+A Transition-Based System for Joint Part-of-Speech Tagging and Labeled Non-Projective Dependency Parsing,1,8.2143006291416,1,2013,
+Learning Linear Ordering Problems for Better Translation,1,4.626145080979537,4,2010,
+Extracting Paraphrases From A Parallel Corpus,1,13.739229968086255,4,2003,2006
+Tree Edit Models for Recognizing Textual Entailments Paraphrases and Answers to Questions,1,4.613949383541121,2,2012,
+Dialog Navigator: A Question Answering System Based On Large Text Knowledge Base,1,5.29013971275123,3,2003,2005
+The Penn Treebank: Annotating Predicate Argument Structure,1,18.77426397836017,10,1997,2006
+Towards Answering Opinion Questions: Separating Facts From Opinions And Identifying The Polarity Of Opinion Sentences,1,8.826488360796501,2,2005,2006
+A New Method Of N-Gram Statistics For Large Number Of N And Automatic Extraction Of Words And Phrases From Large Text Data Of Japanese,1,8.706193323645717,6,1996,2001
+It Makes Sense: A Wide-Coverage Word Sense Disambiguation System for Free Text,1,4.422555969023778,2,2012,
+Categorial Unification Grammars,1,19.85206399730912,9,1986,1994
+Knowledge-Free Induction Of Morphology Using Latent Semantic Analysis,1,7.693382881711823,4,2001,2004
+Overview of Genia Event Task in BioNLP Shared Task 2011,1,6.3965755209701065,3,2011,
+Coordinate Noun Phrase Disambiguation in a Generative Parsing Model,1,4.311240669424475,2,2008,2009
+Evaluating a Focus-Based Approach to Anaphora Resolution,1,5.781929837451009,3,1999,2001
+Constructing Corpora for the Development and Evaluation of Paraphrase Systems,1,4.636963878547552,3,2011,
+First-Order Probabilistic Models for Coreference Resolution,1,5.082478701834397,6,2008,
+Temporal Ontology And Temporal Reference,1,21.630396197598674,13,1988,2000
+A Syntax-Directed Translator With Extended Domain Of Locality,1,8.531628827488317,5,2007,2011
+Corpus-Based Identification Of Non-Anaphoric Noun Phrases,1,4.954038609429571,5,2000,2004
+Using Corpus Statistics And WordNet Relations For Sense Identification,1,9.663443708788266,9,2000,2008
+Contextualizing Semantic Representations Using Syntactically Enriched Vector Models,1,7.125101720856708,3,2011,
+Learning Multilingual Subjective Language via Cross-Lingual Projections,1,4.532835469110004,2,2010,2011
+Instance-Based Question Answering: A Data-Driven Approach,1,6.573301576440155,3,2005,2007
+Multi-Modal Combinatory Categorial Grammar,1,4.116120620759258,6,2004,2009
+Hedge Classification in Biomedical Texts with a Weakly Supervised Selection of Keywords,1,7.098023858346837,2,2009,2010
+Dual Decomposition for Parsing with Non-Projective Head Automata,1,9.42100184292759,2,2012,
+Wider Context by Using Bilingual Language Models in Machine Translation,1,3.980244768572628,2,2012,
+SRA: Description Of The SRA System As Used For MUC-6,1,8.565907828373913,7,1996,2002
+Robust Disambiguation of Named Entities in Text,1,5.307215445427923,2,2012,
+Corpus-Guided Sentence Generation of Natural Images,1,5.307215445427916,2,2012,
+A Statistical Approach To The Semantics Of Verb-Particles,1,5.3210208886034,5,2003,2007
+MEANT: An inexpensive high-accuracy semi-automatic metric for evaluating translation utility based on semantic roles,1,4.171623374309577,2,2012,
+Coping With Syntactic Ambiguity Or How To Put The Block In The Box On The Table,1,12.925296577830194,14,1984,1997
+A Graph Model For Unsupervised Lexical Acquisition,1,4.589000427610956,2,2009,2010
+Extraction Of Semantic Information From An Ordinary English Dictionary And Its Evaluation,1,6.373763112240592,5,1989,1993
+A Discriminative Latent Variable Model for Statistical Machine Translation,1,7.867808971036892,3,2009,2011
+Automatic Rule Induction For Unknown-Word Guessing,1,10.326932889890054,10,1998,2007
+Example-Based Correction Of Word Segmentation And Part Of Speech Labelling,1,4.048006429661518,8,1993,2000
+Toward A Synthesis Of Two Accounts Of Discourse Structure,1,5.791166272652381,9,1997,2005
+A Bayesian Hybrid Method For Context-Sensitive Spelling Correction,1,6.889566251724578,9,1996,2004
+Implementing Systemic Classification By Unification,1,10.667456643419548,9,1989,1997
+Learning Subjective Nouns Using Extraction Pattern Bootstrapping,1,4.739656881987818,4,2005,2008
+Automatic Construction Of A Hypernym-Labeled Noun Hierarchy From Text,1,13.961446686992305,8,2002,2009
+A Semantic Approach To IE Pattern Induction,1,6.677639454203992,2,2006,2007
+Driving Semantic Parsing from the World’s Response,1,8.173964170924092,3,2011,
+CoNLL-X Shared Task On Multilingual Dependency Parsing,1,11.005165076045929,7,2007,
+JPSG Parser On Constraint Logic Programming,1,4.4980378815231035,5,1990,1994
+A Latent Dirichlet Allocation Method for Selectional Preferences,1,11.05370650277862,3,2011,
+Lattice-based Minimum Error Rate Training for Statistical Machine Translation,1,8.08905992338725,5,2009,
+Word Sense Ambiguation: Clustering Related Senses,1,4.451106241900758,5,1996,2000
+Computational Generation of Referring Expressions: A Survey,1,4.782566976043238,1,2013,
+Recognizing Stances in Ideological On-Line Debates,1,4.26403180226996,3,2011,
+Acquiring Lexical Generalizations From Corpora: A Case Study For Diathesis Alternations,1,5.807838684142894,6,1999,2004
+Relating Syntax And Semantics: The Syntactico-Semantic Lexicon Of The System VIE-LANG,1,4.019091107092676,6,1985,1990
+Native Language Detection with Tree Substitution Grammars,1,4.928162209799619,1,2013,
+Fast Parsing Using Pruning And Grammar Specialization,1,6.585477308114523,5,1997,2001
+Improving Statistical Machine Translation Using Word Sense Disambiguation,1,6.452735590734506,6,2008,
+Phylogenetic Grammar Induction,1,4.9923828097756555,3,2011,
+The Infinite PCFG Using Hierarchical Dirichlet Processes,1,4.4227492161854585,4,2008,2011
+Constituent Coordination In Lexical-Functional Grammar,1,4.26201768275215,8,1989,1996
+Learning Similarity-Based Word Sense Disambiguation From Sparse Data,1,4.562042980182161,6,1997,2002
+Generating Referring Expressions Involving Relations,1,4.466803230166164,10,1997,2006
+Joshua: An Open Source Toolkit for Parsing-Based Machine Translation,1,15.82751109701537,4,2010,
+Discourse Relations And Defeasible Knowledge,1,10.04571964847442,9,1991,1999
+Structure-Aware Review Mining and Summarization,1,3.9802447685726348,2,2012,
+Automatic Identification Of Word Translations From Unrelated English And German Corpora,1,4.90787503479505,3,2002,2004
+Distributional Memory: A General Framework for Corpus-Based Semantics,1,11.72947501205795,3,2011,
+Edge-Based Best-First Chart Parsing,1,4.5757899276437435,9,1998,2006
+Syntactic Processing Using the Generalized Perceptron and Beam Search,1,4.422555969023781,2,2012,
+Weakly Supervised Learning of Semantic Parsers for Mapping Instructions to Actions,1,4.928162209799619,1,2013,
+Named Entity Recognition in Tweets: An Experimental Study,1,10.173726378054235,2,2012,
+Stochastic Representation Of Conceptual Structure In The ATIS Task,1,3.859740451105302,4,1991,1994
+Parsing With Flexibility Dynamic Strategies And Idioms In Mind,1,6.351281094208973,9,1990,1998
+Building A Generation Knowledge Source Using Internet-Accessible Newswire,1,4.652792051226283,7,1998,2004
+Named Entity Recognition Using An HMM-Based Chunk Tagger,1,11.152150403525592,5,2002,2006
+Multi-Engine Machine Translation Guided By Explicit Word Matching,1,7.439631137313093,3,2007,2009
+Local Phrase Reordering Models For Statistical Machine Translation,1,4.751631112321103,4,2006,2009
+Computational Complexity In Two-Level Morphology,1,4.3976995901758436,9,1986,1994
+Chunking With Maximum Entropy Models,1,4.08018890185436,8,2000,2007
+Word Identification For Mandarin Chinese Sentences,1,8.90460034160148,12,1992,2003
+A Class-Based Approach To Word Alignment,1,5.083124144305099,10,1997,2006
+SemEval-2010 Task 8: Multi-Way Classification of Semantic Relations Between Pairs of Nominals,1,4.546950151529666,2,2010,2011
+A DP based Search Algorithm for Statistical Machine Translation,1,7.059002270025045,6,1999,2004
+SemEval-2007 Task 02: Evaluating Word Sense Induction and Discrimination Systems,1,4.523172337865951,2,2009,2010
+Backward Machine Transliteration By Learning Phonetic Similarity,1,4.549947759402559,6,2003,2008
+Lateen EM: Unsupervised Training with Multiple Objectives Applied to Dependency Grammar Induction,1,3.9802447685726374,2,2012,
+The IPS System,1,4.503363422716296,9,1993,2001
+Disambiguating Noun Groupings With Respect To Wordnet Senses,1,19.00015955493644,6,1996,2001
+An Integrated Framework For Semantic And Pragmatic Interpretation,1,7.186547806589573,5,1989,1993
+Better Word Alignments with Supervised ITG Models,1,11.16747224976924,2,2010,2011
+Strategic Lazy Incremental Copy Graph Unification,1,7.472001422663148,10,1990,1999
+How To Encode Semantic Knowledge: A Method For Meaning Representation And Computer-Aided Acquisition,1,5.41647521070257,7,1992,1998
+A Localized Prediction Model For Statistical Machine Translation,1,5.5294560738510015,3,2006,2008
+Computing and Evaluating Syntactic Complexity Features for Automated Scoring of Spontaneous Non-Native Speech,1,4.422555969023781,2,2012,
+The ICSI Meeting Recorder Dialog Act (MRDA) Corpus,1,4.31045701043813,3,2006,2008
+Offline Strategies For Online Question Answering: Answering Questions Before They Are Asked,1,9.122557191092074,3,2004,2006
+Creating And Querying Lexical Data Bases,1,4.605033032558916,5,1988,1992
+Situations And Intervals,1,5.897209864868847,6,1987,1992
+Incremental Translation Utilizing Constituent Boundary Patterns,1,6.03702443475399,7,1996,2002
+Building A Large Annotated Corpus Of English: The Penn Treebank,1,44.03040725831758,7,1995,2001
+Structural Ambiguity And Lexical Relations,1,44.72927218927623,10,1991,2000
+Better Evaluation for Grammatical Error Correction,1,8.616488426483155,1,2013,
+Principle-Based Parsing Without Overgeneration,1,4.056890907150407,15,1995,2009
+Feature Logic With Disjunctive Unification,1,7.574003116888267,9,1991,1999
+Attention Intentions And The Structure Of Discourse,1,119.15991381626219,15,1987,2001
+Aspect Aspectual Class And The Temporal Structure Of Narrative,1,7.232514723492331,12,1988,1999
+Decoding Algorithm In Statistical Machine Translation,1,7.70253249508538,7,1998,2004
+A Framework For Robust Semantic Interpretation,1,6.383705645147969,7,2000,2006
+A Stochastic Parts Program And Noun Phrase Parser For Unrestricted Text,1,108.20157518119923,13,1989,2001
+A Conditional Random Field Word Segmenter for Sighan Bakeoff 2005,1,9.514562877015255,3,2008,2010
+Senseval-3 Task: Automatic Labeling Of Semantic Roles,1,8.262801576630302,4,2005,2008
+Discourse Obligations In Dialogue Processing,1,5.145716717134454,9,1995,2003
+Integration Of Diverse Recognition Methodologies Through Reevaluation Of N-Best Sentence Hypotheses,1,7.209561128187306,7,1991,1997
+A Class of Submodular Functions for Document Summarization,1,4.2349258722192396,1,2013,
+*SEM 2012 Shared Task: Resolving the Scope and Focus of Negation,1,6.191924359415168,2,2012,
+A Markov Logic Approach to Bio-Molecular Event Extraction,1,5.831837697880696,2,2010,2011
+The Derivation Of A Grammatically Indexed Lexicon From The Longman Dictionary Of Contemporary English,1,4.371400901293768,19,1987,2005
+Introduction To The Special Issue On Word Sense Disambiguation: The State Of The Art,1,18.683497994474042,6,1999,2004
+Automatically Extracting And Representing Collocations For Language Generation,1,16.217148510797763,6,1991,1996
+Using A Semantic Concordance For Sense Identification,1,11.172889977057913,5,1996,2000
+Extraposition Grammars,1,15.624318800859344,16,1982,1997
+Computational Lexicons: The Neat Examples And The Odd Exemplars,1,6.268044606290731,5,1993,1997
+SemEval-2007 Task 19: Frame Semantic Structure Extraction,1,8.51411999043937,3,2008,2010
+SRI International FASTUS System MUC-6 Test Results And Analysis,1,10.587200564466336,6,1996,2001
+Guiding Semi-Supervision with Constraint-Driven Learning,1,6.382507545479045,5,2009,
+SemEval-2010 Task 13: TempEval-2,1,10.114406653294742,2,2012,
+Labeled Pseudo-Projective Dependency Parsing With Support Vector Machines,1,14.344237876726195,2,2007,2008
+Conditional Descriptions In Functional Unification Grammar,1,3.8343659955970013,6,1989,1994
+Parsing With Generative Models Of Predicate-Argument Structure,1,5.164630678973389,4,2004,2007
+Limited Attention And Discourse Structure,1,6.314071238903175,6,1997,2002
+Web-Scale Features for Full-Scale Parsing,1,5.056287751874648,2,2012,
+Alignment Of Shared Forests For Bilingual Corpora,1,6.269771126481934,9,1997,2005
+A CSR-NL Interface Specification Version 1.51,1,3.9990019540407014,3,1990,1992
+Exemplar-Based Word Sense Disambiguation: Some Recent Improvements,1,7.249642960647377,8,1997,2004
+Assigning Intonational Features In Synthesized Spoken Directions,1,4.010875994408334,7,1994,2000
+An Improved Chinese Word Segmentation System With Conditional Random Field,1,4.5198302299194335,3,2008,2010
+Towards Robust Context-Sensitive Sentence Alignment For Monolingual Corpora,1,4.061371145133457,4,2010,
+Ontological Promiscuity,1,12.996049766838007,13,1986,1998
+Jointly Identifying Temporal Relations with Markov Logic,1,4.996765620043156,2,2012,
+Limitations Of Co-Training For Natural Language Learning From Large Datasets,1,7.289945227986102,8,2002,2009
+A Tripartite Plan-Based Model Of Dialogue,1,10.636530463110518,9,1992,2000
+Development And Use Of A Gold-Standard Data Set For Subjectivity Classifications,1,4.087079808124943,4,2001,2004
+Syntactic Constraints on Paraphrases Extracted from Parallel Corpora,1,9.954093466735753,3,2011,
+Characterizing the Errors of Data-Driven Dependency Parsing Models,1,7.18562857638163,4,2008,2011
+Automatically Learning Source-side Reordering Rules for Large Scale Machine Translation,1,6.7520336937745995,3,2011,
+Batch Tuning Strategies for Statistical Machine Translation,1,15.447662544735508,1,2013,
+A Logic For Semantic Interpretation,1,5.926161469373326,11,1990,2000
+An Efficient Implementation Of The Head-Corner Parser,1,5.037814309845018,7,1997,2003
+Espresso: Leveraging Generic Patterns For Automatically Harvesting Semantic Relations,1,8.991384379411686,4,2008,2011
+Preference Semantics Ill-Formedness And Metaphor,1,7.19502693477048,10,1985,1994
+Automated Translation At Grenoble University,1,7.827533448811786,11,1986,1996
+Graded Word Sense Assignment,1,4.281554723516407,3,2011,
+Evaluation Techniques For Automatic Semantic Extraction: Comparing Syntactic And Window Based Approaches,1,4.811366513034439,7,1998,2004
+Support or Oppose? Classifying Positions in Online Debates from Reply Activities and Opinion Expressions,1,4.264031802269959,3,2011,
+Deriving Transfer Rules from Dominance-Preserving Alignments,1,3.834545840869369,5,2000,2004
+Efficient Support Vector Classifiers For Named Entity Recognition,1,4.606393755370448,4,2002,2005
+Meteor 1.3: Automatic Metric for Reliable Optimization and Evaluation of Machine Translation Systems,1,13.27137594168961,2,2012,
+Forest Rescoring: Faster Decoding with Integrated Language Models,1,13.192646828095071,3,2009,2011
+Linear Segmentation And Segment Significance,1,7.335464774564242,6,1998,2003
+An Empirically Based System For Processing Definite Descriptions,1,6.85208405547645,8,2001,2008
+Structural Non-Correspondence In Translation,1,5.3537978253392735,8,1991,1998
+Sentence Planning As Description Using Tree Adjoining Grammar,1,10.227269719902079,6,1998,2003
+Functional Unification Grammar: A Formalism For Machine Translation,1,16.335342280697336,14,1985,1998
+Cascaded Markov Models,1,4.7671555537646295,6,2000,2005
+Improvements In Phrase-Based Statistical Machine Translation,1,16.138117845537124,5,2005,2009
+An Evaluation Exercise For Word Alignment,1,13.654136134321963,4,2004,2007
+A Simple Pattern-Matching Algorithm For Recovering Empty Nodes And Their Antecedents,1,10.680524512551699,5,2003,2007
+Parsing The WSJ Using CCG And Log-Linear Models,1,14.03024914366178,5,2004,2008
+A Three-Level Model For Plan Exploration,1,4.531179999746486,9,1992,2000
+A Statistical Parser For Czech,1,10.786038412764357,6,2001,2006
+Statistical Machine Translation With Scarce Resources Using Morpho-Syntactic Information,1,10.289124206215261,4,2005,2008
+Towards A Self-Extending Lexicon,1,4.565230559004439,7,1986,1992
+Large Scale Acquisition of Paraphrases for Learning Surface Patterns,1,5.86116105128424,3,2011,
+Improved Part-of-Speech Tagging for Online Conversational Text with Word Clusters,1,6.023479722124719,1,2013,
+Deep Syntactic Processing By Combining Shallow Methods,1,3.963541943535632,4,2004,2007
+A New Statistical Parser Based On Bigram Lexical Dependencies,1,45.26319931139509,9,1997,2005
+cdec: A Decoder Alignment and Learning Framework for Finite-State and Context-Free Translation Models,1,16.370952953284814,3,2011,
+Comparing Reordering Constraints for SMT Using Efficient BLEU Oracle Computation,1,4.168671657966929,2,2008,2009
+Semantic Role Labeling Using Dependency Trees,1,7.817476938171408,3,2007,2009
+Functional Centering Grounding Referential Coherence In Information Structure,1,12.483375022117931,7,1999,2005
+A Comparison of Vector-based Representations for Semantic Composition,1,7.666572165381705,1,2013,
+Shallow Semantic Parsing Of Chinese,1,5.018199365000081,5,2005,2009
+One-Level Phonology: Autosegmental Representations And Rules As Finite Automata,1,5.564880925015146,7,1994,2000
+Manual And Automatic Evaluation Of Machine Translation Between European Languages,1,12.741155245054564,3,2007,2009
+An Empirical Evaluation Of Knowledge Sources And Learning Algorithms For Word Sense Disambiguation,1,12.418400986914278,5,2004,2008
+Using Lexicalized Tags For Machine Translation,1,9.49110041346232,11,1990,2000
+Instance Based Learning With Automatic Feature Selection Applied To Word Sense Disambiguation,1,4.355122308616357,2,2004,2005
+Transformation-Based-Error-Driven Learning And Natural Language Processing: A Case Study In Part-Of-Speech Tagging,1,58.02863345572303,8,1998,2005
+Using a maximum entropy model to build segmentation lattices for MT,1,7.260469343032408,4,2010,
+Extracting Opinions Opinion Holders And Topics Expressed In Online News Media Text,1,5.915193777182202,2,2010,2011
+Tense Trees As The Fine Structure Of Discourse,1,5.699997077234813,14,1993,2006
+Studies In Part Of Speech Labelling,1,10.030944482574728,6,1991,1996
+Accurate Methods For The Statistics Of Surprise And Coincidence,1,28.182763258188196,11,1994,2004
+Translating Named Entities Using Monolingual And Bilingual Resources,1,6.127550314424441,7,2003,2009
+A Prosodic Analysis Of Discourse Segments In Direction-Giving Monologues,1,8.730672521532354,12,1996,2007
+Compositional Semantics In Verbmobil,1,7.917486094790286,5,1996,2000
+Unsupervised Learning Of Field Segmentation Models For Information Extraction,1,5.315878373776702,4,2006,2009
+Bidirectional Inference With The Easiest-First Strategy For Tagging Sequence Data,1,4.839279168903248,2,2007,2008
+Semantic Acquisition In TELL: A Transportable User-Customized Natural Language Processor,1,6.1375771919519915,3,1987,1989
+Sentence Fusion For Multidocument News Summarization,1,5.197410371657985,4,2008,2011
+Training And Scaling Preference Functions For Disambiguation,1,6.530916404981351,7,1994,2000
+Serial Combination Of Rules And Statistics: A Case Study In Czech Tagging,1,4.656762533638485,7,2002,2008
+Improved Hidden Markov Modeling For Speaker-Independent Continuous Speech Recognition,1,5.332154769103051,3,1990,1992
+Two-Phase Biomedical NE Recognition Based On SVMs,1,5.398922784768699,4,2004,2007
+Learning 5000 Relational Extractors,1,4.1244677242197625,3,2011,
+The (Ca)T Framework In EUROTRA: A Theoretically Committed Notation For MT,1,7.951744239567918,10,1987,1996
+Supervised Models for Coreference Resolution,1,6.479076962290899,3,2011,
+Hunting Elusive Metaphors Using Lexical Resources,1,4.456594776758097,1,2013,
+Manual And Automatic Evaluation Of Summaries,1,4.191465990118513,2,2003,2004
+A Computational Model Of The Semantics Of Tense And Aspect,1,8.42257588949196,13,1988,2000
+A Hierarchical Phrase-Based Model For Statistical Machine Translation,1,25.346635583280534,4,2006,2009
+Feature Forest Models for Probabilistic HPSG Parsing,1,4.865556280521545,5,2009,
+Collective Information Extraction With Relational Markov Networks,1,4.168604548764157,5,2005,2009
+Learning to Follow Navigational Directions,1,4.974840603079919,3,2011,
+TIPSem (English and Spanish): Evaluating CRFs and Semantic Roles in TempEval-2,1,4.089320730655185,1,2013,
+Part-Of-Speech Tagging In Context,1,5.651081351291,4,2007,2010
+A Computational Theory Of Goal-Directed Style In Syntax,1,3.8540543834546597,4,1993,1996
+Generalized Inference With Multiple Semantic Role Labeling Systems,1,7.9875173003256625,5,2005,2009
+Fast Unsupervised Incremental Parsing,1,7.891074076281485,3,2009,2011
+Recovery Strategies For Parsing Extragrammatical Language,1,20.90025609609309,14,1984,1997
+A Flexible Interface For Linking Applications To Penman's Sentence Generator,1,9.693225908979601,14,1989,2002
+Noun-Phrase Co-occurrence Statistics for Semi-Automatic Semantic Lexicon Construction,1,9.255333357561462,6,1999,2004
+Finite-State Multimodal Parsing And Understanding,1,4.717670091947219,7,2000,2006
+Unsupervised Discovery of Generic Relationships Using Pattern Clusters and its Evaluation by Automatically Generated SAT Analogy Questions,1,6.288706806477311,2,2009,2010
+Multilingual Authoring using Feedback Texts,1,8.026474959463494,8,1998,2005
+Preference Semantics For Message Understanding,1,6.568201080940078,4,1990,1993
+Understanding the Value of Features for Coreference Resolution,1,6.199557537356649,4,2010,
+Bayesian Unsupervised Word Segmentation with Nested Pitman-Yor Language Modeling,1,4.626145080979551,4,2010,
+Multipath Translation Lexicon Induction Via Bridge Languages,1,4.309672993792622,6,2002,2007
+A Constructive View Of GPSG Or How To Make It Work,1,4.665568850351696,3,1990,1992
+Augmenting A Hidden Markov Model For Phrase-Dependent Word Tagging,1,5.288672696698333,3,1991,1993
+Expressing Implicit Semantic Relations Without Supervision,1,5.585239600039973,4,2007,2010
+DARPA ATIS Test Results June 1990,1,4.498037881523101,5,1990,1994
+Semantic Taxonomy Induction From Heterogenous Evidence,1,9.09704864028988,5,2007,2011
+The Kappa Statistic: A Second Look,1,5.808770320974225,4,2005,2008
+Bitext Maps And Alignment Via Pattern Recognition,1,4.5156622019889925,6,2000,2005
+Painless Unsupervised Learning with Features,1,11.427025957320613,3,2011,
+Recognizing Referential Links: An Information Extraction Perspective,1,8.052087111412554,7,1999,2005
+Dynamic Strategy Selection In Flexible Parsing,1,3.952226322526192,10,1982,1991
+Category Cooccurrence Restrictions And The Elimination Of Metarules,1,4.586587983838548,6,1987,1992
+Advances In Domain Independent Linear Text Segmentation,1,6.767300393835022,8,2001,2008
+Named Entity Recognition: A Maximum Entropy Approach Using Global Information,1,5.719509224895395,5,2002,2006
+Sentence Compression Beyond Word Deletion,1,4.573895497221118,5,2009,
+Unification Of Disjunctive Feature Descriptions,1,8.182602897953464,7,1988,1994
+Automatic Generation Of On-Line Documentation In The IDAS Project,1,4.0108759944083365,7,1994,2000
+Automatic Acquisition Of A Large Sub Categorization Dictionary From Corpora,1,12.664743849976121,9,1994,2002
+A Comparison Of Alignment Models For Statistical Machine Translation,1,10.866560441916318,6,2000,2005
+A Relaxation Method For Understanding Speech Utterances,1,3.9864361556739225,2,1992,1993
+Scaling Web-Based Acquisition Of Entailment Relations,1,10.235402832247381,5,2005,2009
+Centering: A Parametric Theory And Its Instantiations,1,4.090566162127434,3,2004,2006
+Sparsity in Dependency Grammar Induction,1,4.1244677242197625,3,2011,
+Word Alignment Via Quadratic Assignment,1,4.111993201221717,5,2007,2011
+Building A Large-Scale Annotated Chinese Corpus,1,8.339520755290836,4,2004,2007
+Reduced Channel Dependence For Speech Recognition,1,3.9442619837422743,3,1992,1994
+Automatic Detection Of Discourse Structure By Checking Surface Information In Sentences,1,5.243119361901254,6,1996,2001
+Text-Translation Alignment,1,15.04873735831516,14,1993,2006
+An Error-Driven Word-Character Hybrid Model for Joint Chinese Word Segmentation and POS Tagging,1,6.5746922884123205,4,2010,
+The NYU System For MUC-6 Or Where's The Syntax?,1,13.01381583376581,7,1996,2002
+A Question Answering System Supported By Information Extraction,1,6.228269486752674,3,2001,2003
+Annotating Discourse Connectives And Their Arguments,1,4.701689937526595,5,2004,2008
+langid.py: An Off-the-shelf Language Identification Tool,1,4.928162209799619,1,2013,
+Knowledge Sources For Word-Level Translation Models,1,4.009349582831961,4,2002,2005
+A Program For Aligning Sentences In Bilingual Corpora,1,36.4166242700481,12,1992,2003
+Integrating Graph-Based and Transition-Based Dependency Parsers,1,10.47789471550881,5,2009,
+Joint Word Segmentation and POS Tagging Using a Single Perceptron,1,4.700726974969883,4,2010,
+Introduction To The CoNLL-2001 Shared Task: Clause Identification,1,4.527584208481164,4,2003,2006
+From English To Logic: Context-Free Computation Of Conventional Logical Translation,1,9.717622027042733,10,1983,1992
+PHRED: A Generator For Natural Language Interfaces,1,8.184243610447501,12,1986,1997
+How To Invert A Natural Language Parser Into An Efficient Generator: An Algorithm For Logic Grammars,1,4.55295697395367,4,1991,1994
+Introduction To The CoNLL-2003 Shared Task: Language-Independent Named Entity Recognition,1,11.126943543970393,6,2004,2009
+Building A Sense Tagged Corpus With Open Mind Word Expert,1,6.502550638541062,4,2004,2007
+Never Look Back: An Alternative to Centering,1,14.532022836703637,6,1999,2004
+PHRAN - A Knowledge-Based Natural Language Understander,1,5.873855700755336,15,1983,1997
+Transfer And MT Modularity,1,5.948451516318056,11,1987,1997
+Fast Methods For Kernel-Based Text Analysis,1,5.094047260835284,6,2004,2009
+AnCora: Multilevel Annotated Corpora for Catalan and Spanish,1,10.320127493989741,1,2009,2009
+Jane: Open Source Hierarchical Translation Extended with Reordering and Lexicon Models,1,4.264031802269962,3,2011,
+On Coreference Resolution Performance Metrics,1,7.522310445704456,4,2008,2011
+Topic Models for Word Sense Disambiguation and Token-Based Idiom Detection,1,4.264031802269959,3,2011,
+Aligning Sentences In Bilingual Corpora Using Lexical Information,1,13.259084097365138,9,1994,2002
+An Empirical Study of Semi-supervised Structured Conditional Models for Dependency Parsing,1,5.113243169076342,4,2010,
+Semeval-2012 Task 8: Cross-lingual Textual Entailment for Content Synchronization,1,5.749563722452545,2,2012,
+Improving Unsupervised Dependency Parsing with Richer Contexts and Smoothing,1,7.516084023218351,4,2010,
+A General Framework For Distributional Similarity,1,4.572306933066331,2,2004,2005
+A Maximum Entropy Approach To Natural Language Processing,1,41.84047332137638,8,2000,2007
+A Model-Theoretic Coreference Scoring Scheme,1,5.245231069205868,6,1998,2003
+Identifying Semantic Roles Using Combinatory Categorial Grammar,1,8.950013907985284,2,2004,2005
+Unsupervised Modeling of Twitter Conversations,1,7.86584693353163,3,2011,
+Near-Synonymy And Lexical Choice,1,4.881607285639533,5,2002,2006
+Polynomial Time And Space Shift-Reduce Parsing Of Arbitrary Context-Free Grammars,1,5.846657834284224,4,1993,1996
+An Open-Source Environment For Compiling Typed Unification Grammars Into Speech Recognisers,1,4.263078916860051,4,2003,2006
+Boosting Applied To Tagging And PP Attachment,1,7.068134784863673,6,2000,2005
+A Plan-Based Analysis Of Indirect Speech Act,1,14.441152071820582,18,1982,1999
+Statistical Machine Translation By Parsing,1,10.478245193599683,5,2005,2009
+Word Reordering And A Dynamic Programming Beam Search Algorithm For Statistical Machine Translation,1,4.311186775134808,4,2003,2006
+Empirical Study Of Predictive Powers Of Simple Attachment Schemes For Post-Modifier Prepositional Phrases,1,9.28716763764732,9,1990,1998
+Disambiguation Of Super Parts Of Speech (Or Supertags): Almost Parsing,1,10.515288260529447,10,1994,2003
+Chasing the ghost: recovering empty categories in the Chinese Treebank,1,3.9086420649328044,3,2011,
+Automatic Labeling Of Semantic Roles,1,57.33969018106346,4,2003,2006
+Temporal Centering,1,5.947728825869296,6,1994,1999
+MUC-7 Coreference Task Definition (Version 3.0),1,5.793341111905958,7,1999,2005
+Structural Ambiguity And Conceptual Relations,1,7.272604107462863,5,1994,1998
+Feature Structures Based Tree Adjoining Grammars,1,6.881809156455571,9,1988,1996
+Introduction To The CoNLL-2002 Shared Task: Language-Independent Named Entity Recognition,1,6.175191349459026,4,2003,2006
+Coreference Resolution Using Competition Learning Approach,1,6.777764967632903,7,2004,2010
+Recognizing Speculative Language in Biomedical Research Articles: A Linguistically Motivated Perspective,1,6.641316118308655,1,2010,2010
+The Acquisition Of Lexical Knowledge From Combined Machine-Readable Dictionary Sources,1,5.238655809519898,9,1993,2001
+Introduction To The CoNLL-2000 Shared Task: Chunking,1,18.567077527679267,7,2001,2007
+Word Alignment For Languages With Scarce Resources,1,4.059849815238062,2,2006,2007
+Online Generation of Locality Sensitive Hash Signatures,1,4.817723877709945,3,2011,
+DATR: A Language For Lexical Knowledge Representation,1,4.085852609049708,9,1998,2006
+Cues And Control In Expert-Client Dialogues,1,9.481346137487826,13,1989,2001
+Robust PCFG-Based Generation Using Automatically Acquired LFG Approximations,1,4.891933901621659,4,2007,2010
+Bayesian Query-Focused Summarization,1,5.526812536315818,2,2010,2011
+Improved Statistical Machine Translation Using Paraphrases,1,6.686849513781522,5,2007,2011
+Comparing A Linguistic And A Stochastic Tagger,1,5.939736410964718,7,1998,2004
+Detecting Verbal Participation in Diathesis Alternations,1,4.118554276633569,4,1999,2002
+The Application Of Two-Level Morphology To Non-Concatenative German Morphology,1,6.154029292553743,10,1991,2000
+Faster and Smaller N-Gram Language Models,1,5.056287751874647,2,2012,
+Donnellan's Distinction And A Computational Model Of Reference,1,5.637904169092812,14,1987,2000
+Investigating Regular Sense Extensions based on Intersective Levin Classes,1,9.266826638367196,6,1999,2004
+Lexical Semantic Techniques For Corpus Analysis,1,10.71126763108012,13,1993,2005
+Flexible Text Segmentation With Structured Multilabel Classification,1,4.21137520728143,4,2006,2009
+A Classifier-Based Parser With Linear Run-Time Complexity,1,7.261291996044283,3,2006,2008
+On The Semantic Interpretation Of Nominals,1,6.922069438182074,6,1989,1994
+Learning Class-To-Class Selectional Preferences,1,3.9634271047288716,7,2002,2008
+The N-Best Algorithm: Efficient Procedure For Finding Top N Sentence Hypotheses,1,7.875881421771655,11,1989,1999
+Joint Determination of Anaphoricity and Coreference Resolution using Integer Programming,1,8.040108837909703,6,2008,
+Lexicalized Stochastic Modeling Of Constraint-Based Grammars Using Log-Linear Measures And EM Training,1,6.8765871926171975,6,2002,2007
+Distributed Training Strategies for the Structured Perceptron,1,5.690071318461462,2,2012,
+Anaphora Resolution Of Japanese Zero Pronouns With Deictic Reference,1,4.343532942709308,6,1997,2002
+Building Deep Dependency Structures Using A Wide-Coverage CCG Parser,1,6.367703737024694,3,2002,2004
+Jointly Learning to Extract and Compress,1,6.134413262610677,1,2013,
+Syntactic Features For Evaluation Of Machine Translation,1,4.958528958840354,2,2007,2008
+Toward Memory-Based Translation,1,23.39784373601641,13,1991,2003
+A Statistical Approach To Language Translation,1,8.601089298593628,9,1990,1998
+Fast Cheap and Creative: Evaluating Translation Quality Using Amazon’s Mechanical Turk,1,18.493277885596548,2,2010,2011
+A Syntax-Driven Bracketing Model for Phrase-Based Translation,1,3.845804131330482,1,2010,2010
+An Integrated Understander,1,8.010214907722224,14,1982,1995
+Learning Word-Class Lattices for Definition and Hypernym Extraction,1,4.171623374309582,2,2012,
+Stochastic Gradient Descent Training for L1-regularized Log-linear Models with Cumulative Penalty,1,3.8955463337407847,4,2010,
+Edit Detection And Parsing For Transcribed Speech,1,3.9285981664864797,5,2002,2006
+Finite-State Approximation Of Phrase Structure Grammars,1,6.061511274778921,10,1992,2001
+Structural Matching Of Parallel Texts,1,14.704349364280377,12,1993,2004
+Effective Use Of WordNet Semantics Via Kernel-Based Learning,1,3.978741287782567,3,2009,2011
+Semi-Supervised Frame-Semantic Parsing for Unknown Predicates,1,3.9802447685726348,2,2012,
+Contextual Dependencies In Unsupervised Word Segmentation,1,6.073611621645755,3,2008,2010
+A Procedure For Quantitatively Comparing The Syntactic Coverage Of English Grammars,1,14.56668720458353,6,1992,1997
+Planning Coherent Multisentential Text,1,18.489981384289393,7,1989,1995
+Towards A Simple And Accurate Statistical Approach To Learning Translation Relationships Among Words,1,4.254986201816313,5,2001,2005
+Tree-To-String Alignment Template For Statistical Machine Translation,1,11.777966760660494,4,2008,2011
+Knowledge-Based Weak Supervision for Information Extraction of Overlapping Relations,1,9.288794941590128,2,2012,
+Japanese Dependency Structure Analysis Based On Support Vector Machines,1,7.224727916649421,6,2001,2006
+A Phrase-Based Statistical Model For SMS Text Normalization,1,4.0312238019961955,3,2011,
+Evaluation Challenges In Large-Scale Document Summarization,1,4.331718591357131,1,2004,2004
+Using Suffix Arrays To Compute Term Frequency And Document Frequency For All Substrings In A Corpus,1,3.9073491710258095,6,2000,2005
+Collecting Highly Parallel Data for Paraphrase Evaluation,1,7.519080435298687,2,2012,
+An Algebra For Semantic Construction In Constraint-Based Grammars,1,8.201548560012538,4,2002,2005
+Improving generative statistical parsing with semi-supervised word clustering,1,3.8955463337407816,4,2010,
+Automatic Acquisition Of Hyponyms From Large Text Corpora,1,11.642407537531103,4,2006,2009
+Word-Level Confidence Estimation for Machine Translation,1,3.866569484404006,3,2009,2011
+Enriching The Output Of A Parser Using Memory-Based Learning,1,4.236530698587006,3,2005,2007
+A Simple and Effective Hierarchical Phrase Reordering Model,1,10.829306199709862,4,2010,
+Practical Issues In Automatic Documentation Generation,1,6.648260358198389,11,1995,2005
+Shallow Parsing With Conditional Random Fields,1,25.494693169975292,5,2004,2008
+A Problem For RST: The Need For Multi-Level Discourse Analysis,1,22.803866602467906,8,1993,2000
+Determining Term Subjectivity And Term Orientation For Opinion Mining,1,6.161095983629421,4,2007,2010
+Novel Reordering Approaches In Phrase-Based Statistical Machine Translation,1,4.903450015515326,4,2005,2008
+Accurate Information Extraction From Research Papers Using Conditional Random Fields,1,7.9666932127038,5,2004,2008
+From Grammar To Lexicon: Unsupervised Learning Of Lexical Syntax,1,12.950976666059649,9,1994,2002
+Bridging SMT and TM with Translation Recommendation,1,4.171623374309577,2,2012,
+Parser Combination By Reparsing,1,4.094619458672739,4,2007,2010
+Grammatical Machine Translation,1,4.3233433219100394,3,2006,2008
+UMASS/HUGHES: Description Of The CIRCUS System Used For MUC-5,1,4.581107189287858,8,1994,2001
+Probabilistic Disambiguation Models For Wide-Coverage HPSG Parsing,1,7.606347871883853,5,2005,2009
+Forest Reranking: Discriminative Parsing with Non-Local Features,1,11.214611965736514,5,2009,
+Enhanced Sentiment Learning Using Twitter Hashtags and Smileys,1,10.88453135833214,1,2013,
+Semi-Automatic Recognition of Noun Modifier Relationships,1,4.265646531735165,7,2002,2008
+A Binding Rule For Government-Binding Parsing,1,5.649811544327484,13,1990,2002
+A Practical Approach To Multiple Default Inheritance For Unification-Based Lexicons,1,5.895550898110231,8,1992,1999
+Personalizing PageRank for Word Sense Disambiguation,1,9.498287566117273,4,2010,
+Experiments With A Powerful Parser,1,4.782301324373794,20,1981,2000
+Inducing Sentence Structure from Parallel Corpora for Reordering,1,4.422555969023781,2,2012,
+Unsupervised Morphological Segmentation with Log-Linear Models,1,4.146475827803092,4,2010,
+A Non-Projective Dependency Parser,1,14.638834978512119,8,1997,2004
+Improving Statistical MT Through Morphological Analysis,1,7.252108976231961,3,2006,2008
+HOO 2012: A Report on the Preposition and Determiner Error Correction Shared Task,1,6.634297356851698,2,2012,
+Domain Adaptation for Statistical Machine Translation with Domain Dictionary and Monolingual Corpora,1,3.861083717268853,2,2012,
+Types In Functional Unification Grammars,1,4.109027643473261,9,1990,1998
+Noun Phrase Analysis In Large Unrestricted Text For Information Retrieval,1,3.868806642601785,6,1997,2002
+Reversible Unification Based Machine Translation,1,8.092842696308537,2,1991,1992
+Large-Scale Named Entity Disambiguation Based on Wikipedia Data,1,6.339764161701521,3,2011,
+Modeling Sentences in the Latent Space,1,4.422555969023781,2,2012,
+An Empirical Model Of Multiword Expression Decomposability,1,4.549405022553642,4,2004,2007
+CoNLL-2011 Shared Task: Modeling Unrestricted Coreference in OntoNotes,1,15.285964257852356,3,2011,
+Classifying The Semantic Relations In Noun Compounds Via A Domain-Specific Lexical Hierarchy,1,6.2195184255187055,5,2005,2009
+Transition-based Dependency Parsing with Rich Non-local Features,1,13.403871726065965,2,2012,
+Continuous Space Translation Models with Neural Networks,1,5.307215445427928,2,2012,
+Empirical Studies On The Disambiguation Of Cue Phrases,1,13.986844777107647,9,1993,2001
+Combining Distributional And Morphological Information For Part Of Speech Induction,1,5.0435342331084865,4,2008,2011
+A Maximum Entropy Approach To Identifying Sentence Boundaries,1,13.584026793745377,8,1998,2005
+A General Abstract Model of Incremental Dialogue Processing,1,5.056287751874651,2,2012,
+A Lexical Functional Grammar System In Prolog,1,4.2997882789233675,9,1988,1996
+A Stochastic Finite-State Word-Segmentation Algorithm For Chinese,1,15.740255764458352,9,1995,2003
+Intention-Based Segmentation: Human Reliability And Correlation With Linguistic Cues,1,9.402563827357287,6,1993,1998
+A Proposal For SLS Evaluation,1,3.999001954040702,3,1990,1992
+Arabic Morphological Tagging Diacritization and Lemmatization Using Lexeme Models and Feature Ranking,1,4.299077111357358,3,2011,
+Reranking And Self-Training For Parser Adaptation,1,10.704180494985986,4,2007,2010
+Fully Unsupervised Discovery of Concept-Specific Relationships by Web Mining,1,8.81888126873878,3,2008,2010
+Frustratingly Hard Domain Adaptation for Dependency Parsing,1,4.131484581224556,3,2008,2010
+The S-Space Package: An Open Source Package for Word Space Models,1,4.974840603079926,3,2011,
+Forest-based Translation Rule Extraction,1,7.354064679763026,3,2009,2011
+Recognizing Contextual Polarity In Phrase-Level Sentiment Analysis,1,14.460743610665656,2,2010,2011
+A Dynamic Language Model For Speech Recognition,1,5.299445394103724,6,1992,1997
+Subjectivity Word Sense Disambiguation,1,3.845804131330482,1,2010,2010
+Speed And Accuracy In Shallow And Deep Stochastic Parsing,1,11.34770740271621,4,2004,2007
+Chinese Named Entity Identification Using Class-Based Language Model,1,6.94847069575785,3,2003,2005
+Top Accuracy and Fast Dependency Parsing is not a Contradiction,1,13.212177153548126,2,2012,
+SPMT: Statistical Machine Translation With Syntactified Target Language Phrases,1,14.701093817599313,3,2007,2009
+Supervised Noun Phrase Coreference Research: The First Fifteen Years,1,7.462979374328405,3,2011,
+Ranking Algorithms For Named Entity Extraction: Boosting And The Voted Perceptron,1,5.802349252665464,4,2003,2006
+Towards A Self-Extending Parser,1,6.331665675277804,18,1980,1997
+Selective Sharing for Multilingual Dependency Parsing,1,3.8329066509751435,1,2013,
+Local and Global Algorithms for Disambiguation to Wikipedia,1,9.28879494159012,2,2012,
+IsoQuest Inc.: Description Of The NetOwl (TM) Extractor System As Used For MUC-7,1,7.453928004263627,6,1998,2003
+Self-Training PCFG Grammars with Latent Annotations Across Languages,1,4.047695899756401,2,2010,2011
+A Maximum Entropy Model For Part-Of-Speech Tagging,1,42.2666116792887,8,1998,2005
+Automatic Evaluation of Linguistic Quality in Multi-Document Summarization,1,4.864879527799765,2,2012,
+A Fast Decoder for Joint Word Segmentation and POS-Tagging Using a Single Discriminative Model,1,5.49863847985165,2,2012,
+Coping With Ambiguity And Unknown Words Through Probabilistic Models,1,31.381727272092554,8,1993,2000
+Generalized Higher-Order Dependency Parsing with Cube Pruning,1,4.380526686543082,1,2013,
+Modeling Semantic Containment and Exclusion in Natural Language Inference,1,3.8786339159578316,2,2009,2010
+A Freely Available Wide Coverage Morphological Analyzer For English,1,8.292916117066802,11,1994,2004
+Wide-Coverage Efficient Statistical Parsing with CCG and Log-Linear Models,1,14.77171488271194,4,2010,
+Direct Translation Model 2,1,5.0552079001306875,4,2008,2011
+Language Model Adaptation For Statistical Machine Translation Via Structured Query Models,1,3.8786466948407976,4,2010,
+Coarse-To-Fine N-Best Parsing And MaxEnt Discriminative Reranking,1,17.489090634789143,3,2006,2008
+Statistical Significance Tests For Machine Translation Evaluation,1,9.686107743786469,4,2010,
+An Empirical Approach To Conceptual Case Frame Acquisition,1,9.93786194776438,7,2000,2006
+Models For The Semantic Classification Of Noun Phrases,1,7.0352240784050935,4,2005,2008
+A Simple Similarity-based Model for Selectional Preferences,1,4.044197680035037,2,2009,2010
+Learning Translation Templates From Bilingual Text,1,11.638409962112616,12,1993,2004
+A Rule-Based Approach To Prepositional Phrase Attachment Disambiguation,1,26.456537508175632,9,1995,2003
+Sentence Extraction As A Classification Task,1,9.017519455060977,8,1998,2005
+Automatic Learning For Semantic Collocation,1,4.783694694770038,13,1993,2005
+Moses: Open Source Toolkit for Statistical Machine Translation,1,62.01184222359767,5,2009,
+A Cascaded Linear Model for Joint Chinese Word Segmentation and Part-of-Speech Tagging,1,5.739893021122173,4,2010,
+Unsupervised Models For Named Entity Classification,1,28.533652091739455,6,2001,2006
+Stochastic Lexicalized Inversion Transduction Grammar For Alignment,1,4.296425383989427,5,2006,2010
+Pseudo-Projectivity A Polynomially Parsable Non-Projective Dependency Grammar,1,4.658630826605002,7,2001,2007
+Single Malt or Blended? A Study in Multilingual Parser Optimization,1,5.890894492800654,4,2008,2011
+Speech Recognition In SRI'S Resource Management And ATIS Systems,1,5.372889015808233,2,1992,1993
+The LINCOLN Continuous Speech Recognition System: Recent Developments And Results,1,4.773049397406465,2,1989,1990
+KenLM: Faster and Smaller Language Model Queries,1,18.214173201796175,2,2012,
+Stacking Dependency Parsers,1,4.691727310400559,5,2009,
+Typed Unification Grammars,1,16.67209231795531,10,1990,1999
+HMM-Based Part-Of-Speech Tagging For Chinese Corpora,1,4.447065282084058,4,1994,1997
+Corpus Based PP Attachment Ambiguity Resolution With A Semantic Dictionary,1,6.871182412936511,10,1998,2007
+A Report on the First Native Language Identification Shared Task,1,7.666572165381705,1,2013,
+Improving Word Representations via Global Context and Multiple Word Prototypes,1,8.2143006291416,1,2013,
+Lexicon-Grammar And The Syntactic Analysis Of French,1,4.685189926006094,10,1986,1995
+Nonconcatenative Finite-State Morphology,1,11.196234782222215,13,1988,2000
+Generating Minimal Definite Descriptions,1,4.393198087019771,6,2003,2008
+Minimally Supervised Morphological Analysis By Multimodal Alignment,1,10.179342961419438,7,2001,2007
+Data-Oriented Methods For Grapheme-To-Phoneme Conversion,1,3.895286277669923,7,1995,2001
+Syllable-Based Morphology,1,4.505596190961148,5,1991,1995
+Unsupervised Structure Prediction with Non-Parallel Multilingual Guidance,1,6.825764827011174,2,2012,
+Using Lexical Chains For Text Summarization,1,9.125325611875285,8,1998,2005
+Applying Many-to-Many Alignments and Hidden Markov Models to Letter-to-Phoneme Conversion,1,3.879036826633297,2,2012,
+Using Linguistic Principles To Recover Empty Categories,1,4.459626475854266,3,2005,2007
+Evaluating WordNet-based Measures of Lexical Semantic Relatedness,1,8.385028753102402,2,2008,2009
+Efficiently Computed Lexical Chains As An Intermediate Representation For Automatic Text Summarization,1,4.075778237426423,8,2002,2009
+Automatic Word Sense Discrimination,1,16.001527804932156,5,2002,2006
+Unsupervised Learning Of The Morphology Of A Natural Language,1,11.62790476248205,8,2002,2009
+Mixture-Model Adaptation for SMT,1,7.043479045407085,2,2012,
+Joint Feature Selection in Distributed Stochastic Learning for Large-Scale Discriminative Training in SMT,1,7.118859193414043,1,2013,
+The Rhetorical Parsing Of Unrestricted Natural Language Texts,1,8.094035017612491,8,1997,2004
+Polylingual Topic Models,1,7.906558448257545,3,2011,
+Indexing With WordNet Synsets Can Improve Text Retrieval,1,7.190523489991419,6,1999,2004
+Precision And Recall Of Machine Translation,1,6.01736645246865,6,2004,2009
+Statistical Phrase-Based Translation,1,33.766205914127966,4,2006,2009
+Semi-Supervised Sequential Labeling and Segmentation Using Giga-Word Scale Unlabeled Data,1,4.628243187730035,5,2009,
+Cheap and Fast â But is it Good? Evaluating Non-Expert Annotations for Natural Language Tasks,1,24.711035282572855,2,2010,2011
+SemEval-2010 Task 2: Cross-Lingual Lexical Substitution,1,3.895546333740792,4,2010,
+Chart Parsing And Rule Schemata In PSG,1,8.082856664852663,8,1982,1989
+Incremental Finite-State Parsing,1,6.269771126481932,9,1997,2005
+Unification With Lazy Non-Redundant Copying,1,6.99128832166447,9,1991,1999
+Cooperation Between Transfer And Analysis In Example-Based Framework,1,5.274698876376867,3,1994,1996
+Introduction To The Bio-Entity Recognition Task At JNLPBA,1,5.809312838599127,5,2005,2009
+Discovering Relations Among Named Entities From Large Corpora,1,7.674483203087233,4,2005,2008
+The Automatic Acquisition Of Frequencies Of Verb Subcategorization Frames From Tagged Corpora,1,4.709029411666006,6,1997,2002
+Scaling Context Space,1,4.881607285639532,5,2002,2006
+Learning Surface Text Patterns For A Question Answering System,1,11.991660408761245,6,2003,2008
+Two-Level Many-Paths Generation,1,8.487109416196745,7,1996,2002
+Description Of The LTG System Used For MUC-7,1,4.613765250160608,9,1999,2007
+Grammar Writing System (GRADE) Of Mu-Machine Translation Project And Its Characteristics,1,3.905926173924155,8,1985,1992
+Fast Generation Of Abstracts From General Domain Text Corpora By Extracting Relevant Sentences,1,7.767584128341807,8,1997,2004
+Semantic Role Features for Machine Translation,1,4.974840603079919,3,2011,
+Goodness: A Method for Measuring Machine Translation Confidence,1,4.864879527799766,2,2012,
+Synchronous Tree-Adjoining Grammars,1,7.335677538115396,17,1990,2006
+Computing Consensus Translation For Multiple Machine Translation Systems Using Enhanced Hypothesis Alignment,1,11.698742242953745,4,2007,2010
+Clause Aggregation Using Linguistic Knowledge,1,5.145326134719781,5,1999,2003
+Towards Terascale Semantic Acquisition,1,8.873966476769674,4,2006,2009
+Monolingual Machine Translation For Paraphrase Generation,1,5.099564599511188,1,2011,2011
+Generalized Probabilistic LR Parsing Of Natural Language (Corpora) With Unification-Based Grammars,1,19.144530083381753,11,1994,2004
+Discriminative Sentence Compression With Soft Syntactic Evidence,1,4.56480514050347,4,2008,2011
+Extracting Semantic Hierarchies From A Large On-Line Dictionary,1,19.782362444210175,13,1986,1998
+Improving Chinese Tokenization With Linguistic Filters On Statistical Lexical Acquisition,1,6.280900859991917,10,1995,2004
+Interactive Problem Solving And Dialogue In The ATIS Domain,1,4.510227139329249,4,1991,1994
+Squibs and Discussions: Measuring Word Alignment Quality for Statistical Machine Translation,1,7.108915479083192,3,2009,2011
+Responding Intelligently To Unparsable Inputs,1,13.411067977758599,10,1980,1989
+Development And Preliminary Evaluation Of The MIT ATIS System,1,3.9159787125052112,10,1991,2000
+An Information Extraction Core System For Real World German Text Processing,1,5.020974668068735,7,1997,2003
+A POS-Based Model for Long-Range Reorderings in SMT,1,4.869690899190829,4,2010,
+Tailoring Word Alignments to Syntactic Machine Translation,1,4.547834555360826,3,2008,2010
+A General Computational Model For Word-Form Recognition And Production,1,11.99939773533265,13,1986,1998
+Encoding Lexicalized Tree Adjoining Grammars With A Nonmonotonic Inheritance Hierarchy,1,4.731791406133494,5,1995,1999
+An Efficient Algorithm for Easy-First Non-Directional Dependency Parsing,1,9.95159731714154,3,2011,
+Acquisition Of Lexical Information From A Large Textual Italian Corpus,1,11.624168790730824,4,1991,1994
+The Complexity Of Recognition Of Linguistically Adequate Dependency Grammars,1,4.8397815262214126,10,1998,2007
+Role Of Word Sense Disambiguation In Lexical Acquisition: Predicting Semantics From Syntactic Cues,1,9.654695341041785,7,1997,2003
+Integrating Top-Down And Bottom-Up Strategies In A Text Processing System,1,7.068748068998783,5,1990,1994
+The ACL Anthology Network,1,6.007477956671222,4,2010,
+Identifying Zero Pronouns In Japanese Dialogue,1,4.7302822777362765,9,1989,1997
+Class-Based Probability Estimation Using A Semantic Hierarchy,1,7.700694832417886,5,2001,2005
+A Structure-Sharing Representation For Unification-Based Grammar Formalisms,1,8.988003419884294,17,1986,2002
+Probabilistic Coreference In Information Extraction,1,5.647411627804548,8,1998,2005
+Producing Biographical Summaries: Combining Linguistic Knowledge With Corpus Statistics,1,4.393357897525894,4,2002,2005
+Three Heads Are Better Than One,1,4.277601191592208,12,1997,2008
+A Finite-State Morphological Processor For Spanish,1,5.444121898125375,6,1993,1998
+Findings of the 2009 Workshop on Statistical Machine Translation,1,15.47568170836988,4,2010,
+Hierarchical Semantic Role Labeling,1,4.323343321910041,3,2006,2008
+A Joint Source-Channel Model For Machine Transliteration,1,6.122436265254015,5,2006,2010
+An Algorithm For Simultaneously Bracketing Parallel Texts By Aligning Words,1,5.131850054694198,10,1996,2005
+Annotating ESL Errors: Challenges and Rewards,1,3.9086420649328057,3,2011,
+A Discriminative Global Training Algorithm For Statistical MT,1,6.872820314255808,3,2007,2009
+Clustering and Diversifying Web Search Results with Graph-Based Word Sense Induction,1,3.8329066509751435,1,2013,
+Dynamic Programming for Linear-Time Incremental Parsing,1,15.641667010847728,3,2011,
+Generalizing Word Lattice Translation,1,10.172484683383544,3,2009,2011
+Semi-Automatic Acquisition Of Domain-Specific Translation Lexicons,1,4.7504082355254935,7,1997,2003
+Models of Metaphor in NLP,1,4.86487952779977,2,2012,
+Incremental Hypothesis Alignment for Building Confusion Networks with Application to Machine Translation System Combination,1,4.5004612100741745,1,2009,2009
+Ensemble Models for Dependency Parsing: Cheap and Good?,1,6.041127125915069,3,2011,
+Bayesian Learning of a Tree Substitution Grammar,1,5.738371396752315,3,2011,
+Syntax-Based Alignment Of Multiple Translations: Extracting Paraphrases And Generating New Sentences,1,7.175432080922837,3,2004,2006
+Question Answering Based On Semantic Structures,1,5.875007799005775,6,2005,2010
+Bilingually-Constrained (Monolingual) Shift-Reduce Parsing,1,6.652265936309433,4,2010,
+Generalizing Case Frames Using A Thesaurus And The MDL Principle,1,7.633631464867637,8,1998,2005
+A Maximum Entropy Model For Prepositional Phrase Attachment,1,14.119364151629627,13,1994,2006
+Clustering Polysemic Subcategorization Frame Distributions Semantically,1,4.42248488641088,4,2004,2007
+Answer Extraction,1,6.228269486752675,3,2001,2003
+Text-to-Text Semantic Similarity for Automatic Short Answer Grading,1,5.056287751874647,2,2012,
+Maximum Entropy Based Phrase Reordering Model For Statistical Machine Translation,1,9.872930929556038,5,2007,2011
+Evaluating Content Selection In Summarization: The Pyramid Method,1,6.454552834135812,5,2005,2009
+The Generative Lexicon,1,22.151044983082627,8,1991,1998
+A Probabilistic Corpus-Driven Model for Lexical-Functional Analysis,1,5.344079710112249,5,1999,2003
+Tagging Grammatical Functions,1,4.1181301754540645,7,1998,2004
+Self-Training for Biomedical Parsing,1,5.610105097559153,3,2009,2011
+The Complexity of Phrase Alignment Problems,1,4.382158481563324,4,2008,2011
+Towards Effective Use of Training Data in Statistical Machine Translation,1,4.782566976043238,1,2013,
+Similarity-Based Estimation Of Word Cooccurrence Probabilities,1,10.453458366571557,4,1995,1998
+Co-Occurrence Retrieval: A Flexible Framework For Lexical Distributional Similarity,1,5.559727863372759,4,2006,2009
+Determining The Sentiment Of Opinions,1,9.637249626216972,6,2006,2011
+Automatic Acquisition Of Subcategorization Frames From Untagged Text,1,12.32976862679022,9,1992,2000
+Organizing Linguistic Knowledge For Multilingual Generation,1,3.9990019540407022,3,1990,1992
+Language Independent Named Entity Recognition Combining Morphological And Contextual Evidence,1,13.690989190630233,5,2000,2004
+Commonsense Metaphysics And Lexical Semantics,1,6.6410137295969145,6,1986,1991
+Tailoring Object Descriptions To A User's Level Of Expertise,1,10.766137754352393,11,1988,1998
+Automatically Constructing A Lexicon Of Verb Phrase Idiomatic Combinations,1,5.04405593533116,3,2007,2009
+Instance-Based Natural Language Generation,1,4.6370424492407345,4,2005,2008
+The Second Release Of The RASP System,1,16.09503632437457,3,2007,2009
+A Statistical Approach To Machine Translation,1,40.12636106944079,14,1991,2004
+Minimizing Manual Annotation Cost In Supervised Training From Corpora,1,5.833506777503906,12,1997,2008
+Investigating GIS And Smoothing For Maximum Entropy Taggers,1,6.6490975347481225,5,2003,2007
+The Necessity Of Parsing For Predicate Argument Recognition,1,19.50457629044167,3,2003,2005
+Toward Natural Language Computation I,1,4.105569561798664,6,1981,1986
+Stochastic Attribute-Value Grammars,1,10.516890810733319,7,1999,2005
+Parsing For Grammar And Style Checking,1,4.346386296743247,6,1992,1997
+A Plan Recognition Model For Clarification Subdialogues,1,6.777326933068765,5,1985,1989
+Has A Consensus NL Generation Architecture Appeared And Is It Psycholinguistically Plausible?,1,16.02717318277951,6,1996,2001
+Shared Logistic Normal Distributions for Soft Parameter Tying in Unsupervised Grammar Induction,1,10.156349377819954,4,2010,
+Mixed Initiative In Dialogue: An Investigation Into Discourse Segmentation,1,15.140210848644713,12,1991,2002
+Floating Constraints In Lexical Choice,1,4.36046116517732,6,1998,2003
+Weakly Supervised Learning for Hedge Classification in Scientific Literature,1,9.229079790923313,2,2009,2010
+A Comparison Of Rankings Produced By Summarization Evaluation Measures,1,4.819748310580869,3,2002,2004
+Domain Adaptation for Machine Translation by Mining Unseen Words,1,7.71057753319729,2,2012,
+A Trainable Rule-Based Algorithm For Word Segmentation,1,8.74390442929196,9,1998,2006
+Further Meta-Evaluation of Machine Translation,1,12.45609648812404,5,2009,
+Domain Adaptation via Pseudo In-Domain Data Selection,1,9.731254477428305,2,2012,
+Tree Kernels for Semantic Role Labeling,1,3.9107008097377527,3,2009,2011
+Question Answering Using Maximum-Entropy Components,1,5.245803635778676,6,2001,2006
+Another Look At Nominal Compounds,1,4.58863649699447,17,1987,2003
+The LinGO Redwoods Treebank: Motivation And Preliminary Applications,1,7.299180044736547,6,2002,2007
+Genus Disambiguation: A Study In Weighted Preference,1,6.062161707296141,9,1993,2001
+TINA: A Probabilistic Syntactic Parser For Speech Understanding Systems,1,4.049343707398757,3,1989,1991
+Unsupervised Induction of Semantic Roles,1,5.330259667391197,3,2011,
+Word Representations: A Simple and General Method for Semi-Supervised Learning,1,19.19923298670765,3,2011,
+Applied Text Generation,1,13.38300436191001,9,1993,2001
+Multi-Tagging For Lexicalized-Grammar Parsing,1,4.349257417913966,3,2007,2009
+Simple Coreference Resolution with Rich Syntactic and Semantic Features,1,8.767301598874852,4,2010,
+Labeling Chinese Predicates with Semantic Roles,1,6.404658696294652,2,2009,2010
+An Efficient Implementation Of A New DOP Model,1,6.164567675843886,7,2003,2009
+Tree Kernel-Based Relation Extraction with Context-Sensitive Structured Parse Tree Information,1,4.025332941794232,4,2008,2011
+Text Chunking Using Transformation-Based Learning,1,31.754037880632282,8,1999,2006
+Soft Syntactic Constraints For Word Alignment Through Discriminative Training,1,6.294946076082717,3,2008,2010
+A Systematic Comparison Of Various Statistical Alignment Models,1,6.227939179417724,5,2005,2009
+Joint And Conditional Estimation Of Tagging And Parsing Models,1,5.652297568637712,7,2002,2008
+Automatic Learning Of Textual Entailments With Cross-Pair Similarities,1,4.499777909337361,5,2007,2011
+A Study on Similarity and Relatedness Using Distributional and WordNet-based Approaches,1,9.49828756611727,4,2010,
+Use Of Deep Linguistic Features For The Recognition And Labeling Of Semantic Arguments,1,6.711105268540913,7,2004,2010
+Finite-State Transducers In Language And Speech Processing,1,9.068019764631732,7,1998,2004
+Emotions Evoked by Common Words and Phrases: Using Mechanical Turk to Create an Emotion Lexicon,1,6.041127125915068,3,2011,
+Aligning Sentences In Parallel Corpora,1,25.592290695557317,13,1991,2003
+Integrating Multiple Knowledge Sources To Disambiguate Word Sense: An Exemplar-Based Approach,1,29.479091266705524,8,1997,2004
+Technical Correspondence: Parsing Discontinuous Constituents In Dependency Grammar,1,4.348752672085896,13,1993,2005
+Morphological Analysis For Statistical Machine Translation,1,5.048100128246206,4,2006,2009
+Online Learning Of Approximate Dependency Parsing Algorithms,1,11.63003533364104,5,2007,2011
+Parsing The Wall Street Journal With The Inside-Outside Algorithm,1,6.014527756663791,7,1993,1999
+Dynamic Programming For Parsing And Estimation Of Stochastic Unification-Based Grammars,1,8.247339523470782,5,2003,2007
+Probabilistic Tree-Adjoining Grammar As A Framework For Statistical Natural Language Processing,1,7.334896749528145,11,1993,2003
+Transliteration Of Proper Names In Cross-Lingual Information Retrieval,1,6.106693760432527,6,2004,2009
+Focusing For Interpretation Of Pronouns,1,13.857498490787785,18,1983,2000
+A Comparative Study On Reordering Constraints In Statistical Machine Translation,1,6.393234240121648,3,2004,2006
+Towards Understanding Text With A Very Large Vocabulary,1,4.597544065409297,4,1990,1993
+Syntactic Features And Word Similarity For Supervised Metonymy Resolution,1,4.484292200308002,2,2006,2007
+A Compression-Based Algorithm For Chinese Word Segmentation,1,6.729635136439404,6,2001,2006
+Parsing Head-Driven Phrase Structure Grammar,1,8.995308619591585,8,1986,1993
+A Fast Algorithm For The Generation Of Referring Expressions,1,8.549137761246932,9,1992,2000
+Exploiting Syntactic Structure for Language Modeling,1,10.752422425476158,4,1999,2002
+A Maximum-Entropy-Inspired Parser,1,62.29330686531999,7,2001,2007
+Extentions To HMM-Based Statistical Word Alignment Models,1,6.8606488441457145,5,2003,2007
+A Computational Grammar Of Discourse-Neutral Prosodic Phrasing In English,1,8.000650921669298,12,1991,2002
+An Augmented Context Free Grammar For Discourse,1,7.0997115173591,8,1990,1997
+Mining The Web For Bilingual Text,1,9.553489682104146,7,2000,2006
+Extracting Parallel Sentences from Comparable Corpora using Document Level Alignment,1,7.818466882908894,3,2011,
+Augmented Phrase Structure Grammars,1,9.369112293125738,11,1979,1989
+Retrieving Collocations From Text: Xtract,1,29.70112919269884,11,1994,2004
+Seeing Stars: Exploiting Class Relationships For Sentiment Categorization With Respect To Rating Scales,1,4.717484499728755,2,2010,2011
+CommandTalk: A Spoken-Language Interface For Battlefield Simulations,1,7.252929602111466,7,1997,2003
+Incremental Parsing With The Perceptron Algorithm,1,6.492842631836702,3,2005,2007
+Domain Adaptation for Statistical Machine Translation with Monolingual Resources,1,5.600367064927444,4,2010,
+Memory-Based Morphological Analysis,1,5.487675060443221,6,2000,2005
+Machine Translation Using Isomorphic UCGs,1,4.0493437073987595,3,1989,1991
+A Corpus-Based Approach For Building Semantic Lexicons,1,7.699683173207284,7,1998,2004
+Planning Text For Advisory Dialogues,1,19.85980981805343,9,1990,1998
+TextRunner: Open Information Extraction on the Web,1,6.9136618089011455,2,2010,2011
+Structural Patterns Vs. String Patterns For Extracting Semantic Information From Dictionaries,1,5.321281511275742,7,1993,1999
+A Simple Domain-Independent Probabilistic Approach to Generation,1,4.264031802269959,3,2011,
+Head-Driven Parsing For Lexicalist Grammars: Experimental Results,1,3.855108937653628,4,1994,1997
+Co-Occurrences Of Antonymous Adjectives And Their Contexts,1,4.02652541174499,7,1993,1999
+For the sake of simplicity: Unsupervised extraction of lexical simplifications from Wikipedia,1,8.173964170924098,3,2011,
+The Structure Of Shared Forests In Ambiguous Parsing,1,5.871079596309655,12,1993,2004
+Adaptive Multilingual Sentence Boundary Disambiguation,1,8.018938821870272,9,1997,2005
+Why Generative Phrase Models Underperform Surface Heuristics,1,4.106474022526335,4,2008,2011
+Bilingual Generation Of Weather Forecasts In An Operations Environment,1,6.529008677858112,7,1992,1998
+Chinese Word Segmentation without Using Lexicon and Hand-crafted Training Data,1,4.082378923259315,7,2000,2006
+Cascaded ATN Grammars,1,9.657087827718941,11,1982,1992
+Learning to Translate with Source and Target Syntax,1,11.875896070570981,3,2011,
+An Algorithm For Generating Quantifier Scopings,1,14.849178377672693,13,1988,2000
+Word Sense And Subjectivity,1,4.31178871785624,5,2007,2011
+GATE: A Framework And Graphical Development Environment For Robust NLP Tools And Applications,1,16.446601123181512,6,2003,2008
+PARADISE: A Framework For Evaluating Spoken Dialogue Agents,1,4.641395257168952,6,1997,2002
+Cascaded Grammatical Relation Assignment,1,9.088769536796839,4,2000,2003
+The Mapping Unit Approach To Subcategorization,1,4.758863833956579,8,1991,1998
+Automatic Identification Of Non-Compositional Multi-Word Expressions Using Latent Semantic Analysis,1,4.7365709874974815,3,2009,2011
+Algorithms for Deterministic Incremental Dependency Parsing,1,10.266840635027034,4,2010,
+Syntactic Dependency Based Heuristics for Biological Event Extraction,1,5.536018951099994,2,2010,2011
