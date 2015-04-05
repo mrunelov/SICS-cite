@@ -8,6 +8,8 @@ AAN_dir = '../AAN/'
 burstfile = AAN_dir + 'data/Burst-detection-analysis-AAN.csv'
 metrics_dir = '../graph-tool/AAN/'
 
+title_index_map = {}
+
 
 def create_csv_all_AAN():
 	b = load_csv_as_map(metrics_dir + "betweenness.csv")
@@ -18,7 +20,7 @@ def create_csv_all_AAN():
 	# impacts = load_impacts()
 
 	with open("all_AAN.csv", "w+") as csv:
-		csv.write("title,indegree,betweenness,hits,burst_weight,progeny_size\n")
+		csv.write("gt_index,indegree,betweenness,hits,burst_weight,progeny_size\n")
 		for k in b.keys():
 			line = k + "," + str(i[k]) + "," + str(b[k]) + "," + str(h[k]) + ","
 			if k in bursts:
@@ -48,7 +50,8 @@ def load_progeny_sizes(normalize_values=False):
 			print "Skipping node..."
 		else:
 			title = G.node[nodes[i]]["title"].strip().replace(",","")
-			Px_map[title] = int(Px[i])
+                        key = title_index_map[title]
+			Px_map[key] = int(Px[i])
 	if normalize_values:
 		M = max(Px_map.values())
 		for k in Px_map.keys():
@@ -86,7 +89,8 @@ def load_burst_map(normalize_values=False):
 		next(f) # skip header
 		for line in f:
 			data = line.strip().split(",")
-			burst_map[data[0]] = float(data[2])
+                        key = title_index_map[data[0]] # get gt_index from title
+			burst_map[key]= float(data[2])
 	if normalize_values:
 		M = max(burst_map.values())
 		for k in burst_map.keys():
@@ -94,15 +98,17 @@ def load_burst_map(normalize_values=False):
 	return burst_map
 
 
-
+firstcall = True
 def load_csv_as_map(filename, normalize_values=False):
 	"""
 	Loads a csv file with two values into a dictionary
 	"""
 	csv_map = {}
 	with open(filename, "r") as f:
+                next(f) # skip headers
 		for line in f:
-			key,value = line.strip().split(",")
+			title,key,value = line.strip().split(",")
+                        title_index_map[title] = key
 			csv_map[key] = float(value)
         if normalize_values:
             M = max(csv_map.values())
@@ -110,6 +116,7 @@ def load_csv_as_map(filename, normalize_values=False):
                 csv_map[k] /= M
 
 	print "Loaded " + str(len(csv_map.keys())) + " lines"
+        firstcall = False
 	return csv_map
 
 create_csv_all_AAN()
