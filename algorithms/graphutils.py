@@ -46,6 +46,7 @@ def get_gml_graph(dataset,co_citation=False):
 		print("Is DAG now?..."),
 		is_dag = nx.is_directed_acyclic_graph(G)
 		print(str(is_dag))
+		print(str(G.number_of_nodes()) + " nodes and " + str(G.number_of_edges()) + " edges remaining after preprocessing.")
 		#print("Cycles: " + str(len(list(nx.simple_cycles(G)))))
 	with open('pickles/' + dataset + '.pickle', 'wb') as f:	
 		nx.write_gpickle(G, f)
