@@ -34,13 +34,13 @@ def get_gml_graph(dataset,co_citation=False):
 	is_dag = nx.is_directed_acyclic_graph(G)
 	print("Is DAG: " + str(is_dag))
 	if not is_dag: # try to make DAG or closer to DAG by pruning nodes and edges
-		print "Removing biconnected nodes, self-loops and isolates..."
+		print "Removing self-loops and isolates..." #...biconnected nodes, 
 		selfloop_edges = G.selfloop_edges()
-		biconnected_edges = []
-		for u,v in G.edges_iter(): # find bi-edges where two papers cite each other
-			if G.has_edge(v,u):
-				biconnected_edges.extend([(u,v),(v,u)])
-		G.remove_edges_from(biconnected_edges) # delete biconnecting edges
+		# biconnected_edges = []
+		# for u,v in G.edges_iter(): # find bi-edges where two papers cite each other
+		# 	if G.has_edge(v,u):
+		# 		biconnected_edges.extend([(u,v),(v,u)])
+		# G.remove_edges_from(biconnected_edges) # delete biconnecting edges
 		G.remove_edges_from(selfloop_edges) # delete self-loops
 		G.remove_edges_from(nx.isolates(G)) # delete isolates
 		print("Is DAG now?..."),
