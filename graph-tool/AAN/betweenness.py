@@ -13,6 +13,7 @@ Calculates betweenness centrality for a co-citation network and prints info and 
 num_top = 1000
 
 g = gt.load_graph("co-citation.graphml")
+g_cg = gt.load_graph("AAN.graphml") # load the original citation graph
 g.set_directed(False)
 titles = g.vertex_properties["title"]
 authors = g.vertex_properties["authors"]
@@ -20,7 +21,7 @@ in_degs = g.degree_property_map("in")
 print "Loaded a graph with " + str(g.num_vertices()) + " nodes"
 #g = gt.GraphView(g, vfilt=gt.label_largest_component(g))
 
-#vp, ep = gt.betweenness(g)
+vp, ep = gt.betweenness(g)
 #vp = gt.closeness(g)
 
 # TODO: find out if we can pickle betweenness scores with correct indexes
@@ -44,11 +45,17 @@ print "Loaded a graph with " + str(g.num_vertices()) + " nodes"
 top_vp = vpa.argsort()[::-1]#[:num_top]
 
 # write betweenness along with corresponding title to a csv file
-with open("betwenness.csv","w+") as csv:
-    for i,v_i in enumerate(top_vp):
-        v = g.vertex(v_i)
-        line = titles[v].strip().replace(",","") + "," + str(vpa[v]) + "\n"
+with open("betweenness.csv","w+") as csv:
+    csv.write("title,gt_index,betweenness\n")
+    i = 0
+    #for i,v_i in enumerate(top_vp):
+    for n in g_cg.vertices(): # loop original order from citation graph
+        #v = g.vertex(v_i)
+        line = titles[n].strip().replace(",","") +\
+                "," + str(i) + "," + str(vp[n]) + "\n"
+        i += 1
         csv.write(line)
+print "Wrote betweenness.csv"
 
 #with open("top_vp.pickle","wb") as f:
     #pickle.dump(top_vp,f)

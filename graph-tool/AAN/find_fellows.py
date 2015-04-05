@@ -212,7 +212,8 @@ def main():
     eig, auths, hubs = gt.hits(g)
     tp = find_fellows_in_top_scores(auths.a,"HITS",num_top,printstuff=False)
 
-main()
+if __name__ == "__main__":
+    main()
 
 #candidates = ["Kaplan", "Mercer", "Moore", "Tou Ng", "Palmer"]
 #for c in candidates:

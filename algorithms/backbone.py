@@ -108,6 +108,7 @@ def calculate_indegrees(G):
 
 
 def get_Px(G=None):
+        print "checking for file: '" + "pickles/" + dataset + "-backbone-Px.pickle"
 	if os.path.isfile('pickles/' + dataset + '-backbone-Px.pickle'): # OBS: hardcoded backbone Px, since that's all we're interested in
 		with open('pickles/' + dataset + '-backbone-Px.pickle', 'rb') as f:
 			return zip(*pickle.load(f)) # return (Px, nodes) unzipped
@@ -329,4 +330,5 @@ def main():
 
 	if do_plot:
 		plotxy(backbone_indegs,Px)
-main()
+if __name__ == "__main__":
+    main()

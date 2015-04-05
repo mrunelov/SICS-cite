@@ -1,7 +1,7 @@
 import graph_tool.all as gt
 import itertools
 
-G = gt.load_graph("AAN-preprocessed.xml")
+G = gt.load_graph("AAN.graphml") #"AAN-preprocessed.xml")
 #print G.list_properties()
 
 CC = gt.Graph(G,directed=False)
