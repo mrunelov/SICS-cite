@@ -60,6 +60,7 @@ def build_time_slices(G,s):
 	pass
 
 
+# OBS: super slow with networkx, fast graph-tool version in graph-tool/AAN/co_citation.py
 def build_co_citation_graph(G,dataset):
 	print "Building co-citation graph for " + dataset
 	cc = nx.Graph()
