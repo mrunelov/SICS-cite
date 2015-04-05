@@ -15,16 +15,19 @@ def get_authors_for_title(title):
 
 
 
-index_fellow_map = defaultdict(False)
+index_fellow_map = defaultdict(lambda : False)
 with open("all_AAN.csv","r") as old,\
     open("all_AAN_with_fellows.csv", "w+") as new:
     header = old.next()
     new.write(header.strip() + ",fellow\n")
     for line in old:
         old_data = line.strip().split(",")
-        title = old_data[0]
-        gt_index = old_data[1]
-        author_list = get_authors_for_title(title).split(";")
+        gt_index = old_data[0]
+        v = g.vertex(int(gt_index))
+        #title = titles[v]
+        #print title
+        #author_list = get_authors_for_title(title).split(";")
+        author_list = authors[v].split(";")
         if author_list is None:
             print "Didn't find matching node for title:"
             print title
@@ -41,7 +44,7 @@ with open("all_AAN.csv","r") as old,\
             new_data = line.strip() + "," + str(fellow) + "\n"
             new.write(new_data)
 
-with open("index_fellow_map.pickle") as f:
-    pickle.dump(index_fellow_map,f)
-
+# can't pickle with defaultdict and lambda...
+#with open("index_fellow_map.pickle", "wb") as f:
+    #pickle.dump(index_fellow_map,f)
 

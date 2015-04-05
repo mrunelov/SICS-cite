@@ -26,18 +26,18 @@ vp, ep = gt.betweenness(g)
 
 # TODO: find out if we can pickle betweenness scores with correct indexes
 # and then just load that array of floats
-#betweens = []
-#for b in vp.a:
-    #betweens.append(b)
+betweens = []
+for b in vp.a:
+    betweens.append(b)
 
 
 #closeness = []
 #for c in vp.a:
     #closeness.append(c)
-#with open("vpa-closeness.pickle","wb") as f:
-    #pickle.dump(betweens,f)
+with open("vpa-betweenness.pickle","wb") as f:
+    pickle.dump(betweens,f)
     #pickle.dump(closeness,f)
-#print "vpa pickled!"
+print "vpa pickled!"
 
 #with open("vpa-between.pickle","rb") as f:
     #vpa = np.asarray(pickle.load(f))
@@ -45,17 +45,17 @@ vp, ep = gt.betweenness(g)
 top_vp = vpa.argsort()[::-1]#[:num_top]
 
 # write betweenness along with corresponding title to a csv file
-with open("betweenness.csv","w+") as csv:
-    csv.write("title,gt_index,betweenness\n")
-    i = 0
-    #for i,v_i in enumerate(top_vp):
-    for n in g_cg.vertices(): # loop original order from citation graph
-        #v = g.vertex(v_i)
-        line = titles[n].strip().replace(",","") +\
-                "," + str(i) + "," + str(vp[n]) + "\n"
-        i += 1
-        csv.write(line)
-print "Wrote betweenness.csv"
+#with open("betweenness.csv","w+") as csv:
+    #csv.write("title,gt_index,betweenness\n")
+    #i = 0
+    ##for i,v_i in enumerate(top_vp):
+    #for n in g_cg.vertices(): # loop original order from citation graph
+        ##v = g.vertex(v_i)
+        #line = titles[n].strip().replace(",","") +\
+                #"," + str(i) + "," + str(vp[n]) + "\n"
+        #i += 1
+        #csv.write(line)
+#print "Wrote betweenness.csv"
 
 #with open("top_vp.pickle","wb") as f:
     #pickle.dump(top_vp,f)

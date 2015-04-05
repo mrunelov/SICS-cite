@@ -9,8 +9,9 @@ def logit():
     cols = ["indegree","betweenness","hits","progeny_size","burst_weight"]
 
     data = pd.read_csv("all_AAN_with_fellows.csv")
+    print data.head()
     data["intercept"] = 1.0
-    train_set = data.drop(["fellow","title","hits"], axis=1)
+    train_set = data.drop(["fellow","gt_index","hits"], axis=1)
     # print train_set.describe()
 
     # Plot histograms

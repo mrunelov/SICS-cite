@@ -78,7 +78,7 @@ def sim(a, b):
 
 def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, printstuff=True):
 
-    g = gt.load_graph("AAN-preprocessed.xml")
+    g = gt.load_graph("AAN.graphml") #"AAN-preprocessed.xml")
     titles = g.vertex_properties["title"]
     authors = g.vertex_properties["authors"]
     #print "Loaded a graph with " + str(g.num_vertices()) + " nodes"
