@@ -9,7 +9,7 @@ from sets import Set
 from logit import logit
 
 # There are 1667 / 18158 fellow-articles in total
-num_top = 1667
+num_top = 200
 
 
 def parse_names(fullname, has_firstname=True, reverse=False):
@@ -75,46 +75,60 @@ def sim(a, b):
     seq = difflib.SequenceMatcher(a=a.lower(), b=b.lower())
     return seq.ratio()
 
+with open("fellow_indexes.pickle", "rb") as f:
+    fellow_indexes = pickle.load(f)
 
 def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, printstuff=True):
-
     g = gt.load_graph("AAN.graphml") #"AAN-preprocessed.xml")
     titles = g.vertex_properties["title"]
     authors = g.vertex_properties["authors"]
     #print "Loaded a graph with " + str(g.num_vertices()) + " nodes"
 
     top_v = scores.argsort()[::-1][:num_top]
-
-    i = 0
+    fellows = Set(fellow_indexes)
     fellow_articles = 0
-    fellows = Set(range(32))
+    #fellows = Set(range(32))
     for i,v_i in enumerate(top_v):
         sys.stderr.write("looping node " + str(i+1) + " / " + str(num_top) + "\r")
         sys.stderr.flush()
         v = g.vertex(v_i)
+        found_fellow = False
+        if v_i in fellows:
+            fellow_articles += 1
+            fellows.remove(v_i)
+            found_fellow = True
         if printstuff:
             print "##############"
             print "###   " + str(i+1) + "   ###"
             print "##############"
             print titles[v] 
             print authors[v]
+            if found_fellow:
+                print "Has fellow author ---------------------------------------------------"
+            else:
+                print "No fellow authors"
             print score_name + ": " + str(scores[v])
         auths = authors[v]
         auths = auths.split(";")
-        found_fellow = False
-        for a in auths:
-            fellow_index = find_fellow(a,reverse=True,printstuff=printstuff)
-            if fellow_index is not -1:
-                fellow_articles += 1
-                if fellow_index in fellows:
-                    fellows.remove(fellow_index)
+        
+        if not fellows:
+            print "ALL FELLOW ARTICLES FOUND after " + str(i) + " articles"
+            break
+        #found_fellow = False
+        #for a in auths:
+            #fellow_index = find_fellow(a,reverse=True,printstuff=printstuff)
+            #if fellow_index is not -1:
+                #fellow_articles += 1
+                #if fellow_index in fellows:
+                    #fellows.remove(fellow_index)
         #if len(fellows) == 1: # found all fellows except Tou Ng
             #break
-        i += 1
         #if i > 10:
             #break
     #print "Fellows remaining: " + str(fellows)
     print "Precision for " + score_name + ": " + str(fellow_articles) + " / " + str(num_top) + " = " + str(float(fellow_articles)/num_top)
+    print "DCG: " + str(dcg_at_k(top_v, fellow_indexes,num_top))
+
     return fellow_articles
 
     return 
@@ -134,19 +148,38 @@ def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, pr
                 vcmap=matplotlib.cm.gist_heat,
                 output="co-citation_betweenness.pdf") #vorder=vpa, 
 
+def dcg_at_k(argsorted, fellows, k):
+    """
+    Calcualate the discounted cumulative gain given
+    an array of each article's score position and the gold standard (fellow list)
+    """
+
+    rel = [0]*len(argsorted)
+    for i in range(k):
+        fellow = 1 if argsorted[i] in fellows else 0
+        rel[i] = fellow
+
+    rel = np.asfarray(rel)
+    return rel[0] + np.sum(rel[1:] / np.log2(np.arange(2, rel.size + 1)))
+    # TODO: maybe implement exponential version with more emphasis on higher rankings 
+    
+
+
 def main():
     # build score array with logit coefficients
     lp = logit()
+    geometric_mean = None
     with open("vpa-between.pickle","rb") as f:
         vpa = np.asarray(pickle.load(f))
+        geometric_mean = vpa.copy()
         vpa *= lp["betweenness"]
         
-    g = gt.load_graph("AAN-preprocessed.xml")
+    g = gt.load_graph("AAN.graphml")
     in_degs = g.degree_property_map("in")
     vpa += in_degs.a*lp["indegree"]
 
-    #eig, auths, hubs = gt.hits(g)
-    #vpa += auths.a*lp["hits"]
+    eig, auths, hubs = gt.hits(g)
+    vpa += auths.a*lp["hits"]
 
 
     # Generate Px and burst pickles with correct graph-tool ordering
@@ -191,6 +224,8 @@ def main():
     with open("burst_list.pickle","rb") as f:
         ba = np.asarray(pickle.load(f))
     vpa += ba*lp["burst_weight"]
+    geometric_mean *= ba
+    geometric_mean = np.sqrt(geometric_mean)
 
     tp = find_fellows_in_top_scores(vpa,"All with logit coefficients",num_top,printstuff=False)
 
@@ -205,12 +240,15 @@ def main():
         tp = find_fellows_in_top_scores(vpa,"closeness",num_top,printstuff=False)
 
 
-    g = gt.load_graph("AAN-preprocessed.xml")
+    g = gt.load_graph("AAN.graphml")
     in_degs = g.degree_property_map("in")
     tp = find_fellows_in_top_scores(in_degs.a,"indegree",num_top,printstuff=False)
 
     eig, auths, hubs = gt.hits(g)
-    tp = find_fellows_in_top_scores(auths.a,"HITS",num_top,printstuff=False)
+    tp = find_fellows_in_top_scores(auths.a,"HITS authority",num_top,printstuff=False)
+
+    
+    tp = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst)",num_top,printstuff=False)
 
 if __name__ == "__main__":
     main()
