@@ -10,7 +10,7 @@ def logit():
 
     data = pd.read_csv("all_AAN_with_fellows.csv")
     data["intercept"] = 1.0
-    train_set = data.drop(["fellow","title"],axis=1)
+    train_set = data.drop(["fellow","title","hits"], axis=1)
     # print train_set.describe()
 
     # Plot histograms
@@ -32,8 +32,8 @@ def logit():
     print result.summary()
 
     lp = result.params
-    print "Odds ratios:"
-    print np.exp(result.params)
+    #print "Odds ratios:"
+    #print np.exp(result.params)
 
     return lp
 
@@ -55,4 +55,5 @@ def logit():
     # plt.plot(data["betweenness"],data["fellow_prediction"],".",color="y",alpha=.4)
     # plt.show()
 
-#logit()
+if __name__ == "__main__":
+    logit()

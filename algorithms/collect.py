@@ -1,6 +1,9 @@
 from backbone import get_Px, get_impact_graph
 from graphutils import get_gml_graph
 
+# TODO: see why the csv file doesn't have 18158 rows like the preprocessed
+# file AAN-preprocessed.xml, but only 18057 or so.
+
 AAN_dir = '../AAN/'
 burstfile = AAN_dir + 'data/Burst-detection-analysis-AAN.csv'
 metrics_dir = '../graph-tool/AAN/'
