@@ -4,7 +4,6 @@ import matplotlib
 import pickle
 import numpy as np
 from sets import Set
-from find_fellows import *
 
 """
 Calculates betweenness centrality for a co-citation network and prints info and plots the top results

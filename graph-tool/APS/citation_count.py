@@ -1,5 +1,4 @@
 import graph_tool.all as gt
-from find_fellows import *
 
 num_top = 100
 

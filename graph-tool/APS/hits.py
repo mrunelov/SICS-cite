@@ -1,5 +1,4 @@
 import graph_tool.all as gt
-from find_fellows import *
 import pickle
 import numpy as np
 
