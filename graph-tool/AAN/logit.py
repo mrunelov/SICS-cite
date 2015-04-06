@@ -9,8 +9,14 @@ def logit():
     cols = ["indegree","betweenness","hits","progeny_size","burst_weight"]
 
     data = pd.read_csv("all_AAN_with_fellows.csv")
+    # log all progeny sizes, highly experimental
+    #data["progeny_size"] = np.log2(data["progeny_size"])
+    #data["progeny_size"] = data["progeny_size"].replace(float("-inf"),0)
+
+    print data.head(n=10)
+    #print data["gt_index"]
     data["intercept"] = 1.0
-    train_set = data.drop(["fellow","title","hits"], axis=1)
+    train_set = data.drop(["fellow","gt_index"],axis=1)
     # print train_set.describe()
 
     # Plot histograms

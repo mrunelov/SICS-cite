@@ -22,7 +22,7 @@ def create_csv_all_AAN():
 	with open("all_AAN.csv", "w+") as csv:
 		csv.write("gt_index,indegree,betweenness,hits,burst_weight,progeny_size\n")
 		for k in b.keys():
-			line = k + "," + str(i[k]) + "," + str(b[k]) + "," + str(h[k]) + ","
+			line = k + "," + str(int(i[k])) + "," + str(b[k]) + "," + str(h[k]) + ","
 			if k in bursts:
 				line += str(bursts[k])
 			else:
@@ -44,18 +44,18 @@ def create_csv_all_AAN():
 def load_progeny_sizes(normalize_values=False):
 	G = get_gml_graph("AAN")
 	Px_map = {}
-	Px,nodes = get_Px()
-	for i in range(len(nodes)):
-		if "title" not in G.node[nodes[i]]:
-			print "Skipping node..."
-		else:
-			title = G.node[nodes[i]]["title"].strip().replace(",","")
-                        key = title_index_map[title]
-			Px_map[key] = int(Px[i])
+	Px,titles = get_Px()
+        num_skipped = 0
+	for i in range(len(Px)):
+                title = titles[i].strip().replace(",","")
+                title = title.encode("utf-8")
+                key = title_index_map[title]
+                Px_map[key] = int(Px[i])
 	if normalize_values:
 		M = max(Px_map.values())
 		for k in Px_map.keys():
 			Px_map[k] /= float(M)
+        print "Skipped " + str(num_skipped) + " nodes"
 	return Px_map
 
 

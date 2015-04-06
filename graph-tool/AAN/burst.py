@@ -34,7 +34,7 @@ def normalize_offsets(offsets):
 
 
 def get_offsets():
-    g = gt.load_graph("AAN-preprocessed.xml")
+    g = gt.load_graph("AAN.graphml") #"AAN-preprocessed.xml")
     dates = g.vertex_properties["date"]
     i = 0
     for v in g.vertices():
