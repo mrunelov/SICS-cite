@@ -19,7 +19,7 @@ authors = g.vertex_properties["authors"]
 eig, auths, hubs = gt.hits(g)
 top_auths = auths.a.argsort()[::-1]#[:num_top]
 top_nodes = [g.vertex(v) for v in top_auths]
-bg = gt.GraphView(g, vfilt=lambda v: v in top_auths)
+#bg = gt.GraphView(g, vfilt=lambda v: v in top_auths)
 
 with open("hits.csv", "w+") as csv:
     csv.write("title,gt_index,hits_auth\n")
