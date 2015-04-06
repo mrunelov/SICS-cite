@@ -8,8 +8,8 @@ import numpy as np
 from sets import Set
 from logit import logit
 
-# There are 1667 / 18158 fellow-articles in total
-num_top = 200
+# There are 1603 / 18158 fellow-articles in total
+num_top = 18158
 
 
 def parse_names(fullname, has_firstname=True, reverse=False):
@@ -47,8 +47,12 @@ def parse_fellows():
 
 fellows = parse_fellows()
 def find_fellow(candidate, has_firstname=True, reverse=False, printstuff=True):
+    # hardcoded to skip E. Mercer. There is a fellow named L. Mercer,
+    # but we want to partially ignore these middle name letters in other cases...
     fellow_index = -1
     if not candidate:
+        return fellow_index
+    if candidate == "Mercer, Robert E.":
         return fellow_index
     name = parse_names(candidate,has_firstname=has_firstname, reverse=reverse)
     #print "Checking fellow: " + str(name)
@@ -65,7 +69,6 @@ def find_fellow(candidate, has_firstname=True, reverse=False, printstuff=True):
                 fellow_index = i
                 best_match = s
             if printstuff:
-                print "Found probable match:"
                 print names_to_str(fellow) + " MATCHES " + names_to_str(name) 
     return fellow_index 
 
@@ -126,12 +129,11 @@ def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, pr
         #if i > 10:
             #break
     #print "Fellows remaining: " + str(fellows)
-    print "Precision for " + score_name + ": " + str(fellow_articles) + " / " + str(num_top) + " = " + str(float(fellow_articles)/num_top)
-    print "DCG: " + str(dcg_at_k(top_v, fellow_indexes,num_top))
+    print score_name + ":                                                              \n " +\
+            "\tPrecision: " + str(fellow_articles) + " / " + str(num_top) + " = " + str(float(fellow_articles)/num_top)
+    dcg1,dcg2 = dcg_at_k(top_v, fellow_indexes,num_top)
+    print "\tDCG1: " + str(dcg1) + ", DCG2: " + str(dcg2)
 
-    return fellow_articles
-
-    return 
 
     if do_plot:
         top_nodes = [g.vertex(v) for v in top_v]
@@ -147,6 +149,8 @@ def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, pr
                 #edge_pen_width=gt.prop_to_size(ep, mi=0.5, ma=5),
                 vcmap=matplotlib.cm.gist_heat,
                 output="co-citation_betweenness.pdf") #vorder=vpa, 
+    
+    return fellow_articles
 
 def dcg_at_k(argsorted, fellows, k):
     """
@@ -160,8 +164,10 @@ def dcg_at_k(argsorted, fellows, k):
         rel[i] = fellow
 
     rel = np.asfarray(rel)
-    return rel[0] + np.sum(rel[1:] / np.log2(np.arange(2, rel.size + 1)))
-    # TODO: maybe implement exponential version with more emphasis on higher rankings 
+    dcg1 = rel[0] + np.sum(rel[1:] / np.log2(np.arange(2, rel.size + 1)))
+    # Maybe use exponential version with more emphasis on higher rankings:
+    dcg2 = np.sum(((2**rel)-1) / np.log2(np.arange(2, rel.size + 2)))
+    return dcg1,dcg2
     
 
 
@@ -172,11 +178,14 @@ def main():
     with open("vpa-between.pickle","rb") as f:
         vpa = np.asarray(pickle.load(f))
         geometric_mean = vpa.copy()
+        geometric_mean /= geometric_mean.max()
         vpa *= lp["betweenness"]
         
     g = gt.load_graph("AAN.graphml")
     in_degs = g.degree_property_map("in")
     vpa += in_degs.a*lp["indegree"]
+
+    #geometric_mean *= (in_degs.a/in_degs.a.max())
 
     eig, auths, hubs = gt.hits(g)
     vpa += auths.a*lp["hits"]
@@ -224,8 +233,11 @@ def main():
     with open("burst_list.pickle","rb") as f:
         ba = np.asarray(pickle.load(f))
     vpa += ba*lp["burst_weight"]
-    geometric_mean *= ba
+    geometric_mean *= (ba/ba.max())
     geometric_mean = np.sqrt(geometric_mean)
+    numzero = len(geometric_mean[geometric_mean == 0])
+    print "Number of zero values for geometric mean:" + str(numzero)
+
 
     tp = find_fellows_in_top_scores(vpa,"All with logit coefficients",num_top,printstuff=False)
 
@@ -235,9 +247,9 @@ def main():
         vpa = np.asarray(pickle.load(f))
         tp = find_fellows_in_top_scores(vpa,"betweenness",num_top,printstuff=False)
     
-    with open("vpa-closeness.pickle","rb") as f:
-        vpa = np.asarray(pickle.load(f))
-        tp = find_fellows_in_top_scores(vpa,"closeness",num_top,printstuff=False)
+    #with open("vpa-closeness.pickle","rb") as f:
+        #vpa = np.asarray(pickle.load(f))
+        #tp = find_fellows_in_top_scores(vpa,"closeness",num_top,printstuff=False)
 
 
     g = gt.load_graph("AAN.graphml")

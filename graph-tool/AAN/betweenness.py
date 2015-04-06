@@ -92,7 +92,7 @@ for i,v_i in enumerate(top_vp):
             fellow_articles += 1
             if fellow_index in fellows:
                 fellows.remove(fellow_index)
-    if len(fellows) == 1: # found all fellows except Tou Ng
+    if len(fellows) == 1:
         break
     print "###################################################"
     i += 1
