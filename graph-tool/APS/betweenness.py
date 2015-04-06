@@ -17,7 +17,7 @@ g = gt.load_graph("co-citation.graphml")
 # since the original order is preserved then.
 g_cg = gt.load_graph("APS.graphml") # load the original citation graph
 g.set_directed(False)
-labels = g.vertex_properties["label"]
+ids = g.vertex_properties["_graphml_vertex_id"]
 # in_degs = g.degree_property_map("in")
 print "Loaded a graph with " + str(g.num_vertices()) + " nodes"
 #g = gt.GraphView(g, vfilt=gt.label_largest_component(g))
@@ -52,7 +52,7 @@ with open("betweenness.csv","w+") as csv:
     #for i,v_i in enumerate(top_vp):
     for n in g_cg.vertices(): # loop original order from citation graph
         #v = g.vertex(v_i)
-        line = titles[n].strip().replace(",","") +\
+        line = ids[n].strip().replace(",","") +\
                 "," + str(i) + "," + str(vp[n]) + "\n"
         i += 1
         csv.write(line)

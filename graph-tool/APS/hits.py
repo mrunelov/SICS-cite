@@ -5,9 +5,7 @@ import numpy as np
 num_top = 10
 
 g = gt.load_graph("APS.graphml")
-g.list_properties() # TODO: check if node id can be used or needs to be rewritten as a separate attribute
-labels = g.vertex_properties["label"]
-
+ids = g.vertex_properties["_graphml_vertex_id"]
 
 print "Running HITS..."
 eig, auths, hubs = gt.hits(g) # Might take a while...
@@ -18,7 +16,7 @@ with open("hits.csv", "w+") as csv:
     csv.write("id,gt_index,hits_auth\n")
     i = 0
     for n in g.vertices():
-        line = labels[n].strip().replace(",","") +\
+        line = ids[n].strip().replace(",","") +\
                 "," + str(i) + "," + str(auths[n]) + "\n"
         i += 1
         csv.write(line)
