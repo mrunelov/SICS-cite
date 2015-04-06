@@ -1,14 +1,27 @@
 from backbone import get_Px, get_impact_graph
 from graphutils import get_gml_graph
 
-# TODO: see why the csv file doesn't have 18158 rows like the preprocessed
-# file AAN-preprocessed.xml, but only 18057 or so.
+# Handle APS and AAN differently.
+# Make use of the insertion order from graph-tool
+# since that's the only way to get constant lookup (can't use attributes for that)
 
 AAN_dir = '../AAN/'
 burstfile = AAN_dir + 'data/Burst-detection-analysis-AAN.csv'
 metrics_dir = '../graph-tool/AAN/'
 
 title_index_map = {}
+
+def create_csv_all_APS():
+	Px,ids = get_Px()
+
+	# TODO: create indegs, betweenness, hits csv files with graph-tool and create a map from id to gt_index
+
+	with open("all_APS.csv", "w+") as csv:
+		csv.write("id,progeny_size\n")
+		for i in range(len(Px)):
+			line = ids[i] + "," + str(Px[i]) + "\n"
+			csv.write(line)
+
 
 
 def create_csv_all_AAN():
@@ -41,8 +54,7 @@ def create_csv_all_AAN():
 			csv.write(line)
 
 
-def load_progeny_sizes(normalize_values=False):
-	G = get_gml_graph("AAN")
+def load_progeny_sizes_AAN(normalize_values=False):
 	Px_map = {}
 	Px,titles = get_Px()
         num_skipped = 0
@@ -101,14 +113,15 @@ def load_burst_map(normalize_values=False):
 firstcall = True
 def load_csv_as_map(filename, normalize_values=False):
 	"""
-	Loads a csv file with two values into a dictionary
+	Loads a csv file (title,gt_index,value) into a dictionary
+	that maps gt_index to value
 	"""
 	csv_map = {}
 	with open(filename, "r") as f:
                 next(f) # skip headers
 		for line in f:
 			title,key,value = line.strip().split(",")
-                        title_index_map[title] = key
+			# title_index_map[title] = key
 			csv_map[key] = float(value)
         if normalize_values:
             M = max(csv_map.values())
@@ -119,4 +132,5 @@ def load_csv_as_map(filename, normalize_values=False):
         firstcall = False
 	return csv_map
 
-create_csv_all_AAN()
+# create_csv_all_AAN()
+create_csv_all_APS()
