@@ -5,29 +5,21 @@ import numpy as np
 
 num_top = 10
 
-g = gt.load_graph("AAN.graphml") #"AAN-preprocessed.xml")
-#g.list_properties()
-# date exists in this map. see code in other AAN folder for inspiration
-# TODO: do HITS with different graph views. So, todo is: learn to filter on dates.
-
-titles = g.vertex_properties["title"]
-authors = g.vertex_properties["authors"]
+g = gt.load_graph("APS.graphml")
+g.list_properties() # TODO: check if node id can be used or needs to be rewritten as a separate attribute
+labels = g.vertex_properties["label"]
 
 
-#in_degs = g.degree_property_map("in")
-#top_in_degs = in_degs.a.argsort()[::-1]
-eig, auths, hubs = gt.hits(g)
-top_auths = auths.a.argsort()[::-1]#[:num_top]
-top_nodes = [g.vertex(v) for v in top_auths]
-#bg = gt.GraphView(g, vfilt=lambda v: v in top_auths)
+print "Running HITS..."
+eig, auths, hubs = gt.hits(g) # Might take a while...
+print "Done running HITS!"
 
+# write to csv file
 with open("hits.csv", "w+") as csv:
-    csv.write("title,gt_index,hits_auth\n")
-    #for x in top_auths:
+    csv.write("id,gt_index,hits_auth\n")
     i = 0
     for n in g.vertices():
-        #v = g.vertex(x)
-        line = titles[n].strip().replace(",","") +\
+        line = labels[n].strip().replace(",","") +\
                 "," + str(i) + "," + str(auths[n]) + "\n"
         i += 1
         csv.write(line)
