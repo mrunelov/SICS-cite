@@ -11,6 +11,9 @@ def logit():
     # log all progeny sizes, highly experimental
     #data["progeny_size"] = np.log2(data["progeny_size"])
     #data["progeny_size"] = data["progeny_size"].replace(float("-inf"),0)
+
+    for col in data: # normalize
+        data[col] /= data[col].max()
    
     #print data.head(n=5)
     #print data["gt_index"]

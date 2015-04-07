@@ -9,7 +9,7 @@ from sets import Set
 from logit import logit
 
 # There are 1603 / 18158 fellow-articles in total
-num_top = 18158
+num_top = 200
 
 
 def parse_names(fullname, has_firstname=True, reverse=False):
