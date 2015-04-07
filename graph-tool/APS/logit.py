@@ -6,10 +6,9 @@ import statsmodels.api as sm
 
 def logit():
     #cols = ["indegree","betweenness","hits","progeny_size","burst_weight"]
-    cols = ["indegree"]
+    cols = ["indegree","hits_auth","progeny_size"]
 
-    data = pd.read_csv("indegs.csv")
-    #data = pd.read_csv("all_AAN_with_fellows.csv")
+    data = pd.read_csv("all_APS.csv")
     # log all progeny sizes, highly experimental
     #data["progeny_size"] = np.log2(data["progeny_size"])
     #data["progeny_size"] = data["progeny_size"].replace(float("-inf"),0)
@@ -17,7 +16,7 @@ def logit():
     #print data.head(n=5)
     #print data["gt_index"]
     #data["intercept"] = 1.0
-    train_set = data.drop(["id","gt_index"],axis=1)
+    train_set = data.drop(["gt_index"],axis=1)
     # print train_set.describe()
 
     # Plot histograms
