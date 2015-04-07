@@ -19,7 +19,7 @@ G2.purge_vertices()
 #CC = gt.GraphView(CC,efilt=lambda e: False)
 #CC.purge_edges()
 #CC.set_directed(False)
-CC = gt.load_graph("tmp/co-citation-APS-20000.graphml") # load partly processed graph
+CC = gt.load_graph("tmp/co-citation-APS-80000.graphml") # load partly processed graph
 
 weight = CC.new_edge_property("int") #CC.edge_properties["weight"] 
 CC.edge_properties["weight"] = weight
@@ -28,10 +28,10 @@ N = str(CC.num_vertices())
 idx = -1
 for n in G2.vertices():
     idx += 1
-    if idx <= 20000:
+    if idx <= 80000:
         continue
     if idx%10000 == 0:
-        CC.save("tmp/co-citation-" + dataset + "-" + str(idx) + ".graphml")
+        CC.save("tmp/co-citation-" + dataset + "-tmp.graphml")
     out_edges = list(n.out_edges())
     if len(out_edges) <= 1:
         continue
