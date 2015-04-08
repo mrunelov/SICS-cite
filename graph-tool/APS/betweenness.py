@@ -11,16 +11,12 @@ Calculates betweenness centrality for a co-citation network and prints info and 
 
 num_top = 1000
 
-g = gt.load_graph("co-citation.graphml")
+g = gt.load_graph("/home/mrunelov/KTH/exjobb/SICS-cite/algorithms/tmp/co-citation-APS-tmp.graphml")
 
 # Only loaded to get correct vertex loop order. If we create the co-citation graph using co_citation.py this is not needed
 # since the original order is preserved then.
-g_cg = gt.load_graph("APS.graphml") # load the original citation graph
-g.set_directed(False)
 ids = g.vertex_properties["_graphml_vertex_id"]
-# in_degs = g.degree_property_map("in")
 print "Loaded a graph with " + str(g.num_vertices()) + " nodes"
-#g = gt.GraphView(g, vfilt=gt.label_largest_component(g))
 
 print "Calculating betweenness..."
 vp, ep = gt.betweenness(g) # This takes a while...
@@ -46,6 +42,7 @@ print "vpa pickled!"
     #vpa = np.asarray(pickle.load(f))
 
 # write betweenness along with corresponding id to a csv file
+g_cg = gt.load_graph("APS.graphml") # load the original citation graph
 with open("betweenness.csv","w+") as csv:
     csv.write("id,gt_index,betweenness\n")
     i = 0

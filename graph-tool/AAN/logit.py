@@ -13,12 +13,14 @@ def logit():
     #data["progeny_size"] = data["progeny_size"].replace(float("-inf"),0)
 
     for col in data: # normalize
+        if col == "gt_index":
+            continue
         data[col] /= data[col].max()
-   
+
     #print data.head(n=5)
     #print data["gt_index"]
     data["intercept"] = 1.0
-    train_set = data.drop(["fellow","gt_index"],axis=1)
+    train_set = data.drop(["fellow","gt_index","hits"],axis=1)
     # print train_set.describe()
 
     # Plot histograms
@@ -39,11 +41,15 @@ def logit():
     data["fellow_prediction"] = result.predict(train_set)
     print result.summary()
 
-    lp = result.params
     #print "Odds ratios:"
     #print np.exp(result.params)
 
-    return lp
+    #lp = result.params
+    #return lp
+    pred = data[["gt_index","fellow_prediction"]]
+    pred = pred.sort(["gt_index"])
+    print 
+    return pred["fellow_prediction"].values
 
 
     # lp = result.params
