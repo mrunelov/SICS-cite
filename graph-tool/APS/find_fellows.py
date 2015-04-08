@@ -39,21 +39,17 @@ def names_to_str(names):
 
 def parse_fellows():
     fellows = []
-    with open("fellows.txt","r") as f:
+    with open("APS-fellows.txt","r") as f:
         for line in f:
-            name = parse_names(line)
-            fellows.append(name)
+            names = parse_names(line,reverse=True)
+            fellows.append(names)
     return fellows
 
 
 fellows = parse_fellows()
 def find_fellow(candidate, has_firstname=True, reverse=False, printstuff=True):
-    # hardcoded to skip E. Mercer. There is a fellow named L. Mercer,
-    # but we want to partially ignore these middle name letters in other cases...
     fellow_index = -1
     if not candidate:
-        return fellow_index
-    if candidate == "Mercer, Robert E.":
         return fellow_index
     name = parse_names(candidate,has_firstname=has_firstname, reverse=reverse)
     #print "Checking fellow: " + str(name)
@@ -79,11 +75,26 @@ def sim(a, b):
     seq = difflib.SequenceMatcher(a=a.lower(), b=b.lower())
     return seq.ratio()
 
-with open("fellow_indexes.pickle", "rb") as f:
-    fellow_indexes = pickle.load(f)
+
+# TODO: create fellow_indexes of list of articles with fellows to speed up precision calculations
+
+def find_fellow_indexes():
+    g = gt.load_graph("/home/mrunelov/KTH/exjobb/SICS-cite/APS/data/APS.graphml")
+    authors = g.vertex_properties["authors"]
+    for n in g.vertices():
+        auths = authors[n].split(";")
+        for a in auths:
+            if find_fellow(a) != -1:
+                fellow_indexes.append(n)
+    with open("fellow_indexes.pickle","w+") as f:
+        pickle.dump(fellow_indexes,f)
+    return fellow_indexes
+
+#with open("fellow_indexes.pickle", "rb") as f:
+    #fellow_indexes = pickle.load(f)
 
 def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, printstuff=True):
-    g = gt.load_graph("AAN.graphml") #"AAN-preprocessed.xml")
+    g = gt.load_graph("APS.graphml") #"AAN-preprocessed.xml")
     titles = g.vertex_properties["title"]
     authors = g.vertex_properties["authors"]
     #print "Loaded a graph with " + str(g.num_vertices()) + " nodes"
@@ -139,22 +150,6 @@ def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, pr
     dcg1,dcg2 = dcg_at_k(top_v, fellow_indexes,num_top)
     print "\tDCG1: " + str(dcg1) + ", DCG2: " + str(dcg2)
 
-
-    if do_plot:
-        top_nodes = [g.vertex(v) for v in top_v]
-        bg = gt.GraphView(g, vfilt=lambda v: v in top_nodes)
-        print "Number of nodes after filtering: " + str(bg.num_vertices())
-
-        print "Calculating layout..." 
-        pos = gt.fruchterman_reingold_layout(bg,n_iter=10) 
-        print "Done calculating layout. Plotting."
-
-        gt.graph_draw(bg, pos=pos, #vertex_fill_color=vpa,
-                vertex_size=gt.prop_to_size(in_degs, mi=7, ma=25),
-                #edge_pen_width=gt.prop_to_size(ep, mi=0.5, ma=5),
-                vcmap=matplotlib.cm.gist_heat,
-                output="co-citation_betweenness.pdf") #vorder=vpa, 
-    
     return fellow_articles
 
 def dcg_at_k(argsorted, fellows, k):
@@ -177,14 +172,14 @@ def dcg_at_k(argsorted, fellows, k):
 
 def main():
     # build score array with logit coefficients
-    lra = logit()
+    #lra = logit()
     
-    geometric_mean = None
-    with open("vpa-between.pickle","rb") as f:
-        geometric_mean = np.asarray(pickle.load(f))
-        geometric_mean /= geometric_mean.max()
+    #geometric_mean = None
+    #with open("vpa-between.pickle","rb") as f:
+        #geometric_mean = np.asarray(pickle.load(f))
+        #geometric_mean /= geometric_mean.max()
         
-    g = gt.load_graph("AAN.graphml")
+    g = gt.load_graph("APS.graphml")
     in_degs_gt = g.degree_property_map("in")
     in_degs = in_degs_gt.a.astype("float")
     in_degs = in_degs/in_degs.max()
@@ -198,7 +193,7 @@ def main():
     ##Px = g.new_vertex_property("int")
     #bursts = g.new_vertex_property("double")
     #i = 1
-    #with open("all_AAN_with_fellows.csv", "r") as csv:
+    #with open("all_APS_with_fellows.csv", "r") as csv:
         #for line in csv:
             #print "Checking line " + str(i) + "\r",
             #values = line.split(",")
@@ -233,18 +228,18 @@ def main():
     with open("burst_list.pickle","rb") as f:
         ba = np.asarray(pickle.load(f))
         ba /= ba.max()
-    geometric_mean *= ba
-    geometric_mean = np.sqrt(geometric_mean)
-    numzero = len(geometric_mean[geometric_mean == 0])
-    print "Number of zero values for geometric mean:" + str(numzero)
+    #geometric_mean *= ba
+    #geometric_mean = np.sqrt(geometric_mean)
+    #numzero = len(geometric_mean[geometric_mean == 0])
+    #print "Number of zero values for geometric mean:" + str(numzero)
 
-    tp = find_fellows_in_top_scores(lra,"All with logit coefficients",num_top,printstuff=False)
+    #tp = find_fellows_in_top_scores(lra,"All with logit coefficients",num_top,printstuff=False)
 
     tp = find_fellows_in_top_scores(pxa, "progeny size", num_top, printstuff=False)
 
-    with open("vpa-between.pickle","rb") as f:
-        vpa = np.asarray(pickle.load(f))
-        tp = find_fellows_in_top_scores(vpa,"betweenness",num_top,printstuff=False)
+    #with open("vpa-between.pickle","rb") as f:
+        #vpa = np.asarray(pickle.load(f))
+        #tp = find_fellows_in_top_scores(vpa,"betweenness",num_top,printstuff=False)
     
     #with open("vpa-closeness.pickle","rb") as f:
         #vpa = np.asarray(pickle.load(f))
@@ -257,10 +252,12 @@ def main():
     tp = find_fellows_in_top_scores(auths.a,"HITS authority",num_top,printstuff=False)
 
     
-    tp = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst)",num_top,printstuff=False)
+    #tp = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst)",num_top,printstuff=False)
 
 if __name__ == "__main__":
-    main()
+    fi = find_fellow_indexes()
+    print fi[:10]
+    #main()
 
 #candidates = ["Kaplan", "Mercer", "Moore", "Tou Ng", "Palmer"]
 #for c in candidates:
