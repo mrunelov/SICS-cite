@@ -104,9 +104,10 @@ def parse_citations():
 					for node in [u,v]:
 						if node not in nodes and "title" in meta[node]:
 							nodes.add(node)
-							label = meta[node]["title"]
+							title = meta[node]["title"].replace('"',"'").replace("<","").replace(">","") # replace " with '
 							date = meta[node]["date"]
-							attrs = ["label", label, "date", date]
+							authors = ";".join(meta[node]["authors"])
+							attrs = ["title", title, "date", date, "authors", authors]
 							write_node(node, graph, attrs)
 							num_nodes += 1
 				else:
@@ -145,6 +146,16 @@ def parse_meta():
 					meta_entry["title"] = data["title"]["value"]
 					if "date" in data:
 						meta_entry["date"] = data["date"]
+					authors = []
+					if "authors" in data and data["authors"]:
+						for author in data["authors"]:
+							if not author:
+								continue
+							if "firstname" not in data["authors"]:
+								authors.append(author["name"])
+							else:
+								authors.append(author["surname"] + "," + author["firstname"])
+					meta_entry["authors"] = authors
 					meta[data["id"]] = meta_entry
 					
 	print("Parsed " + str(len(meta)) + " abstracts.")
@@ -156,7 +167,8 @@ def parse_meta():
 def write_headers(graphfile):
 	with open(graphfile,'w+') as graph:
 		graph.write(gml.get_header())
-		graph.write(gml.get_attr("label", "label", "string", "node"))
+		graph.write(gml.get_attr("title", "title", "string", "node"))
+		graph.write(gml.get_attr("authors", "authors", "string", "node"))
 		graph.write(gml.get_attr("date", "date", "string", "node"))
 		graph.write(gml.get_startgraph())
 
@@ -173,6 +185,6 @@ def write_edges(edges, graph):
 	graph.write(gml.get_footer())
 	return num_edges
 
-#parse_citations()
+parse_citations()
 #write_meta_CSV()
 #preprocess_CSV()
