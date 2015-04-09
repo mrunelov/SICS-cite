@@ -9,9 +9,9 @@ from sets import Set
 Calculates betweenness centrality for a co-citation network and prints info and plots the top results
 """
 
-num_top = 1000
+#num_top = 1000
 
-g = gt.load_graph("/home/mrunelov/KTH/exjobb/SICS-cite/algorithms/tmp/co-citation-APS-tmp.graphml")
+g = gt.load_graph("/home/mrunelov/KTH/exjobb/SICS-cite/algorithms/co-citation-APS.graphml")
 
 # Only loaded to get correct vertex loop order. If we create the co-citation graph using co_citation.py this is not needed
 # since the original order is preserved then.

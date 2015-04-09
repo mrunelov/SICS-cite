@@ -56,11 +56,11 @@ def find_fellow(candidate, has_firstname=True, reverse=False, printstuff=True):
     best_match = 0.0
     for i,fellow in enumerate(fellows):
         s = sim(fellow[1],name[-1])
-        if s >= 0.7: 
+        if s >= 0.8: 
             if has_firstname: # check first name if available
                 s2 = sim(fellow[0],name[0])
                 #print "Checked first names: " + fellow[0] + ", " + name[0] + " with similarity " + str(s2)
-                if s2 < 0.7:
+                if s2 < 0.8:
                     continue
             if s > best_match:
                 fellow_index = i
@@ -76,19 +76,32 @@ def sim(a, b):
     return seq.ratio()
 
 
-# TODO: create fellow_indexes of list of articles with fellows to speed up precision calculations
-
 def find_fellow_indexes():
     g = gt.load_graph("/home/mrunelov/KTH/exjobb/SICS-cite/APS/data/APS.graphml")
     authors = g.vertex_properties["authors"]
+    fellow_indexes = []
+    idx = 0
+    N = str(G.num_vertices())
     for n in g.vertices():
+        print "Looping node " + str(idx+1) + " / " + N + " with " + str(len(out_edges)) + " references" + "                \r",
         auths = authors[n].split(";")
         for a in auths:
             if find_fellow(a) != -1:
                 fellow_indexes.append(n)
+                break
+        idx += 1
     with open("fellow_indexes.pickle","w+") as f:
         pickle.dump(fellow_indexes,f)
     return fellow_indexes
+
+# TODO:loop through fellow indexes and sort out some of the incorrect values,mostly chinese. 
+#Some in the beginning and "Hui Li" vs "Shui Lai", "Hudong Chen" vs "Hung Cheng" and other short names.
+# "Jing Shi" vs "Jirong Shi", "Ulrich Eckern" vs "Ulrich Becker", "Jie Liu" vs "Ji Li"
+
+# "Uri Feldman" vs "Yuri Feldman" OBS: Might be same person...  
+# "Michael Brunger" vs "Michel Baranger"
+
+
 
 #with open("fellow_indexes.pickle", "rb") as f:
     #fellow_indexes = pickle.load(f)
