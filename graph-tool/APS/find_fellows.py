@@ -95,12 +95,20 @@ def find_fellow_indexes():
     return fellow_indexes
 
 # TODO:loop through fellow indexes and sort out some of the incorrect values,mostly chinese. 
+# Note: the fellow name is on the left, the matched name from the dataset is on the right.
 #Some in the beginning and "Hui Li" vs "Shui Lai", "Hudong Chen" vs "Hung Cheng" and other short names.
 # "Jing Shi" vs "Jirong Shi", "Ulrich Eckern" vs "Ulrich Becker", "Jie Liu" vs "Ji Li"
 
 # "Uri Feldman" vs "Yuri Feldman" OBS: Might be same person...  
 # "Michael Brunger" vs "Michel Baranger"
-
+# "Michael Brunger" vs "Michael Brunner"
+# "Michael Brenner" vs "Michael Brunner"
+# "Robert H. Blick" vs "Robert Blinc"
+# "Jin Wang" vs "Jian Wang" 
+# "Jiang Zhao" vs "Qiang Zhao"
+# "Robert H. Romer" vs "Robert Gomer"
+# "Robert D. Maurer" vs "Robert J. Maurer"
+# "Fuqiang Wang" vs "Quiang Wang"
 
 
 #with open("fellow_indexes.pickle", "rb") as f:
