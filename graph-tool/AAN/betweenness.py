@@ -12,7 +12,7 @@ Calculates betweenness centrality for a co-citation network and prints info and 
 
 num_top = 1000
 
-g = gt.load_graph("co-citation.graphml")
+g = gt.load_graph("co-citation-AAN.graphml")
 g_cg = gt.load_graph("AAN.graphml") # load the original citation graph
 g.set_directed(False)
 titles = g.vertex_properties["title"]

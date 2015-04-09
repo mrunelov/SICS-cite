@@ -11,11 +11,17 @@ def logit():
     # log all progeny sizes, highly experimental
     #data["progeny_size"] = np.log2(data["progeny_size"])
     #data["progeny_size"] = data["progeny_size"].replace(float("-inf"),0)
+    
+    #print data.corr()
+
 
     for col in data: # normalize
         if col == "gt_index":
             continue
         data[col] /= data[col].max()
+    
+    #data["geo_mean"] = np.sqrt(data["betweenness"]*data["burst_weight"])
+    print data.corr()
 
     #print data.head(n=5)
     #print data["gt_index"]
