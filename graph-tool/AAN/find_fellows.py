@@ -6,11 +6,11 @@ import matplotlib
 import pickle
 import numpy as np
 from sets import Set
-from logit import logit
+from logit import logit,OLS
 
 # There are 1603 / 18158 fellow-articles in total
 # logit has prob below 0.8 at 15 and below 0.7 at 22
-num_top = 500
+num_top = 20
 
 
 def parse_names(fullname, has_firstname=True, reverse=False):
@@ -177,7 +177,7 @@ def dcg_at_k(argsorted, fellows, k):
 
 def main():
     # build score array with logit coefficients
-    lra = logit()
+    lra = OLS() #logit()
     
     geometric_mean = None
     with open("vpa-between.pickle","rb") as f:
@@ -235,8 +235,8 @@ def main():
         ba /= ba.max()
     geometric_mean *= ba
     geometric_mean = np.sqrt(geometric_mean)
-    numzero = len(geometric_mean[geometric_mean == 0])
-    print "Number of zero values for geometric mean:" + str(numzero)
+    #numzero = len(geometric_mean[geometric_mean == 0])
+    #print "Number of zero values for geometric mean:" + str(numzero)
 
     tp = find_fellows_in_top_scores(lra,"All with logit coefficients",num_top,printstuff=False)
 
