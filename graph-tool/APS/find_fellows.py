@@ -7,23 +7,42 @@ import pickle
 import numpy as np
 from sets import Set
 from logit import logit
+from collections import defaultdict
 
 # There are 1603 / 18158 fellow-articles in total
 # logit has prob below 0.8 at 15 and below 0.7 at 22
 num_top = 500
 
 
+#prefixes = ["von","di","de","af"]
 def parse_names(fullname, has_firstname=True, reverse=False):
-    if fullname.count(",") == 1:
+    fullname = fullname.rstrip()
+    if fullname.count(",") > 0:
         names = fullname.split(",")
+        names = [n.strip() for n in names]
     else:
-        names = fullname.split(" ")
-    names[-1] = names[-1].strip() # remove newline
+        if fullname.count(" ") == 1:
+            names = fullname.split(" ")
+        else:
+            # put "C." and such in first name, rest in lastname
+            tmp_names = fullname.split(" ")
+            dot_index = 1
+            for name in tmp_names[1:-1]:
+                if len(name) == 2 and name[1] == ".":
+                    dot_index += 1
+                else:
+                    break
+            names = []
+            firstname = " ".join(tmp_names[:dot_index])
+            lastname = " ".join(tmp_names[dot_index:])
+            names.append(firstname)
+            names.append(lastname) 
+            #print "Firstname: " + firstname + ", Lastname: " + lastname
     if reverse: # first name is last, put it first
         r_i = len(names) - 1
-        while r_i >= 0 and len(names[r_i]) <= 2: # move past e.g. "C." and such
+        while r_i >= 0 and len(names[r_i]) <= 2:
             r_i -= 1
-        names = names[r_i:] + names[:r_i]
+        names = names[r_i:] + names[:r_i][::-1]
     for name in names:
         name = name.replace(",","")
     if has_firstname:
@@ -38,56 +57,87 @@ def names_to_str(names):
     return " ".join(names)
 
 def parse_fellows():
+    fellow_map = defaultdict(list) # maps first letter of last name to list of fellows
     fellows = []
     with open("APS-fellows.txt","r") as f:
         for line in f:
             names = parse_names(line,reverse=True)
+            fellow_map[names[-1][0]].append(names)
             fellows.append(names)
-    return fellows
+    return fellow_map,fellows
 
 
-fellows = parse_fellows()
+fellow_map,fellows = parse_fellows()
+#non_fellows = ["Yuri Feldman", "Jirong Shi", "Ulrich Becker", "Ji Li", "Michel Baranger", "Michael Brunner", "Robert Blinc", "Jian Wang", "Qiang Zhao", "Robert Gomer", "Robert J. Maurer", "Quiang Wang", "Baiwen Li", "Xiaoguang Wang", "George Sterman", "Richard C. Greene", "Michael Unger", "Y. Okimoto"]
 def find_fellow(candidate, has_firstname=True, reverse=False, printstuff=True):
     fellow_index = -1
-    if not candidate:
-        return fellow_index
+    if len(candidate) <= 4:
+        return -1
+    #if candidate in non_fellows:
+        #return fellow_index
     name = parse_names(candidate,has_firstname=has_firstname, reverse=reverse)
+    if name[-1] == "":
+        return -1 
     #print "Checking fellow: " + str(name)
-    best_match = 0.0
-    for i,fellow in enumerate(fellows):
+    best_match = 0.9
+    firstchar = name[-1][0]
+    if firstchar.isupper():
+        to_check = fellow_map[firstchar]
+    else:
+        #print "Checking author that does not start with a capital letter: " + names_to_str(name)
+        to_check = fellows
+    for i,fellow in enumerate(to_check):
         s = sim(fellow[1],name[-1])
-        if s >= 0.8: 
-            if has_firstname: # check first name if available
-                s2 = sim(fellow[0],name[0])
-                #print "Checked first names: " + fellow[0] + ", " + name[0] + " with similarity " + str(s2)
-                if s2 < 0.8:
+        if s > best_match:
+            #if has_firstname: # check first name if available
+            if len(name[0]) == 1 or name[0][1] == ".": # avoid comparing e.g. "M." to "Martin"
+                if name[0][0].lower() != fellow[0][0].lower():
                     continue
-            if s > best_match:
-                fellow_index = i
-                best_match = s
+            else:
+                s2 = sim(fellow[0],name[0])
+                #print "Checked first names: " + fellow[0] + ", " + name[0] + "(" + names_to_str(name) + ") with similarity " + str(s2) 
+                if s2 < 0.8: # TOOD: maybe use 0.9 with "M." and such handled above
+                    continue
+            if s == 1.0: # if we're kinda sure, return mid-loop
+                #if printstuff:
+                    #print names_to_str(fellow) + " MATCHES " + names_to_str(name) + "  (" + str(s) + ")"
+                return i
+            fellow_index = i
+            best_match = s
+                    
             if printstuff:
-                print names_to_str(fellow) + " MATCHES " + names_to_str(name) 
+                print names_to_str(fellow) + " MATCHES " + names_to_str(name) + "  (" + str(s) + ")"
     return fellow_index 
 
 
 def sim(a, b):
-    #print "COMPARING " + a + " AND " + b
     seq = difflib.SequenceMatcher(a=a.lower(), b=b.lower())
     return seq.ratio()
 
 
 def find_fellow_indexes():
-    g = gt.load_graph("/home/mrunelov/KTH/exjobb/SICS-cite/APS/data/APS.graphml")
-    authors = g.vertex_properties["authors"]
+    #g = gt.load_graph("/home/mrunelov/KTH/exjobb/SICS-cite/APS/data/APS.graphml")
+    #authors = g.vertex_properties["authors"]
+    #author_array = []
+    #for n in g.vertices():
+        #author_array.append(authors[n])
+    #with open("author_array.pickle", "wb") as f:
+        #pickle.dump(author_array,f)
+        #print "pickled numpy array of authors"
+    with open("author_array.pickle","rb") as f:
+        author_array = pickle.load(f)
     fellow_indexes = []
     idx = 0
-    N = str(G.num_vertices())
-    for n in g.vertices():
-        print "Looping node " + str(idx+1) + " / " + N + " with " + str(len(out_edges)) + " references" + "                \r",
-        auths = authors[n].split(";")
+    for i,authors in enumerate(author_array):
+        auths = authors.split(";")
+        #print "Looping node " + str(idx+1) + "\r",
+        if i%1000 == 0:
+            print "-----------------------------------------"
+            print "---------- Looping node " + str(i) + " -----------"
+            print "-----------------------------------------"
         for a in auths:
             if find_fellow(a) != -1:
-                fellow_indexes.append(n)
+                fellow_indexes.append(i)
                 break
         idx += 1
     with open("fellow_indexes.pickle","w+") as f:
@@ -109,6 +159,18 @@ def find_fellow_indexes():
 # "Robert H. Romer" vs "Robert Gomer"
 # "Robert D. Maurer" vs "Robert J. Maurer"
 # "Fuqiang Wang" vs "Quiang Wang"
+# "Baowen Li" vs "Baiwen Li"
+# "Xiaogang Wang" vs "Xiaoguang Wang"
+# "George I. Stegeman" vs "George Sterman"
+# "Richard L. Greene" vs "Richard C. Greene"
+# "Michael Brunger" vs "Michael Unger"
+
+# Yuko Okamoto" vs "Y. Okimoto"
+# "Dongqi Li" vs "Dong li"
+# Sarma vs Sharma (couldn't see more)
+# "John M. Martinis" vs "J. L. Martins"
+# "Hudong Chen" vs "Dong Chen"
+# Robert Woodhouse Crompton vs Compton (couldn't see more)
 
 
 #with open("fellow_indexes.pickle", "rb") as f:
