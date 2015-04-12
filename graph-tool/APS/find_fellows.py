@@ -79,7 +79,7 @@ def find_fellow(candidate, has_firstname=True, reverse=False, printstuff=True):
     if name[-1] == "":
         return -1 
     #print "Checking fellow: " + str(name)
-    best_match = 0.9
+    best_match = 0.91 # should keep high to minimize false positives
     firstchar = name[-1][0]
     if firstchar.isupper():
         to_check = fellow_map[firstchar]
@@ -90,14 +90,17 @@ def find_fellow(candidate, has_firstname=True, reverse=False, printstuff=True):
         s = sim(fellow[1],name[-1])
         if s > best_match:
             #if has_firstname: # check first name if available
-            if len(name[0]) == 1 or name[0][1] == ".": # avoid comparing e.g. "M." to "Martin"
-                if name[0][0].lower() != fellow[0][0].lower():
-                    continue
-            else:
-                s2 = sim(fellow[0],name[0])
-                #print "Checked first names: " + fellow[0] + ", " + name[0] + "(" + names_to_str(name) + ") with similarity " + str(s2) 
-                if s2 < 0.8: # TOOD: maybe use 0.9 with "M." and such handled above
-                    continue
+            if name[0]:
+                # TODO: find some way to match e.g. "Michael C." with "Michael Clark" and such, without
+                # creating new false negatives (missing more)
+                if len(name[0]) == 1 or name[0][1] == ".": # avoid comparing e.g. "M." to "Martin"
+                    if name[0][0].lower() != fellow[0][0].lower():
+                        continue
+                else:
+                    s2 = sim(fellow[0],name[0])
+                    #print "Checked first names: " + fellow[0] + ", " + name[0] + "(" + names_to_str(name) + ") with similarity " + str(s2) 
+                    if s2 < 0.8: # TOOD: maybe use 0.9 with "M." and such handled above
+                        continue
             if s == 1.0: # if we're kinda sure, return mid-loop
                 #if printstuff:
                     #print names_to_str(fellow) + " MATCHES " + names_to_str(name) + "  (" + str(s) + ")"
@@ -171,7 +174,24 @@ def find_fellow_indexes():
 # "John M. Martinis" vs "J. L. Martins"
 # "Hudong Chen" vs "Dong Chen"
 # Robert Woodhouse Crompton vs Compton (couldn't see more)
-
+# "James Valles" vs "J. W. F. Valle"
+# Piero Martin" vs "P. C. Marin"
+# "Mark A. Johnson" vs "M. Jonson"
+# "Jack R. Leibowitz" vs "J. L. Lebowitz"
+# "Gianfranco Vidali" vs "G. Vidal"
+#  "Stephen Martin" vs "S. M. Matin"
+# "Jeffrey Reimer" "J. N. Reimers"
+# "Paul Heinrich Soding" vs "P. Sding"
+# "Kevin F. McCarty" vs "K. T. McCarthy" 
+# "Josep John Barrett" vs "J. Barrette"
+# "John C. Mather" vs "J. V. Maher"
+# "Kwok-Tsang Cheng" vs "K. Cheung"
+# "Marcus Muller" vs "M. A. Mueller"
+# "Howard Henry Wieman" vs "H. Weman"
+# "Davies" vs "Davis"
+# "Dana Zachery Anderson" vs "D. R. Andersson"
+# "J. Michael Brown" vs "J. C. Browne"
+# "Gabriel Lorimer" vs "G. Mller"
 
 #with open("fellow_indexes.pickle", "rb") as f:
     #fellow_indexes = pickle.load(f)
