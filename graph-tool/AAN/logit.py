@@ -21,7 +21,7 @@ def get_data():
 
     data["combo5"] = data["progeny_size"] + data["betweenness"]
     
-    #print data.corr()
+    print data.corr()
     #data["intercept"] = 1.0
     train_set = data.drop(["fellow","gt_index"], axis=1)
     train_set = sm.add_constant(train_set)

@@ -9,9 +9,7 @@ from sets import Set
 from logit import logit
 from collections import defaultdict
 
-# There are 1603 / 18158 fellow-articles in total
-# logit has prob below 0.8 at 15 and below 0.7 at 22
-num_top = 500
+num_top = 20
 
 
 #prefixes = ["von","di","de","af"]
@@ -59,9 +57,10 @@ def names_to_str(names):
 def parse_fellows():
     fellow_map = defaultdict(list) # maps first letter of last name to list of fellows
     fellows = []
-    with open("APS-fellows.txt","r") as f:
+    #with open("APS-fellows.txt","r") as f:
+    with open("boltzmann.txt","r") as f:
         for line in f:
-            names = parse_names(line,reverse=True)
+            names = parse_names(line,reverse=False) # True for fellows!
             fellow_map[names[-1][0]].append(names)
             fellows.append(names)
     return fellow_map,fellows
@@ -70,6 +69,9 @@ def parse_fellows():
 fellow_map,fellows = parse_fellows()
 #non_fellows = ["Yuri Feldman", "Jirong Shi", "Ulrich Becker", "Ji Li", "Michel Baranger", "Michael Brunner", "Robert Blinc", "Jian Wang", "Qiang Zhao", "Robert Gomer", "Robert J. Maurer", "Quiang Wang", "Baiwen Li", "Xiaoguang Wang", "George Sterman", "Richard C. Greene", "Michael Unger", "Y. Okimoto"]
 def find_fellow(candidate, has_firstname=True, reverse=False, printstuff=True):
+    if candidate == "Elisheva Cohen":
+        print "---------------------------------Skipping Elisheva"
+        return -1
     fellow_index = -1
     if len(candidate) <= 4:
         return -1
@@ -79,7 +81,7 @@ def find_fellow(candidate, has_firstname=True, reverse=False, printstuff=True):
     if name[-1] == "":
         return -1 
     #print "Checking fellow: " + str(name)
-    best_match = 0.91 # should keep high to minimize false positives
+    best_match = 0.96 # should keep high to minimize false positives
     firstchar = name[-1][0]
     if firstchar.isupper():
         to_check = fellow_map[firstchar]
@@ -87,27 +89,42 @@ def find_fellow(candidate, has_firstname=True, reverse=False, printstuff=True):
         #print "Checking author that does not start with a capital letter: " + names_to_str(name)
         to_check = fellows
     for i,fellow in enumerate(to_check):
+        # TODO: maybe force check that last char is correct. Spelling errors in the middle is common, and 
+        # different last letters often indicate that it's a different person, e.g. "s"-suffixes
         s = sim(fellow[1],name[-1])
         if s > best_match:
             #if has_firstname: # check first name if available
             if name[0]:
-                # TODO: find some way to match e.g. "Michael C." with "Michael Clark" and such, without
-                # creating new false negatives (missing more)
-                if len(name[0]) == 1 or name[0][1] == ".": # avoid comparing e.g. "M." to "Martin"
-                    if name[0][0].lower() != fellow[0][0].lower():
-                        continue
-                else:
-                    s2 = sim(fellow[0],name[0])
-                    #print "Checked first names: " + fellow[0] + ", " + name[0] + "(" + names_to_str(name) + ") with similarity " + str(s2) 
-                    if s2 < 0.8: # TOOD: maybe use 0.9 with "M." and such handled above
-                        continue
+                not_fellow = False
+                firstnames = name[0].split(" ") # this logic can be moved to the parsing step, we're doing it back and forth now, not very effective
+                fellow_firstnames = fellow[0].split(" ")
+                shortest = min(len(firstnames),len(fellow_firstnames))
+                for i in range(shortest):
+                    if len(firstnames[i]) == 1 or firstnames[i][1] == "." or len(fellow_firstnames[i]) == 1 or fellow_firstnames[i][1] == ".":
+                        if fellow_firstnames[i][0].lower() != firstnames[i][0].lower():
+                            not_fellow = True
+                            break
+                    else:
+                        s2 = sim(fellow_firstnames[i],firstnames[i])
+                        if s2 < 0.9:
+                            not_fellow = True
+                            break
+                if not_fellow:
+                    continue
+                #if len(name[0]) == 1 or name[0][1] == ".": # avoid comparing e.g. "M." to "Martin"
+                    #if name[0][0].lower() != fellow[0][0].lower():
+                        #continue
+                #else:
+                    #s2 = sim(fellow[0],name[0])
+                    ##print "Checked first names: " + fellow[0] + ", " + name[0] + "(" + names_to_str(name) + ") with similarity " + str(s2) 
+                    #if s2 < 0.9: # TOOD: maybe use 0.9 with "M." and such handled above
+                        #continue
             if s == 1.0: # if we're kinda sure, return mid-loop
-                #if printstuff:
-                    #print names_to_str(fellow) + " MATCHES " + names_to_str(name) + "  (" + str(s) + ")"
+                if printstuff:
+                    print names_to_str(fellow) + " MATCHES " + names_to_str(name) + "  (" + str(s) + ")"
                 return i
             fellow_index = i
             best_match = s
-                    
             if printstuff:
                 print names_to_str(fellow) + " MATCHES " + names_to_str(name) + "  (" + str(s) + ")"
     return fellow_index 
@@ -134,16 +151,17 @@ def find_fellow_indexes():
     for i,authors in enumerate(author_array):
         auths = authors.split(";")
         #print "Looping node " + str(idx+1) + "\r",
-        if i%1000 == 0:
-            print "-----------------------------------------"
-            print "---------- Looping node " + str(i) + " -----------"
-            print "-----------------------------------------"
+        #if i%1000 == 0:
+            #print "-----------------------------------------"
+            #print "---------- Looping node " + str(i) + " -----------"
+            #print "-----------------------------------------"
         for a in auths:
             if find_fellow(a) != -1:
                 fellow_indexes.append(i)
                 break
         idx += 1
-    with open("fellow_indexes.pickle","w+") as f:
+    #with open("fellow_indexes.pickle","w+") as f:
+    with open("boltzmann_indexes.pickle","w+") as f:
         pickle.dump(fellow_indexes,f)
     return fellow_indexes
 
@@ -193,14 +211,35 @@ def find_fellow_indexes():
 # "J. Michael Brown" vs "J. C. Browne"
 # "Gabriel Lorimer" vs "G. Mller"
 
+# "David Gershoni" vs "David Gershon"
+# Kirill Menikov vs Kirill Melnikov
+# Jose Luis Martins vs J. Martin
+# John Lister vs J.D. Litser
+# John Carlstrom vs Johan Carlstrm
+# Peter D Zimmerman vs P. H. Zimmerman
+# Peter J. Schmid vs P. H. Schmidt
+# James M. Matthews vs J. A. D. Matthew
+# Robert A. Johnson vs R. L. Johnston
+# J. Douglas McDonald J. R. MacDonald
+# Edward CHarles Blucher vs E. Bucher
+# Dana Zachery Anderson vs D. R. Andersson
+# David Attwood vs D. K. Atwood
+# ...
+# ...
+# ...and many more. Should make less accepting. And check all "A. B. C." when available
+
+
+
 #with open("fellow_indexes.pickle", "rb") as f:
-    #fellow_indexes = pickle.load(f)
+with open("boltzmann_indexes.pickle", "rb") as f:
+    fellow_indexes = pickle.load(f)
 
 def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, printstuff=True):
-    g = gt.load_graph("APS.graphml") #"AAN-preprocessed.xml")
-    titles = g.vertex_properties["title"]
-    authors = g.vertex_properties["authors"]
-    #print "Loaded a graph with " + str(g.num_vertices()) + " nodes"
+    #g = gt.load_graph("APS.graphml") #"AAN-preprocessed.xml")
+    if printstuff:
+        titles = g.vertex_properties["title"]
+        authors = g.vertex_properties["authors"]
+        #print "Loaded a graph with " + str(g.num_vertices()) + " nodes"
 
     top_v = scores.argsort()[::-1][:num_top]
     #if score_name == "indegree":
@@ -228,8 +267,8 @@ def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, pr
             else:
                 print "No fellow authors"
             print score_name + ": " + str(scores[v_i])
-        auths = authors[v]
-        auths = auths.split(";")
+        #auths = authors[v]
+        #auths = auths.split(";")
         #if score_name == "All with logit coefficients" and scores[v_i] < 0.7:
             #print "logit prob below 0.8 at index " + str(i)
         
@@ -282,7 +321,8 @@ def main():
         #geometric_mean = np.asarray(pickle.load(f))
         #geometric_mean /= geometric_mean.max()
         
-    g = gt.load_graph("APS.graphml")
+    #g = gt.load_graph("APS.graphml")
+    #g = gt.load_graph("/home/mrunelov/KTH/exjobb/SICS-cite/APS/data/APS.graphml")
     in_degs_gt = g.degree_property_map("in")
     in_degs = in_degs_gt.a.astype("float")
     in_degs = in_degs/in_degs.max()
@@ -328,9 +368,9 @@ def main():
         pxa = np.asarray(pickle.load(f)).astype("float")
         pxa /= pxa.max()
 
-    with open("burst_list.pickle","rb") as f:
-        ba = np.asarray(pickle.load(f))
-        ba /= ba.max()
+    #with open("burst_list.pickle","rb") as f:
+        #ba = np.asarray(pickle.load(f))
+        #ba /= ba.max()
     #geometric_mean *= ba
     #geometric_mean = np.sqrt(geometric_mean)
     #numzero = len(geometric_mean[geometric_mean == 0])
@@ -340,9 +380,13 @@ def main():
 
     tp = find_fellows_in_top_scores(pxa, "progeny size", num_top, printstuff=False)
 
-    #with open("vpa-between.pickle","rb") as f:
-        #vpa = np.asarray(pickle.load(f))
-        #tp = find_fellows_in_top_scores(vpa,"betweenness",num_top,printstuff=False)
+    with open("vpa-between2.pickle","rb") as f:
+        vpa = np.asarray(pickle.load(f))
+        vpa /= vpa.max()
+        tp = find_fellows_in_top_scores(vpa,"betweenness",num_top,printstuff=False)
+
+
+    #tp = find_fellows_in_top_scores(vpa + pxa,"betweenness + progeny size",num_top,printstuff=False)
     
     #with open("vpa-closeness.pickle","rb") as f:
         #vpa = np.asarray(pickle.load(f))
@@ -351,19 +395,17 @@ def main():
 
     tp = find_fellows_in_top_scores(in_degs,"indegree",num_top,printstuff=False)
 
-    eig, auths, hubs = gt.hits(g)
-    tp = find_fellows_in_top_scores(auths.a,"HITS authority",num_top,printstuff=False)
+    #eig, auths, hubs = gt.hits(g)
+    #tp = find_fellows_in_top_scores(auths.a,"HITS authority",num_top,printstuff=False)
 
     
     #tp = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst)",num_top,printstuff=False)
 
 if __name__ == "__main__":
-    fi = find_fellow_indexes()
-    print fi[:10]
-    #main()
+    #fi = find_fellow_indexes()
+    g = gt.load_graph("/home/mrunelov/KTH/exjobb/SICS-cite/APS/data/APS.graphml")
+    main()
 
 #candidates = ["Kaplan", "Mercer", "Moore", "Tou Ng", "Palmer"]
 #for c in candidates:
     #is_fellow(c,has_firstname=False)
-
-
