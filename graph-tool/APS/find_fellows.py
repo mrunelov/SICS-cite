@@ -9,7 +9,7 @@ from sets import Set
 from logit import logit
 from collections import defaultdict
 
-num_top = 20
+num_top = 1000
 
 
 #prefixes = ["von","di","de","af"]
@@ -314,7 +314,7 @@ def dcg_at_k(argsorted, fellows, k):
 
 def main():
     # build score array with logit coefficients
-    #lra = logit()
+    lra = logit()
     
     #geometric_mean = None
     #with open("vpa-between.pickle","rb") as f:
@@ -376,7 +376,7 @@ def main():
     #numzero = len(geometric_mean[geometric_mean == 0])
     #print "Number of zero values for geometric mean:" + str(numzero)
 
-    #tp = find_fellows_in_top_scores(lra,"All with logit coefficients",num_top,printstuff=False)
+    tp = find_fellows_in_top_scores(lra,"All with logit coefficients",num_top,printstuff=False)
 
     tp = find_fellows_in_top_scores(pxa, "progeny size", num_top, printstuff=False)
 
