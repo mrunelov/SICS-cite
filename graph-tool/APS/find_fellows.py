@@ -8,8 +8,9 @@ import numpy as np
 from sets import Set
 from logit import logit
 from collections import defaultdict
+from plotter import plotxy
 
-num_top = 1000
+num_top = 100
 
 
 #prefixes = ["von","di","de","af"]
@@ -57,8 +58,8 @@ def names_to_str(names):
 def parse_fellows():
     fellow_map = defaultdict(list) # maps first letter of last name to list of fellows
     fellows = []
-    #with open("APS-fellows.txt","r") as f:
-    with open("boltzmann.txt","r") as f:
+    with open("APS-fellows.txt","r") as f:
+    #with open("boltzmann.txt","r") as f:
         for line in f:
             names = parse_names(line,reverse=False) # True for fellows!
             fellow_map[names[-1][0]].append(names)
@@ -230,8 +231,8 @@ def find_fellow_indexes():
 
 
 
-#with open("fellow_indexes.pickle", "rb") as f:
-with open("boltzmann_indexes.pickle", "rb") as f:
+with open("fellow_indexes.pickle", "rb") as f:
+#with open("boltzmann_indexes.pickle", "rb") as f:
     fellow_indexes = pickle.load(f)
 
 def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, printstuff=True):
@@ -316,7 +317,7 @@ def main():
     # build score array with logit coefficients
     lra = logit()
     
-    #geometric_mean = None
+    geometric_mean = None
     #with open("vpa-between.pickle","rb") as f:
         #geometric_mean = np.asarray(pickle.load(f))
         #geometric_mean /= geometric_mean.max()
@@ -329,48 +330,35 @@ def main():
     #geometric_mean *= in_degs
 
 
-    # Generate Px and burst pickles with correct graph-tool ordering
-    # (need to match csv titles to graph-tool titles)
-    # Unfortunately this is O(n^2) since there's not O(1) attribute lookup in graph-tool
-    #titles = g.vertex_properties["title"]
-    ##Px = g.new_vertex_property("int")
-    #bursts = g.new_vertex_property("double")
-    #i = 1
-    #with open("all_APS_with_fellows.csv", "r") as csv:
-        #for line in csv:
-            #print "Checking line " + str(i) + "\r",
-            #values = line.split(",")
-            #title = values[0]
-            ##px = values[5]
-            #burst = values[4]
-            #for v in g.vertices():
-                #if title == titles[v]:
-                    ##Px[v] = px
-                    #bursts[v] = burst
-            #i += 1
 
-    #Px_list = []
-    #burst_list = []
-    #for px in Px.a:
-        #Px_list.append(px)
-    #with open("Px_list.pickle","wb") as f:
-        #pickle.dump(Px_list,f)
-    #print "wrote Px_list to pickle!"
-
-    #for b in bursts.a:
-        #burst_list.append(b)
-    #with open("burst_list.pickle","wb") as f:
+    #burst_list = [0]*len(in_degs)
+    #with open("all_APS_with_fellows.csv", "r") as f:
+        #next(f) # skip header
+        #for line in f:
+            #values = line.strip().split(",")
+            #gt_index = int(values[0])
+            #burst_weight = values[4]
+            #burst_list[gt_index] = burst_weight
+    #with open("burst_list.pickle", "wb") as f:         
         #pickle.dump(burst_list,f)
-    #print "wrote burst_list to pickle!"
 
+    with open("burst_list.pickle", "rb") as f:
+        bla = np.asarray(pickle.load(f)).astype("float")
+        bla /= bla.max()
+
+
+    with open("vpa-between2.pickle","rb") as f:
+        ba = np.asarray(pickle.load(f))
+        ba /= ba.max()
+
+    geometric_mean = bla
+    geometric_mean *= ba
+    geometric_mean = np.sqrt(geometric_mean)
 
     with open("Px_list.pickle","rb") as f:
         pxa = np.asarray(pickle.load(f)).astype("float")
-        pxa /= pxa.max()
+        pxa_n = pxa/pxa.max()
 
-    #with open("burst_list.pickle","rb") as f:
-        #ba = np.asarray(pickle.load(f))
-        #ba /= ba.max()
     #geometric_mean *= ba
     #geometric_mean = np.sqrt(geometric_mean)
     #numzero = len(geometric_mean[geometric_mean == 0])
@@ -378,15 +366,17 @@ def main():
 
     tp = find_fellows_in_top_scores(lra,"All with logit coefficients",num_top,printstuff=False)
 
-    tp = find_fellows_in_top_scores(pxa, "progeny size", num_top, printstuff=False)
+    tp = find_fellows_in_top_scores(pxa_n, "progeny size", num_top, printstuff=False)
 
-    with open("vpa-between2.pickle","rb") as f:
-        vpa = np.asarray(pickle.load(f))
-        vpa /= vpa.max()
-        tp = find_fellows_in_top_scores(vpa,"betweenness",num_top,printstuff=False)
+    tp = find_fellows_in_top_scores(ba,"betweenness",num_top,printstuff=False)
+    
+    tp = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst)",num_top,printstuff=False)
 
+    geometric_mean *= np.sqrt(in_degs)
+    tp = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst*indegs)",num_top,printstuff=False)
 
-    #tp = find_fellows_in_top_scores(vpa + pxa,"betweenness + progeny size",num_top,printstuff=False)
+    tp = find_fellows_in_top_scores(ba + pxa_n + in_degs,"betweenness + progeny size + cc",num_top,printstuff=False)
+    
     
     #with open("vpa-closeness.pickle","rb") as f:
         #vpa = np.asarray(pickle.load(f))
@@ -394,6 +384,10 @@ def main():
 
 
     tp = find_fellows_in_top_scores(in_degs,"indegree",num_top,printstuff=False)
+
+    pr = gt.pagerank(g,damping=0.5)
+    tp = find_fellows_in_top_scores(pr.a,"PageRank alpha 0.5",num_top,printstuff=False)
+    #plotxy(pxa,pr.a,"Backbone Progeny Size","PageRank (alpha=0.5)")
 
     #eig, auths, hubs = gt.hits(g)
     #tp = find_fellows_in_top_scores(auths.a,"HITS authority",num_top,printstuff=False)
