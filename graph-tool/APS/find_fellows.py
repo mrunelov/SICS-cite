@@ -9,8 +9,9 @@ from sets import Set
 from logit import logit
 from collections import defaultdict
 from plotter import plotxy
+from datetime import datetime
 
-num_top = 100
+num_top = 200
 
 
 #prefixes = ["von","di","de","af"]
@@ -236,22 +237,27 @@ with open("fellow_indexes.pickle", "rb") as f:
     fellow_indexes = pickle.load(f)
 
 def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, printstuff=True):
-    #g = gt.load_graph("APS.graphml") #"AAN-preprocessed.xml")
+    cutoff = datetime(1960,1,1)
+
     if printstuff:
         titles = g.vertex_properties["title"]
         authors = g.vertex_properties["authors"]
         #print "Loaded a graph with " + str(g.num_vertices()) + " nodes"
 
-    top_v = scores.argsort()[::-1][:num_top]
+    top_v = scores.argsort()[::-1]#[:num_top]
     #if score_name == "indegree":
         #print [scores[x] for x in top_v[:100]]
     fellows = Set(fellow_indexes)
     fellow_articles = 0
     #fellows = Set(range(32))
-    for i,v_i in enumerate(top_v):
+    i = 0
+    for v_i in top_v:
         sys.stderr.write("looping node " + str(i+1) + " / " + str(num_top) + "\r")
         sys.stderr.flush()
         v = g.vertex(v_i)
+        date = datetime.strptime(dates[v],dateformat)
+        if date < cutoff:
+            continue
         found_fellow = False
         if v_i in fellows:
             fellow_articles += 1
@@ -283,10 +289,10 @@ def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, pr
                 #fellow_articles += 1
                 #if fellow_index in fellows:
                     #fellows.remove(fellow_index)
-        #if len(fellows) == 1: # found all fellows except Tou Ng
-            #break
-        #if i > 10:
-            #break
+        if i == num_top:
+            break
+        i += 1
+
     #print "Fellows remaining: " + str(fellows)
     print score_name + ":                                                              \n " +\
             "\tPrecision: " + str(fellow_articles) + " / " + str(num_top) + " = " + str(float(fellow_articles)/num_top)
@@ -395,9 +401,19 @@ def main():
     
     #tp = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst)",num_top,printstuff=False)
 
+def pr_curves():
+    prs = range(0,1001,10)
+    for precision in prs:
+        pass
+        # TODO: plot precision and recall curves for all metrics!
+        # TODO2: choose a cutoff. maybe 1970 since only about 2k are left out (of 160k)
+
+
 if __name__ == "__main__":
     #fi = find_fellow_indexes()
     g = gt.load_graph("/home/mrunelov/KTH/exjobb/SICS-cite/APS/data/APS.graphml")
+    dates = g.vertex_properties["date"]
+    dateformat = "%Y-%m-%d"
     main()
 
 #candidates = ["Kaplan", "Mercer", "Moore", "Tou Ng", "Palmer"]
