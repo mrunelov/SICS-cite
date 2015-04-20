@@ -9,9 +9,9 @@ def get_data():
     #data["progeny_size"] = np.log2(data["progeny_size"])
     #data["progeny_size"] = data["progeny_size"].replace(float("-inf"),0)
     
-    #data["combo"] = data["progeny_size"]*data["burst_weight"]*data["indegree"]
-    #data["combo2"] = data["progeny_size"]*data["burst_weight"]
-    #data["combo3"] = data["progeny_size"]*data["progeny_size"]
+    data["combo"] = data["progeny_size"]*data["burst_weight"]*data["indegree"]
+    data["combo2"] = data["progeny_size"]*data["burst_weight"]
+    data["combo3"] = data["progeny_size"]*data["progeny_size"]
     #data["comb4"] = data["burst_weight"]*data["burst_weight"]
     
     for col in data: # normalize
@@ -23,7 +23,7 @@ def get_data():
     
     print data.corr()
     #data["intercept"] = 1.0
-    train_set = data.drop(["fellow","gt_index"], axis=1)
+    train_set = data.drop(["fellow","gt_index","hits"], axis=1)
     train_set = sm.add_constant(train_set)
 
     return train_set, data

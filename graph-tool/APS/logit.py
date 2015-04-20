@@ -25,7 +25,7 @@ def get_data():
     return df 
 
 
-def logit():
+def logit(traincol="fellow"):
     #cols = ["indegree","betweenness","hits","progeny_size","burst_weight"]
     data = get_data()
 
@@ -39,7 +39,7 @@ def logit():
     #data["progeny_size"] = data["progeny_size"].replace(float("-inf"),0)
     #data["combo1"] = data["progeny_size"]*data["progeny_size"]
     #data["combo2"] = data["betweenness"]*data["burst_weight"]
-    data["combo3"] = data["betweenness"]*data["burst_weight"]*data["indegree"]
+    #data["combo3"] = data["betweenness"]*data["burst_weight"]*data["indegree"]
 
     #data_sorted = data.sort(["fellow"],ascending=False)
     #print data_sorted.head(n=20)
@@ -48,9 +48,14 @@ def logit():
     #print data.head(n=5)
     #print data["gt_index"]
     #data["intercept"] = 1.0
-    train_set = data.drop(["gt_index","fellow","hits_auth"],axis=1)
+    to_drop = ["gt_index","fellow","hits_auth"]
+    if traincol == "fellow":
+        to_drop.append("boltzmann")
+    elif traincol == "boltzmann":
+        to_drop.append("fellow")
+    train_set = data.drop(to_drop,axis=1)
 
-    #print train_set.corr()
+    print train_set.corr()
     #print train_set.describe()
 
     # Plot histograms
@@ -66,10 +71,10 @@ def logit():
         #plt.ylabel("count")
         #plt.show()
      
-    logit = sm.Logit(data["fellow"],train_set) #data[train_cols])
+    logit = sm.Logit(data[traincol],train_set) #data[train_cols])
     result = logit.fit()
     data["fellow_prediction"] = result.predict(train_set)
-    print result.summary()
+    #print result.summary()
 
     #lp = result.params
     #print "Odds ratios:"
