@@ -12,7 +12,11 @@ from plotter import plotxy
 from datetime import datetime
 import matplotlib.pyplot as plt
 
-num_top = 527130
+num_top = 100
+
+with open("fellow_indexes.pickle", "rb") as f:
+#with open("boltzmann_indexes.pickle", "rb") as f:
+    fellow_indexes = pickle.load(f)
 
 #prefixes = ["von","di","de","af"]
 def parse_names(fullname, has_firstname=True, reverse=False):
@@ -226,15 +230,7 @@ def find_fellow_indexes():
 # Edward CHarles Blucher vs E. Bucher
 # Dana Zachery Anderson vs D. R. Andersson
 # David Attwood vs D. K. Atwood
-# ...
-# ...
-# ...and many more. Should make less accepting. And check all "A. B. C." when available
-
-
-
-#with open("fellow_indexes.pickle", "rb") as f:
-with open("boltzmann_indexes.pickle", "rb") as f:
-    fellow_indexes = pickle.load(f)
+#...
 
 def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, printstuff=True):
     cutoff = datetime(1800,1,1)
@@ -253,6 +249,7 @@ def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, pr
     fellow_articles = 0
     #fellows = Set(range(32))
     i = 0
+    result = []
     for v_i in top_v:
         sys.stderr.write("looping node " + str(i+1) + " / " + str(num_top) + "\r")
         sys.stderr.flush()
@@ -260,6 +257,8 @@ def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, pr
         date = datetime.strptime(dates[v],dateformat)
         if date < cutoff:
             continue
+        else:
+            result.append(v_i)
         found_fellow = False
         if v_i in fellows:
             fellow_articles += 1
@@ -300,23 +299,20 @@ def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, pr
     #print "Fellows remaining: " + str(fellows)
     print score_name + ":                                                              \n " +\
             "\tPrecision: " + str(fellow_articles) + " / " + str(num_top) + " = " + str(float(fellow_articles)/num_top)
-    #dcg1,dcg2 = dcg_at_k(top_v, fellow_indexes,num_top)
-    # TODO: make dcgs work with date skipping
-    #print "\tDCG1: " + str(dcg1) + ", DCG2: " + str(dcg2)
+    dcg1,dcg2 = dcg_at_k(result, fellow_indexes,num_top)
+    print "\tDCG1: " + str(dcg1) + ", DCG2: " + str(dcg2)
 
     #return fellow_articles
-    return prs
+    return prs # return precisions and recalls for every 10 articles
 
 def dcg_at_k(argsorted, fellows, k):
     """
     Calcualate the discounted cumulative gain given
     an array of each article's score position and the gold standard (fellow list)
     """
-
     rel = [0]*len(argsorted)
     for i in range(k):
-        fellow = 1 if argsorted[i] in fellows else 0
-        rel[i] = fellow
+        rel[i] = 1 if argsorted[i] in fellows else 0
 
     rel = np.asfarray(rel)
     dcg1 = rel[0] + np.sum(rel[1:] / np.log2(np.arange(2, rel.size + 1)))
@@ -334,7 +330,6 @@ def main():
         #geometric_mean = np.asarray(pickle.load(f))
         #geometric_mean /= geometric_mean.max()
         
-    #g = gt.load_graph("APS.graphml")
     #g = gt.load_graph("/home/mrunelov/KTH/exjobb/SICS-cite/APS/data/APS.graphml")
     in_degs_gt = g.degree_property_map("in")
     in_degs = in_degs_gt.a.astype("float")
@@ -428,7 +423,7 @@ def pr_curves():
     plots[1] = find_fellows_in_top_scores(ba,"betweenness",num_top,printstuff=False)
     plots[2] = find_fellows_in_top_scores(pxa_n, "progeny size", num_top, printstuff=False)
     plots[3] = find_fellows_in_top_scores(lra,"All with logit coefficients",num_top,printstuff=False)
-    plots[4] = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst)",num_top,printstuff=False)
+    plots[4] = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst)",num_top,printstuff=True)
     geometric_mean *= np.sqrt(in_degs)
     plots[5] = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst*indegs)",num_top,printstuff=False)
     pr = gt.pagerank(g,damping=0.5)
@@ -451,7 +446,7 @@ def pr_curves():
         for p in plots:
             ys = [point[1] for point in p]
             plt.plot(xs,ys)
-        plt.legend(['Indegree', 'Betweenness', 'Backbone progeny size', 'Logit', 'sqrt(betweenness*burstness)','sqrt(betweenness*burstness*indegree)','PageRank, alpha=0.5'], loc='lower right')
+        plt.legend(['Indegree', 'Betweenness', 'Backbone progeny size', 'Logit', 'sqrt(betweenness*burstness)','sqrt(betweenness*burstness*indegree)','PageRank, alpha=0.5'], loc='upper right')
         plt.show()
 
 if __name__ == "__main__":
