@@ -10,6 +10,7 @@ from collections import Counter, defaultdict
 import itertools
 import pickle
 import os.path
+import os.remove
 from graphutils import get_gml_graph
 
 def sim_read_helper(G, a, b):
@@ -128,7 +129,7 @@ def di_triangles():
 	pass
 
 
-def calculate_all_impacts(G):
+def calculate_all_impacts(G,postfix=""):
 	"""
 	Calculates the impact of a parent on a child for all edges
 	Time complexity:
@@ -157,7 +158,7 @@ def calculate_all_impacts(G):
 	nx.set_edge_attributes(G, 'impact', impacts)
 	print
 	print("Done calculating all impacts.")
-	with open('pickles/' + dataset + '-with-impacts-second.pickle', 'wb') as f:    
+	with open('pickles/' + dataset + '-with-impacts-' + postfix + '.pickle', 'wb') as f:  
 		nx.write_gpickle(G, f)
 	return G
 
@@ -175,7 +176,7 @@ def get_impact(edge):
 	return edge[2]['impact']
 
 
-def build_backbone_graph(G):
+def build_backbone_graph(G,postfix=""):
 	print("Generating backbone from impact graph...")
 	backbone = []
 	for n in G.nodes_iter():
@@ -195,9 +196,9 @@ def build_backbone_graph(G):
 			G2_titles[n] = titles[n]
 	nx.set_node_attributes(G2,'title', G2_titles)
 	
-	with open('pickles/' + dataset + '-backbone-second.pickle', 'wb') as f:    
+	with open('pickles/' + dataset + '-backbone-' + postfix + '.pickle', 'wb') as f:    
 		nx.write_gpickle(G2, f)
-	nx.write_graphml(G2, '../' + dataset + '/data/' + dataset + '-backbone.graphml')
+	#nx.write_graphml(G2, '../' + dataset + '/data/' + dataset + '-backbone.graphml')
 
 	return G2
 
@@ -239,7 +240,7 @@ def normalize_impacts(G):
 			#G.edge[e]['impact'] = e['impact']/impact_sum 
 
 
-def calculate_Px(G):
+def calculate_Px(G,postfix=""):
 	"""
 	Calculates and pickles Px (progeny sizes) for a graph.
 	Returns the node order that was pickled
@@ -260,7 +261,7 @@ def calculate_Px(G):
 
 	print("Done calculating Px.")
 	Px_with_ids = zip(Px,ids)
-	with open('pickles/' + dataset + '-backbone-Px-second.pickle', 'wb') as f:
+	with open('pickles/' + dataset + '-backbone-Px-' + postfix + '.pickle', 'wb') as f:
 		pickle.dump(Px_with_ids,f)
                 print "Pickled " + dataset + "-backbone-Px.pickle"
 	return Px,ids
@@ -273,12 +274,19 @@ def get_subset_list(foomap, keys):
 
 def main():
 	G = get_gml_graph(dataset)
-	with open("second.pickle","rb") as f:
-		second = pickle.load(f)
-	G_half = G.subgraph(second) # filter away half the graph
-	G_half = calculate_all_impacts(G_half)
-	G2_half = build_backbone_graph(G_half)	
-	calculate_Px(G2_half)	
+
+	for i in range(1,11):
+		for x in ["first","second"]:
+			with open("pickles/" + x + str(i) + ".pickle","rb") as f:
+				half = pickle.load(f)
+			G_half = G.subgraph(half) # filter away half the graph
+			postfix = x + str(i)
+			G_half = calculate_all_impacts(G_half,postfix=postfix)
+			G2_half = build_backbone_graph(G_half,postfix=postfix)
+			calculate_Px(G2_half,postfix=postfix)
+			# remove temp files, we just need Px
+			os.remove('pickles/' + dataset + '-with-impacts-' + postfix + '.pickle')
+			os.remove('pickles/' + dataset + '-backbone-' + postfix + '.pickle')
 
 	#G = get_impact_graph(G)
 	#normalize_impacts(G)
@@ -339,5 +347,7 @@ def main():
 
 	if do_plot:
 		plotxy(backbone_indegs,Px)
+
+
 if __name__ == "__main__":
     main()
