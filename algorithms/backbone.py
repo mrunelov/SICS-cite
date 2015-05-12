@@ -157,7 +157,7 @@ def calculate_all_impacts(G):
 	nx.set_edge_attributes(G, 'impact', impacts)
 	print
 	print("Done calculating all impacts.")
-	with open('pickles/' + dataset + '-with-impacts.pickle', 'wb') as f:    
+	with open('pickles/' + dataset + '-with-impacts-second.pickle', 'wb') as f:    
 		nx.write_gpickle(G, f)
 	return G
 
@@ -195,7 +195,7 @@ def build_backbone_graph(G):
 			G2_titles[n] = titles[n]
 	nx.set_node_attributes(G2,'title', G2_titles)
 	
-	with open('pickles/' + dataset + '-backbone.pickle', 'wb') as f:    
+	with open('pickles/' + dataset + '-backbone-second.pickle', 'wb') as f:    
 		nx.write_gpickle(G2, f)
 	nx.write_graphml(G2, '../' + dataset + '/data/' + dataset + '-backbone.graphml')
 
@@ -248,20 +248,22 @@ def calculate_Px(G):
 		raise ValueError("No graph provided for calculate_Px")
 	Px = []
 	#nodes = []
-        titles = []
+	#titles = []
+	ids = []
 	print("Calculating Px...")
 	for n in G.nodes_iter():
 		px = len(nx.ancestors(G,n))
 		Px.append(px)
+		ids.append(n)
 		#nodes.append(n)
-                titles.append(G.node[n]["title"])
+                #titles.append(G.node[n]["title"])
 
 	print("Done calculating Px.")
-	Px_with_titles = zip(Px,titles)
-	with open('pickles/' + dataset + '-backbone-Px.pickle', 'wb') as f:
-		pickle.dump(Px_with_titles,f)
+	Px_with_ids = zip(Px,ids)
+	with open('pickles/' + dataset + '-backbone-Px-second.pickle', 'wb') as f:
+		pickle.dump(Px_with_ids,f)
                 print "Pickled " + dataset + "-backbone-Px.pickle"
-	return Px,titles
+	return Px,ids
 
 def get_subset_list(foomap, keys):
 	subset = []
@@ -270,11 +272,16 @@ def get_subset_list(foomap, keys):
 	return subset
 
 def main():
-	#G = None
 	G = get_gml_graph(dataset)
-	G = get_impact_graph(G)
+	with open("second.pickle","rb") as f:
+		second = pickle.load(f)
+	G_half = G.subgraph(second) # filter away half the graph
+	G_half = calculate_all_impacts(G_half)
+	G2_half = build_backbone_graph(G_half)	
+	calculate_Px(G2_half)	
+
+	#G = get_impact_graph(G)
 	#normalize_impacts(G)
-	G2 = get_backbone_graph(G) 
 	
 	#pr = nx.pagerank(G, alpha=0.5, max_iter=10)
 	#top_pr = Counter(pr).most_common(10) # top 10 pageranks
@@ -287,7 +294,7 @@ def main():
 	#top_indegrees = Counter(indegrees).most_common(1000) # top 10 pageranks
 	#closeness = nx.closeness_centrality(G)
 	#betweenness = nx.betweenness_centrality(G)
-	Px,nodes = get_Px(G2)
+	#Px,nodes = get_Px(G2)
 	#indegrees = get_indegrees(G)
 	#backbone_indegs = get_subset_list(indegrees,nodes)
 
