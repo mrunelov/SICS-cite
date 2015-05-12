@@ -3,24 +3,35 @@ import matplotlib.pyplot as plt
 import numpy as np
 import statsmodels.api as sm
 
-
-def logit():
-    cols = ["indegree","betweenness","hits","progeny_size","burst_weight"]
-
+def get_data():
     data = pd.read_csv("all_AAN_with_fellows.csv")
     # log all progeny sizes, highly experimental
     #data["progeny_size"] = np.log2(data["progeny_size"])
     #data["progeny_size"] = data["progeny_size"].replace(float("-inf"),0)
-
+    
+    #data["combo"] = data["progeny_size"]*data["burst_weight"]*data["indegree"]
+    #data["combo2"] = data["progeny_size"]*data["burst_weight"]
+    #data["combo3"] = data["progeny_size"]*data["progeny_size"]
+    #data["comb4"] = data["burst_weight"]*data["burst_weight"]
+    #data["combo5"] = data["progeny_size"]*data["betweenness"]
+    #data["combo6"] = data["progeny_size"]*data["betweenness"]*data["indegree"]
+    #data["combo6"] = data["progeny_size"]*data["betweenness"]*data["indegree"]*data["burst_weight"]
+    
     for col in data: # normalize
         if col == "gt_index":
             continue
         data[col] /= data[col].max()
 
-    #print data.head(n=5)
-    #print data["gt_index"]
-    data["intercept"] = 1.0
-    train_set = data.drop(["fellow","gt_index","hits"],axis=1)
+    
+    #data["intercept"] = 1.0
+    train_set = data.drop(["fellow","gt_index","hits"], axis=1)
+    print train_set.corr()
+    train_set = sm.add_constant(train_set)
+
+    return train_set, data
+
+def logit():
+    train_set,data = get_data()
     # print train_set.describe()
 
     # Plot histograms
@@ -69,5 +80,20 @@ def logit():
     # plt.plot(data["betweenness"],data["fellow_prediction"],".",color="y",alpha=.4)
     # plt.show()
 
+def OLS():
+    train_set, data = get_data()
+    model = sm.OLS(data["fellow"], train_set)
+    result = model.fit()
+    data["fellow_prediction"] = result.predict(train_set)
+
+    pred = data[["gt_index","fellow_prediction"]]
+    pred = pred.sort(["gt_index"])
+    return pred["fellow_prediction"].values
+
+
+
 if __name__ == "__main__":
     logit()
+    #OLS()
+
+

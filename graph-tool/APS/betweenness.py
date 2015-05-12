@@ -9,14 +9,21 @@ from sets import Set
 Calculates betweenness centrality for a co-citation network and prints info and plots the top results
 """
 
-num_top = 1000
+#num_top = 1000
 
-g = gt.load_graph("/home/mrunelov/KTH/exjobb/SICS-cite/algorithms/tmp/co-citation-APS-tmp.graphml")
+g = gt.load_graph("/home/mrunelov/KTH/exjobb/SICS-cite/algorithms/co-citation-APS.graphml")
+print "Loaded a graph with " + str(g.num_vertices()) + " nodes and " + str(g.num_edges()) + " edges."
 
+g2 = gt.load_graph("APS.graphml")
 # Only loaded to get correct vertex loop order. If we create the co-citation graph using co_citation.py this is not needed
 # since the original order is preserved then.
+g = gt.GraphView(g, vfilt=lambda v:g2.vertex(v).in_degree() > 20)
+g.purge_vertices()
+print "Pruned g, now with " + str(g.num_vertices()) + " nodes and " + str(g.num_edges()) + " edges."
+
+
 ids = g.vertex_properties["_graphml_vertex_id"]
-print "Loaded a graph with " + str(g.num_vertices()) + " nodes"
+
 
 print "Calculating betweenness..."
 vp, ep = gt.betweenness(g) # This takes a while...

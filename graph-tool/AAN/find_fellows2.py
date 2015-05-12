@@ -8,17 +8,11 @@ import numpy as np
 from sets import Set
 from logit import logit
 from collections import defaultdict
-from plotter import plotxy
 from datetime import datetime
 import matplotlib.pyplot as plt
 
-num_top = 100
+num_top = 200
 
-with open("fellow_indexes.pickle", "rb") as f:
-#with open("boltzmann_indexes.pickle", "rb") as f:
-    fellow_indexes = pickle.load(f)
-
-#prefixes = ["von","di","de","af"]
 def parse_names(fullname, has_firstname=True, reverse=False):
     fullname = fullname.rstrip()
     if fullname.count(",") > 0:
@@ -63,7 +57,7 @@ def names_to_str(names):
 def parse_fellows():
     fellow_map = defaultdict(list) # maps first letter of last name to list of fellows
     fellows = []
-    with open("APS-fellows.txt","r") as f:
+    with open("fellows.txt","r") as f:
     #with open("boltzmann.txt","r") as f:
         for line in f:
             names = parse_names(line,reverse=False) # True for fellows!
@@ -75,9 +69,6 @@ def parse_fellows():
 fellow_map,fellows = parse_fellows()
 #non_fellows = ["Yuri Feldman", "Jirong Shi", "Ulrich Becker", "Ji Li", "Michel Baranger", "Michael Brunner", "Robert Blinc", "Jian Wang", "Qiang Zhao", "Robert Gomer", "Robert J. Maurer", "Quiang Wang", "Baiwen Li", "Xiaoguang Wang", "George Sterman", "Richard C. Greene", "Michael Unger", "Y. Okimoto"]
 def find_fellow(candidate, has_firstname=True, reverse=False, printstuff=True):
-    if candidate == "Elisheva Cohen":
-        print "---------------------------------Skipping Elisheva"
-        return -1
     fellow_index = -1
     if len(candidate) <= 4:
         return -1
@@ -87,7 +78,7 @@ def find_fellow(candidate, has_firstname=True, reverse=False, printstuff=True):
     if name[-1] == "":
         return -1 
     #print "Checking fellow: " + str(name)
-    best_match = 0.96 # should keep high to minimize false positives
+    best_match = 0.94 # should keep high to minimize false positives
     firstchar = name[-1][0]
     if firstchar.isupper():
         to_check = fellow_map[firstchar]
@@ -166,74 +157,18 @@ def find_fellow_indexes():
                 fellow_indexes.append(i)
                 break
         idx += 1
-    #with open("fellow_indexes.pickle","w+") as f:
-    with open("boltzmann_indexes.pickle","w+") as f:
+    with open("fellow_indexes2.pickle","w+") as f:
+    #with open("boltzmann_indexes.pickle","w+") as f:
         pickle.dump(fellow_indexes,f)
     return fellow_indexes
 
-# TODO:loop through fellow indexes and sort out some of the incorrect values,mostly chinese. 
-# Note: the fellow name is on the left, the matched name from the dataset is on the right.
-#Some in the beginning and "Hui Li" vs "Shui Lai", "Hudong Chen" vs "Hung Cheng" and other short names.
-# "Jing Shi" vs "Jirong Shi", "Ulrich Eckern" vs "Ulrich Becker", "Jie Liu" vs "Ji Li"
 
-# "Uri Feldman" vs "Yuri Feldman" OBS: Might be same person...  
-# "Michael Brunger" vs "Michel Baranger"
-# "Michael Brunger" vs "Michael Brunner"
-# "Michael Brenner" vs "Michael Brunner"
-# "Robert H. Blick" vs "Robert Blinc"
-# "Jin Wang" vs "Jian Wang" 
-# "Jiang Zhao" vs "Qiang Zhao"
-# "Robert H. Romer" vs "Robert Gomer"
-# "Robert D. Maurer" vs "Robert J. Maurer"
-# "Fuqiang Wang" vs "Quiang Wang"
-# "Baowen Li" vs "Baiwen Li"
-# "Xiaogang Wang" vs "Xiaoguang Wang"
-# "George I. Stegeman" vs "George Sterman"
-# "Richard L. Greene" vs "Richard C. Greene"
-# "Michael Brunger" vs "Michael Unger"
-
-# Yuko Okamoto" vs "Y. Okimoto"
-# "Dongqi Li" vs "Dong li"
-# Sarma vs Sharma (couldn't see more)
-# "John M. Martinis" vs "J. L. Martins"
-# "Hudong Chen" vs "Dong Chen"
-# Robert Woodhouse Crompton vs Compton (couldn't see more)
-# "James Valles" vs "J. W. F. Valle"
-# Piero Martin" vs "P. C. Marin"
-# "Mark A. Johnson" vs "M. Jonson"
-# "Jack R. Leibowitz" vs "J. L. Lebowitz"
-# "Gianfranco Vidali" vs "G. Vidal"
-#  "Stephen Martin" vs "S. M. Matin"
-# "Jeffrey Reimer" "J. N. Reimers"
-# "Paul Heinrich Soding" vs "P. Sding"
-# "Kevin F. McCarty" vs "K. T. McCarthy" 
-# "Josep John Barrett" vs "J. Barrette"
-# "John C. Mather" vs "J. V. Maher"
-# "Kwok-Tsang Cheng" vs "K. Cheung"
-# "Marcus Muller" vs "M. A. Mueller"
-# "Howard Henry Wieman" vs "H. Weman"
-# "Davies" vs "Davis"
-# "Dana Zachery Anderson" vs "D. R. Andersson"
-# "J. Michael Brown" vs "J. C. Browne"
-# "Gabriel Lorimer" vs "G. Mller"
-
-# "David Gershoni" vs "David Gershon"
-# Kirill Menikov vs Kirill Melnikov
-# Jose Luis Martins vs J. Martin
-# John Lister vs J.D. Litser
-# John Carlstrom vs Johan Carlstrm
-# Peter D Zimmerman vs P. H. Zimmerman
-# Peter J. Schmid vs P. H. Schmidt
-# James M. Matthews vs J. A. D. Matthew
-# Robert A. Johnson vs R. L. Johnston
-# J. Douglas McDonald J. R. MacDonald
-# Edward CHarles Blucher vs E. Bucher
-# Dana Zachery Anderson vs D. R. Andersson
-# David Attwood vs D. K. Atwood
-#...
+with open("fellow_indexes2.pickle", "rb") as f:
+#with open("boltzmann_indexes.pickle", "rb") as f:
+    fellow_indexes = pickle.load(f)
 
 def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, printstuff=True):
-    cutoff = datetime(1800,1,1)
+    cutoff = datetime(2000,1,1)
     prs = [] # precision and recall every 10 results
     total = len(fellow_indexes)
 
@@ -249,7 +184,6 @@ def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, pr
     fellow_articles = 0
     #fellows = Set(range(32))
     i = 0
-    result = []
     for v_i in top_v:
         sys.stderr.write("looping node " + str(i+1) + " / " + str(num_top) + "\r")
         sys.stderr.flush()
@@ -257,8 +191,6 @@ def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, pr
         date = datetime.strptime(dates[v],dateformat)
         if date < cutoff:
             continue
-        else:
-            result.append(v_i)
         found_fellow = False
         if v_i in fellows:
             fellow_articles += 1
@@ -282,7 +214,7 @@ def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, pr
         
         if not fellows:
             print "ALL FELLOW ARTICLES FOUND after " + str(i) + " articles"
-            break
+            #break
         #found_fellow = False
         #for a in auths:
             #fellow_index = find_fellow(a,reverse=True,printstuff=printstuff)
@@ -299,20 +231,23 @@ def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, pr
     #print "Fellows remaining: " + str(fellows)
     print score_name + ":                                                              \n " +\
             "\tPrecision: " + str(fellow_articles) + " / " + str(num_top) + " = " + str(float(fellow_articles)/num_top)
-    dcg1,dcg2 = dcg_at_k(result, fellow_indexes,num_top)
-    print "\tDCG1: " + str(dcg1) + ", DCG2: " + str(dcg2)
+    #dcg1,dcg2 = dcg_at_k(top_v, fellow_indexes,num_top)
+    # TODO: make dcgs work with date skipping
+    #print "\tDCG1: " + str(dcg1) + ", DCG2: " + str(dcg2)
 
     #return fellow_articles
-    return prs # return precisions and recalls for every 10 articles
+    return prs
 
 def dcg_at_k(argsorted, fellows, k):
     """
     Calcualate the discounted cumulative gain given
     an array of each article's score position and the gold standard (fellow list)
     """
+
     rel = [0]*len(argsorted)
     for i in range(k):
-        rel[i] = 1 if argsorted[i] in fellows else 0
+        fellow = 1 if argsorted[i] in fellows else 0
+        rel[i] = fellow
 
     rel = np.asfarray(rel)
     dcg1 = rel[0] + np.sum(rel[1:] / np.log2(np.arange(2, rel.size + 1)))
@@ -323,13 +258,14 @@ def dcg_at_k(argsorted, fellows, k):
 
 def main():
     # build score array with logit coefficients
-    lra = logit(traincol="boltzmann")
+    lra = logit()
     
     geometric_mean = None
     #with open("vpa-between.pickle","rb") as f:
         #geometric_mean = np.asarray(pickle.load(f))
         #geometric_mean /= geometric_mean.max()
         
+    #g = gt.load_graph("APS.graphml")
     #g = gt.load_graph("/home/mrunelov/KTH/exjobb/SICS-cite/APS/data/APS.graphml")
     in_degs_gt = g.degree_property_map("in")
     in_degs = in_degs_gt.a.astype("float")
@@ -405,7 +341,7 @@ def pr_curves():
         bla = np.asarray(pickle.load(f)).astype("float")
         bla /= bla.max()
 
-    with open("vpa-between2.pickle","rb") as f:
+    with open("vpa-between.pickle","rb") as f:
         ba = np.asarray(pickle.load(f))
         ba /= ba.max()
 
@@ -423,37 +359,40 @@ def pr_curves():
     plots[1] = find_fellows_in_top_scores(ba,"betweenness",num_top,printstuff=False)
     plots[2] = find_fellows_in_top_scores(pxa_n, "progeny size", num_top, printstuff=False)
     plots[3] = find_fellows_in_top_scores(lra,"All with logit coefficients",num_top,printstuff=False)
-    plots[4] = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst)",num_top,printstuff=True)
+    plots[4] = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst)",num_top,printstuff=False)
     geometric_mean *= np.sqrt(in_degs)
     plots[5] = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst*indegs)",num_top,printstuff=False)
     pr = gt.pagerank(g,damping=0.5)
     plots[6] = find_fellows_in_top_scores(pr.a,"PageRank alpha 0.5",num_top,printstuff=False)
-    
-    print "Plotting..."
+        
     for p in plots:
         plt.plot(*zip(*p))
-    plt.legend(['Indegree', 'Betweenness', 'Backbone progeny size', 'Logit', 'sqrt(betweenness*burstness)','sqrt(betweenness*burstness*indegree)','PageRank, alpha=0.5'], loc='upper right')
+    leg = plt.legend(['Indegree', 'Betweenness', 'Backbone progeny size', 'Logit', 'sqrt(betweenness*burstness)','sqrt(betweenness*burstness*indegree)', 'PageRank, alpha=0.5'], loc='upper right')
+    for obj in leg.legendHandles:
+        obj.set_linewidth(2.0)
     plt.xlabel('Recall')
     plt.ylabel('Precision')
     plt.show()
 
-    if num_top <= 1000:
-        plt.figure(2)
-        plt.figure().set_facecolor('white')
-        plt.xlabel('@')
-        plt.ylabel('Precision')
-        xs = range(10,num_top+1,10)
-        for p in plots:
-            ys = [point[1] for point in p]
-            plt.plot(xs,ys)
-        plt.legend(['Indegree', 'Betweenness', 'Backbone progeny size', 'Logit', 'sqrt(betweenness*burstness)','sqrt(betweenness*burstness*indegree)','PageRank, alpha=0.5'], loc='upper right')
-        plt.show()
+    plt.figure(2)
+    plt.figure().set_facecolor('white')
+    plt.xlabel('@')
+    plt.ylabel('Precision')
+    xs = range(10,num_top+1,10)
+    for p in plots:
+        ys = [point[1] for point in p]
+        plt.plot(xs,ys)
+    leg = plt.legend(['Indegree', 'Betweenness', 'Backbone progeny size', 'Logit', 'sqrt(betweenness*burstness)','sqrt(betweenness*burstness*indegree)', 'PageRank, alpha=0.5'], loc='upper right')
+    for obj in leg.legendHandles:
+        obj.set_linewidth(2.0)
+    plt.show()
+
 
 if __name__ == "__main__":
     #fi = find_fellow_indexes()
-    g = gt.load_graph("/home/mrunelov/KTH/exjobb/SICS-cite/APS/data/APS.graphml")
+    g = gt.load_graph("AAN.graphml")
     dates = g.vertex_properties["date"]
-    dateformat = "%Y-%m-%d"
+    dateformat = "%Y"
     #main()
     pr_curves()
 

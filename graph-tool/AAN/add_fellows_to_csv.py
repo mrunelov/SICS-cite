@@ -1,5 +1,6 @@
 import graph_tool.all as gt
-from find_fellows import *
+from find_fellows2 import *
+#from find_fellows import *
 
 g = gt.load_graph("AAN.graphml") #"AAN-preprocessed.xml")
 titles = g.vertex_properties["title"]
@@ -44,6 +45,6 @@ with open("all_AAN.csv","r") as old,\
             new.write(new_data)
 
 # can't pickle with defaultdict and lambda...
-with open("fellow_indexes.pickle", "wb") as f:
+with open("fellow_indexes2.pickle", "wb") as f:
     pickle.dump(fellow_indexes,f)
 

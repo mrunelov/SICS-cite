@@ -6,38 +6,34 @@ from graphutils import get_gml_graph
 # since that's the only way to get constant lookup (can't use attributes for that)
 
 AAN_dir = '../AAN/'
+APS_dir = '../APS/'
 burstfile = AAN_dir + 'data/Burst-detection-analysis-AAN.csv'
-metrics_dir = '../graph-tool/AAN/'
+burstfile1 = APS_dir + 'data/Burst-detection-analysis-part1.csv'
+burstfile2 = APS_dir + 'data/Burst-detection-analysis-part2.csv'
+metrics_dir = '../graph-tool/APS/'
 
 title_index_map = {}
 
-def create_csv_all_APS():
-	Px,ids = get_Px()
-
-	# TODO: create indegs, betweenness, hits csv files with graph-tool and create a map from id to gt_index
-
-	with open("all_APS.csv", "w+") as csv:
-		csv.write("id,progeny_size\n")
-		for i in range(len(Px)):
-			line = ids[i] + "," + str(Px[i]) + "\n"
-			csv.write(line)
-
-
-
-def create_csv_all_AAN():
-	b = load_csv_as_map(metrics_dir + "betweenness.csv")
+def create_csv_all():
 	i = load_csv_as_map(metrics_dir + "indegs.csv")
+	b = load_csv_as_map(metrics_dir + "betweenness.csv")
 	h = load_csv_as_map(metrics_dir + "hits.csv")
-	bursts = load_burst_map()
-	progeny_sizes = load_progeny_sizes()
+	bursts1 = load_burst_map(burstfile=burstfile1)
+	bursts2 = load_burst_map(burstfile=burstfile2)
+	#bursts = load_burst_map()
+
+	progeny_sizes = load_progeny_sizes_APS()
 	# impacts = load_impacts()
 
-	with open("all_AAN.csv", "w+") as csv:
-		csv.write("gt_index,indegree,betweenness,hits,burst_weight,progeny_size\n")
-		for k in b.keys():
-			line = k + "," + str(int(i[k])) + "," + str(b[k]) + "," + str(h[k]) + ","
-			if k in bursts:
-				line += str(bursts[k])
+	with open("all_APS.csv", "w+") as csv:
+		csv.write("gt_index,indegree,betweenness,hits_auth,burst_weight,progeny_size\n")
+		for k in i.keys():
+                        betweenness = b[k] if k in b else 0
+			line = k + "," + str(int(i[k])) + "," + str(betweenness) + "," + str(h[k]) + ","
+			if k in bursts1:
+				line += str(bursts1[k])
+			if k in bursts2:
+				line += str(bursts2[k])
 			else:
 				line += "0"
 			line += ","
@@ -45,13 +41,16 @@ def create_csv_all_AAN():
 				line += str(progeny_sizes[k])
 			else:
 				line += "0"
-			# line += ","
-			# if k in impacts:
-			# 	line += str(impacts[k])
-			# else:
-			# 	line += "0"
 			line += "\n"
 			csv.write(line)
+
+def load_progeny_sizes_APS():
+    Px_map = {}
+    Px,ids = get_Px()
+    for i in range(len(Px)):
+        Px_map[title_index_map[ids[i]]]= Px[i]
+    return Px_map
+    
 
 
 def load_progeny_sizes_AAN(normalize_values=False):
@@ -71,38 +70,18 @@ def load_progeny_sizes_AAN(normalize_values=False):
 	return Px_map
 
 
-# Not very useful since impact sums to 1, but can be used in other ways later maybe
-# def load_impacts(normalize_values=False):
-# 	G = get_impact_graph()
-# 	impact_map = {}
-# 	num_skipped = 0
-# 	for n in G.nodes_iter(data=True):
-# 		if "label" not in n[1]: # called label in this graph. it should be fixed..
-# 			print n
-# 			num_skipped += 1
-# 			# print "Skipping node..."
-# 		else:
-# 			pred = G.predecessors(n[0])
-# 			cumulative_impact = sum([G[x][n[0]]["impact"] for x in pred])
-# 			title = n[1]["label"].strip().replace(",","")
-# 			impact_map[title] = cumulative_impact
-# 	if normalize_values:
-# 		M = max(impact_map.values())
-# 		for k in impact_map.keys():
-# 			impact_map[k] /= float(M)
-# 	print "Done loading impacts. Skipped " + str(num_skipped) + " nodes."
-# 	return impact_map
-
-
-def load_burst_map(normalize_values=False):
+def load_burst_map(normalize_values=False,burstfile=burstfile):
 	# Word,Level,Weight,Length,Start,End (word is title.strip().replace(",",""))
 	burst_map = {}
 	with open(burstfile, "r") as f:
 		next(f) # skip header
 		for line in f:
 			data = line.strip().split(",")
-                        key = title_index_map[data[0]] # get gt_index from title
-			burst_map[key]= float(data[2])
+                        try:
+                            key = title_index_map["n" + data[0]] # get gt_index from title
+                            burst_map[key]= float(data[2])
+                        except KeyError as e:
+                            print "No mapping for " + data[0]
 	if normalize_values:
 		M = max(burst_map.values())
 		for k in burst_map.keys():
@@ -120,8 +99,8 @@ def load_csv_as_map(filename, normalize_values=False):
 	with open(filename, "r") as f:
                 next(f) # skip headers
 		for line in f:
-			title,key,value = line.strip().split(",")
-			# title_index_map[title] = key
+		        title,key,value = line.strip().split(",")
+                        title_index_map[title] = key
 			csv_map[key] = float(value)
         if normalize_values:
             M = max(csv_map.values())
@@ -133,4 +112,4 @@ def load_csv_as_map(filename, normalize_values=False):
 	return csv_map
 
 # create_csv_all_AAN()
-create_csv_all_APS()
+create_csv_all()
