@@ -5,9 +5,44 @@ import statsmodels.api as sm
 from sklearn.svm import SVC
 from sklearn.cross_validation import train_test_split
 from sklearn.grid_search import GridSearchCV
+from split import get_first,get_second
 
 def get_data():
-    df = pd.read_csv("all_APS_with_fellows.csv")
+    #df = pd.read_csv("all_APS_with_fellows.csv")
+    df = pd.read_csv("all_APS_with_fellows_and_pagerank.csv")
+    #print df.mean()
+
+    first = get_first()
+    first_c = []
+    for x in first:
+        if x:
+            first_c.append(True)
+        else:
+            first_c.append(False)
+    #first_indexes = set([i for i,e in enumerate(first) if e])
+    second = get_second()
+    second_c = []
+    for x in second:
+        if x:
+            second_c.append(True)
+        else:
+            second_c.append(False)
+    #second_indexes = set([i for i,e in enumerate(second) if e])
+
+    bps = df["progeny_size"]
+    bps_1 = bps[first_c]
+    bps_2 = bps[second_c]
+    print "len x 3 :"
+    print len(bps)
+    print len(bps_1)
+    print len(bps_2)
+    #bps_1 = bps[bps & first]
+    #bps_2 = bps[bps & second]
+    print "BPS 1 mean:"
+    print bps_1.mean()
+    print "BPS 2 mean:"
+    print bps_2.mean()
+
 
     # Normalize
     for col in df: # normalize values
@@ -53,7 +88,7 @@ def logit(traincol="fellow"):
     #print data.head(n=5)
     #print data["gt_index"]
     #data["intercept"] = 1.0
-    to_drop = ["gt_index","fellow","hits_auth"]
+    to_drop = ["gt_index","fellow","hits_auth","pagerank"]
     if traincol == "fellow":
         to_drop.append("boltzmann")
     elif traincol == "boltzmann":
@@ -136,6 +171,6 @@ def svm():
     #test_score = svc.score(X_test,y_test)
 
 if __name__ == "__main__":
-    logit()
+    #logit()
     #svm()
-    #get_data()
+    get_data()

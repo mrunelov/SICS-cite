@@ -43,3 +43,17 @@ def plotxy(x,y,xlabel,ylabel):
 	
 	plt.show() # display
 	print("Done.")
+
+
+def test_errorbar():
+    x = [0,1,2,3,4,5]
+    y = [3,4,5,6,7,8]
+    xerr = [0.05,0.05,0.01,0.1,0.1,0.05]
+    yerr = [0.1,0.5,0.2,0.3,0.7,0.1]
+
+    plt.figure()
+    plt.errorbar(x,y,xerr=xerr,yerr=yerr)
+    plt.show()
+
+    
+test_errorbar()

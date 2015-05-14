@@ -50,7 +50,14 @@ def load_progeny_sizes_APS():
     for i in range(len(Px)):
         Px_map[title_index_map[ids[i]]]= Px[i]
     return Px_map
-    
+
+def load_split_progeny_sizes_APS():
+    with open('pickles/APS-backbone-Px-first.pickle', 'rb') as f:
+        first = zip(*pickle.load(f)) # return (Px, nodes) unzipped
+    with open('pickles/APS-backbone-Px-second.pickle', 'rb') as f:
+        second = zip(*pickle.load(f)) # return (Px, nodes) unzipped
+    # TODO
+
 
 
 def load_progeny_sizes_AAN(normalize_values=False):

@@ -13,7 +13,8 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 from random import shuffle
 
-num_top = 500
+num_top = 13589 #18158
+# OBS: Remember to change manual total!
 
 def parse_names(fullname, has_firstname=True, reverse=False):
     fullname = fullname.rstrip()
@@ -80,7 +81,7 @@ def find_fellow(candidate, has_firstname=True, reverse=False, printstuff=True):
     if name[-1] == "":
         return -1 
     #print "Checking fellow: " + str(name)
-    best_match = 0.94 # should keep high to minimize false positives
+    best_match = 0.8 # should keep high to minimize false positives
     firstchar = name[-1][0]
     if firstchar.isupper():
         to_check = fellow_map[firstchar]
@@ -88,6 +89,9 @@ def find_fellow(candidate, has_firstname=True, reverse=False, printstuff=True):
         #print "Checking author that does not start with a capital letter: " + names_to_str(name)
         to_check = fellows
     for i,fellow in enumerate(to_check):
+        # Special case, short name, fellow.
+        if name[0] == "Ng" and name[1] == "Hwee Tou":
+            return i
         # TODO: maybe force check that last char is correct. Spelling errors in the middle is common, and 
         # different last letters often indicate that it's a different person, e.g. "s"-suffixes
         s = sim(fellow[1],name[-1])
@@ -135,16 +139,16 @@ def sim(a, b):
 
 
 def find_fellow_indexes():
-    #g = gt.load_graph("/home/mrunelov/KTH/exjobb/SICS-cite/APS/data/APS.graphml")
-    #authors = g.vertex_properties["authors"]
-    #author_array = []
-    #for n in g.vertices():
-        #author_array.append(authors[n])
+    g = gt.load_graph("AAN.graphml")
+    authors = g.vertex_properties["authors"]
+    author_array = []
+    for n in g.vertices():
+        author_array.append(authors[n])
     #with open("author_array.pickle", "wb") as f:
         #pickle.dump(author_array,f)
         #print "pickled numpy array of authors"
-    with open("author_array.pickle","rb") as f:
-        author_array = pickle.load(f)
+    #with open("author_array.pickle","rb") as f:
+        #author_array = pickle.load(f)
     fellow_indexes = []
     idx = 0
     for i,authors in enumerate(author_array):
@@ -155,25 +159,29 @@ def find_fellow_indexes():
             #print "---------- Looping node " + str(i) + " -----------"
             #print "-----------------------------------------"
         for a in auths:
-            if find_fellow(a) != -1:
+            if find_fellow(a,reverse=True) != -1:
                 fellow_indexes.append(i)
                 break
         idx += 1
-    with open("fellow_indexes2.pickle","w+") as f:
+    print "Num fellow articles found: " + str(len(fellow_indexes))
+    with open("fellow_indexes3.pickle","w+") as f:
     #with open("boltzmann_indexes.pickle","w+") as f:
         pickle.dump(fellow_indexes,f)
     return fellow_indexes
 
 
-with open("fellow_indexes2.pickle", "rb") as f:
+with open("fellow_indexes3.pickle", "rb") as f:
 #with open("boltzmann_indexes.pickle", "rb") as f:
     fellow_indexes = pickle.load(f)
 
 def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, printstuff=True, use_first=True):
-    cutoff = datetime(2000,1,1)
     # oldest date: 1965
     prs = [] # precision and recall every 10 results
-    total = len(fellow_indexes)
+    result = []
+    dcgs = []
+    #total = len(fellow_indexes)
+    total = 1197 # manual total within cutoff
+    cutoff = datetime(2000,1,1)
     print "Total fellow articles: " + str(total)
 
     if printstuff:
@@ -197,6 +205,8 @@ def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, pr
             date = datetime.strptime(dates[v],dateformat)
             if date < cutoff:
                 continue
+            else:
+                result.append(v_i)
             found_fellow = False
             if v_i in fellows:
                 fellow_articles += 1
@@ -229,38 +239,43 @@ def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, pr
             i += 1
             if i%10 == 0:
                 prs.append([float(fellow_articles)/total,float(fellow_articles)/i])
+                #dcg2 = dcg_at_k(result,fellow_indexes,i)
+                #dcgs.append(dcg2)
             if i == num_top:
                 break
             if not fellows:
                 print "ALL FELLOW ARTICLES FOUND after " + str(i) + " articles"
                 break
 
+    #print "\nNum fellow articles within cutoff: " + str(fellow_articles) + "\n"
     #print "Fellows remaining: " + str(fellows)
     print score_name + ":                                                              \n " +\
             "\tPrecision: " + str(fellow_articles) + " / " + str(num_top) + " = " + str(float(fellow_articles)/num_top)
-    #dcg1,dcg2 = dcg_at_k(top_v, fellow_indexes,num_top)
+    #dcg2 = dcg_at_k(top_v, fellow_indexes,num_top)
     # TODO: make dcgs work with date skipping
     #print "\tDCG1: " + str(dcg1) + ", DCG2: " + str(dcg2)
+    #print "DCG2: " + str(dcg2)
 
     #return fellow_articles
     return prs
+    #return dcgs
 
 def dcg_at_k(argsorted, fellows, k):
     """
     Calcualate the discounted cumulative gain given
     an array of each article's score position and the gold standard (fellow list)
     """
-
     rel = [0]*len(argsorted)
     for i in range(k):
-        fellow = 1 if argsorted[i] in fellows else 0
-        rel[i] = fellow
+        rel[i] = 1 if argsorted[i] in fellows else 0
 
     rel = np.asfarray(rel)
-    dcg1 = rel[0] + np.sum(rel[1:] / np.log2(np.arange(2, rel.size + 1)))
+    #dcg1 = rel[0] + np.sum(rel[1:] / np.log2(np.arange(2, rel.size + 1)))
     # Maybe use exponential version with more emphasis on higher rankings:
     dcg2 = np.sum(((2**rel)-1) / np.log2(np.arange(2, rel.size + 2)))
-    return dcg1,dcg2
+    #return dcg1,dcg2
+    return dcg2
+
     
 
 def main():
@@ -406,13 +421,15 @@ def pr_curves():
         plt.plot(*zip(*p),linewidth=2.0)
     #plt.plot([0,0],[1.0,1.0],linestyle="--",c="0.5",linewidth=2.0)
     ax = plt.subplot()
-    y_random = float(len(fellow_indexes)) / 18158
+    #total_fellow_articles = len(fellow_indexes)
+    total_fellow_articles = 1197 # hard-coded for 2000 cutoff
+    y_random = float(total_fellow_articles) / num_top 
     ax.plot([0.0,1.0],[y_random,y_random], ls="--",c="0.5",linewidth=2.0)
     leg = plt.legend([r'$\mathrm{Indegree}$', r'$\mathrm{Betweenness}$', r'$\mathrm{Backbone\/ progeny\/ size}$', r'$\mathrm{Logit}$',r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}}$',r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}\times\/\mathrm{indegree}}$',r'$\mathrm{PageRank,\/} \alpha=0.5$',r'$\mathrm{Random\/ retrieval}$'], loc='best',fontsize=18)
     for obj in leg.legendHandles:
-        obj.set_linewidth(2.0)
-    plt.xlabel('Recall')
-    plt.ylabel('Precision')
+        obj.set_linewidth(4.0)
+    plt.xlabel(r'$\mathrm{Recall}$',fontsize=24)
+    plt.ylabel(r'$\mathrm{Precision}$',fontsize=24)
     plt.show()
 
     line_width = 2.0
@@ -421,17 +438,20 @@ def pr_curves():
         plt.title(r"$\mathrm{Precision\/ @\/ X}$")
         plt.figure().set_facecolor('white')
         plt.xlabel(r'$\mathrm{@}$',fontsize=24)
-        plt.ylabel(r'$\mathrm{Precision}$',fontsize=24)
+        #plt.ylabel(r'$\mathrm{Precision}$',fontsize=24)
+        plt.ylabel(r'$\mathrm{DCG}$',fontsize=24)
         xs = range(10,num_top+1,10)
         for p in plots:
         #plt.subplot(121)
         #for p in plots_first:
-            ys = [point[1] for point in p]
+            #ys = [point[1] for point in p]
+            ys = p # for DCGs
             plt.plot(xs,ys,linewidth=line_width)
-        ax = plt.subplot()
-        y_random = float(len(fellow_indexes)) / 18158
-        ax.plot([0.0,num_top],[y_random,y_random], ls="--",c="0.5",linewidth=2.0)
-        leg = plt.legend([r'$\mathrm{Indegree}$', r'$\mathrm{Betweenness}$', r'$\mathrm{Backbone\/ progeny\/ size}$', r'$\mathrm{Logit}$',r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}}$',r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}\times\/\mathrm{indegree}}$',r'$\mathrm{PageRank,\/} \alpha=0.5$',r'$\mathrm{Random\/ retrieval}$'], loc='best',fontsize=18)
+        #ax = plt.subplot()
+        #y_random = float(len(fellow_indexes)) / 18158
+        #ax.plot([0.0,num_top],[y_random,y_random], ls="--",c="0.5",linewidth=2.0)
+        #leg = plt.legend([r'$\mathrm{Indegree}$', r'$\mathrm{Betweenness}$', r'$\mathrm{Backbone\/ progeny\/ size}$', r'$\mathrm{Logit}$',r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}}$',r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}\times\/\mathrm{indegree}}$',r'$\mathrm{PageRank,\/} \alpha=0.5$',r'$\mathrm{Random\/ retrieval}$'], loc='best',fontsize=18)
+        leg = plt.legend([r'$\mathrm{Indegree}$', r'$\mathrm{Betweenness}$', r'$\mathrm{Backbone\/ progeny\/ size}$', r'$\mathrm{Logit}$',r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}}$',r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}\times\/\mathrm{indegree}}$',r'$\mathrm{PageRank,\/} \alpha=0.5$'], loc='best',fontsize=18)
         for obj in leg.legendHandles:
             obj.set_linewidth(line_width)
         

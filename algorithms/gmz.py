@@ -91,7 +91,7 @@ def main():
 		# plt.hist(hist, bins=bins)
 		plt.show()
 
-def indirect_predecessors(G,n):
+def weighted_num_ancestors(G,n):
 	"""
 	Note: If G is a DAG, nx.ancestors(G,source) can be used 
 	(https://networkx.github.io/documentation/latest/reference/generated/networkx.algorithms.dag.ancestors.html)
@@ -100,14 +100,26 @@ def indirect_predecessors(G,n):
 	TODO: A more efficient way calculates it for the entire graph at once, avoiding duplicate calculations
 	"""
 	queue = deque([n])
-	ind_preds = Set()
-	depth = 0
+	ancestors = Set()
+	depth = -1
+        elements_to_depth_increase = 1
+        next_elements_to_depth_increase = 0;
+        score = 0 # total amount ancestors, weighted by depth
 	while queue:
 		curr = queue.popleft()
+                print "popped " + str(curr) + " at depth " + str(depth)
+                if depth is not -1:
+                    score += 0.5**depth
 		preds = G.predecessors(curr)
+                next_elements_to_depth_increase += len(preds)
+                elements_to_depth_increase -= 1
+                if elements_to_depth_increase == 0:
+                    depth += 1
+                    elements_to_depth_increase = next_elements_to_depth_increase
+                    next_elements_to_depth_increase = 0
 		for p in preds:
-			if p not in ind_preds:
-				ind_preds.add(p)
+			if p not in ancestors:
+				ancestors.add(p)
 				queue.append(p)
 			# else:
 			#	print("Reached node "),
@@ -115,7 +127,8 @@ def indirect_predecessors(G,n):
 			#	print(" twice.")
 			#	print("Currently at node "),
 			#	print curr
-	return list(ind_preds)
+	#return list(ind_preds)
+        return score
 
 def single_source_shortest_path_length(G,source):
 	"""Compute the shortest path lengths from source to all reachable nodes.
@@ -193,14 +206,17 @@ def progeny_size(G, source):
 #	 anc = set(nx.shortest_path_length(G, target=source).keys()) - set([source])
 #	 return anc
 
-# G = nx.DiGraph()
-# G.add_node(1)
-# G.add_node(2)
-# G.add_node(3)
-# G.add_edge(1,2)
-# G.add_edge(2,3)
+G = nx.DiGraph()
+G.add_node(1)
+G.add_node(2)
+G.add_node(3)
+G.add_node(4)
+G.add_edge(1,2)
+#G.add_edge(1,3)
+G.add_edge(2,3)
+G.add_edge(3,4)
 #G.add_edge(3,3)
-
+print weighted_num_ancestors(G,4)
 #print indirect_predecessors(G,3)
 
-main()
+#main()
