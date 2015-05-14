@@ -4,11 +4,23 @@ import numpy as np
 import statsmodels.api as sm
 
 def get_data():
+
     data = pd.read_csv("all_AAN_with_fellows.csv")
     # log all progeny sizes, highly experimental
     #data["progeny_size"] = np.log2(data["progeny_size"])
     #data["progeny_size"] = data["progeny_size"].replace(float("-inf"),0)
     
+    for col in data: # normalize
+        if col == "gt_index":
+            continue
+        data[col] /= data[col].max()
+
+    data["g"] = data["burst_weight"]*data["betweenness"]
+    data["g2"] = data["burst_weight"]*data["betweenness"]*data["indegree"]
+    
+    for col in ["g","g2"]: # normalize values
+        data[col] /= data[col].max()
+
     #data["combo"] = data["progeny_size"]*data["burst_weight"]*data["indegree"]
     #data["combo2"] = data["progeny_size"]*data["burst_weight"]
     #data["combo3"] = data["progeny_size"]*data["progeny_size"]
@@ -16,12 +28,6 @@ def get_data():
     #data["combo5"] = data["progeny_size"]*data["betweenness"]
     #data["combo6"] = data["progeny_size"]*data["betweenness"]*data["indegree"]
     #data["combo6"] = data["progeny_size"]*data["betweenness"]*data["indegree"]*data["burst_weight"]
-    
-    for col in data: # normalize
-        if col == "gt_index":
-            continue
-        data[col] /= data[col].max()
-
     
     #data["intercept"] = 1.0
     train_set = data.drop(["fellow","gt_index","hits"], axis=1)

@@ -11,11 +11,12 @@ from collections import defaultdict
 from plotter import plotxy
 from datetime import datetime
 import matplotlib.pyplot as plt
+from random import shuffle
 
-num_top = 100
+num_top = 500 #527130
 
-with open("fellow_indexes.pickle", "rb") as f:
-#with open("boltzmann_indexes.pickle", "rb") as f:
+#with open("fellow_indexes.pickle", "rb") as f:
+with open("boltzmann_indexes.pickle", "rb") as f:
     fellow_indexes = pickle.load(f)
 
 #prefixes = ["von","di","de","af"]
@@ -232,10 +233,13 @@ def find_fellow_indexes():
 # David Attwood vs D. K. Atwood
 #...
 
-def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, printstuff=True):
+def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, printstuff=True,use_first=True):
     cutoff = datetime(1800,1,1)
     prs = [] # precision and recall every 10 results
+    result = []
+    dcgs = []
     total = len(fellow_indexes)
+    print "Total fellow articles: " + str(total)
 
     if printstuff:
         titles = g.vertex_properties["title"]
@@ -243,67 +247,68 @@ def find_fellows_in_top_scores(scores, score_name, num_top=20, do_plot=False, pr
         #print "Loaded a graph with " + str(g.num_vertices()) + " nodes"
 
     top_v = scores.argsort()[::-1]#[:num_top]
-    #if score_name == "indegree":
-        #print [scores[x] for x in top_v[:100]]
     fellows = Set(fellow_indexes)
     fellow_articles = 0
-    #fellows = Set(range(32))
     i = 0
-    result = []
     for v_i in top_v:
-        sys.stderr.write("looping node " + str(i+1) + " / " + str(num_top) + "\r")
-        sys.stderr.flush()
-        v = g.vertex(v_i)
-        date = datetime.strptime(dates[v],dateformat)
-        if date < cutoff:
-            continue
-        else:
-            result.append(v_i)
-        found_fellow = False
-        if v_i in fellows:
-            fellow_articles += 1
-            fellows.remove(v_i)
-            found_fellow = True
-        if printstuff:
-            print "##############"
-            print "###   " + str(i+1) + "   ###"
-            print "##############"
-            print titles[v] 
-            print authors[v]
-            if found_fellow:
-                print "Has fellow author ---------------------------------------------------"
+        if True:
+        #if (use_first and v_i in first) or (not use_first and v_i in second): 
+            sys.stderr.write("looping node " + str(i+1) + " / " + str(num_top) + "\r")
+            sys.stderr.flush()
+            v = g.vertex(v_i)
+            date = datetime.strptime(dates[v],dateformat)
+            if date < cutoff:
+                continue
             else:
-                print "No fellow authors"
-            print score_name + ": " + str(scores[v_i])
-        #auths = authors[v]
-        #auths = auths.split(";")
-        #if score_name == "All with logit coefficients" and scores[v_i] < 0.7:
-            #print "logit prob below 0.8 at index " + str(i)
-        
-        if not fellows:
-            print "ALL FELLOW ARTICLES FOUND after " + str(i) + " articles"
-            break
-        #found_fellow = False
-        #for a in auths:
-            #fellow_index = find_fellow(a,reverse=True,printstuff=printstuff)
-            #if fellow_index is not -1:
-                #fellow_articles += 1
-                #if fellow_index in fellows:
-                    #fellows.remove(fellow_index)
-        i += 1
-        if i%10 == 0:
-            prs.append([float(fellow_articles)/total,float(fellow_articles)/i])
-        if i == num_top:
-            break
+                result.append(v_i)
+            found_fellow = False
+            if v_i in fellows:
+                fellow_articles += 1
+                fellows.remove(v_i)
+                found_fellow = True
+            if printstuff:
+                print "##############"
+                print "###   " + str(i+1) + "   ###"
+                print "##############"
+                print titles[v] 
+                print authors[v]
+                if found_fellow:
+                    print "Has fellow author ---------------------------------------------------"
+                else:
+                    print "No fellow authors"
+                print score_name + ": " + str(scores[v_i])
+            #auths = authors[v]
+            #auths = auths.split(";")
+            #if score_name == "All with logit coefficients" and scores[v_i] < 0.7:
+                #print "logit prob below 0.8 at index " + str(i)
+            
+            #found_fellow = False
+            #for a in auths:
+                #fellow_index = find_fellow(a,reverse=True,printstuff=printstuff)
+                #if fellow_index is not -1:
+                    #fellow_articles += 1
+                    #if fellow_index in fellows:
+                        #fellows.remove(fellow_index)
+            i += 1
+            if i%10 == 0:
+                prs.append([float(fellow_articles)/total,float(fellow_articles)/i])
+                #dcg2 = dcg_at_k(result,fellow_indexes,i)
+                #dcgs.append(dcg2)
+            if i == num_top:
+                break
+            if not fellows:
+                print "ALL FELLOW ARTICLES FOUND after " + str(i) + " articles"
+                break
 
-    #print "Fellows remaining: " + str(fellows)
     print score_name + ":                                                              \n " +\
             "\tPrecision: " + str(fellow_articles) + " / " + str(num_top) + " = " + str(float(fellow_articles)/num_top)
-    dcg1,dcg2 = dcg_at_k(result, fellow_indexes,num_top)
-    print "\tDCG1: " + str(dcg1) + ", DCG2: " + str(dcg2)
+    #dcg2 = dcg_at_k(result, fellow_indexes,num_top)
+    #print "\tDCG1: " + str(dcg1) + ", DCG2: " + str(dcg2)
+    #print "DCG2: " + str(dcg2)
 
     #return fellow_articles
     return prs # return precisions and recalls for every 10 articles
+    #return dcgs
 
 def dcg_at_k(argsorted, fellows, k):
     """
@@ -315,10 +320,11 @@ def dcg_at_k(argsorted, fellows, k):
         rel[i] = 1 if argsorted[i] in fellows else 0
 
     rel = np.asfarray(rel)
-    dcg1 = rel[0] + np.sum(rel[1:] / np.log2(np.arange(2, rel.size + 1)))
+    #dcg1 = rel[0] + np.sum(rel[1:] / np.log2(np.arange(2, rel.size + 1)))
     # Maybe use exponential version with more emphasis on higher rankings:
     dcg2 = np.sum(((2**rel)-1) / np.log2(np.arange(2, rel.size + 2)))
-    return dcg1,dcg2
+    #return dcg1,dcg2
+    return dcg2
     
 
 def main():
@@ -417,13 +423,39 @@ def pr_curves():
         pxa = np.asarray(pickle.load(f)).astype("float")
         pxa_n = pxa/pxa.max()
 
+
+    #plots_first = [[] for _ in range(7)]
+    #plots_second = [[] for _ in range(7)]
+    #print "Calculating for num_top = " + str(num_top)
+    #plots_first[0] = find_fellows_in_top_scores(in_degs,"indegree",num_top,printstuff=False,use_first=True)
+    #plots_first[1] = find_fellows_in_top_scores(ba,"betweenness",num_top,printstuff=False,use_first=True)
+    #plots_first[2] = find_fellows_in_top_scores(pxa_n, "progeny size", num_top, printstuff=False,use_first=True)
+    #plots_first[3] = find_fellows_in_top_scores(lra,"All with logit coefficients",num_top,printstuff=False,use_first=True)
+    ##plots[4] = find_fellows_in_top_scores(lra1,"SVM",num_top,printstuff=False)
+    #plots_first[4] = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst)",num_top,printstuff=False,use_first=True)
+    #geometric_mean *= np.sqrt(in_degs)
+    #plots_first[5] = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst*indegs)",num_top,printstuff=False,use_first=True)
+    #pr = gt.pagerank(g,damping=0.5)
+    #plots_first[6] = find_fellows_in_top_scores(pr.a,"PageRank alpha 0.5",num_top,printstuff=False,use_first=True)
+    
+    #plots_second[0] = find_fellows_in_top_scores(in_degs,"indegree",num_top,printstuff=False,use_first=False)
+    #plots_second[1] = find_fellows_in_top_scores(ba,"betweenness",num_top,printstuff=False,use_first=False)
+    #plots_second[2] = find_fellows_in_top_scores(pxa_n, "progeny size", num_top, printstuff=False,use_first=False)
+    #plots_second[3] = find_fellows_in_top_scores(lra,"All with logit coefficients",num_top,printstuff=False,use_first=False)
+    ##plots[4] = find_fellows_in_top_scores(lra1,"SVM",num_top,printstuff=False)
+    #plots_second[4] = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst)",num_top,printstuff=False,use_first=False)
+    #geometric_mean *= np.sqrt(in_degs)
+    #plots_second[5] = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst*indegs)",num_top,printstuff=False,use_first=False)
+    #pr = gt.pagerank(g,damping=0.5)
+    #plots_second[6] = find_fellows_in_top_scores(pr.a,"PageRank alpha 0.5",num_top,printstuff=False,use_first=False)
+
     plots = [[] for _ in range(7)]
     print "Calculating for num_top = " + str(num_top)
     plots[0] = find_fellows_in_top_scores(in_degs,"indegree",num_top,printstuff=False)
     plots[1] = find_fellows_in_top_scores(ba,"betweenness",num_top,printstuff=False)
     plots[2] = find_fellows_in_top_scores(pxa_n, "progeny size", num_top, printstuff=False)
     plots[3] = find_fellows_in_top_scores(lra,"All with logit coefficients",num_top,printstuff=False)
-    plots[4] = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst)",num_top,printstuff=True)
+    plots[4] = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst)",num_top,printstuff=False)
     geometric_mean *= np.sqrt(in_degs)
     plots[5] = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst*indegs)",num_top,printstuff=False)
     pr = gt.pagerank(g,damping=0.5)
@@ -431,32 +463,46 @@ def pr_curves():
     
     print "Plotting..."
     for p in plots:
-        plt.plot(*zip(*p))
-    plt.legend(['Indegree', 'Betweenness', 'Backbone progeny size', 'Logit', 'sqrt(betweenness*burstness)','sqrt(betweenness*burstness*indegree)','PageRank, alpha=0.5'], loc='upper right')
+        plt.plot(*zip(*p),linewidth=2.0)
+    ax = plt.subplot()
+    y_random = float(len(fellow_indexes)) / 527130
+    ax.plot([0.0,1.0],[y_random,y_random],ls="--",c="0.5",linewidth=2.0)
+    leg = plt.legend([r'$\mathrm{Indegree}$', r'$\mathrm{Betweenness}$', r'$\mathrm{Backbone\/ progeny\/ size}$', r'$\mathrm{Logit}$', r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}}$',r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}\times\/\mathrm{indegree}}$',r'$\mathrm{PageRank,\/} \alpha=0.5$',r'$\mathrm{Random\/ retrieval}$'], loc='best',fontsize=16)
+    for obj in leg.legendHandles:
+        obj.set_linewidth(4.0)
+
     plt.xlabel('Recall')
     plt.ylabel('Precision')
     plt.show()
 
     if num_top <= 1000:
         plt.figure(2)
+        plt.title(r"$\mathrm{Precision\/ @\/ X}$")
+        #plt.title(r"$\mathrm{DCG\/ @\/ X}$")
         plt.figure().set_facecolor('white')
-        plt.xlabel('@')
-        plt.ylabel('Precision')
+        plt.xlabel(r'$\mathrm{@}$',fontsize=24)
+        plt.ylabel(r'$\mathrm{Precision}$',fontsize=24)
+        #plt.ylabel(r'$\mathrm{DCG}$',fontsize=24)
         xs = range(10,num_top+1,10)
         for p in plots:
             ys = [point[1] for point in p]
-            plt.plot(xs,ys)
-        plt.legend(['Indegree', 'Betweenness', 'Backbone progeny size', 'Logit', 'sqrt(betweenness*burstness)','sqrt(betweenness*burstness*indegree)','PageRank, alpha=0.5'], loc='upper right')
+            #ys = p # for DCGs
+            plt.plot(xs,ys,linewidth=2.0)
+        ax = plt.subplot()
+        ax.plot([0.0,num_top],[y_random,y_random],ls="--",c="0.5",linewidth=2.0)
+        leg = plt.legend([r'$\mathrm{Indegree}$', r'$\mathrm{Betweenness}$', r'$\mathrm{Backbone\/ progeny\/ size}$', r'$\mathrm{Logit}$', r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}}$',r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}\times\/\mathrm{indegree}}$',r'$\mathrm{PageRank,\/} \alpha=0.5$',r'$\mathrm{Random\/ retrieval}$'], loc='best',fontsize=16)
+        for obj in leg.legendHandles:
+            obj.set_linewidth(2.0)
         plt.show()
 
 if __name__ == "__main__":
     #fi = find_fellow_indexes()
     g = gt.load_graph("/home/mrunelov/KTH/exjobb/SICS-cite/APS/data/APS.graphml")
+    #indexes = range(527130)
+    #shuffle(indexes)
+    #first = indexes[:len(indexes)/2]
+    #second = indexes[len(indexes)/2:]
     dates = g.vertex_properties["date"]
     dateformat = "%Y-%m-%d"
     #main()
     pr_curves()
-
-#candidates = ["Kaplan", "Mercer", "Moore", "Tou Ng", "Palmer"]
-#for c in candidates:
-    #is_fellow(c,has_firstname=False)
