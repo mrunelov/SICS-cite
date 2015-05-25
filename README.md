@@ -2,7 +2,7 @@ Here be dragons
 
 # SICS-cite
 
-This is a thesis project done at SICS. The overall goal of the project is to implement and evaluate a set of algorithms for citation analysis.
+This is a thesis project done at [SICS](https://www.sics.se/). The overall goal of the project is to implement and evaluate a set of algorithms for citation analysis.
 
 
 ## Directories
@@ -29,4 +29,4 @@ by S. Gualdi, C. H. Yeung, Y.-C. Zhang - Found in `algorithms/backbone.py`, impl
 * Indegree centrality - Done using graph-tool (indegree is a property for all graph-tool graphs)
 * Betweenness centrality - Done using graph-tool
 * PageRank - Done using graph-tool
-* Burstness - Done separately using the Sci2 software (https://sci2.cns.iu.edu/). Saved as csv files.
+* Burstness - Done separately using the [Sci2](https://sci2.cns.iu.edu/) software. Saved as csv files.
