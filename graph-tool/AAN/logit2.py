@@ -30,8 +30,8 @@ def get_data():
     #data["combo6"] = data["progeny_size"]*data["betweenness"]*data["indegree"]*data["burst_weight"]
     
     #data["intercept"] = 1.0
-    train_set = data.drop(["fellow","gt_index","hits","pagerank"],axis=1)
-    print train_set.corr()
+    train_set = data.drop(["fellow","gt_index","hits"],axis=1)
+    print train_set.corr(method='spearman')
     train_set = sm.add_constant(train_set)
     
     return train_set, data
