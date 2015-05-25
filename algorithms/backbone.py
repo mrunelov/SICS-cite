@@ -205,7 +205,7 @@ def build_backbone_graph(G,postfix=""):
 	
 	with open('pickles/' + dataset + '-backbone-' + postfix + '.pickle', 'wb') as f:    
 		nx.write_gpickle(G2, f)
-	#nx.write_graphml(G2, '../' + dataset + '/data/' + dataset + '-backbone.graphml')
+	#nx.write_graphml(G2, '../datasets/' + dataset + '/data/' + dataset + '-backbone.graphml')
 
 	return G2
 

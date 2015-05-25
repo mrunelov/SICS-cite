@@ -11,19 +11,20 @@ It assumes that all metrics have been calculated and stored
 # Make use of the insertion order from graph-tool
 # since that's the only way to get constant lookup (can't use attributes for that)
 
-AAN_dir = '../AAN/'
-APS_dir = '../APS/'
-burstfile = AAN_dir + 'data/Burst-detection-analysis-AAN.csv'
+datasets_dir = '../datasets/'
+APS_dir = datasets_dir + 'APS/'
+#AAN_dir = datasets_dir + 'AAN/'
+#burstfile = AAN_dir + 'data/Burst-detection-analysis-AAN.csv'
 burstfile1 = APS_dir + 'data/Burst-detection-analysis-part1.csv'
 burstfile2 = APS_dir + 'data/Burst-detection-analysis-part2.csv'
-metrics_dir = '../graph-tool/APS/'
+metrics_dir = '../metrics/APS/'
 
 title_index_map = {}
 
 def create_csv_all():
 	i = load_csv_as_map(metrics_dir + "indegs.csv")
 	b = load_csv_as_map(metrics_dir + "betweenness.csv")
-	h = load_csv_as_map(metrics_dir + "hits.csv")
+	h = load_csv_as_map(metrics_dir + "hits.csv") # not used
 	bursts1 = load_burst_map(burstfile=burstfile1)
 	bursts2 = load_burst_map(burstfile=burstfile2)
 	#bursts = load_burst_map()
