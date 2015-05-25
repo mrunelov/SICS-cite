@@ -4,21 +4,8 @@ import config as conf
 
 dataset = conf.settings['dataset']
 
-G = gt.load_graph("../" + dataset + "/data/" + dataset + ".graphml") #"AAN-preprocessed.xml")
+G = gt.load_graph("../datasets/" + dataset + "/data/" + dataset + ".graphml"))
 print "Loaded a graph with " + str(G.num_vertices()) + " vertices and " + str(G.num_edges()) + " edges."
-
-
-with open("../graph-tool/APS/pickles/first1.pickle","rb") as f:
-    first = pickle.load(f)
-    first_a = np.zeros(527129)
-    for f_i in first:
-        first_a[f_i] = 1
-
-with open("../graph-tool/APS/pickles/second1.pickle","rb") as f:
-    second = pickle.load(f)
-    second_a = np.zeros(527129)
-    for s_i in second:
-        second_a[s_i] = 1
 
 del G.properties[("v","date")]
 del G.properties[("v","label")]
