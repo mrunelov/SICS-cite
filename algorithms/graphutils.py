@@ -10,7 +10,7 @@ def get_gml_graph(dataset,co_citation=False):
 	and subsequent calls load the pickle
 	"""
 	picklefile = 'pickles/' + dataset + '.pickle'
-	if os.path.isfile(picklefile):
+	if False:#os.path.isfile(picklefile):
 		with open(picklefile, 'rb') as f:
 			print("Reading pickled graph...")
 			G = nx.read_gpickle(f)
@@ -42,7 +42,9 @@ def get_gml_graph(dataset,co_citation=False):
 		# 		biconnected_edges.extend([(u,v),(v,u)])
 		# G.remove_edges_from(biconnected_edges) # delete biconnecting edges
 		G.remove_edges_from(selfloop_edges) # delete self-loops
+		print(str(G.number_of_nodes()) + " nodes and " + str(G.number_of_edges()) + " edges remaining after removing self-loops.")
 		G.remove_edges_from(nx.isolates(G)) # delete isolates
+		print(str(G.number_of_nodes()) + " nodes and " + str(G.number_of_edges()) + " edges remaining after removing isolates.")
 		print("Is DAG now?..."),
 		is_dag = nx.is_directed_acyclic_graph(G)
 		print(str(is_dag))

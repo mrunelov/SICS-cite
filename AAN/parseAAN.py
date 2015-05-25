@@ -302,4 +302,4 @@ def write_meta_CSV():
 			if num_cited_added > 20:
 				return
 
-# parse_citations()
+parse_citations()
