@@ -3,6 +3,10 @@ import os.path
 import networkx as nx
 import itertools
 
+"""
+Utility functions for graphs
+"""
+
 def get_gml_graph(dataset,co_citation=False):
 	"""
 	Loads a graphml file into a networkx graph object.
@@ -62,7 +66,7 @@ def build_time_slices(G,s):
 	pass
 
 
-# OBS: super slow with networkx, fast graph-tool version in graph-tool/AAN/co_citation.py
+# OBS: super slow with networkx, fast graph-tool version in co_citation.py
 def build_co_citation_graph(G,dataset):
 	print "Building co-citation graph for " + dataset
 	cc = nx.Graph()
@@ -82,4 +86,3 @@ def build_co_citation_graph(G,dataset):
 	print "Done. Wrote a graph with " + str(cc.number_of_nodes()) + " nodes and " + str(cc.number_of_edges()) + " edges."
 
 #G = get_gml_graph('AAN')
-#build_co_citation_graph(G,'AAN')

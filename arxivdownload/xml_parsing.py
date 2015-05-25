@@ -1,9 +1,9 @@
 import xml.etree.ElementTree as ET
 import difflib # SequenceMatcher used for string similarity measure
 
-#
-# Utility module that parses xml from the arXiv API, extracting certain fields
-#
+"""
+Utility module that parses xml from the arXiv API, extracting certain fields
+"""
 
 
 def extract_title_authors(filename):

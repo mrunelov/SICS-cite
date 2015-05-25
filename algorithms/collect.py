@@ -1,6 +1,12 @@
 from backbone import get_Px, get_impact_graph
 from graphutils import get_gml_graph
 
+"""
+This script collects metrics into a single csv file
+
+It assumes that all metrics have been calculated and stored
+"""
+
 # Handle APS and AAN differently.
 # Make use of the insertion order from graph-tool
 # since that's the only way to get constant lookup (can't use attributes for that)

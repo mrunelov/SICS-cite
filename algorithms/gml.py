@@ -1,6 +1,10 @@
 import random as r
 from itertools import tee,izip
 
+"""
+Utility file for creating GraphML files
+"""
+
 valid_attr_types = ["boolean", "int", "long", "float", "double", "string"]
 
 def test(directory=""):
@@ -29,8 +33,12 @@ def get_attr(id, name, attr_type, attr_for):
 		raise ValueError('Invalid attr_type. Must be one of ' + str(valid_attr_types))
 	return '  <key attr.name="' + name + '" attr.type="' + attr_type + '" for="' + attr_for + '" id="' + id + '" />\n'
 
-def get_startgraph():
-	return '  <graph id="G" edgedefault="directed">\n'
+def get_startgraph(directed=True):
+	if directed:
+		edgedefault = "directed"
+	else:
+		edgedefault = "undirected"
+	return '  <graph id="G" edgedefault="' + edgedefault + '">\n'
 
 def get_node(id, attrs=[]):
 	node = '    <node id="n' + str(id) + '">\n'

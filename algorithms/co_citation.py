@@ -26,28 +26,13 @@ del G.properties[("v","label")]
 G2 = gt.GraphView(G, vfilt=lambda v: v.in_degree() > 0,
         efilt=lambda e: e.source().out_degree >= 2)
 
-G_first = gt.GraphView(G2,vfilt=first_a)
-G_second = gt.GraphView(G2,vfilt=second_a)
+CC = gt.Graph(G2) #gt.load_graph("tmp/co-citation-APS-10000.graphml") 
+CC.purge_edges()
+CC.set_directed(False)
+# CC = gt.load_graph("tmp/co-citation-APS-80000.graphml") # load partly processed graph
 
-print "After filtering there are " + str(G_first.num_vertices()) + " vertices and " + str(G_first.num_edges()) + " edges in first" 
-print "After filtering there are " + str(G_second.num_vertices()) + " vertices and " + str(G_second.num_edges()) + " edges in second" 
-
-G_first.purge_vertices()
-G_second.purge_vertices()
-
-#CC = gt.Graph(G2) #gt.load_graph("tmp/co-citation-APS-10000.graphml") 
-CC1 = gt.GraphView(G_first,efilt=lambda e: False)
-CC2 = gt.GraphView(G_second,efilt=lambda e: False)
-#CC.purge_edges()
-CC1.set_directed(False)
-CC2.set_directed(False)
-#CC = gt.load_graph("tmp/co-citation-APS-80000.graphml") # load partly processed graph
-
-weight = CC1.new_edge_property("int") #CC.edge_properties["weight"] 
-weight = CC2.new_edge_property("int") #CC.edge_properties["weight"] 
-CC1.edge_properties["weight"] = weight
-CC2.edge_properties["weight"] = weight
-
+weight = CC.new_edge_property("int")
+CC.edge_properties["weight"] = weight
 
 def build_co_citation(CC):
     N = str(CC.num_vertices())
