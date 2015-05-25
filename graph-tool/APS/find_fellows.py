@@ -14,6 +14,16 @@ from random import shuffle
 from logit import logit
 from split import split_graph,get_first,get_second,get_gt_graphs
 
+"""
+This script parses fellows and calculates precision and recall for metric rankings
+
+TODO:
+Break up into multiple files. We should separate fellow parsing, metric evaluation, and plotting
+Lots of hard-coded things and things that are changed by commenting/uncommenting blocks...
+"""
+
+
+
 num_top = 500 #527129 #427735 
 use_cutoff = False 
 # total : 527129
@@ -78,6 +88,11 @@ def parse_fellows(filename="APS-fellows.txt"):
 
 fellow_map,fellows = parse_fellows()
 def find_fellow(candidate, has_firstname=True, reverse=False, printstuff=True):
+    """
+    Takes a candidate name and checks all fellows for a match
+
+    """
+    FIRSTNAME_THRESHOLD = 0.9 # minimum similarity between firstnames
     fellow_index = -1
     if len(candidate) <= 4:
         return -1
@@ -108,7 +123,7 @@ def find_fellow(candidate, has_firstname=True, reverse=False, printstuff=True):
                             break
                     else:
                         s2 = sim(fellow_firstnames[i],firstnames[i])
-                        if s2 < 0.9:
+                        if s2 < FIRSTNAME_THRESHOLD:
                             not_fellow = True
                             break
                 if not_fellow:
@@ -236,69 +251,6 @@ def dcg_at_k(argsorted, fellows, k):
     # exponential version with more emphasis on higher rankings:
     dcg2 = np.sum(((2**rel)-1) / np.log2(np.arange(2, rel.size + 2)))
     return dcg1,dcg2    
-
-def main():
-    global g
-    # build score array with logit coefficients
-    lra = logit(traincol="fellow") # or "boltzmann"
-        
-    in_degs_gt = g.degree_property_map("in")
-    in_degs = in_degs_gt.a.astype("float")
-    in_degs = in_degs/in_degs.max()
-    #geometric_mean *= in_degs
-
-    #burst_list = [0]*len(in_degs)
-    #with open("all_APS_with_fellows.csv", "r") as f:
-        #next(f) # skip header
-        #for line in f:
-            #values = line.strip().split(",")
-            #gt_index = int(values[0])
-            #burst_weight = values[4]
-            #burst_list[gt_index] = burst_weight
-    #with open("burst_list.pickle", "wb") as f:         
-        #pickle.dump(burst_list,f)
-
-    with open("burst_list.pickle", "rb") as f:
-        bla = np.asarray(pickle.load(f)).astype("float")
-        bla /= bla.max()
-
-    with open("vpa-between2.pickle","rb") as f:
-        ba = np.asarray(pickle.load(f))
-        ba /= ba.max()
-
-    geometric_mean = bla
-    geometric_mean *= ba
-    geometric_mean = np.sqrt(geometric_mean)
-
-    with open("Px_list.pickle","rb") as f:
-        pxa = np.asarray(pickle.load(f)).astype("float")
-        pxa_n = pxa/pxa.max()
-
-    #numzero = len(geometric_mean[geometric_mean == 0])
-    #print "Number of zero values for geometric mean:" + str(numzero)
-
-    tp = find_fellows_in_top_scores(lra,"All with logit coefficients",num_top,printstuff=False)
-    tp = find_fellows_in_top_scores(pxa_n, "progeny size", num_top, printstuff=False)
-    tp = find_fellows_in_top_scores(ba,"betweenness",num_top,printstuff=False)
-    tp = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst)",num_top,printstuff=False)
-    geometric_mean *= np.sqrt(in_degs)
-    tp = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst*indegs)",num_top,printstuff=False)
-    tp = find_fellows_in_top_scores(ba + pxa_n + in_degs,"betweenness + progeny size + cc",num_top,printstuff=False)
-    
-    #with open("vpa-closeness.pickle","rb") as f:
-        #vpa = np.asarray(pickle.load(f))
-        #tp = find_fellows_in_top_scores(vpa,"closeness",num_top,printstuff=False)
-
-    tp = find_fellows_in_top_scores(in_degs,"indegree",num_top,printstuff=False)
-
-    pr = gt.pagerank(g,damping=0.5)
-    tp = find_fellows_in_top_scores(pr.a,"PageRank alpha 0.5",num_top,printstuff=False)
-    #plotxy(pxa,pr.a,"Backbone Progeny Size","PageRank (alpha=0.5)")
-
-    #eig, auths, hubs = gt.hits(g)
-    #tp = find_fellows_in_top_scores(auths.a,"HITS authority",num_top,printstuff=False)
-    
-    #tp = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst)",num_top,printstuff=False)
 
 def pr_curves():
     plt.figure().set_facecolor('white')
@@ -531,7 +483,6 @@ if __name__ == "__main__":
     g = gt.load_graph("APS.graphml")
     dates = g.vertex_properties["date"]
     dateformat = "%Y-%m-%d"
-    #main()
     #pr_curves()
     plot_bps()
     plot_random_metrics("indeg")
