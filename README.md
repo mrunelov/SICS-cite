@@ -1,5 +1,3 @@
-Here be dragons
-
 # SICS-cite
 
 This is a thesis project done at [SICS](https://www.sics.se/). The overall goal of the project is to implement and evaluate a set of algorithms for citation analysis.
@@ -9,7 +7,7 @@ This is a thesis project done at [SICS](https://www.sics.se/). The overall goal 
 
 * algorithms - Tools and algorithms used on both datasets.
 * datasets - Parse files for the datasets used. There is no rawdata on GitHub due to space limitations.
-* metrics - Parsing and calculations related to metrics and evaluation.
+* metrics - Parsing and calculations related to metrics and evaluation. Here be dragons.
 * arxivdownload - an arXiv crawler and parser, slow, not tested much
 * boost - Some very basic tests with the C++ `boost` library
 
