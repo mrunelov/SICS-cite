@@ -9,26 +9,21 @@ from split import split_graph,get_first,get_second,get_gt_graphs
 """
 Calculates betweenness centrality for a co-citation network and prints info and plots the top results
 """
-
-#num_top = 1000
-
-g = gt.load_graph("/home/mrunelov/KTH/exjobb/SICS-cite/algorithms/co-citation-APS.graphml")
-#cc1,cc2 = split_graph(g)
-
+graph_file = "/home/mrunelov/KTH/exjobb/SICS-cite/algorithms/co-citation-APS.graphml"
+g = gt.load_graph(graph_file)
 print "Loaded a graph with " + str(g.num_vertices()) + " nodes and " + str(g.num_edges()) + " edges."
-
+# Optional pruning
 #g2 = gt.load_graph("APS.graphml")
-# Only loaded to get correct vertex loop order. If we create the co-citation graph using co_citation.py this is not needed
 # since the original order is preserved then.
 #g = gt.GraphView(g, vfilt=lambda v:g2.vertex(v).in_degree() > 20)
 #g.purge_vertices()
 #print "Pruned g, now with " + str(g.num_vertices()) + " nodes and " + str(g.num_edges()) + " edges."
 
-#vp, ep = gt.betweenness(g)
-#pickle_result(vp)
+vp, ep = gt.betweenness(g)
+pickle_result(vp)
 
-with open("vpa-between.pickle","rb") as f:
-    vpa = np.asarray(pickle.load(f))
+# with open("vpa-between.pickle","rb") as f:
+    # vpa = np.asarray(pickle.load(f))
 
 ids = g.vertex_properties["_graphml_vertex_id"]
 # write betweenness along with corresponding id to a csv file

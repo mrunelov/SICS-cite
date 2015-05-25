@@ -10,7 +10,7 @@ from find_fellows import *
 Calculates betweenness centrality for a co-citation network and prints info and plots the top results
 """
 
-num_top = 1000
+#num_top = 100
 
 g = gt.load_graph("co-citation-AAN.graphml")
 g_cg = gt.load_graph("AAN.graphml") # load the original citation graph
@@ -66,40 +66,35 @@ top_vp = vpa.argsort()[::-1]#[:num_top]
 # can't pickle vertex objects atm, but convert to int then save might work.
 # so, maybe try looping vp.a
 
-i = 0
-fellow_articles = 0
-fellows = Set(range(32))
-#for i in range(num_top):
-#for v in bg.vertices():
-total = len(top_vp)
-for i,v_i in enumerate(top_vp):
-    sys.stderr.write("looping node " + str(i+1) + " / " + str(total) + "\r")
-    sys.stderr.flush()
-    #v = g.vertex(top_vp[i])
-    v = g.vertex(v_i)
-    print "##############"
-    print "###   " + str(i+1) + "   ###"
-    print "##############"
-    print titles[v] 
-    print authors[v]
-    print "Betweenness: " + str(vpa[v])
-    auths = authors[v]
-    auths = auths.split(";")
-    found_fellow = False
-    for a in auths:
-        fellow_index = find_fellow(a,reverse=True)
-        if fellow_index is not -1:
-            fellow_articles += 1
-            if fellow_index in fellows:
-                fellows.remove(fellow_index)
-    if len(fellows) == 1:
-        break
-    print "###################################################"
-    i += 1
-
-
-print "Fellow articles: " + str(fellow_articles) + " / " + str(num_top)
-print "Fellows remaining: " + str(fellows)
+# Print top results, and check for fellow matches
+# i = 0
+# fellow_articles = 0
+# fellows = Set(range(32))
+# total = len(top_vp)
+# for i,v_i in enumerate(top_vp):
+#     sys.stderr.write("looping node " + str(i+1) + " / " + str(total) + "\r")
+#     sys.stderr.flush()
+#     #v = g.vertex(top_vp[i])
+#     v = g.vertex(v_i)
+#     print "##############"
+#     print "###   " + str(i+1) + "   ###"
+#     print "##############"
+#     print titles[v] 
+#     print authors[v]
+#     print "Betweenness: " + str(vpa[v])
+#     auths = authors[v]
+#     auths = auths.split(";")
+#     found_fellow = False
+#     for a in auths:
+#         fellow_index = find_fellow(a,reverse=True)
+#         if fellow_index is not -1:
+#             fellow_articles += 1
+#             if fellow_index in fellows:
+#                 fellows.remove(fellow_index)
+#     if len(fellows) == 1:
+#         break
+#     print "###################################################"
+#     i += 1
 
 #bg = gt.GraphView(g, vfilt=lambda v: vp[v] > vp.a.max() / 4)
 #top_nodes = [g.vertex(v) for v in top_vp]
