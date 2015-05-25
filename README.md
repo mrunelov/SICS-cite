@@ -28,6 +28,5 @@ Below is a list of algorithms used, along with source/package information:
 by S. Gualdi, C. H. Yeung, Y.-C. Zhang - Found in `algorithms/backbone.py`, implemented with NetworkX.
 * **Co-citation graph generation** - Found in `algorithms/co_citation.py` (graph-tool) and in `algorithms/graphutils.py` (`#build_co_citation_graph`, NetworkX).
 * **Indegree** and **betweenness** centralities - Done using graph-tool (indegree is a property for all graph-tool graphs)
-* **Betweenness centrality** - Done using graph-tool
 * **PageRank** and **HITS** - Done using graph-tool
 * **Burstness** - Done separately using the [Sci2](https://sci2.cns.iu.edu/) software. Saved as csv files.
