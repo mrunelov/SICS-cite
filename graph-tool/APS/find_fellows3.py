@@ -6,7 +6,6 @@ import matplotlib
 import pickle
 import numpy as np
 from collections import defaultdict
-from plotter import plotxy
 from datetime import datetime
 import matplotlib.pyplot as plt
 from random import shuffle
@@ -15,7 +14,7 @@ from logit import logit
 from split import split_graph,get_first,get_second,get_gt_graphs
 
 num_top = 500 #527129 #427735 
-use_cutoff = False 
+use_cutoff = True 
 # total : 527130
 # 1980 filter: 427735
 # fellow articles within 1980 filter: 139755 
@@ -462,18 +461,19 @@ def pr_curves():
     #pr = gt.pagerank(g,damping=0.5)
     #plots_second[6] = find_fellows_in_top_scores(pr.a,"PageRank alpha 0.5",num_top,printstuff=False,use_first=False)
 
+    pr = gt.pagerank(g,damping=0.5)
+
     plots = [[] for _ in range(8)]
     print "Calculating for num_top = " + str(num_top)
     plots[0] = find_fellows_in_top_scores(in_degs,"indegree",num_top,printstuff=False)
-    plots[1] = find_fellows_in_top_scores(ba,"betweenness",num_top,printstuff=False)
-    plots[2] = find_fellows_in_top_scores(pxa_n, "progeny size", num_top, printstuff=False)
-    plots[3] = find_fellows_in_top_scores(lra,"All with logit coefficients",num_top,printstuff=False)
-    plots[4] = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst)",num_top,printstuff=False)
+    plots[1] = find_fellows_in_top_scores(pr.a,"PageRank alpha 0.5",num_top,printstuff=False)
+    plots[2] = find_fellows_in_top_scores(ba,"betweenness",num_top,printstuff=False)
+    plots[3] = find_fellows_in_top_scores(pxa_n, "progeny size", num_top, printstuff=False)
+    plots[4] = find_fellows_in_top_scores(pxwa_n,"Weighted progeny size",num_top,printstuff=False)
+    plots[5] = find_fellows_in_top_scores(lra,"All with logit coefficients",num_top,printstuff=False)
+    plots[6] = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst)",num_top,printstuff=False)
     geometric_mean *= np.sqrt(in_degs)
-    plots[5] = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst*indegs)",num_top,printstuff=False)
-    pr = gt.pagerank(g,damping=0.5)
-    plots[6] = find_fellows_in_top_scores(pr.a,"PageRank alpha 0.5",num_top,printstuff=False)
-    plots[7] = find_fellows_in_top_scores(pxwa_n,"Weighted progeny size",num_top,printstuff=False)
+    plots[7] = find_fellows_in_top_scores(geometric_mean,"sqrt(between*burst*indegs)",num_top,printstuff=False)
     
     #print "Plotting..."
     #for p in plots:
@@ -490,10 +490,11 @@ def pr_curves():
     #plt.xlabel(r'$\mathrm{Recall}$',fontsize=24)
     #plt.ylabel(r'$\mathrm{Precision}$',fontsize=24)
     #plt.show()
-
     lss = ["-"]*8
-    lss[0] = [":"]
-    lss[6] = [":"]
+    lss[0] = "--"
+    lss[1] = "--"
+    #lss[4] = ":"
+    clr = ['b','k','g','r','r','c','m','y']
     if num_top <= 1000:
         plt.figure(2)
         plt.title(r"$\mathrm{Precision\/ @\/ X}$")
@@ -502,28 +503,37 @@ def pr_curves():
         plt.xlabel(r'$\mathrm{@}$',fontsize=24)
         plt.ylabel(r'$\mathrm{Precision}$',fontsize=24)
         #plt.ylabel(r'$\mathrm{DCG}$',fontsize=24)
-        xs = range(10,num_top+1,10)
-        for i,p in enumerate(plots[:-1]):
-            ys = [point[1] for point in p]
-            #ys = p # for DCGs
-            plt.plot(xs,ys,linewidth=2.0,ls=lss[i])
-        ys = [point[1] for point in plots[-1]]
-        plt.plot(xs,ys,linewidth=2.0,color='r',ls="--")
-        ax = plt.subplot()
+        
         if use_cutoff:
             total_fellow_articles = 139755 # manual total within 1980 filter
-            y_random = float(total_fellow_articles) / 427735 #527129 # 427735 is for cutoff
+            y_random = float(total_fellow_articles) / 427735 # with cutoff
         else:
             total_fellow_articles = len(fellow_indexes)
-            y_random = float(total_fellow_articles) / 527129
+            y_random = float(total_fellow_articles) / 527129 
+        
+        xs = range(10,num_top+1,10)
+      
+        i = 0
+        for p in plots[:2]:
+            ys = [point[1] for point in p]
+            plt.plot(xs,ys,linewidth=2.0,ls=lss[i],color=clr[i])
+            i += 1
+        ax = plt.subplot()
         ax.plot([0.0,num_top],[y_random,y_random],ls="--",c="0.5",linewidth=2.0)
-        #leg = plt.legend([r'$\mathrm{Indegree}$', r'$\mathrm{Betweenness}$', r'$\mathrm{Backbone\/ progeny\/ size}$', r'$\mathrm{Logit}$', r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}}$',r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}\times\/\mathrm{indegree}}$',r'$\mathrm{PageRank,\/} \alpha=0.5$',r'$\mathrm{Random\/ retrieval}$'], loc='best',fontsize=16)
-        leg = plt.legend([r'$\mathrm{Indegree}$', r'$\mathrm{Betweenness}$', r'$\mathrm{Backbone\/ progeny\/ size}$', r'$\mathrm{Logit}$', r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}}$',r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}\times\/\mathrm{indegree}}$',r'$\mathrm{PageRank,\/} \alpha=0.5$',r'$\mathrm{Weighted\/ progeny\/ size}$',r'$\mathrm{Random\/ retrieval}$'], loc='best',fontsize=18)
+        for p in plots[2:]:
+            ys = [point[1] for point in p]
+            #ys = p # for DCGs
+            if i == 4:
+                plt.plot(xs,ys,linewidth=2.0,ls=lss[i],color=clr[i],marker='D')
+            else:
+                plt.plot(xs,ys,linewidth=2.0,ls=lss[i],color=clr[i])
+            i += 1
+        leg = plt.legend([r'$\mathrm{Indegree}$',r'$\mathrm{PageRank,\/} \alpha=0.5$',r'$\mathrm{Random\/ retrieval}$', r'$\mathrm{Betweenness}$', r'$\mathrm{Backbone\/ progeny\/ size}$', r'$\mathrm{Weighted\/ backbone\/ progeny\/ size}$', r'$\mathrm{Logit}$', r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}}$',r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}\times\/\mathrm{indegree}}$'], loc='lower right',fontsize=18)
         for obj in leg.legendHandles:
             obj.set_linewidth(4.0)
         plt.show()
 
-def plot_random_metrics(metric):
+def plot_pagerank():
     global g
     plots = []
     for i in range(1,11):
@@ -531,24 +541,20 @@ def plot_random_metrics(metric):
         first = get_first(num)
         second = get_second(num)
         g1,g2 = get_gt_graphs(g,first,second)
-        if metric == "indeg":
-            m1 = g1.degree_property_map("in")
-            m2 = g2.degree_property_map("in")
-        elif metric == "pagerank":
-            m1 = gt.pagerank(g1,damping=0.5)
-            m2 = gt.pagerank(g2,damping=0.5)
-        ys1 = find_fellows_in_top_scores(m1.a, metric, num_top, printstuff=False) 
+        m1 = g1.degree_property_map("in")
+        m2 = g2.degree_property_map("in")
+        #m1 = gt.pagerank(g1,damping=0.5)
+        #m2 = gt.pagerank(g2,damping=0.5)
+        ys1 = find_fellows_in_top_scores(m1.a, "pagerank", num_top, printstuff=False) 
         ys1 = [p[1] for p in ys1]
         plots.append(ys1)
-        ys2 = find_fellows_in_top_scores(m2.a, metric, num_top, printstuff=False) 
+        ys2 = find_fellows_in_top_scores(m2.a, "pagerank", num_top, printstuff=False) 
         ys2 = [p[1] for p in ys2]
         plots.append(ys2)
-
-    if metric == "pagerank":
-        original = gt.pagerank(g,damping=0.5)
-    elif metric == "indeg":
-        original = g.degree_property_map("in")
-    g_plot = find_fellows_in_top_scores(original.a,metric,num_top,printstuff=False)
+    
+    #pr = gt.pagerank(g,damping=0.5)
+    indeg = g.degree_property_map("in")
+    g_plot = find_fellows_in_top_scores(indeg.a,"pagerank",num_top,printstuff=False)
     g_plot = [p[1] for p in g_plot]
 
     plt.figure()
@@ -561,13 +567,9 @@ def plot_random_metrics(metric):
     #for i,p in enumerate(plots):
         #ys = p
         #plt.plot(xs,ys,linewidth=1.0,color='b',ls=":")
-    
-    if metric == "indeg":
-        clr = 'b'
-    elif metric == "pagerank":
-        clr = 'k'
-    plt.plot(xs,g_plot,color=clr,linewidth=4.0)
-    plot_mean_std(xs,plots,color=clr,ls=':')
+
+    plt.plot(xs,g_plot,color='b')
+    plot_mean_std(xs,plots,color='b',ls=':')
     #leg = plt.legend([r'$\mathrm{\/ progeny\/ size}$', r'$\mathrm{Backbone\/ progeny\/ size}$', r'$\mathrm{Random\/ retrieval}$'],fontsize=18,loc='best')
     ax = plt.subplot()
     if use_cutoff:
@@ -576,11 +578,9 @@ def plot_random_metrics(metric):
     else:
         total_fellow_articles = len(fellow_indexes)
         y_random = float(total_fellow_articles) / 527129
-    ax.plot([0.0,num_top],[y_random,y_random],ls="--",c="0.5",linewidth=4.0)
-    if metric == "pagerank":
-        leg = plt.legend([r'$\mathrm{PageRank,\/} \alpha=0.5$', r'$\mathrm{PageRank\/ random\/ mean,\/} \alpha=0.5$',r'$\mathrm{Random\/ retrieval}$'],fontsize=32,loc='lower right')
-    elif metric == "indeg":
-        leg = plt.legend([r'$\mathrm{Indegree}$', r'$\mathrm{Indegree\/ random\/ mean}$',r'$\mathrm{Random\/ retrieval}$'],fontsize=32,loc='lower right')
+    ax.plot([0.0,num_top],[y_random,y_random],ls="--",c="0.5",linewidth=2.0)
+    #leg = plt.legend([r'$\mathrm{PageRank,\/} \alpha=0.5$', r'$\mathrm{PageRank\/ random\/ mean,\/} \alpha=0.5$',r'$\mathrm{Random\/ retrieval}$'])
+    leg = plt.legend([r'$\mathrm{Indegree}$', r'$\mathrm{Indegree\/ random\/ mean}$',r'$\mathrm{Random\/ retrieval}$'])
     for obj in leg.legendHandles:
         obj.set_linewidth(4.0)
     plt.show()
@@ -633,18 +633,20 @@ def plot_bps():
     #all_means = all_means[:,1]
     #all_stddev = all_stddev[:,1]
     #all_stddev = all_stddev - all_means
-    plt.plot(xs,ys,color='r',linewidth=4.0)
-    plt.errorbar(xs,all_means,yerr=all_stddev,color='r',linewidth=4.0,elinewidth=1.0,ls=':')
+    plt.plot(xs,ys,color='r',linewidth=2.0)
+    plt.errorbar(xs,all_means,yerr=all_stddev,color='r',linewidth=2.0,elinewidth=1.0,ls=':')
     ax = plt.subplot()
     if use_cutoff:
-        total_fellow_articles = 139755 # manual total within 1980 filter
-        y_random = float(total_fellow_articles) / 427735 #527129 # 427735 is for cutoff
+        total_fellow_articles = 1197# manual total within 1980 filter
+        y_random = float(total_fellow_articles) / 13589 # with cutoff
     else:
         total_fellow_articles = len(fellow_indexes)
-        y_random = float(total_fellow_articles) / 527129
-    ax.plot([0.0,num_top],[y_random,y_random],ls="--",c="0.5",linewidth=4.0)
+        y_random = float(total_fellow_articles) / 527 
+        print "total fellow articles: " + str(total_fellow_articles)
+        print "percent: " + str(y_random)
+    ax.plot([0.0,num_top],[y_random,y_random],ls="--",c="0.5",linewidth=2.0)
     #leg = plt.legend([r'$\mathrm{Backbone\/ progeny\/ size}$', r'$\mathrm{Backbone\/ progeny\/ size\/ first\/ half}$', r'$\mathrm{Backbone\/ progeny\/ size\/ second\/ half}$', r'$\mathrm{Random\/ retrieval}$'], loc='best', fontsize=18)
-    leg = plt.legend([r'$\mathrm{Backbone\/ progeny\/ size}$', r'$\mathrm{Backbone\/ progeny\/ size\/ random\/ mean}$', r'$\mathrm{Random\/ retrieval}$'],fontsize=32,loc='best')
+    leg = plt.legend([r'$\mathrm{Backbone\/ progeny\/ size}$', r'$\mathrm{Backbone\/ progeny\/ size\/ random\/ mean}$', r'$\mathrm{Random\/ retrieval}$'],fontsize=18,loc='best')
     for obj in leg.legendHandles:
         obj.set_linewidth(4.0)
     plt.show()
@@ -660,21 +662,20 @@ def plot_mean_std(xs,ys_list,color='r',ls='-'):
 
 if __name__ == "__main__":
     #fi = find_fellow_indexes()
-    #g = gt.load_graph("/home/mrunelov/KTH/exjobb/SICS-cite/APS/data/APS.graphml")
-    if use_cutoff:
-        g = gt.load_graph("APS.graphml")
-        dates = g.vertex_properties["date"]
-    else:
-        g = gt.load_graph("APS.graphml")
+    g = gt.load_graph("APS.graphml")
+    #if use_cutoff:
+        #g = gt.load_graph("AAN.graphml")
+    dates = g.vertex_properties["date"]
+    #else:
+        #g = gt.load_graph("AAN.graphml")
     #indexes = range(527130)
     #shuffle(indexes)
     #first = indexes[:len(indexes)/2]
     #second = indexes[len(indexes)/2:]
     dateformat = "%Y-%m-%d"
     #main()
-    #pr_curves()
-    plot_bps()
-    plot_random_metrics("indeg")
-    plot_random_metrics("pagerank")
+    pr_curves()
+    #plot_bps()
+    #plot_pagerank()
     #g1,g2 = split_graph(g)
     #find_fellow_indexes(g1) # throws error on line 128, index out of bounds
