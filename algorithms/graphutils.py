@@ -22,7 +22,7 @@ def get_gml_graph(dataset,co_citation=False):
 			return G
 
 	# build filename
-	graphmlfile = '../' + dataset + '/data/' + dataset
+	graphmlfile = '../datasets/' + dataset + '/data/' + dataset
 	if co_citation:
 		 graphmlfile += 'co-citation'
 	graphmlfile += '.graphml'
@@ -82,7 +82,7 @@ def build_co_citation_graph(G,dataset):
 			else:
 				G.add_edge(u,v,weight=1)
 	print "Done. Writing Graphml file..."
-	nx.write_graphml(cc, '../' + dataset + '/data/' + dataset + '-co-citation.graphml')
+	nx.write_graphml(cc, '../datasets' + dataset + '/data/' + dataset + '-co-citation.graphml')
 	print "Done. Wrote a graph with " + str(cc.number_of_nodes()) + " nodes and " + str(cc.number_of_edges()) + " edges."
 
 #G = get_gml_graph('AAN')
