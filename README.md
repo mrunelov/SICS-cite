@@ -7,7 +7,7 @@ This is a thesis project done at [SICS](https://www.sics.se/). The overall goal 
 
 * algorithms - Tools and algorithms used. *Note:* Additional library algorithms are used in the *metrics* directory.
 * datasets - Parse files for the datasets used. There is no rawdata on GitHub due to space limitations.
-* metrics - Parsing and calculations related to metrics and evaluation. Here be dragons.
+* metrics - Parsing, calculation, and evaluation of metrics. Here be dragons.
 * arxivdownload - an arXiv crawler and parser, slow, not tested much
 * boost - Some very basic tests using the C++ `boost` library
 
