@@ -5,7 +5,7 @@ This is a thesis project done at [SICS](https://www.sics.se/). The overall goal 
 
 ## Directories
 
-* algorithms - Tools and algorithms used on both datasets.
+* algorithms - Tools and algorithms used. *Note:* Additional library algorithms are used in the *metrics* directory.
 * datasets - Parse files for the datasets used. There is no rawdata on GitHub due to space limitations.
 * metrics - Parsing and calculations related to metrics and evaluation. Here be dragons.
 * arxivdownload - an arXiv crawler and parser, slow, not tested much
