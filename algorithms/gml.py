@@ -42,10 +42,11 @@ def get_node(id, attrs=[]):
 		value = attrs[i+1]
 		if key == "authors" or key == "title":
 			try:
-				key = key.encode('utf-8') #.decode('utf-8')
+				key = key.encode('ascii','ignore') #.decode('utf-8')
 				#value = value.decode('utf-8')
-				value = value.encode('utf-8') #.decode('utf-8')
-			except UnicodeEncodeError as e:
+				value = value.encode('ascii','ignore') #.decode('utf-8')
+			except:
+				print "Exception caught in gml encode/decode"
 				print value
 		node += '      <data key="' + key + '">' + value + '</data>\n'
 	node += "    </node>\n"
@@ -69,4 +70,3 @@ def get_edge(id, u, v, attrs=[]):
 	edge += '    </edge>\n'
 	return edge
 
-test()
