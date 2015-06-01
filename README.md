@@ -32,6 +32,7 @@ by S. Gualdi, C. H. Yeung, Y.-C. Zhang - Found in `algorithms/backbone.py`, impl
 
 ## Workflow
 The approximate workflow is as follows:
+
 1. Collect raw citation data
 2. Build GraphML files using the parse scripts available in each dataset's directory. (Currently available for AAN and APS).
 3. Build co-citation graphs using `algorithms/co_citation.py` and backbone graphs using `algorithms/backbone.py`
