@@ -2,6 +2,13 @@
 
 This is a thesis project done at [SICS](https://www.sics.se/). The overall goal of the project is to implement and evaluate a set of algorithms for citation analysis.
 
+## Dependencies
+The following python modules are used in this project:
+* NetworkX
+* graph-tool
+* pandas (only used for Logistic regression and correlation coefficients)
+* Statsmodels (only used for Logistic regression)
+
 ## Directories
 
 * algorithms - Tools and algorithms used. *Note:* Additional library algorithms are used in the *metrics* directory.
@@ -22,6 +29,14 @@ by S. Gualdi, C. H. Yeung, Y.-C. Zhang - Found in `algorithms/backbone.py`, impl
 * **Indegree** and **betweenness** centralities - Done using graph-tool (indegree is a property for all graph-tool graphs)
 * **PageRank** and **HITS** - Done using graph-tool in `metrics/` and using NetworkX in the test file `algorithms/pr_avg_age.py`
 * **Burstiness** - Done separately using the [Sci2](https://sci2.cns.iu.edu/) software. Saved as csv files.
+
+## Workflow
+The approximate workflow is as follows:
+1. Collect raw citation data
+2. Build GraphML files using the parse scripts available in each dataset's directory. (Currently available for AAN and APS).
+3. Build co-citation graphs using `algorithms/co_citation.py` and backbone graphs using `algorithms/backbone.py`
+4. Generate ranked lists for each metric in the `metrics` directory.
+5. Evaluate the ranked lists using `metrics/find_fellows.py`.
 
 ### Notes
 The *algorithms* directory have been tested on both FreeBSD 9.3 and Windows 8.
