@@ -17,9 +17,7 @@ The following python modules are used in this project:
 * arxivdownload - an arXiv crawler and parser, slow, not tested much
 * boost - Some very basic tests using the C++ `boost` library
 
-The *algorithms* directory is dependent on the python graph package `NetworkX`.
-
-The *metrics* directory uses the python graph package `graph-tool` for all graph processing and `pandas` and `Statsmodels` for statistical analysis.
+The *algorithms* directory is dependent on the python graph package `NetworkX`. The *metrics* directory uses the python graph package `graph-tool` for all graph processing and `pandas` and `Statsmodels` for statistical analysis.
 
 ## Algorithms
 Below is a list of algorithms used, along with source/package information:
