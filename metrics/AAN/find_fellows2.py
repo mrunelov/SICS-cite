@@ -427,7 +427,7 @@ def pr_curves():
     ax.plot([0.0,1.0],[y_random,y_random], ls="--",c="0.5",linewidth=2.0)
     leg = plt.legend([r'$\mathrm{Indegree}$', r'$\mathrm{Betweenness}$', r'$\mathrm{Backbone\/ progeny\/ size}$', r'$\mathrm{Logit}$',r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}}$',r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}\times\/\mathrm{indegree}}$',r'$\mathrm{PageRank,\/} \alpha=0.5$',r'$\mathrm{Random\/ retrieval}$'], loc='best',fontsize=18)
     for obj in leg.legendHandles:
-        obj.set_linewidth(4.0)
+        obj.set_linewidth(2.0)
     plt.xlabel(r'$\mathrm{Recall}$',fontsize=24)
     plt.ylabel(r'$\mathrm{Precision}$',fontsize=24)
     plt.show()

@@ -14,19 +14,16 @@ from collections import Counter, defaultdict, deque
 from sets import Set
 
 """
-Influence, originality and similarity in directed acyclic graphs
-  by Gualdi, Medo and Zhang
-
-file:///C:/Users/Martin/Desktop/KTH/Exjobb/Litteraturstudie/Intressant/Ska%20anv%E4ndas/To%20read/SUPERINTRESSANT-Influence,%20originality%20and%20similarity%20in%20directed%20acyclic%20graphs.pdf
+'Influence, originality and similarity in directed acyclic graphs
+  by Gualdi, Medo and Zhang' (Hence gmz)
 
 NetworkX pagerank source code for inspiration:
 http://pydoc.net/Python/networkx/1.0/networkx.algorithms.pagerank/
 """
 
-
 # Thoughts:
-# Like pagerank without the damping factor, instead using progeny size.
-# Should look into: see if damping factors of different kinds are better
+# Ix is like pagerank without the damping factor
+# TODO?: see if damping factors of different kinds are better
 
 
 def main():

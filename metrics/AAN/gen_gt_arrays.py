@@ -42,15 +42,19 @@ def create_Px_list(g,Px_location,name="Px_list"):
 #Px_location1 = "/home/mrunelov/KTH/exjobb/SICS-cite/algorithms/pickles/APS-backbone-Px.pickle"
 #Px_location2 = "/home/mrunelov/KTH/exjobb/SICS-cite/algorithms/pickles/APS-backbone-Px.pickle"
 
-g = gt.load_graph("/home/mrunelov/KTH/exjobb/SICS-cite/graph-tool/APS/APS.graphml")
+g = gt.load_graph("AAN.graphml")
 #g1,g2 = split_graph(g)
 #create_Px_list(g,Px_location1,"Px_list_first")
 #create_Px_list(g,Px_location2,"Px_list_second")
 
-Px_location_base = "/home/mrunelov/KTH/exjobb/SICS-cite/algorithms/pickles/APS-backbone-Px-"
-for i in range(1,11):
-    for x in ["first","second"]:
-        filename = Px_location_base + x + str(i) + ".pickle"
-        name = "pickles/Px_list_" + x + str(i)
-        create_Px_list(g,filename,name)
+Px_location_base = "/home/mrunelov/KTH/exjobb/SICS-cite/algorithms/pickles/AAN-backbone-Px-"
+
+weighted_location = Px_location_base + "weighted.pickle"
+create_Px_list(g,weighted_location,"Px_list_weighted")
+
+#for i in range(1,11):
+    #for x in ["first","second"]:
+        #filename = Px_location_base + x + str(i) + ".pickle"
+        #name = "pickles/Px_list_" + x + str(i)
+        #create_Px_list(g,filename,name)
 

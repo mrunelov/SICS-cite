@@ -14,16 +14,16 @@ def create(postfix=""):
     with open("pickles/second" + postfix + ".pickle", "wb") as f:
         pickle.dump(second,f)
 
-def get_first():
-    with open("first.pickle","rb") as f:
+def get_first(num=""):
+    with open("pickles/first" + num + ".pickle","rb") as f:
         first = pickle.load(f)
         first_a = np.zeros(527129)
         for f_i in first:
             first_a[f_i] = 1
         return first_a
 
-def get_second():
-    with open("second.pickle","rb") as f:
+def get_second(num=""):
+    with open("pickles/second" + num + ".pickle","rb") as f:
         second = pickle.load(f)
         second_a = np.zeros(527129)
         for s_i in second:
@@ -37,12 +37,9 @@ def split_graph(g):
     g_second = gt.GraphView(g,vfilt=second)
     return g_first,g_second
 
-def get_gt_graphs():
-    g_all = gt.load_graph("/home/mrunelov/KTH/exjobb/SICS-cite/APS/data/APS.graphml")
-    first = get_first()
-    second = get_second()
-    g_first = gt.GraphView(g_all,vfilt=first)
-    g_second = gt.GraphView(g_all,vfilt=second)
+def get_gt_graphs(g, first, second):
+    g_first = gt.GraphView(g,vfilt=first)
+    g_second = gt.GraphView(g,vfilt=second)
     return g_first,g_second
 
 
@@ -54,5 +51,5 @@ def test_get_graphs():
 #test_get_graphs()
 
 
-for i in range(1,11):
-    create(str(i))
+#for i in range(1,11):
+    #create(str(i))

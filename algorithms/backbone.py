@@ -13,6 +13,13 @@ import os.path
 import os.remove
 from graphutils import get_gml_graph
 
+"""
+Implementation of the Backbone algorithm as described in 
+'Tracing the Evolution of Physics on the Backbone of Citation Networks' 
+by S. Gualdi, C. H. Yeung, Y.-C. Zhang
+"""
+
+
 def sim_read_helper(G, a, b):
 	"""
 	Calcuates the similarity between a and b from the reader's perspective
@@ -198,7 +205,7 @@ def build_backbone_graph(G,postfix=""):
 	
 	with open('pickles/' + dataset + '-backbone-' + postfix + '.pickle', 'wb') as f:    
 		nx.write_gpickle(G2, f)
-	#nx.write_graphml(G2, '../' + dataset + '/data/' + dataset + '-backbone.graphml')
+	#nx.write_graphml(G2, '../datasets/' + dataset + '/data/' + dataset + '-backbone.graphml')
 
 	return G2
 
@@ -275,6 +282,7 @@ def get_subset_list(foomap, keys):
 def main():
 	G = get_gml_graph(dataset)
 
+	# Code for the randomization test, calculate for all 10 halves
 	for i in range(1,11):
 		for x in ["first","second"]:
 			with open("pickles/" + x + str(i) + ".pickle","rb") as f:
@@ -345,8 +353,8 @@ def main():
 	#   #print("\tEigenvector centrality: %0.5f"%(eigen_centralities[n]))
 	
 
-	if do_plot:
-		plotxy(backbone_indegs,Px)
+	# if do_plot:
+	# 	plotxy(backbone_indegs,Px)
 
 
 if __name__ == "__main__":

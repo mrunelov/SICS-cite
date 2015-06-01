@@ -3,6 +3,10 @@ import os.path
 import networkx as nx
 import itertools
 
+"""
+Utility functions for graphs
+"""
+
 def get_gml_graph(dataset,co_citation=False):
 	"""
 	Loads a graphml file into a networkx graph object.
@@ -10,7 +14,7 @@ def get_gml_graph(dataset,co_citation=False):
 	and subsequent calls load the pickle
 	"""
 	picklefile = 'pickles/' + dataset + '.pickle'
-	if os.path.isfile(picklefile):
+	if False:#os.path.isfile(picklefile):
 		with open(picklefile, 'rb') as f:
 			print("Reading pickled graph...")
 			G = nx.read_gpickle(f)
@@ -18,7 +22,7 @@ def get_gml_graph(dataset,co_citation=False):
 			return G
 
 	# build filename
-	graphmlfile = '../' + dataset + '/data/' + dataset
+	graphmlfile = '../datasets/' + dataset + '/data/' + dataset
 	if co_citation:
 		 graphmlfile += 'co-citation'
 	graphmlfile += '.graphml'
@@ -42,7 +46,9 @@ def get_gml_graph(dataset,co_citation=False):
 		# 		biconnected_edges.extend([(u,v),(v,u)])
 		# G.remove_edges_from(biconnected_edges) # delete biconnecting edges
 		G.remove_edges_from(selfloop_edges) # delete self-loops
+		print(str(G.number_of_nodes()) + " nodes and " + str(G.number_of_edges()) + " edges remaining after removing self-loops.")
 		G.remove_edges_from(nx.isolates(G)) # delete isolates
+		print(str(G.number_of_nodes()) + " nodes and " + str(G.number_of_edges()) + " edges remaining after removing isolates.")
 		print("Is DAG now?..."),
 		is_dag = nx.is_directed_acyclic_graph(G)
 		print(str(is_dag))
@@ -60,7 +66,7 @@ def build_time_slices(G,s):
 	pass
 
 
-# OBS: super slow with networkx, fast graph-tool version in graph-tool/AAN/co_citation.py
+# OBS: super slow with networkx, fast graph-tool version in co_citation.py
 def build_co_citation_graph(G,dataset):
 	print "Building co-citation graph for " + dataset
 	cc = nx.Graph()
@@ -76,8 +82,7 @@ def build_co_citation_graph(G,dataset):
 			else:
 				G.add_edge(u,v,weight=1)
 	print "Done. Writing Graphml file..."
-	nx.write_graphml(cc, '../' + dataset + '/data/' + dataset + '-co-citation.graphml')
+	nx.write_graphml(cc, '../datasets' + dataset + '/data/' + dataset + '-co-citation.graphml')
 	print "Done. Wrote a graph with " + str(cc.number_of_nodes()) + " nodes and " + str(cc.number_of_edges()) + " edges."
 
 #G = get_gml_graph('AAN')
-#build_co_citation_graph(G,'AAN')

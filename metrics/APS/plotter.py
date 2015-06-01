@@ -52,8 +52,9 @@ def test_errorbar():
     yerr = [0.1,0.5,0.2,0.3,0.7,0.1]
 
     plt.figure()
-    plt.errorbar(x,y,xerr=xerr,yerr=yerr)
+    #plt.errorbar(x,y,xerr=xerr,yerr=yerr)
+    plt.errorbar(x,y,yerr=yerr)
     plt.show()
 
     
-test_errorbar()
+#test_errorbar()
