@@ -13,8 +13,8 @@ from random import shuffle
 from logit import logit
 from split import split_graph,get_first,get_second,get_gt_graphs
 
-num_top = 18158 #500
-use_cutoff = False 
+num_top = 500 #18158
+use_cutoff = True 
 # total : 527130
 # 1980 filter: 427735
 # fellow articles within 1980 filter: 139755 
@@ -497,15 +497,16 @@ def pr_curves():
     clr = ['b','k','g','r','r','c','m','y']
     if num_top <= 1000:
         xs = range(10,num_top+1,10)
-    plt.figure(2)
+    #plt.tick_params(labelsize=18)
+    #plt.figure(2)
     plt.title(r"$\mathrm{Precision\/ @\/ X}$")
     #plt.title(r"$\mathrm{DCG\/ @\/ X}$")
     plt.figure().set_facecolor('white')
     if num_top <= 1000:
-        plt.xlabel(r'$\mathrm{@}$',fontsize=24)
+        plt.xlabel(r'$\mathrm{@}$',fontsize=32)
     else:
-        plt.xlabel(r'$\mathrm{Recall}$',fontsize=24)
-    plt.ylabel(r'$\mathrm{Precision}$',fontsize=24)
+        plt.xlabel(r'$\mathrm{Recall}$',fontsize=32)
+    plt.ylabel(r'$\mathrm{Precision}$',fontsize=32)
     #plt.ylabel(r'$\mathrm{DCG}$',fontsize=24)
     
     if use_cutoff:
@@ -515,7 +516,6 @@ def pr_curves():
         total_fellow_articles = len(fellow_indexes)
         y_random = float(total_fellow_articles) / 18158 
     
-  
     i = 0
     for p in plots[:2]:
         if num_top > 1000:
@@ -524,6 +524,7 @@ def pr_curves():
         plt.plot(xs,ys,linewidth=2.0,ls=lss[i],color=clr[i])
         i += 1
     ax = plt.subplot()
+    ax.tick_params(labelsize=18)
     if num_top <= 1000:
         ax.plot([0.0,num_top],[y_random,y_random],ls="--",c="0.5",linewidth=2.0)
     else:
@@ -538,7 +539,7 @@ def pr_curves():
         else:
             plt.plot(xs,ys,linewidth=2.0,ls=lss[i],color=clr[i])
         i += 1
-    leg = plt.legend([r'$\mathrm{Indegree}$',r'$\mathrm{PageRank,\/} \alpha=0.5$',r'$\mathrm{Random\/ retrieval}$', r'$\mathrm{Betweenness}$', r'$\mathrm{Backbone\/ progeny\/ size}$', r'$\mathrm{Weighted\/ backbone\/ progeny\/ size}$', r'$\mathrm{Logit}$', r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}}$',r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}\times\/\mathrm{indegree}}$'], loc='best',fontsize=18)
+    leg = plt.legend([r'$\mathrm{Indegree}$',r'$\mathrm{PageRank,\/} \alpha=0.5$',r'$\mathrm{Random\/ retrieval}$', r'$\mathrm{Betweenness}$', r'$\mathrm{Backbone\/ progeny\/ size}$', r'$\mathrm{Weighted\/ backbone\/ progeny\/ size}$', r'$\mathrm{Logit}$', r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}}$',r'$\sqrt{\mathrm{betweenness}\times\/\mathrm{burstness}\times\/\mathrm{indegree}}$'], loc='upper right',fontsize=24)
     for obj in leg.legendHandles:
         obj.set_linewidth(2.0)
     plt.show()
