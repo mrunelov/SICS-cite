@@ -12,34 +12,6 @@ def get_data():
     df = pd.read_csv("all_APS_with_fellows_and_pagerank.csv")
     #print df.mean()
 
-    #first = get_first()
-    #first_c = []
-    #for x in first:
-        #if x:
-            #first_c.append(True)
-        #else:
-            #first_c.append(False)
-    #first_indexes = set([i for i,e in enumerate(first) if e])
-    #second = get_second()
-    #second_c = []
-    #for x in second:
-        #if x:
-            #second_c.append(True)
-        #else:
-            #second_c.append(False)
-    #second_indexes = set([i for i,e in enumerate(second) if e])
-
-    bps = df["progeny_size"]
-    #bps_1 = bps[first_c]
-    #bps_2 = bps[second_c]
-    #bps_1 = bps[bps & first]
-    #bps_2 = bps[bps & second]
-    #print "BPS 1 mean:"
-    #print bps_1.mean()
-    #print "BPS 2 mean:"
-    #print bps_2.mean()
-
-
     # Normalize
     for col in df: # normalize values
         if col == "gt_index":
@@ -79,10 +51,7 @@ def get_data():
 def logit(traincol="fellow"):
     #cols = ["indegree","betweenness","hits","progeny_size","burst_weight"]
     data = get_data()
-
    
-    #print data.head(n=5)
-    #print data["gt_index"]
     #data["intercept"] = 1.0
     to_drop = ["gt_index","fellow","hits_auth"]
     if traincol == "fellow":
@@ -91,22 +60,10 @@ def logit(traincol="fellow"):
         to_drop.append("fellow")
     train_set = data.drop(to_drop,axis=1)
 
-    print train_set.corr(method='spearman')
+    #print train_set.corr(method='spearman')
     #print train_set.describe()
+    #plot_histograms(train_set) 
 
-    # Plot histograms
-    #for col in train_set:
-        #plot_attribute = col #"progeny_size"
-        #fig,ax = plt.subplots()
-        #fig.set_facecolor("white")
-        #ax.set_yscale("log")
-        #ax.set_axisbelow(True)
-        #train_set[plot_attribute].hist(ax=ax,bottom=0.1,bins=100,color="#aaddaa", edgecolor='gray')
-        #plt.title(plot_attribute)
-        #plt.xlabel(plot_attribute)
-        #plt.ylabel("count")
-        #plt.show()
-     
     logit = sm.Logit(data[traincol],train_set) #data[train_cols])
     result = logit.fit()
     data["fellow_prediction"] = result.predict(train_set)
@@ -127,10 +84,6 @@ def logit(traincol="fellow"):
 
     # fig = plt.figure(figsize=(10,8))
     # fig.set_facecolor("white")
-    #data["hits"] /= data["hits"].max()
-    #data["indegree"] /= data["indegree"].max()
-    #data["progeny_size"] /= data["progeny_size"].max()
-    # data["betweenness"] /= data["betweenness"].max()
     #plt.plot(data["hits"],data["fellow_prediction"],".",color="b",alpha=.4)
     #plt.plot(data["progeny_size"],data["fellow_prediction"],".",color="r",alpha=.4)
     # plt.plot(data["indegree"],data["fellow_prediction"],".",color="g",alpha=.4)
@@ -156,7 +109,6 @@ def svm():
     print gs_svc.best_params_
     print gs_svc.best_score_
 
-
     #X_train, X_test, y_train, y_test = train_test_split(train_set, data["fellow"], test_size=0.25, random_state=1)
     #svc.fit(train_set,data["fellow"])
     #print "Fitting SVM to training data"
@@ -165,6 +117,21 @@ def svm():
     #train_score = svc.score(X_train,y_train)
     #print train_score
     #test_score = svc.score(X_test,y_test)
+
+def plot_histograms(data):
+    for col in data:
+        plot_attribute = col 
+        fig,ax = plt.subplots()
+        fig.set_facecolor("white")
+        ax.set_yscale("log")
+        ax.set_axisbelow(True)
+        train_set[plot_attribute].hist(ax=ax,bottom=0.1,bins=100,color="#aaddaa", edgecolor='gray')
+        plt.title(plot_attribute)
+        plt.xlabel(plot_attribute)
+        plt.ylabel("count")
+        plt.show()
+     
+
 
 if __name__ == "__main__":
     logit()

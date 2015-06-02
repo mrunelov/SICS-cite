@@ -1,0 +1,32 @@
+Walter Daelemans
+Kevin Knight
+Daniel Marcu
+Raymond Mooney
+Martha Palmer
+Junichi Tsujii
+Dekang Lin
+Candace Sidner
+Ido Dagan
+David Yarowsky
+Hwee Tou Ng
+Dan Roth
+Richard Sproat
+Mark Steedman
+Bonnie Webber
+Nicoletta Calzolari
+Eugene Charniak
+Michael Collins
+Eva Hajičová
+Julia Hirschberg
+Eduard Hovy
+Mark Johnson
+Aravind Joshi
+Ronald M. Kaplan
+Lauri Karttunen
+Christopher D. Manning
+Mitch Marcus
+Yuji Matsumoto
+Kathleen R. McKeown
+Robert L. Mercer
+Robert C. Moore
+Dekai Wu
