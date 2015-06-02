@@ -1,5 +1,4 @@
 import difflib
-# Imports from betwenness.py
 import sys
 import graph_tool.all as gt
 import matplotlib
@@ -15,7 +14,9 @@ from logit import logit
 from split import split_graph,get_first,get_second,get_gt_graphs
 
 """
-This script parses fellows and calculates precision and recall for metric rankings
+This script parses fellows and calculates precision and recall for metric rankings.
+
+The input and output of the script is controlled through variables declared at the top of the file and through the main function
 
 TODO:
 Break up into multiple files. We should separate fellow parsing, metric evaluation, and plotting

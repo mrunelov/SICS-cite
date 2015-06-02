@@ -1,3 +1,8 @@
+"""
+This script parses HTML from the APS website in order to extract a list of fellows.
+The Fellow list, in HTML format, is available at http://www.aps.org/programs/honors/fellowships/archive-all.cfm (2015-06-01)
+"""
+
 
 def find_between(s, first, last):
     try:
